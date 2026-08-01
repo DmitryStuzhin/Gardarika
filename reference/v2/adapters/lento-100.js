@@ -74,8 +74,13 @@
   }
 
   function partitions(group,project,kit,level,config){
-    var segments=config.layout==="custom"?level.adaptedPartitions:level.partitions,h=level.id==="ground"?2.42:2.05,material=config.interior==="shell"?kit.materials.screed:kit.materials.interior;
-    segments.forEach(function(s){var dx=s[2]-s[0],dz=s[3]-s[1],len=Math.sqrt(dx*dx+dz*dz),mesh=addBox(group,kit,len,h,project.structure.partition,material,(s[0]+s[2])/2,level.elevation+h/2,(s[1]+s[3])/2);mesh.rotation.y=-Math.atan2(dz,dx);});
+    var segments=config.layout==="custom"?level.adaptedPartitions:level.partitions,doors=config.layout==="custom"?(level.adaptedInteriorDoors||level.interiorDoors):level.interiorDoors,h=level.id==="ground"?2.42:2.05,material=config.interior==="shell"?kit.materials.screed:kit.materials.interior,thickness=project.structure.partition;
+    segments.forEach(function(s){
+      var horizontal=Math.abs(s[2]-s[0])>=Math.abs(s[3]-s[1]),start=horizontal?Math.min(s[0],s[2]):Math.min(s[1],s[3]),end=horizontal?Math.max(s[0],s[2]):Math.max(s[1],s[3]),constant=horizontal?s[1]:s[0],cuts=(doors||[]).filter(function(d){var onLine=horizontal?Math.abs(d.z-constant)<.06:Math.abs(d.x-constant)<.06,pos=horizontal?d.x:d.z;return onLine&&pos-d.width/2>start-.02&&pos+d.width/2<end+.02;}).sort(function(a,b){return (horizontal?a.x:a.z)-(horizontal?b.x:b.z);}),cursor=start;
+      function wallPart(a,b,y,height){if(b-a<.02||height<.02)return;var center=(a+b)/2;if(horizontal)addBox(group,kit,b-a,height,thickness,material,center,level.elevation+y,constant);else addBox(group,kit,thickness,height,b-a,material,constant,level.elevation+y,center);}
+      cuts.forEach(function(d){var center=horizontal?d.x:d.z,left=center-d.width/2,right=center+d.width/2;wallPart(cursor,left,h/2,h);if(d.height<h)wallPart(left,right,d.height+(h-d.height)/2,h-d.height);cursor=right;});
+      wallPart(cursor,end,h/2,h);
+    });
   }
 
   function slabAroundVoid(group,project,kit,y,material){
@@ -90,21 +95,25 @@
 
   function furniture(group,project,kit,level,config){
     if(config.interior!=="turnkey")return;var m=kit.materials,y=level.elevation+.08;
-    function bed(x,z,rotation){var g=kit.groupNamed("bed");addBox(g,kit,1.55,.32,2.05,m.oak,0,.2,0);addBox(g,kit,1.43,.22,1.9,m.cream,0,.46,.04);addBox(g,kit,1.5,.7,.13,m.oak,0,.53,-.96);g.position.set(x,y,z);g.rotation.y=rotation||0;group.add(g);}
-    function sofa(x,z,rotation){var g=kit.groupNamed("sofa");addBox(g,kit,2.1,.45,.78,m.fabric,0,.26,0);addBox(g,kit,2.1,.62,.18,m.fabric,0,.6,.3);addBox(g,kit,.18,.5,.8,m.sage,-.96,.4,0);addBox(g,kit,.18,.5,.8,m.sage,.96,.4,0);g.position.set(x,y,z);g.rotation.y=rotation||0;group.add(g);}
-    function table(x,z){addBox(group,kit,1.55,.1,.82,m.oak,x,y+.76,z);[-.62,.62].forEach(function(dx){[-.28,.28].forEach(function(dz){addBox(group,kit,.07,.72,.07,m.charcoal,x+dx,y+.36,z+dz);});});}
-    if(level.id==="ground"){
-      sofa(-1.45,2.75,Math.PI/2);addBox(group,kit,1.05,.12,.58,m.oak,-.1,y+.38,2.75);table(1.85,2.55);
-      addBox(group,kit,.62,.9,2.75,m.sage,3.12,y+.45,.8);addBox(group,kit,.72,.08,2.85,m.oak,3.06,y+.94,.8);
-      addBox(group,kit,.72,.44,1.25,m.ceramic,.68,y+.24,-3.55);addBox(group,kit,1.0,.45,.38,m.oak,1.72,y+.25,-3.55);
-    }else{
-      bed(-1.85,2.5,0);bed(1.85,2.5,0);addBox(group,kit,.8,1.85,1.8,m.oak,2.75,y+.93,1.25);addBox(group,kit,.75,.42,1.35,m.ceramic,2.4,y+.25,-1.4);
-    }
+    function placed(name,item,build){var g=kit.groupNamed(name);build(g,item);g.position.set(item.x,y,item.z);g.rotation.y=item.rotation||0;group.add(g);}
+    function bed(item){placed("bed",item,function(g,i){var w=i.width||1.5,d=i.depth||2;addBox(g,kit,w,.25,d,m.oak,0,.16,0);addBox(g,kit,w-.12,.2,d-.12,m.cream,0,.39,.03);addBox(g,kit,w-.16,.12,d*.48,i.accent==="terracotta"?m.terracotta:m.sage,0,.55,.2);addBox(g,kit,w,.7,.11,m.oak,0,.48,-d/2);});}
+    function sofa(item){placed("sofa",item,function(g){addBox(g,kit,2.05,.4,.78,m.fabric,0,.24,0);addBox(g,kit,2.05,.58,.16,m.fabric,0,.57,.29);addBox(g,kit,.16,.48,.8,m.sage,-.95,.38,0);addBox(g,kit,.16,.48,.8,m.sage,.95,.38,0);[-.58,0,.58].forEach(function(x){addBox(g,kit,.5,.13,.48,x===0?m.cream:m.sage,x,.48,-.04);});});}
+    function rug(item){var mesh=kit.cylinder(.5,.035,item.accent==="sage"?m.sage:m.cream,0,.02,0,false);mesh.scale.set(item.width||1.8,1,item.depth||1.2);mesh.position.set(item.x,y+.02,item.z);group.add(mesh);}
+    function coffee(item){placed("coffee-table",item,function(g,i){var w=i.width||1,d=i.depth||.55;addBox(g,kit,w,.08,d,m.oak,0,.42,0);[-1,1].forEach(function(sx){[-1,1].forEach(function(sz){addBox(g,kit,.045,.4,.045,m.charcoal,sx*w*.38,.2,sz*d*.34);});});});}
+    function dining(item){placed("dining",item,function(g){addBox(g,kit,1.42,.09,.78,m.oak,0,.76,0);[-.56,.56].forEach(function(x){[-.27,.27].forEach(function(z){addBox(g,kit,.055,.72,.055,m.charcoal,x,.36,z);});});[[0,-.66,0],[0,.66,Math.PI],[-.93,0,Math.PI/2],[.93,0,-Math.PI/2]].forEach(function(v){var c=kit.groupNamed("chair");addBox(c,kit,.42,.08,.42,m.sage,0,.45,0);addBox(c,kit,.42,.5,.07,m.sage,0,.67,.17);[-.16,.16].forEach(function(x){addBox(c,kit,.04,.42,.04,m.charcoal,x,.21,-.14);});c.position.set(v[0],0,v[1]);c.rotation.y=v[2];g.add(c);});});}
+    function kitchen(item){placed("kitchen",item,function(g,i){var run=i.width||2.35;addBox(g,kit,.6,.82,run,m.sage,0,.41,0);addBox(g,kit,.68,.075,run+.08,m.oak,-.02,.86,0);for(var z=-run/2+.3;z<run/2;z+=.58)addBox(g,kit,.025,.68,.56,m.charcoal,-.31,.45,z);addBox(g,kit,.08,.5,.5,m.charcoal,-.35,.55,-run*.2);addBox(g,kit,.46,.04,.36,m.charcoal,-.36,.91,run*.2);});}
+    function bath(item){placed("bath",item,function(g,i){var w=i.width||.7,d=i.depth||1.3;addBox(g,kit,w,.38,d,m.ceramic,0,.23,0);addBox(g,kit,w-.18,.16,d-.2,m.cream,0,.43,.02);addBox(g,kit,.05,.58,.05,m.brass,w*.32,.62,-d*.36);});}
+    function storage(item){placed("storage",item,function(g,i){var w=i.width||1,d=i.depth||.5,h=i.height||1.9;addBox(g,kit,w,h,d,m.oak,0,h/2,0);addBox(g,kit,.025,h*.88,d+.02,m.charcoal,0,h*.52,0);[-.16,.16].forEach(function(x){addBox(g,kit,.025,.16,.035,m.brass,x,h*.52,-d/2-.02);});});}
+    function bench(item){placed("bench",item,function(g,i){var w=i.width||.72,d=i.depth||.34;addBox(g,kit,w,.12,d,m.oak,0,.42,0);[-.28,.28].forEach(function(x){addBox(g,kit,.05,.4,.05,m.charcoal,x,.2,0);});});}
+    function vanity(item){placed("vanity",item,function(g,i){var w=i.width||.9,d=i.depth||.46;addBox(g,kit,w,.62,d,m.sage,0,.38,0);addBox(g,kit,w+.04,.06,d+.04,m.oak,0,.72,0);addBox(g,kit,.32,.12,.28,m.ceramic,0,.78,0);addBox(g,kit,.04,.34,.04,m.brass,.18,.91,0);});}
+    function light(item){var glow=new root.THREE.PointLight(0xffd6a0,.2,4.5,2);glow.position.set(item.x,y+(item.height||2.05),item.z);group.add(glow);var shade=kit.cylinder(.16,.09,m.brass,item.x,y+(item.height||2.05),item.z,false);group.add(shade);}
+    (level.furniture||[]).forEach(function(item){if(item.type==="bed")bed(item);else if(item.type==="sofa")sofa(item);else if(item.type==="rug")rug(item);else if(item.type==="coffee")coffee(item);else if(item.type==="dining")dining(item);else if(item.type==="kitchen")kitchen(item);else if(item.type==="bath")bath(item);else if(item.type==="storage")storage(item);else if(item.type==="bench")bench(item);else if(item.type==="vanity")vanity(item);else if(item.type==="console")bench(item);else if(item.type==="light")light(item);});
   }
 
   function interiorDoors(group,project,kit,level,config){
     if(config.interior!=="turnkey")return;
-    level.interiorDoors.forEach(function(d){var door=addBox(group,kit,d.width,d.height,.075,kit.materials.doorWarm,d.x,level.elevation+d.height/2,d.z);door.rotation.y=d.rotation||0;});
+    var doors=config.layout==="custom"?(level.adaptedInteriorDoors||level.interiorDoors):level.interiorDoors;
+    doors.forEach(function(d){var g=kit.groupNamed(d.id||"interior-door"),door=addBox(g,kit,d.width-.05,d.height,.055,kit.materials.doorWarm,0,d.height/2,0);addBox(g,kit,d.width+.1,.07,.1,kit.materials.frame,0,d.height+.035,0);[-1,1].forEach(function(side){addBox(g,kit,.07,d.height+.05,.1,kit.materials.frame,side*(d.width/2+.015),d.height/2,0);});addBox(g,kit,.04,.04,.11,kit.materials.brass,d.width*.28,d.height*.5,-.055);g.position.set(d.x,level.elevation,d.z);g.rotation.y=d.rotation||0;group.add(g);});
   }
 
   function foundation(group,project,kit,config){
@@ -200,11 +209,17 @@
       var key=o.level+":"+o.wall;(byWall[key]=byWall[key]||[]).push(o);
     });
     Object.keys(byWall).forEach(function(key){var a=byWall[key].sort(function(x,y){return x.center-y.center;});for(var i=1;i<a.length;i++)if(a[i].center-a[i].width/2-(a[i-1].center+a[i-1].width/2)<.3)errors.push({id:a[i].id,message:"Между проёмами нужен простенок не менее 300 мм."});});
+    function doorOnSegment(d,s){var horizontal=Math.abs(s[2]-s[0])>=Math.abs(s[3]-s[1]);if(horizontal)return Math.abs(d.z-s[1])<.06&&d.x-d.width/2>=Math.min(s[0],s[2])-.06&&d.x+d.width/2<=Math.max(s[0],s[2])+.06;return Math.abs(d.x-s[0])<.06&&d.z-d.width/2>=Math.min(s[1],s[3])-.06&&d.z+d.width/2<=Math.max(s[1],s[3])+.06;}
+    project.levels.forEach(function(level){
+      [[level.partitions,level.interiorDoors,"original"],[level.adaptedPartitions,level.adaptedInteriorDoors,"adapted"]].forEach(function(v){(v[1]||[]).forEach(function(d){if(!v[0].some(function(s){return doorOnSegment(d,s);}))errors.push({id:d.id||level.id,message:"Дверь "+v[2]+" не совпадает с проёмом перегородки."});});});
+      var rooms={};level.rooms.forEach(function(r){rooms[r.id]=r;});
+      (level.furniture||[]).forEach(function(item){var room=rooms[item.roomId],fp=item.footprint||[],rot=Math.abs(((item.rotation||0)%(Math.PI*2))-Math.PI/2),swap=Math.min(rot,Math.abs(rot-Math.PI),Math.abs(rot+Math.PI))<.08,fw=swap?fp[1]:fp[0],fd=swap?fp[0]:fp[1];if(!room||!fw||!fd){errors.push({id:item.id||level.id,message:"Мебель не привязана к комнате или не имеет footprint."});return;}var b=room.box;if(item.x-fw/2<b[0]-.03||item.x+fw/2>b[0]+b[2]+.03||item.z-fd/2<b[1]-.03||item.z+fd/2>b[1]+b[3]+.03)errors.push({id:item.id,message:"Мебель выходит за границы комнаты."});if(item.type==="storage"&&(item.depth>.75||item.height>2.4))errors.push({id:item.id,message:"Шкаф имеет недопустимый комнатный масштаб."});});
+    });
     var canopyAngle=13*Math.PI/180,canopyX=-5.1,canopyY=2.69,canopyThickness=.16,deckTop=.15;
     [-6.5,-4.0].forEach(function(x){var underside=canopyY+Math.sin(canopyAngle)*(x-canopyX)-canopyThickness/2*Math.cos(canopyAngle),postHeight=underside-deckTop+.025;if(Math.abs(deckTop+postHeight-underside)>.03)errors.push({id:"carport-post-"+x,message:"Стойка навеса не примыкает к кровле."});});
     var terraceAngle=12*Math.PI/180,terraceRoofY=2.58,terraceRoofZ=5.58,terraceRoofThickness=.14,z=6.52,terraceUnder=terraceRoofY-Math.sin(terraceAngle)*(z-terraceRoofZ)-terraceRoofThickness/2*Math.cos(terraceAngle),terracePostHeight=terraceUnder-deckTop+.02;
     if(Math.abs(deckTop+terracePostHeight-terraceUnder)>.03)errors.push({id:"terrace-posts",message:"Стойки задней террасы не примыкают к кровле."});
-    return {valid:errors.length===0,errors:errors,checks:20-errors.length};
+    return {valid:errors.length===0,errors:errors,checks:28-errors.length};
   }
 
   function quantities(project){

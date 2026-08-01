@@ -78,8 +78,8 @@
   "stairVoid": {"x": 0, "z": 0, "width": 0, "depth": 0},
   "staircase": {"steps": 0, "rise": 0, "run": 0, "width": 0, "direction": "+z"},
   "levels": [
-    {"id": "ground", "name": "Первый этаж", "elevation": 0.45, "rooms": [], "partitions": [], "adaptedPartitions": [], "interiorDoors": [], "furniture": []},
-    {"id": "mansard", "name": "Второй уровень", "elevation": 0, "rooms": [], "partitions": [], "adaptedPartitions": [], "interiorDoors": [], "furniture": []}
+    {"id": "ground", "name": "Первый этаж", "elevation": 0.45, "rooms": [], "partitions": [], "adaptedPartitions": [], "interiorDoors": [], "adaptedInteriorDoors": [], "furniture": []},
+    {"id": "mansard", "name": "Второй уровень", "elevation": 0, "rooms": [], "partitions": [], "adaptedPartitions": [], "interiorDoors": [], "adaptedInteriorDoors": [], "furniture": []}
   ],
   "openings": [],
   "visual": {"projectType": "Дом с жилой мансардой", "interiorStyle": "warm-natural", "environmentSeed": 1, "notes": []},

@@ -37,6 +37,8 @@ Opening visuals use `visualType`, not semantic `type`: `window` and `glazed-door
 
 For a covered terrace, porch, or carport, the visible option is complete only when its roof, edge/ledger/header, supports, and deck are present. Compute each support top from the actual rotated roof underside and validate the contact within 30 mm rather than assigning a visually guessed height.
 
+Interior layers are also data-driven. Cut every partition around `interiorDoors` or `adaptedInteriorDoors`, then place the corresponding leaf and frame in that opening. Build furniture exclusively from the active level's HouseSpec records. Each item's rotated footprint must remain inside `roomId`; reject room-sized storage blocks, solid furniture collisions, and coordinates copied from another house.
+
 If a system is normally hidden, reveal it during its build stage and label the visualization as schematic.
 
 ## Compatibility

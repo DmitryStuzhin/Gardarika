@@ -706,6 +706,7 @@
       ],
       "interiorDoors": [
         {
+          "id": "hall-door",
           "x": -0.45,
           "z": -1.05,
           "rotation": 1.5708,
@@ -713,6 +714,7 @@
           "height": 2.05
         },
         {
+          "id": "service-door",
           "x": 0.7,
           "z": -2.35,
           "rotation": 0,
@@ -720,7 +722,155 @@
           "height": 2.05
         }
       ],
-      "furniture": []
+      "adaptedInteriorDoors": [
+        {
+          "id": "hall-door",
+          "x": -0.1,
+          "z": -1.05,
+          "rotation": 1.5708,
+          "width": 0.85,
+          "height": 2.05
+        },
+        {
+          "id": "service-door",
+          "x": 0.7,
+          "z": -2.35,
+          "rotation": 0,
+          "width": 0.8,
+          "height": 2.05
+        }
+      ],
+      "furniture": [
+        {
+          "id": "living-rug",
+          "roomId": "living",
+          "type": "rug",
+          "x": -1.25,
+          "z": 2.75,
+          "width": 2.15,
+          "depth": 1.45,
+          "footprint": [
+            2.15,
+            1.45
+          ],
+          "accent": "cream",
+          "confidence": "illustrative"
+        },
+        {
+          "id": "living-sofa",
+          "roomId": "living",
+          "type": "sofa",
+          "x": -2.35,
+          "z": 2.75,
+          "rotation": 1.5708,
+          "footprint": [
+            2.05,
+            0.82
+          ],
+          "accent": "sage",
+          "confidence": "illustrative"
+        },
+        {
+          "id": "living-table",
+          "roomId": "living",
+          "type": "coffee",
+          "x": -0.85,
+          "z": 2.75,
+          "width": 1.0,
+          "depth": 0.55,
+          "footprint": [
+            1.0,
+            0.55
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "dining",
+          "roomId": "living",
+          "type": "dining",
+          "x": 1.55,
+          "z": 2.72,
+          "footprint": [
+            2.15,
+            1.55
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "kitchen",
+          "roomId": "living",
+          "type": "kitchen",
+          "x": 3.0,
+          "z": 1.33,
+          "rotation": 0,
+          "width": 2.35,
+          "depth": 0.62,
+          "footprint": [
+            0.62,
+            2.35
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "wc-bath",
+          "roomId": "wc",
+          "type": "bath",
+          "x": 0.67,
+          "z": -3.55,
+          "rotation": 0,
+          "width": 0.68,
+          "depth": 1.18,
+          "footprint": [
+            0.68,
+            1.18
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "vestibule-storage",
+          "roomId": "vestibule",
+          "type": "storage",
+          "x": 1.88,
+          "z": -3.84,
+          "rotation": 0,
+          "width": 0.68,
+          "depth": 0.38,
+          "height": 1.92,
+          "footprint": [
+            0.68,
+            0.38
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "vestibule-bench",
+          "roomId": "vestibule",
+          "type": "bench",
+          "x": 1.72,
+          "z": -3.05,
+          "rotation": 0,
+          "width": 0.72,
+          "depth": 0.34,
+          "footprint": [
+            0.72,
+            0.34
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "living-light",
+          "roomId": "living",
+          "type": "light",
+          "x": -1.2,
+          "z": 2.8,
+          "height": 2.15,
+          "footprint": [
+            0.1,
+            0.1
+          ],
+          "confidence": "illustrative"
+        }
+      ]
     },
     {
       "id": "mansard",
@@ -838,6 +988,7 @@
       ],
       "interiorDoors": [
         {
+          "id": "bed-left-door",
           "x": -1.45,
           "z": 0.55,
           "rotation": 0,
@@ -845,6 +996,7 @@
           "height": 2.0
         },
         {
+          "id": "bed-right-door",
           "x": 1.65,
           "z": 0.55,
           "rotation": 0,
@@ -852,6 +1004,7 @@
           "height": 2.0
         },
         {
+          "id": "bath-door",
           "x": 0.65,
           "z": -0.85,
           "rotation": 1.5708,
@@ -859,7 +1012,197 @@
           "height": 2.0
         }
       ],
-      "furniture": []
+      "adaptedInteriorDoors": [
+        {
+          "id": "bed-left-door",
+          "x": -1.45,
+          "z": 0.55,
+          "rotation": 0,
+          "width": 0.8,
+          "height": 2.0
+        },
+        {
+          "id": "bed-right-door",
+          "x": 1.65,
+          "z": 0.55,
+          "rotation": 0,
+          "width": 0.8,
+          "height": 2.0
+        },
+        {
+          "id": "bath-door",
+          "x": 0.65,
+          "z": -0.85,
+          "rotation": 1.5708,
+          "width": 0.8,
+          "height": 2.0
+        }
+      ],
+      "furniture": [
+        {
+          "id": "bed-left",
+          "roomId": "bed-left",
+          "type": "bed",
+          "x": -1.86,
+          "z": 2.6,
+          "width": 1.5,
+          "depth": 2.0,
+          "footprint": [
+            1.5,
+            2.0
+          ],
+          "accent": "sage",
+          "confidence": "illustrative"
+        },
+        {
+          "id": "rug-left",
+          "roomId": "bed-left",
+          "type": "rug",
+          "x": -1.86,
+          "z": 2.65,
+          "width": 1.85,
+          "depth": 2.35,
+          "footprint": [
+            1.85,
+            2.35
+          ],
+          "accent": "cream",
+          "confidence": "illustrative"
+        },
+        {
+          "id": "wardrobe-left",
+          "roomId": "bed-left",
+          "type": "storage",
+          "x": -3.02,
+          "z": 1.38,
+          "rotation": 1.5708,
+          "width": 1.2,
+          "depth": 0.52,
+          "height": 1.92,
+          "footprint": [
+            1.2,
+            0.52
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "bed-right",
+          "roomId": "bed-right",
+          "type": "bed",
+          "x": 1.86,
+          "z": 2.6,
+          "width": 1.5,
+          "depth": 2.0,
+          "footprint": [
+            1.5,
+            2.0
+          ],
+          "accent": "terracotta",
+          "confidence": "illustrative"
+        },
+        {
+          "id": "rug-right",
+          "roomId": "bed-right",
+          "type": "rug",
+          "x": 1.86,
+          "z": 2.65,
+          "width": 1.85,
+          "depth": 2.35,
+          "footprint": [
+            1.85,
+            2.35
+          ],
+          "accent": "cream",
+          "confidence": "illustrative"
+        },
+        {
+          "id": "wardrobe-right",
+          "roomId": "bed-right",
+          "type": "storage",
+          "x": 3.02,
+          "z": 1.38,
+          "rotation": 1.5708,
+          "width": 1.2,
+          "depth": 0.52,
+          "height": 1.92,
+          "footprint": [
+            1.2,
+            0.52
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "upper-bath",
+          "roomId": "bath",
+          "type": "bath",
+          "x": 2.35,
+          "z": -1.42,
+          "rotation": 0,
+          "width": 0.72,
+          "depth": 1.35,
+          "footprint": [
+            0.72,
+            1.35
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "bath-vanity",
+          "roomId": "bath",
+          "type": "vanity",
+          "x": 1.2,
+          "z": -1.65,
+          "rotation": 1.5708,
+          "width": 0.9,
+          "depth": 0.46,
+          "footprint": [
+            0.9,
+            0.46
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "hall-console",
+          "roomId": "upper-hall",
+          "type": "console",
+          "x": 0.3,
+          "z": -1.65,
+          "rotation": 1.5708,
+          "width": 0.75,
+          "depth": 0.28,
+          "footprint": [
+            0.75,
+            0.28
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "upper-light-left",
+          "roomId": "bed-left",
+          "type": "light",
+          "x": -1.86,
+          "z": 2.55,
+          "height": 2.0,
+          "footprint": [
+            0.1,
+            0.1
+          ],
+          "confidence": "illustrative"
+        },
+        {
+          "id": "upper-light-right",
+          "roomId": "bed-right",
+          "type": "light",
+          "x": 1.86,
+          "z": 2.55,
+          "height": 2.0,
+          "footprint": [
+            0.1,
+            0.1
+          ],
+          "confidence": "illustrative"
+        }
+      ]
     }
   ],
   "openings": [

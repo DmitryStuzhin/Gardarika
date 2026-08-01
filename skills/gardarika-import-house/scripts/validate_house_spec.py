@@ -7,9 +7,18 @@ from pathlib import Path
 GROUPS = {"foundation", "walls", "slab", "roofCover", "facade", "windows", "engineering", "layout", "interior", "terrace"}
 CONFIDENCE = {"published", "measured", "traced", "inferred", "illustrative"}
 OPENING_VISUAL_TYPES = {"window", "glazed-door", "solid-door"}
+FURNITURE_TYPES = {"bed", "sofa", "dining", "kitchen", "bath", "light", "rug", "storage", "coffee", "bench", "vanity", "console"}
 STANDARD_OPTIONS = {"foundation":{"slab","strip","piles"},"walls":{"aerated","arbolit","frame"},"slab":{"concrete","beams"},"roofCover":{"ceramic","soft","metal"},"facade":{"clinker","plaster","prepared"},"windows":{"premium","standard"},"engineering":{"full","basic","later"},"layout":{"original","custom"},"interior":{"turnkey","prefinish","shell"},"terrace":{"full","base","later"}}
 
 def positive(value): return isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0
+
+def door_on_partition(door, segment, tolerance=.06):
+    x1, z1, x2, z2 = segment
+    horizontal = abs(x2-x1) >= abs(z2-z1)
+    width = door.get("width", 0)
+    if horizontal:
+        return abs(door.get("z", 1e9)-z1) <= tolerance and min(x1,x2)-tolerance <= door.get("x", 1e9)-width/2 and door.get("x", -1e9)+width/2 <= max(x1,x2)+tolerance
+    return abs(door.get("x", 1e9)-x1) <= tolerance and min(z1,z2)-tolerance <= door.get("z", 1e9)-width/2 and door.get("z", -1e9)+width/2 <= max(z1,z2)+tolerance
 
 def validate(spec, strict=False, base_dir=None):
     errors, warnings = [], []
@@ -58,8 +67,46 @@ def validate(spec, strict=False, base_dir=None):
         for ri, room in enumerate(level.get("rooms", [])):
             room_box=room.get("box",[])
             if len(room_box)!=4 or not all(isinstance(v,(int,float)) for v in room_box) or not positive(room_box[2]) or not positive(room_box[3]): err(f"levels[{li}].rooms[{ri}].box", "must be [minX,minZ,width,depth]")
+        rooms={room.get("id"):room for room in level.get("rooms",[]) if room.get("id")}
+        for variant, segments, doors in (
+            ("original", level.get("partitions",[]), level.get("interiorDoors",[])),
+            ("adapted", level.get("adaptedPartitions",[]), level.get("adaptedInteriorDoors",[])),
+        ):
+            if strict and not doors: err(f"levels[{li}].{variant}InteriorDoors", "must contain doors for this layout")
+            for di, door in enumerate(doors):
+                dpath=f"levels[{li}].{variant}InteriorDoors[{di}]"
+                for key in ("x","z","rotation"):
+                    if not isinstance(door.get(key),(int,float)): err(dpath+"."+key, "must be numeric")
+                for key in ("width","height"):
+                    if not positive(door.get(key)): err(dpath+"."+key, "must be positive")
+                if segments and not any(door_on_partition(door,segment) for segment in segments): err(dpath, "must lie on and fit inside a partition segment so the wall can be cut around it")
+        furniture=level.get("furniture",[])
+        if strict and not furniture: err(f"levels[{li}].furniture", "must contain an explicit furniture layout")
+        solids=[]
+        for fi, item in enumerate(furniture):
+            fpath=f"levels[{li}].furniture[{fi}]"
+            if item.get("type") not in FURNITURE_TYPES: err(fpath+".type", "is not a supported furniture type")
+            room=rooms.get(item.get("roomId"))
+            if not room: err(fpath+".roomId", "must reference a room on the same level")
+            if item.get("confidence") not in CONFIDENCE: (err if strict else warn)(fpath+".confidence", "needs an evidence class")
+            if not isinstance(item.get("x"),(int,float)) or not isinstance(item.get("z"),(int,float)): err(fpath, "x and z must be numeric")
+            footprint=item.get("footprint",[])
+            if len(footprint)!=2 or not all(positive(v) for v in footprint): err(fpath+".footprint", "must contain positive width and depth")
+            elif room and isinstance(item.get("x"),(int,float)) and isinstance(item.get("z"),(int,float)):
+                rotation=abs((item.get("rotation",0)%(math.pi*2))-math.pi/2)
+                swap=min(rotation,abs(rotation-math.pi),abs(rotation+math.pi))<.08
+                fw,fd=(footprint[1],footprint[0]) if swap else footprint
+                minx,minz,rw,rd=room["box"]
+                if item["x"]-fw/2<minx-.03 or item["x"]+fw/2>minx+rw+.03 or item["z"]-fd/2<minz-.03 or item["z"]+fd/2>minz+rd+.03: err(fpath, "footprint must fit inside its room after rotation")
+                if item.get("type") not in {"rug","light"}: solids.append((fi,item,item["x"]-fw/2,item["x"]+fw/2,item["z"]-fd/2,item["z"]+fd/2))
+            if item.get("type")=="storage" and (item.get("depth",0)>.75 or item.get("height",0)>2.4): err(fpath, "storage depth must be <= 0.75 m and height <= 2.4 m")
+        for ai,a,al,ar,af,ab in solids:
+            for bi,b,bl,br,bf,bb in solids:
+                if bi<=ai or a.get("roomId")!=b.get("roomId"): continue
+                overlap_x=min(ar,br)-max(al,bl); overlap_z=min(ab,bb)-max(af,bf)
+                if overlap_x>.12 and overlap_z>.12: err(f"levels[{li}].furniture[{ai}],levels[{li}].furniture[{bi}]", "solid furniture footprints overlap")
         if strict and mode == "rect-gable-2level":
-            for key in ("adaptedPartitions","interiorDoors","furniture"):
+            for key in ("adaptedPartitions","interiorDoors","adaptedInteriorDoors","furniture"):
                 if key not in level: err(f"levels[{li}].{key}", "must be explicitly supplied for reusable standard geometry")
             if not level.get("rooms"): err(f"levels[{li}].rooms", "must describe the plan")
             if not level.get("adaptedPartitions"): err(f"levels[{li}].adaptedPartitions", "must contain an explicit alternative layout")

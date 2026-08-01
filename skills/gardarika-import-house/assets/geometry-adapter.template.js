@@ -33,7 +33,10 @@
       // solid-door) for materials. Cut the shell and place the visual from the
       // same opening record. Split cladding around opening rectangles; never
       // cover them with a solid overlay. Derive support heights from the actual
-      // rotated roof underside and keep every contact within 30 mm.
+      // rotated roof underside and keep every contact within 30 mm. Read the
+      // interior from level.furniture, keep each rotated footprint inside its
+      // room, and cut partitions around original/adaptedInteriorDoors before
+      // placing complete leaves and frames. Do not hardcode fallback furniture.
 
       model.userData = layers;
       return model;

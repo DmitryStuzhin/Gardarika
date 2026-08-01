@@ -36,6 +36,8 @@ Calculator V2 currently assumes a ground level plus an upper/mansard level and a
 - Give every exterior opening both semantic `type` and explicit `visualType`; never render all doors as one opaque slab.
 - Subtract openings from every facade skin or build trim around their clear rectangles. Never cover a window or door with a decorative box.
 - Derive porch, terrace, and carport support heights from the rotated roof underside and validate every contact within 30 mm.
+- Store every furniture item in HouseSpec with a room id, rotated footprint, dimensions, and evidence class; reject hardcoded fallback interiors and room-sized placeholder boxes.
+- Cut partitions around both original and adapted interior doors. Move door coordinates with the adapted partition layout instead of overlaying leaves on solid walls.
 - Do not expose an option unless its selected state produces a visible 3D change or an explicitly labeled non-geometric system visualization.
 - Do not call pricing production-ready unless rates came from an approved source. Mark calculated examples as `illustrative`.
 - Stop and ask for the missing section, facade, or dimension when the omission can change massing, roof intersections, floor heights, or openings.
