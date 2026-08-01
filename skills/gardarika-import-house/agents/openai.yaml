@@ -1,0 +1,4 @@
+interface:
+  display_name: "Импорт дома в Гардарика"
+  short_description: "Превращает проект дома в 3D-калькулятор"
+  default_prompt: "Use $gardarika-import-house to import this house project into Gardarika Calculator V2."

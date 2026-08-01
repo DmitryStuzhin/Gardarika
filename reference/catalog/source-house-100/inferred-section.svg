@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 760" role="img" aria-labelledby="title desc">
+  <title id="title">Lento 100 — восстановленный поперечный разрез</title>
+  <desc id="desc">Схема собрана по опубликованным общей высоте 6,93 м и уклону кровли 25 градусов. Высоты этажей восстановлены для визуальной модели.</desc>
+  <rect width="1040" height="760" fill="#f7f4ee"/>
+  <g fill="none" stroke="#252623" stroke-width="8" stroke-linejoin="round">
+    <path d="M220 650V370H820V650"/>
+    <path d="M178 384 520 154 862 384"/>
+    <path d="M220 478H820"/>
+    <path d="M520 154V650" stroke="#b9b3a7" stroke-dasharray="18 16"/>
+  </g>
+  <g fill="#252623" font-family="Arial, sans-serif" font-size="25">
+    <text x="54" y="70" font-size="32" font-weight="700">LENTO 100 · ВОССТАНОВЛЕННЫЙ РАЗРЕЗ</text>
+    <text x="55" y="108" fill="#7c7569">Не рабочая документация. Контроль формы для 3D-конструктора.</text>
+    <text x="840" y="412">5,24 м</text>
+    <text x="540" y="148">6,93 м</text>
+    <text x="842" y="485">3,10 м</text>
+    <text x="842" y="654">0,45 м</text>
+    <text x="428" y="302">25°</text>
+  </g>
+  <g stroke="#b4552f" stroke-width="3" fill="none">
+    <path d="M900 650V154M884 650H916M884 154H916"/>
+    <path d="M220 704H820M220 688V720M820 688V720"/>
+  </g>
+  <text x="462" y="744" fill="#b4552f" font-family="Arial, sans-serif" font-size="24">7,25 м</text>
+</svg>

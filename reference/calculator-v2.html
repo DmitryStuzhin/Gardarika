@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3eee5">
+  <title>Lilia 105 — Калькулятор V2 · Гардарика</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b4552f'/%3E%3Cpath d='M8 20 16 9l8 11z' fill='%23fbf9f5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="v2/calculator-v2.css">
+</head>
+<body>
+  <header class="v2-nav">
+    <a class="brand" href="index.src.html#top" aria-label="Гардарика — на главную">ГАРДАРИКА <small>ДОМА</small></a>
+    <div class="nav-project" aria-label="Открытый проект"><span class="status-dot"></span><span data-project-name>Lilia 105</span> <span>·</span> <span id="navMode">оригинал</span></div>
+    <div class="nav-actions">
+      <span class="nav-price" id="navPrice">15 000 000 ₽</span>
+      <a class="quiet-link" href="index.src.html#catalog">Каталог</a>
+      <a class="button button-dark button-small" href="#handoff">Получить расчёт</a>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="model-panel" aria-label="Трёхмерная модель Lilia 105">
+      <canvas id="modelCanvas"></canvas>
+      <div class="model-topbar">
+        <div class="view-switch" role="group" aria-label="Режим просмотра">
+          <button type="button" data-view="exterior" aria-pressed="true">Дом</button>
+          <button type="button" data-view="ground" aria-pressed="false">1 этаж</button>
+          <button type="button" data-view="mansard" aria-pressed="false" data-project-upper-short>Мансарда</button>
+          <button type="button" data-view="explode" aria-pressed="false">Разрез</button>
+        </div>
+        <button class="icon-button" id="resetCamera" type="button" aria-label="Вернуть исходный ракурс">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 8.4A8 8 0 1 1 4 14m.8-5.6H9M4.8 8.4V4"/></svg>
+        </button>
+      </div>
+      <div class="model-caption">
+        <strong id="viewTitle">Точная внешняя форма</strong>
+        <span id="viewHint">Тяните, чтобы повернуть · колесо — масштаб</span>
+      </div>
+      <div class="dimensions" aria-label="Основные размеры">
+        <span><b data-project-width>8,20</b> м</span><i></i><span><b data-project-length>10,50</b> м</span><i></i><span><b data-project-height>8,14</b> м</span>
+      </div>
+    </section>
+
+    <aside class="inspector" aria-label="Параметры проекта">
+      <div class="inspector-head">
+        <div>
+          <p class="project-type" data-project-type>Дом с жилой мансардой</p>
+          <h1 data-project-name>Lilia 105</h1>
+        </div>
+        <span class="pilot-badge">V2 · пилот</span>
+        <p class="lead">Перенесён из каталога без изменения пятна и силуэта. Опубликованные размеры защищены от случайной правки.</p>
+      </div>
+
+      <div class="mode-control" role="group" aria-label="Режим проекта">
+        <button type="button" data-mode="original" aria-pressed="true"><span>Оригинал</span><small>точно по проекту</small></button>
+        <button type="button" data-mode="adapt" aria-pressed="false"><span>Адаптация</span><small>безопасные изменения</small></button>
+      </div>
+
+      <section class="build-flow" id="buildFlow" aria-label="Пошаговая адаптация проекта" hidden>
+        <div class="build-progress-head">
+          <span id="buildStepLabel">Шаг 1 из 11</span>
+          <strong id="buildLivePrice">15 000 000 ₽</strong>
+        </div>
+        <div class="build-progress" aria-hidden="true"><i id="buildProgressBar"></i></div>
+        <div class="build-copy">
+          <p class="build-kicker" id="buildKicker">Подготовка</p>
+          <h2 id="buildTitle">Участок и грунт</h2>
+          <p id="buildDescription"></p>
+        </div>
+        <div class="build-identity-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V8a6 6 0 0 1 12 0v2m-13 0h14v10H5V10Zm7 4v2"/></svg>
+          <p><strong>Форма <span data-project-name>Lilia 105</span> закреплена.</strong> Габарит <span data-project-footprint>8,20 × 10,50 м</span>, <span data-project-upper-name>жилая мансарда</span> и скаты <span data-project-pitch>40°</span> останутся узнаваемыми при любой допустимой комплектации.</p>
+        </div>
+        <div class="build-options" id="buildOptions"></div>
+        <div class="build-actions">
+          <button class="button build-back" id="buildPrev" type="button">Назад</button>
+          <button class="button button-clay" id="buildNext" type="button">Следующий этап</button>
+        </div>
+      </section>
+
+      <nav class="tabs" role="tablist" aria-label="Разделы конструктора">
+        <button type="button" role="tab" data-tab="project" aria-controls="panel-project" aria-selected="true">Проект</button>
+        <button type="button" role="tab" data-tab="package" aria-controls="panel-package" aria-selected="false">Комплектация</button>
+        <button type="button" role="tab" data-tab="openings" aria-controls="panel-openings" aria-selected="false">Проёмы</button>
+        <button type="button" role="tab" data-tab="estimate" aria-controls="panel-estimate" aria-selected="false">Смета</button>
+      </nav>
+
+      <div class="tab-panel" id="panel-project" role="tabpanel" data-panel="project">
+        <div class="fact-grid">
+          <div><span>Полезная площадь</span><strong><span data-project-area>104,58</span> м²</strong></div>
+          <div><span>Пятно застройки</span><strong><span data-project-footprint-area>86,12</span> м²</strong></div>
+          <div><span>Кровля</span><strong><span data-project-roof-area>147,00</span> м²</strong></div>
+          <div><span>Уклон</span><strong data-project-pitch>40°</strong></div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title"><h2>Уровни дома</h2><span>2 связанных уровня</span></div>
+          <button class="level-row" type="button" data-level-jump="ground">
+            <span class="level-thumb ground-thumb"></span><span><b>Первый этаж</b><small><span data-project-footprint>8,20 × 10,50 м</span> · лестница сохранена</small></span><em>→</em>
+          </button>
+          <button class="level-row" type="button" data-level-jump="mansard">
+            <span class="level-thumb roof-thumb"></span><span><b data-project-upper-name>Жилая мансарда</b><small><span data-project-upper-note>внутри кровли · коленная стена</span> <span data-project-kneewall>1,15 м</span>*</small></span><em>→</em>
+          </button>
+        </div>
+
+        <div class="section-block plan-block">
+          <div class="section-title"><h2>Планировка</h2><div class="floor-mini-switch"><button type="button" data-plan="ground" aria-pressed="true">1</button><button type="button" data-plan="mansard" aria-pressed="false" data-project-upper-code>М</button></div></div>
+          <div id="planDrawing" class="plan-drawing" role="img" aria-label="План первого этажа"></div>
+          <div class="plan-legend"><span><i class="wall-key"></i>стены</span><span><i class="opening-key"></i>проёмы</span><span><i class="stair-key"></i>лестница</span></div>
+        </div>
+
+        <div class="source-note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4m0 4h.01M4.9 19h14.2L12 4 4.9 19Z"/></svg>
+          <p><strong>Что восстановлено по чертежам.</strong> Габариты, уровни, кровля, лестничный проём, планировка и фасадные проёмы связаны в одной параметрической модели. Предварительные значения сохраняют свой статус в спецификации проекта.</p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-package" role="tabpanel" data-panel="package" hidden>
+        <div class="price-hero" aria-live="polite">
+          <span>Ваша комплектация</span>
+          <strong id="packageTotal">15 000 000 ₽</strong>
+          <div><span>Цена проекта <s id="cataloguePrice">15 000 000 ₽</s></span><b id="packageSaving">Без изменений</b></div>
+        </div>
+        <div class="shape-lock">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V8a6 6 0 0 1 12 0v2m-13 0h14v10H5V10Zm7 4v2"/></svg>
+          <p><strong>Архитектура защищена.</strong> Пятно, этажи, планировка и форма кровли остаются <span data-project-name>Lilia 105</span>. Здесь меняется только способ строительства и степень готовности.</p>
+        </div>
+        <div class="package-groups" id="packageGroups"></div>
+        <button class="text-button" id="resetPackage" type="button">Вернуть комплектацию из каталога</button>
+      </div>
+
+      <div class="tab-panel" id="panel-openings" role="tabpanel" data-panel="openings" hidden>
+        <div class="adapt-lock" id="adaptLock">
+          <h2>Оригинал защищён</h2>
+          <p>Перейдите в режим «Адаптация», чтобы менять разрешённые окна. Несущая схема, лестничный проём и кровля останутся связанными.</p>
+          <button class="button button-dark" type="button" id="unlockAdapt">Начать адаптацию</button>
+        </div>
+        <div id="openingEditor" hidden>
+          <div class="section-title"><h2>Окна и двери</h2><span id="openingCount"></span></div>
+          <label class="field-label" for="openingSelect">Выбранный проём</label>
+          <select id="openingSelect"></select>
+          <div class="range-field">
+            <div><label for="openingWidth">Ширина</label><output id="openingWidthValue">—</output></div>
+            <input id="openingWidth" type="range" min="0.6" max="3.2" step="0.05">
+          </div>
+          <div class="range-field">
+            <div><label for="openingOffset">Положение на стене</label><output id="openingOffsetValue">—</output></div>
+            <input id="openingOffset" type="range" min="-3" max="3" step="0.05">
+          </div>
+          <div class="validation" id="openingValidation" data-state="valid" aria-live="polite">
+            <span class="validation-mark"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10 3 3 7-7"/></svg></span>
+            <div><strong>Геометрия корректна</strong><small>Проём помещается в стене и не пересекается с соседними.</small></div>
+          </div>
+          <button class="text-button" id="resetOpenings" type="button">Вернуть окна <span data-project-name>Lilia 105</span></button>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-estimate" role="tabpanel" data-panel="estimate" hidden>
+        <div class="quantity-head"><h2>Смета выбранного дома</h2><span>геометрия + комплектация</span></div>
+        <dl class="cost-list" id="costList"></dl>
+        <div class="estimate-total estimate-total-main">
+          <span>Предварительная стоимость</span>
+          <strong id="estimateTotal">—</strong>
+          <small id="estimateSaving">Погрешность после инженерной проверки 10–15%</small>
+        </div>
+        <div class="quantity-head quantity-subhead"><h2>Контроль объёмов</h2><span>из единой 3D-модели</span></div>
+        <dl class="quantity-list" id="quantityList"></dl>
+        <p class="estimate-footnote">Цены демонстрируют логику комплектации. Перед коммерческим предложением ставки, геология и инженерные решения проверяются специалистом.</p>
+      </div>
+
+      <footer class="inspector-footer" id="handoff">
+        <div class="footer-price"><span>Стоимость дома</span><strong id="footerPrice">15 000 000 ₽</strong><small id="footerSaving"><i class="status-dot"></i><span id="modelStatus">12 проверок пройдено</span></small></div>
+        <button class="button button-clay" type="button" id="requestEstimate">Посмотреть смету</button>
+      </footer>
+    </aside>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="three.min.js"></script>
+  <script src="OrbitControls.js"></script>
+  <script src="v2/lilia-105.js"></script>
+  <script src="v2/geometry-engine.js"></script>
+  <script src="v2/calculator-v2.js"></script>
+</body>
+</html>

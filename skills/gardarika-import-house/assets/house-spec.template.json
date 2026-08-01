@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "id": "house-id",
+    "name": "House Name",
+    "geometryMode": "rect-gable-2level",
+    "geometryAdapter": null,
+    "adapterModule": null,
+    "sourceFolder": "",
+    "status": "draft"
+  },
+  "evidence": {
+    "plans": [],
+    "facades": [],
+    "sections": [],
+    "roofPlans": [],
+    "photos": []
+  },
+  "source": {
+    "usefulArea": 0,
+    "footprintArea": 0,
+    "roofArea": 0,
+    "volume": null,
+    "totalHeight": 0,
+    "minPlot": [0, 0],
+    "footprint": [0, 0],
+    "roofPitch": 0,
+    "confidence": {
+      "footprint": "",
+      "roofPitch": "",
+      "totalHeight": "",
+      "openings": "",
+      "partitions": "",
+      "kneeWall": ""
+    }
+  },
+  "structure": {
+    "exteriorWall": 0.4,
+    "partition": 0.12,
+    "groundWallHeight": 0,
+    "slab": 0.25,
+    "kneeWall": 0,
+    "plinth": 0.45,
+    "roofPitch": 0,
+    "roofOverhangSide": 0,
+    "roofOverhangGable": 0
+  },
+  "site": {
+    "defaultSoil": "unknown",
+    "soils": [
+      {"id": "sand", "name": "Песок", "note": "Требуется подтверждение геологией"},
+      {"id": "loam", "name": "Суглинок", "note": "Требуется подтверждение геологией"},
+      {"id": "clay", "name": "Глина", "note": "Требуется подтверждение геологией"},
+      {"id": "peat", "name": "Торф", "note": "Нужно отдельное инженерное решение"},
+      {"id": "unknown", "name": "Не знаю", "note": "Добавим геологию перед расчётом"}
+    ]
+  },
+  "package": {
+    "pricingStatus": "missing",
+    "cataloguePrice": 0,
+    "fixed": {"name": "Проект, работы и логистика", "price": 0},
+    "defaults": {
+      "foundation": "slab", "walls": "aerated", "slab": "concrete", "roofCover": "ceramic", "facade": "plaster", "windows": "premium", "engineering": "full", "layout": "original", "interior": "turnkey", "terrace": "full"
+    },
+    "groups": [
+      {"id": "foundation", "name": "Фундамент", "options": [{"id": "slab", "name": "Монолитная плита", "price": 0, "visual": "slab geometry"}, {"id": "piles", "name": "Сваи с ростверком", "price": 0, "visual": "piles and grade beam geometry"}]},
+      {"id": "walls", "name": "Конструкция стен", "options": [{"id": "aerated", "name": "Газобетон", "price": 0, "visual": "aerated wall core"}, {"id": "arbolit", "name": "Арболит", "price": 0, "visual": "arbolit wall core"}]},
+      {"id": "slab", "name": "Перекрытие и лестница", "options": [{"id": "concrete", "name": "Монолитное перекрытие", "price": 0, "visual": "concrete slab"}, {"id": "beams", "name": "Деревянные балки", "price": 0, "visual": "exposed beam system"}]},
+      {"id": "roofCover", "name": "Покрытие кровли", "options": [{"id": "ceramic", "name": "Керамическая черепица", "price": 0, "visual": "ceramic roof material"}, {"id": "metal", "name": "Фальцевая кровля", "price": 0, "visual": "standing seam roof material"}]},
+      {"id": "facade", "name": "Фасад", "options": [{"id": "plaster", "name": "Штукатурка", "price": 0, "visual": "finished facade skin"}, {"id": "prepared", "name": "Под отделку", "price": 0, "visual": "bare construction skin"}]},
+      {"id": "windows", "name": "Окна и двери", "options": [{"id": "premium", "name": "Дерево-алюминий", "price": 0, "visual": "premium frames and glass"}, {"id": "standard", "name": "ПВХ", "price": 0, "visual": "standard frames and glass"}]},
+      {"id": "engineering", "name": "Инженерия", "options": [{"id": "full", "name": "Под ключ", "price": 0, "visual": "full schematic routes"}, {"id": "later", "name": "Только вводы", "price": 0, "visual": "entry routes only"}]},
+      {"id": "layout", "name": "Планировка", "options": [{"id": "original", "name": "Авторская планировка", "price": 0, "visual": "source partitions and doors"}, {"id": "custom", "name": "Адаптация архитектором", "price": 0, "visual": "adapted partitions and doors"}]},
+      {"id": "interior", "name": "Внутренняя отделка", "options": [{"id": "turnkey", "name": "Готово к переезду", "price": 0, "visual": "warm finishes furniture and lights"}, {"id": "shell", "name": "Без отделки", "price": 0, "visual": "empty construction shell"}]},
+      {"id": "terrace", "name": "Терраса", "options": [{"id": "full", "name": "Полная терраса", "price": 0, "visual": "deck and pergola"}, {"id": "later", "name": "Построить позже", "price": 0, "visual": "terrace hidden"}]}
+    ]
+  },
+  "stairVoid": {"x": 0, "z": 0, "width": 0, "depth": 0},
+  "staircase": {"steps": 0, "rise": 0, "run": 0, "width": 0, "direction": "+z"},
+  "levels": [
+    {"id": "ground", "name": "Первый этаж", "elevation": 0.45, "rooms": [], "partitions": [], "adaptedPartitions": [], "interiorDoors": [], "furniture": []},
+    {"id": "mansard", "name": "Второй уровень", "elevation": 0, "rooms": [], "partitions": [], "adaptedPartitions": [], "interiorDoors": [], "furniture": []}
+  ],
+  "openings": [],
+  "visual": {"projectType": "Дом с жилой мансардой", "interiorStyle": "warm-natural", "environmentSeed": 1, "notes": []},
+  "exteriorDetails": {"terraceDeck": [], "terracePergola": [], "cladding": [], "balcony": [], "other": []},
+  "geometry": null,
+  "importMeta": {"inventoryFile": "", "notes": []}
+}

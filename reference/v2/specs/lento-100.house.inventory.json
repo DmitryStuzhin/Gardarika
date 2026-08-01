@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "sourceDir": "/Users/dmitrijstuzin/Desktop/gardarika.moscow/reference/catalog/source-house-100",
+  "fileCount": 7,
+  "counts": {
+    "image": 6,
+    "document": 1
+  },
+  "files": [
+    {
+      "path": "0b03bf8ec85d56c4da3316eac42ef261.png",
+      "extension": ".png",
+      "category": "image",
+      "bytes": 255046,
+      "pixels": [
+        1024,
+        768
+      ]
+    },
+    {
+      "path": "108.jpg",
+      "extension": ".jpg",
+      "category": "image",
+      "bytes": 266074
+    },
+    {
+      "path": "6e9d7d376b8585b1224c4bdb2b6f5fcf.jpg",
+      "extension": ".jpg",
+      "category": "image",
+      "bytes": 39319
+    },
+    {
+      "path": "71cb743225d748fad5cc8a31fbd55447.jpg",
+      "extension": ".jpg",
+      "category": "image",
+      "bytes": 37967
+    },
+    {
+      "path": "8e726e8594b16aec2352325b85a61c03.png",
+      "extension": ".png",
+      "category": "image",
+      "bytes": 307195,
+      "pixels": [
+        1024,
+        768
+      ]
+    },
+    {
+      "path": "c89e2ea87beacd8ef8ff60b0356020e7.jpg",
+      "extension": ".jpg",
+      "category": "image",
+      "bytes": 30289
+    },
+    {
+      "path": "source-description.docx",
+      "extension": ".docx",
+      "category": "document",
+      "bytes": 14552
+    }
+  ]
+}

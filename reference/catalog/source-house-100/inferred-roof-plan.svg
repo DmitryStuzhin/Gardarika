@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 760" role="img" aria-labelledby="title desc">
+  <title id="title">Lento 100 — восстановленная схема кровель</title>
+  <desc id="desc">Основная двускатная кровля 25 градусов и зависимый односкатный навес над автомобильным местом.</desc>
+  <rect width="1040" height="760" fill="#f7f4ee"/>
+  <g fill="#e7ded0" stroke="#252623" stroke-width="7" stroke-linejoin="round">
+    <path d="M374 145H890V632H374Z"/>
+    <path d="M114 188H374V632H114Z" fill="#d9c6b2"/>
+    <path d="M497 632H720V710H497Z" fill="#d9c6b2"/>
+  </g>
+  <g fill="none" stroke="#b4552f" stroke-width="5">
+    <path d="M632 145V632"/>
+    <path d="M374 410 114 532"/>
+    <path d="M608 632 608 710"/>
+  </g>
+  <g fill="#252623" font-family="Arial, sans-serif" font-size="25">
+    <text x="54" y="70" font-size="32" font-weight="700">LENTO 100 · СХЕМА КРОВЕЛЬ</text>
+    <text x="54" y="108" fill="#7c7569">Восстановлено по фасадам и планам. Все скаты принадлежат своим объёмам.</text>
+    <text x="648" y="392">основная кровля · 25°</text>
+    <text x="128" y="420">навес</text>
+    <text x="517" y="680">тамбур</text>
+  </g>
+</svg>

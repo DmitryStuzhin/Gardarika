@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "id": "lento-100",
+    "name": "Lento 100",
+    "geometryMode": "custom-adapter",
+    "geometryAdapter": "lento-100",
+    "adapterModule": "reference/v2/adapters/lento-100.js",
+    "sourceFolder": "/Users/dmitrijstuzin/Desktop/gardarika.moscow/reference/catalog/source-house-100",
+    "status": "validated-visual"
+  },
+  "evidence": {
+    "plans": [
+      {"path": "0b03bf8ec85d56c4da3316eac42ef261.png", "kind": "published-ground-plan"},
+      {"path": "8e726e8594b16aec2352325b85a61c03.png", "kind": "published-upper-plan"}
+    ],
+    "facades": [
+      {"path": "6e9d7d376b8585b1224c4bdb2b6f5fcf.jpg", "kind": "published-front-facade"},
+      {"path": "71cb743225d748fad5cc8a31fbd55447.jpg", "kind": "published-rear-facade"},
+      {"path": "c89e2ea87beacd8ef8ff60b0356020e7.jpg", "kind": "published-side-facade"}
+    ],
+    "sections": [{"path": "inferred-section.svg", "kind": "inferred-control-section"}],
+    "roofPlans": [{"path": "inferred-roof-plan.svg", "kind": "inferred-roof-assembly"}],
+    "photos": [{"path": "108.jpg", "kind": "published-rendering"}]
+  },
+  "source": {
+    "usefulArea": 100.9,
+    "livingArea": 50.4,
+    "footprintArea": 79.8,
+    "roofArea": 123.6,
+    "volume": 446,
+    "totalHeight": 6.93,
+    "minPlot": [16.4, 18.2],
+    "footprint": [10.4, 9.125],
+    "roofPitch": 25,
+    "confidence": {
+      "footprint": "published",
+      "roofPitch": "published",
+      "totalHeight": "published",
+      "openings": "traced",
+      "partitions": "traced",
+      "kneeWall": "inferred"
+    }
+  },
+  "structure": {
+    "exteriorWall": 0.4,
+    "partition": 0.12,
+    "groundWallHeight": 2.5,
+    "slab": 0.22,
+    "kneeWall": 2.14,
+    "plinth": 0.45,
+    "roofPitch": 25,
+    "roofOverhangSide": 0.55,
+    "roofOverhangGable": 0.4,
+    "upperElevation": 3.1,
+    "eaveHeight": 5.24
+  },
+  "geometry": {
+    "footprintPolygons": [
+      {"id": "main", "points": [[-3.625,-2.6875],[3.625,-2.6875],[3.625,4.5625],[-3.625,4.5625]]},
+      {"id": "vestibule", "points": [[0.2,-4.5625],[2.3,-4.5625],[2.3,-2.6875],[0.2,-2.6875]]},
+      {"id": "carport", "points": [[-6.775,-2.6875],[-3.625,-2.6875],[-3.625,4.5625],[-6.775,4.5625]]}
+    ],
+    "volumes": [
+      {"id": "main-ground", "footprint": "main", "from": 0.45, "to": 3.1},
+      {"id": "main-upper", "footprint": "main", "from": 3.1, "to": 5.24},
+      {"id": "vestibule", "footprint": "vestibule", "from": 0.45, "to": 2.7},
+      {"id": "carport", "footprint": "carport", "from": 0, "to": 2.65}
+    ],
+    "wallSegments": [
+      {"id":"main-front","from":[-3.625,-2.6875],"to":[3.625,-2.6875]},
+      {"id":"main-back","from":[3.625,4.5625],"to":[-3.625,4.5625]},
+      {"id":"main-left","from":[-3.625,4.5625],"to":[-3.625,-2.6875]},
+      {"id":"main-right","from":[3.625,-2.6875],"to":[3.625,4.5625]},
+      {"id":"vestibule-front","from":[0.2,-4.5625],"to":[2.3,-4.5625]},
+      {"id":"vestibule-left","from":[0.2,-2.6875],"to":[0.2,-4.5625]},
+      {"id":"vestibule-right","from":[2.3,-4.5625],"to":[2.3,-2.6875]}
+    ],
+    "roofFaces": [
+      {"id":"main-left-slope","family":"gable","pitch":25,"owner":"main-upper"},
+      {"id":"main-right-slope","family":"gable","pitch":25,"owner":"main-upper"},
+      {"id":"carport-slope","family":"lean-to","pitch":13,"owner":"carport"},
+      {"id":"vestibule-slope","family":"lean-to","pitch":10,"owner":"vestibule"}
+    ],
+    "ridges": [{"id":"main-ridge","from":[0,6.93,-3.0875],"to":[0,6.93,4.9625]}],
+    "valleys": [],
+    "penetrations": [{"id":"chimney","center":[2.1,5.8,1.35],"size":[0.55,0.65]}],
+    "levelElevations": {"ground":0.45,"mansard":3.1}
+  },
+  "site": {
+    "defaultSoil": "loam",
+    "soils": [
+      {"id":"sand","name":"Песок","note":"Высокая несущая способность"},
+      {"id":"loam","name":"Суглинок","note":"Нужны геология, дренаж и утеплённая отмостка"},
+      {"id":"clay","name":"Глина","note":"Пучинистый грунт — основание уточняется расчётом"},
+      {"id":"peat","name":"Торф","note":"Нужно отдельное инженерное решение","adjustments":{"slab":780000,"strip":960000,"piles":0}},
+      {"id":"unknown","name":"Не знаю","note":"Добавим геологию перед расчётом"}
+    ]
+  },
+  "package": {
+    "pricingStatus": "illustrative",
+    "cataloguePrice": 12800000,
+    "fixed": {"name":"Проект, работы и логистика","price":1250000},
+    "defaults": {"foundation":"slab","walls":"aerated","slab":"beams","roofCover":"ceramic","facade":"clinker","windows":"premium","engineering":"full","layout":"original","interior":"turnkey","terrace":"full"},
+    "groups": [
+      {"id":"foundation","name":"Фундамент","note":"Все варианты требуют подтверждения геологией","options":[
+        {"id":"slab","name":"Монолитная плита","price":1450000,"tag":"в проекте","visual":"solid slab under house and carport pads"},
+        {"id":"strip","name":"Лента","price":1190000,"visual":"perimeter and bearing strip geometry"},
+        {"id":"piles","name":"Сваи с ростверком","price":980000,"visual":"pile field and grade beams"}
+      ]},
+      {"id":"walls","name":"Конструкция стен","note":"Форма дома не меняется","options":[
+        {"id":"aerated","name":"Газобетон 400 мм","price":1760000,"tag":"в проекте","visual":"light aerated-block wall core"},
+        {"id":"arbolit","name":"Арболит 400 мм","price":2110000,"visual":"warm fibre wall core"},
+        {"id":"frame","name":"Тёплый каркас","price":1540000,"visual":"timber stud wall core"}
+      ]},
+      {"id":"slab","name":"Перекрытие и лестница","options":[
+        {"id":"beams","name":"Деревянные балки","price":590000,"tag":"в проекте","visual":"timber beam floor around stair void"},
+        {"id":"concrete","name":"Монолитное перекрытие","price":840000,"visual":"solid concrete plate around stair void"}
+      ]},
+      {"id":"roofCover","name":"Покрытие кровли","note":"Геометрия всех четырёх скатов закреплена","options":[
+        {"id":"ceramic","name":"Керамическая черепица","price":1120000,"tag":"в проекте","visual":"dark ceramic tile texture"},
+        {"id":"soft","name":"Мягкая черепица","price":830000,"visual":"fine-grain shingle texture"},
+        {"id":"metal","name":"Фальцевая кровля","price":740000,"visual":"standing-seam metal texture"}
+      ]},
+      {"id":"facade","name":"Фасад","options":[
+        {"id":"clinker","name":"Штукатурка + клинкер","price":1050000,"tag":"на визуализации","visual":"cream plaster and red clinker accents"},
+        {"id":"plaster","name":"Тёплая штукатурка","price":680000,"visual":"continuous cream plaster skin"},
+        {"id":"prepared","name":"Под отделку","price":310000,"visual":"construction wall core remains visible"}
+      ]},
+      {"id":"windows","name":"Окна и двери","options":[
+        {"id":"premium","name":"Дерево-алюминий","price":930000,"tag":"в проекте","visual":"warm timber frames and clearer glass"},
+        {"id":"standard","name":"ПВХ · ламинация","price":640000,"visual":"light standard frames and softer glass"}
+      ]},
+      {"id":"engineering","name":"Инженерия","options":[
+        {"id":"full","name":"Под ключ","price":1680000,"tag":"в проекте","visual":"water heat and power routes"},
+        {"id":"basic","name":"Базовый комплект","price":1030000,"visual":"water and heat routes"},
+        {"id":"later","name":"Только вводы","price":360000,"visual":"short utility entry routes"}
+      ]},
+      {"id":"layout","name":"Планировка","options":[
+        {"id":"original","name":"Планировка Lento 100","price":0,"tag":"в проекте","visual":"published partitions and doors"},
+        {"id":"custom","name":"Адаптация архитектором","price":380000,"visual":"alternative non-bearing partition arrangement"}
+      ]},
+      {"id":"interior","name":"Внутренняя отделка","options":[
+        {"id":"turnkey","name":"Готово к переезду","price":2250000,"tag":"в проекте","visual":"warm floors furniture doors and lights"},
+        {"id":"prefinish","name":"White box","price":1080000,"visual":"clean unfinished rooms without furniture"},
+        {"id":"shell","name":"Без отделки","price":290000,"visual":"bare wall core and empty rooms"}
+      ]},
+      {"id":"terrace","name":"Навес и терраса","options":[
+        {"id":"full","name":"Навес + терраса","price":730000,"tag":"в проекте","visual":"carport posts roof and rear deck"},
+        {"id":"base","name":"Только навес","price":470000,"visual":"carport remains while terrace deck is hidden"},
+        {"id":"later","name":"Построить позже","price":0,"visual":"carport and terrace layers hidden"}
+      ]}
+    ]
+  },
+  "stairVoid": {"x":-1.65,"z":-0.55,"width":2.05,"depth":3.05},
+  "staircase": {"steps":14,"rise":0.1893,"run":3.0,"width":1.0,"direction":"+z"},
+  "levels": [
+    {"id":"ground","name":"Первый этаж","elevation":0.45,"rooms":[
+      {"id":"living","name":"Гостиная-кухня","area":25.8,"box":[-3.35,0.15,6.7,4.05]},
+      {"id":"hall","name":"Холл","area":10.7,"box":[-0.2,-2.35,3.55,2.5]},
+      {"id":"stairs","name":"Лестница","area":5.2,"box":[-3.35,-2.35,2.9,2.5],"stair":true},
+      {"id":"wc","name":"Санузел","area":1.6,"box":[0.2,-4.25,1.0,1.45]},
+      {"id":"vestibule","name":"Тамбур","area":2.9,"box":[1.2,-4.25,1.1,1.45]}
+    ],"partitions":[[-3.35,0.15,3.35,0.15],[-0.45,-2.35,-0.45,0.15],[-3.35,-2.35,3.35,-2.35],[0.2,-4.25,0.2,-2.8],[1.2,-4.25,1.2,-2.8]],"adaptedPartitions":[[-3.35,0.35,3.35,0.35],[-0.1,-2.35,-0.1,0.35],[-3.35,-2.35,3.35,-2.35],[0.2,-4.25,0.2,-2.8]],"interiorDoors":[{"x":-0.45,"z":-1.05,"rotation":1.5708,"width":0.85,"height":2.05},{"x":0.7,"z":-2.35,"rotation":0,"width":0.8,"height":2.05}],"furniture":[]},
+    {"id":"mansard","name":"Второй этаж","elevation":3.1,"rooms":[
+      {"id":"bed-left","name":"Спальня","area":12.3,"box":[-3.35,0.55,3.0,3.55]},
+      {"id":"bed-right","name":"Спальня","area":12.2,"box":[0.35,0.55,3.0,3.55]},
+      {"id":"bath","name":"Ванная","area":5.9,"box":[0.65,-2.35,2.7,2.55]},
+      {"id":"upper-hall","name":"Холл","area":4.2,"box":[-0.75,-2.35,1.4,2.9]},
+      {"id":"upper-stairs","name":"Лестница","area":5.2,"box":[-3.35,-2.35,2.6,2.9],"stair":true}
+    ],"partitions":[[-0.2,0.55,-0.2,4.1],[-3.35,0.55,-0.75,0.55],[0.65,0.55,3.35,0.55],[0.65,-2.35,0.65,0.55]],"adaptedPartitions":[[0.15,0.55,0.15,4.1],[-3.35,0.55,-0.75,0.55],[0.65,0.55,3.35,0.55],[0.65,-2.35,0.65,0.55]],"interiorDoors":[{"x":-1.45,"z":0.55,"rotation":0,"width":0.8,"height":2.0},{"x":1.65,"z":0.55,"rotation":0,"width":0.8,"height":2.0},{"x":0.65,"z":-0.85,"rotation":1.5708,"width":0.8,"height":2.0}],"furniture":[]}
+  ],
+  "openings": [
+    {"id":"entry","label":"Входная дверь","level":"ground","wall":"vestibule-front","wallLength":2.1,"type":"door","center":0,"width":0.95,"height":2.15,"sill":0},
+    {"id":"front-left","label":"Окно лестницы","level":"ground","wall":"main-front","wallLength":7.25,"type":"window","center":-2.45,"width":0.85,"height":1.15,"sill":0.9},
+    {"id":"front-right","label":"Окно кухни","level":"ground","wall":"main-front","wallLength":7.25,"type":"window","center":2.55,"width":0.8,"height":1.2,"sill":0.85},
+    {"id":"back-left-door","label":"Дверь на террасу","level":"ground","wall":"main-back","wallLength":7.25,"type":"door","center":-1.35,"width":1.0,"height":2.2,"sill":0},
+    {"id":"back-right-window","label":"Панорамное окно","level":"ground","wall":"main-back","wallLength":7.25,"type":"window","center":1.45,"width":1.45,"height":2.1,"sill":0.1},
+    {"id":"right-living-a","label":"Окно гостиной","level":"ground","wall":"main-right","wallLength":7.25,"type":"window","center":-0.8,"width":1.25,"height":1.25,"sill":0.85},
+    {"id":"right-living-b","label":"Окно столовой","level":"ground","wall":"main-right","wallLength":7.25,"type":"window","center":1.25,"width":1.15,"height":1.25,"sill":0.85},
+    {"id":"upper-front-a","label":"Окно спальни слева","level":"mansard","wall":"main-front","wallLength":7.25,"type":"window","center":-1.35,"width":0.9,"height":1.2,"sill":0.62},
+    {"id":"upper-front-b","label":"Окно спальни справа","level":"mansard","wall":"main-front","wallLength":7.25,"type":"window","center":1.35,"width":0.9,"height":1.2,"sill":0.62},
+    {"id":"upper-back-a","label":"Балконное окно слева","level":"mansard","wall":"main-back","wallLength":7.25,"type":"door","center":-1.2,"width":0.95,"height":1.95,"sill":0.05},
+    {"id":"upper-back-b","label":"Балконное окно справа","level":"mansard","wall":"main-back","wallLength":7.25,"type":"door","center":1.2,"width":0.95,"height":1.95,"sill":0.05},
+    {"id":"upper-bath","label":"Окно ванной","level":"mansard","wall":"main-right","wallLength":7.25,"type":"window","center":-1.45,"width":0.75,"height":0.75,"sill":1.1}
+  ],
+  "visual": {"projectType":"Компактный дом с полноценным вторым этажом","upperLevelName":"полноценный второй этаж","upperLevelShort":"2 этаж","upperLevelCode":"2","upperLevelNote":"вертикальные стены · высота до карниза","upperViewTitle":"Второй этаж внутри исходного объёма","upperViewHint":"Вертикальные стены, лестница и двускатная кровля остаются связанными","upperStructuralSummary":"Второй этаж с вертикальными стенами до отметки 5,24 м, общая высота 6,93 м и лестничный проём восстановлены как единый узел.","palette":"cream plaster, red clinker, dark tile, warm oak","landscape":"family garden with carport and rear terrace","interior":"warm oak, sand textiles, muted green accents"},
+  "importMeta": {"inventoryFile":"/Users/dmitrijstuzin/Desktop/gardarika.moscow/reference/v2/specs/lento-100.house.inventory.json","notes":["Высоты уровней и площадь кровли восстановлены для визуальной модели.","Навес, тамбур и основная кровля собраны как зависимые части одного проекта.","Цены иллюстративные и не являются коммерческим предложением."]}
+}
