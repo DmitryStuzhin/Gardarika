@@ -631,12 +631,13 @@ body.project-route .nav,body.project-route .nav-atelier{position:sticky;backgrou
 .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,28px)}
 .catalog-card{
   grid-column:auto!important;display:grid;grid-template-rows:auto auto;gap:0;
-  background:transparent;color:var(--ink);border:0;padding:0;text-align:left;font:inherit;cursor:pointer;
-  overflow:visible;transition:opacity .4s var(--ease);
+  background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-lg);padding:0;text-align:left;font:inherit;cursor:pointer;
+  overflow:hidden;transition:opacity .4s var(--ease),border-color .35s var(--ease),background .35s var(--ease);
 }
+.catalog-card:hover,.catalog-card:focus-visible{border-color:rgba(180,85,47,.58);background:#fff}
 .catalog-card[hidden]{display:none}
 .catalog-media{
-  position:relative;overflow:hidden;border-radius:var(--r);background:var(--linen);
+  position:relative;overflow:hidden;border-radius:0;background:var(--linen);
   width:100%;height:clamp(320px,26vw,440px);
 }
 .catalog-media::after{
@@ -645,14 +646,25 @@ body.project-route .nav,body.project-route .nav-atelier{position:sticky;backgrou
   transition:opacity .6s var(--ease);
 }
 .catalog-card:hover .catalog-media::after{opacity:1}
-.catalog-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);filter:none}
-.catalog-card:hover img{transform:scale(1.05);filter:none}
+.catalog-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .75s var(--ease),filter .75s var(--ease);filter:none;transform:scale(1.015)}
+.catalog-card:hover img{transform:scale(1.065) translate3d(var(--image-x,0),var(--image-y,0),0);filter:saturate(1.04)}
 .catalog-index{display:none}
 .catalog-kind{
   position:absolute;z-index:2;left:14px;bottom:14px;padding:6px 10px;border-radius:var(--pill);
   background:rgba(29,27,23,.62);color:rgba(255,255,255,.92);backdrop-filter:blur(6px);
   font:500 10px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;
 }
+.catalog-status{
+  position:absolute;z-index:2;right:14px;top:14px;display:inline-flex;align-items:center;gap:7px;
+  padding:7px 10px;border-radius:var(--pill);background:rgba(251,249,245,.92);backdrop-filter:blur(8px);
+  color:var(--ink);font:600 10px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;
+}
+.catalog-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--clay);box-shadow:0 0 0 4px var(--clay-soft)}
+.catalog-measure{position:absolute;z-index:2;left:14px;top:14px;color:#fff;font:700 12px/1 var(--font);text-shadow:0 1px 16px rgba(0,0,0,.5)}
+.catalog-ruler{position:absolute;z-index:2;left:14px;right:14px;top:45px;height:1px;background:rgba(255,255,255,.68);transform:scaleX(.18);transform-origin:left;transition:transform .55s var(--ease)}
+.catalog-ruler::before,.catalog-ruler::after{content:"";position:absolute;top:-3px;width:1px;height:7px;background:rgba(255,255,255,.84)}
+.catalog-ruler::before{left:0}.catalog-ruler::after{right:0}
+.catalog-card:hover .catalog-ruler,.catalog-card:focus-visible .catalog-ruler{transform:scaleX(1)}
 .catalog-arrow{
   position:absolute;z-index:2;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;
   display:grid;place-items:center;background:rgba(251,249,245,.94);color:var(--ink);clip-path:none;
@@ -662,7 +674,7 @@ body.project-route .nav,body.project-route .nav-atelier{position:sticky;backgrou
 .catalog-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .catalog-copy{
   display:grid;grid-template-columns:1fr auto;gap:4px 18px;align-items:baseline;
-  padding:18px 2px 0;border-top:0;
+  padding:20px 20px 18px;border-top:0;
 }
 .catalog-copy h3{
   margin:0;font:700 22px/1.2 var(--font);letter-spacing:-.012em;
@@ -670,7 +682,14 @@ body.project-route .nav,body.project-route .nav-atelier{position:sticky;backgrou
 }
 .catalog-card:hover .catalog-copy h3{transform:translateY(-4px)}
 .catalog-meta{text-align:right;font:500 14px/1.35 var(--font);letter-spacing:0;text-transform:none;color:var(--ash)}
-.catalog-copy p{grid-column:1/-1;margin:2px 0 0;font-size:14px;line-height:1.55;color:var(--ash)}
+.catalog-copy p{grid-column:1/-1;margin:4px 0 0;font-size:14px;line-height:1.55;color:var(--ash)}
+.catalog-program{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.catalog-program span{padding:7px 10px;border-radius:var(--pill);background:var(--sand);color:var(--ash);font:600 11px/1 var(--font)}
+.catalog-open{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:13px;border-top:1px solid var(--line);font:700 13px/1 var(--font);color:var(--ink)}
+.catalog-open i{display:block;width:42px;height:2px;background:var(--clay);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.catalog-card:hover .catalog-open i,.catalog-card:focus-visible .catalog-open i{transform:scaleX(1)}
+.catalog-card.is-entering{animation:catalogEnter .56s var(--ease) both;animation-delay:var(--enter-delay,0ms)}
+@keyframes catalogEnter{from{opacity:0;clip-path:inset(0 0 16% 0);transform:translateY(18px)}to{opacity:1;clip-path:inset(0);transform:none}}
 .projects-cta{display:flex;justify-content:center;margin-top:clamp(34px,4vw,52px)}
 
 /* ============================================================
@@ -909,6 +928,8 @@ body.project-route{background:var(--paper)}
 body.project-route>main,body.project-route>footer{display:none}
 .project-page[hidden]{display:none}
 .project-page{min-height:100vh;background:var(--paper);color:var(--ink);padding-bottom:clamp(40px,5vw,72px)}
+.project-progress{position:fixed;z-index:95;top:var(--nav-h);left:0;right:0;height:2px;background:transparent;pointer-events:none}
+.project-progress i{display:block;width:100%;height:100%;background:var(--clay);transform:scaleX(0);transform-origin:left center;will-change:transform}
 #projectTitle:focus,#studioTitle:focus{outline:none}
 .project-top{
   display:flex;align-items:center;justify-content:space-between;gap:20px;
@@ -926,24 +947,43 @@ body.project-route>main,body.project-route>footer{display:none}
   max-width:var(--page);margin-inline:auto;padding:0 var(--pad);
 }
 .project-hero-media{
-  position:relative;min-height:0;aspect-ratio:16/9;max-height:70vh;border-radius:var(--r-lg);
+  position:relative;width:100%;height:min(70vh,720px);min-height:420px;aspect-ratio:auto;border-radius:var(--r-lg);
   overflow:hidden;background:var(--linen);
 }
-.project-hero-media::after{content:none}
-.project-hero-media img{width:100%;height:100%;object-fit:cover}
+.project-hero-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(24,22,19,.18),transparent 25%,transparent 67%,rgba(24,22,19,.34))}
+.project-hero-media::before{content:"";position:absolute;z-index:2;inset:18px;border:1px solid rgba(255,255,255,.5);border-radius:calc(var(--r-lg) - 5px);clip-path:polygon(0 0,14% 0,14% 1px,86% 1px,86% 0,100% 0,100% 100%,86% 100%,86% calc(100% - 1px),14% calc(100% - 1px),14% 100%,0 100%);pointer-events:none}
+.project-hero-media img{width:100%;height:100%;object-fit:cover;animation:projectImageIn .75s var(--ease) both}
+.project-image-label,.project-image-number{position:absolute;z-index:3;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.38)}
+.project-image-label{left:30px;bottom:28px;font:600 11px/1 var(--font);letter-spacing:.08em;text-transform:uppercase}
+.project-image-number{right:30px;top:28px;font:700 12px/1 var(--font);font-variant-numeric:tabular-nums}
+@keyframes projectImageIn{from{filter:blur(8px);transform:scale(1.035)}to{filter:none;transform:none}}
 .project-hero-copy{
-  padding:clamp(34px,4vw,56px) 0 0;display:grid;gap:26px;
+  position:relative;z-index:4;margin:-72px clamp(18px,3vw,44px) 0;padding:clamp(28px,3.4vw,46px);display:grid;gap:26px;
   grid-template-columns:1fr;
+  background:rgba(251,249,245,.97);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:0 24px 70px rgba(35,30,23,.12);
 }
+body.project-route .project-hero-copy{animation:projectSheetIn .62s var(--ease) .08s both}
+@keyframes projectSheetIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @media(min-width:960px){.project-hero-copy{grid-template-columns:1.05fr .95fr;gap:clamp(32px,4vw,64px);align-items:start}}
 .project-hero-copy h1{margin:0;font-size:clamp(32px,4.4vw,58px);font-weight:700;line-height:1.04;letter-spacing:-.025em}
+.project-heading{min-width:0}
+.project-status{display:flex;align-items:center;gap:9px;margin-bottom:17px;color:var(--ash);font:600 12px/1.3 var(--font)}
+.project-status i{width:8px;height:8px;border-radius:50%;background:var(--clay);box-shadow:0 0 0 5px var(--clay-soft)}
 .project-lede{margin:16px 0 0;font-size:18px;line-height:1.6;color:var(--ash);max-width:44ch}
+.project-inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.project-inline-actions .mkt-tab{min-height:46px;font-size:14px}
 .project-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line);margin-top:0}
 .project-fact{padding:18px 0;border-bottom:1px solid var(--line)}
 .project-fact:nth-child(odd){border-right:1px solid var(--line);padding-right:20px}
 .project-fact:nth-child(even){padding-left:24px}
 .project-fact strong{display:block;font:700 26px/1.1 var(--font);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .project-fact span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
+.project-fact{opacity:0;transform:translateY(10px);animation:projectFactIn .5s var(--ease) forwards}
+.project-fact:nth-child(2){animation-delay:.07s}.project-fact:nth-child(3){animation-delay:.14s}.project-fact:nth-child(4){animation-delay:.21s}
+@keyframes projectFactIn{to{opacity:1;transform:none}}
+.project-editables{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.project-editables-label{flex-basis:100%;margin-bottom:4px;font:700 11px/1 var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--ash)}
+.project-editables span{padding:7px 10px;border:1px solid var(--line);border-radius:var(--pill);font:600 11px/1 var(--font);color:var(--ash);background:#fff}
 .project-body{max-width:var(--page);margin:auto;padding:clamp(56px,7vw,104px) var(--pad)}
 .project-story{display:grid;grid-template-columns:1fr;gap:20px;margin-bottom:clamp(34px,4vw,56px);max-width:760px}
 .project-story h2{margin:0;font-size:var(--t-h2);line-height:1.08;letter-spacing:-.018em}
@@ -954,6 +994,8 @@ body.project-route>main,body.project-route>footer{display:none}
   position:relative;margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);
   min-height:clamp(300px,32vw,460px);display:grid;place-items:center;overflow:hidden;cursor:zoom-in;
 }
+.project-gallery figure::after{content:"Открыть";position:absolute;right:14px;bottom:14px;z-index:2;padding:7px 10px;border-radius:var(--pill);background:rgba(251,249,245,.92);color:var(--ink);font:700 10px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateY(5px);transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.project-gallery figure:hover::after,.project-gallery figure:focus-visible::after{opacity:1;transform:none}
 .project-gallery figure:first-child{grid-column:1/-1;min-height:clamp(340px,42vw,600px);border:0}
 .project-gallery img{width:100%;height:100%;object-fit:contain;padding:18px;transition:transform .6s var(--ease)}
 .project-gallery figure:first-child img{object-fit:cover;padding:0}
@@ -969,6 +1011,8 @@ body.project-route>main,body.project-route>footer{display:none}
 }
 .project-cta-strip h3{margin:0;font:700 clamp(24px,2.8vw,36px)/1.12 var(--font);letter-spacing:-.02em;max-width:16ch}
 .project-cta-strip .mkt-tab{background:var(--clay);color:#fff;flex:0 0 auto}
+
+::view-transition-old(house-visual),::view-transition-new(house-visual){animation-duration:.62s;animation-timing-function:var(--ease)}
 
 /* лайтбокс */
 .lightbox{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:clamp(16px,4vw,56px);background:rgba(24,22,19,.92);backdrop-filter:blur(4px)}
@@ -1024,13 +1068,19 @@ p.mkt-label,p.kicker,.sec-head .mkt-label,.projects-head .mkt-label,.method-head
 @media (prefers-reduced-motion:reduce){
   .rise,.stagger>*{opacity:1;transform:none;transition:none}
   .method-line i{transform:scaleX(1);transition:none}
-  .catalog-card img,.swatch::before,.catalog-copy h3{transition:none}
+  .catalog-card img,.swatch::before,.catalog-copy h3,.catalog-ruler,.catalog-open i{transition:none}
+  .catalog-card.is-entering,.project-hero-media img,.project-fact,body.project-route .project-hero-copy{animation:none;opacity:1;transform:none;filter:none}
 }
 
 /* ---------- адаптив ---------- */
 @media(max-width:1080px){
   .catalog-grid{grid-template-columns:repeat(2,1fr)}
 }
+@media(max-width:1350px){
+  .nav-links,.nav-atelier .nav-links{display:none}
+  .nav-actions,.nav-atelier .nav-actions{margin-left:auto}
+}
+@media(max-width:1040px){.nav-phone{display:none}}
 @media(max-width:980px){
   .method-head,.projects-head,.approach-grid,.materials-head{grid-template-columns:1fr}
   .atelier-pieces{grid-template-columns:1fr}
@@ -1047,6 +1097,15 @@ p.mkt-label,p.kicker,.sec-head .mkt-label,.projects-head .mkt-label,.method-head
   .hero-cred{top:calc(var(--nav-h) + 10px);bottom:auto}
   .catalog-grid{grid-template-columns:1fr}
   .catalog-media{height:clamp(240px,64vw,340px)}
+  .catalog-arrow{opacity:1;transform:none}
+  .catalog-status{top:12px;right:12px}
+  .project-top .mkt-label{display:none}
+  .project-hero{padding-inline:14px}
+  .project-hero-media{height:auto;min-height:0;aspect-ratio:4/3;border-radius:var(--r)}
+  .project-hero-media::before{inset:10px}
+  .project-image-label{left:20px;bottom:18px}.project-image-number{right:20px;top:18px}
+  .project-hero-copy{margin:-28px 10px 0;padding:24px 20px;box-shadow:0 18px 48px rgba(35,30,23,.1)}
+  .project-inline-actions{display:grid}.project-inline-actions .mkt-tab{width:100%}
   .project-fact:nth-child(odd){border-right:0;padding-right:0}
   .project-fact:nth-child(even){padding-left:0}
   .project-cta-strip{align-items:flex-start;flex-direction:column}
@@ -1111,10 +1170,14 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </header>
 
 <section class="project-page" id="projectPage" hidden aria-live="polite">
+  <div class="project-progress" aria-hidden="true"><i id="projectProgressBar"></i></div>
   <div class="project-top"><button class="project-back" id="projectBack" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6"/></svg>Назад в каталог</button><span class="mkt-label">Проект — основа, которая меняется под вас</span></div>
   <div class="project-hero">
-    <div class="project-hero-media"><img id="projectHeroImage" src="catalog/house-100.jpg" alt="Проект дома"></div>
-    <div class="project-hero-copy"><div><h1 class="mkt-display" id="projectTitle" tabindex="-1"></h1><p class="project-lede" id="projectLede"></p></div><div class="project-facts" id="projectFacts"></div></div>
+    <div class="project-hero-media"><img id="projectHeroImage" src="catalog/house-100.jpg" alt="Проект дома"><span class="project-image-label" id="projectImageLabel">Архитектурная визуализация</span><span class="project-image-number" id="projectImageNumber">01 / 13</span></div>
+    <div class="project-hero-copy">
+      <div class="project-heading"><div class="project-status"><i aria-hidden="true"></i><span id="projectStatus">Основа доступна для адаптации</span></div><h1 class="mkt-display" id="projectTitle" tabindex="-1"></h1><p class="project-lede" id="projectLede"></p><div class="project-inline-actions"><button class="mkt-tab" id="projectHeroToStudio" type="button"><span>Перенести в конструктор</span></button><button class="mkt-tab mkt-tab-ghost" id="projectToGallery" type="button"><span>Смотреть материалы</span></button></div></div>
+      <div><div class="project-facts" id="projectFacts"></div><div class="project-editables" aria-label="Что можно изменить"><strong class="project-editables-label">Можно изменить</strong><span>Фундамент</span><span>Фасад</span><span>Отделка</span><span>Инженерия</span></div></div>
+    </div>
   </div>
   <div class="project-body">
     <div class="project-story"><h2 class="mkt-display">План, который можно перекроить.</h2><p id="projectStory"></p></div>
@@ -4434,14 +4497,15 @@ var GENERATED_COVERS = {"lento-100":1,"linea-101":1,"lilia-105":1,"garden-106":1
 var V2_CONSTRUCTORS = {"lilia-105":"calculator-v2.html","lento-100":"calculator-lento-100.html"};
 
 function catalogCard(item, i){
-  var kind=GENERATED_COVERS[item.slug]?"визуализация":"референс";
-  return '<button class="catalog-card" type="button" data-slug="'+item.slug+'" data-floors="'+item.floors+'" aria-label="Открыть проект '+item.name+'">'+
-    '<span class="catalog-media"><img src="'+item.image+'" alt="Проект дома '+item.name+'" loading="lazy"><span class="catalog-index">'+String(i+1).padStart(2,"0")+'</span><span class="catalog-kind">'+kind+'</span><span class="catalog-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>'+
-    '<span class="catalog-copy"><h3>'+item.name+'</h3><span class="catalog-meta">'+item.area+' м²<br>'+item.floorLabel+'</span><p>'+item.eyebrow+'</p></span></button>';
+  var kind=GENERATED_COVERS[item.slug]?"визуализация":"референс",ready=!!V2_CONSTRUCTORS[item.slug];
+  return '<button class="catalog-card" type="button" data-slug="'+item.slug+'" data-floors="'+item.floors+'" data-ready="'+ready+'" aria-label="Открыть проект '+item.name+'">'+
+    '<span class="catalog-media"><img src="'+item.image+'" alt="Проект дома '+item.name+'" loading="lazy"><span class="catalog-measure">'+item.area+' м²</span><span class="catalog-ruler" aria-hidden="true"></span><span class="catalog-status">'+(ready?'3D готова':'адаптация')+'</span><span class="catalog-index">'+String(i+1).padStart(2,"0")+'</span><span class="catalog-kind">'+kind+'</span><span class="catalog-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>'+
+    '<span class="catalog-copy"><h3>'+item.name+'</h3><span class="catalog-meta">'+item.area+' м²<br>'+item.floorLabel+'</span><p>'+item.eyebrow+'</p><span class="catalog-program"><span>'+item.rooms+'</span><span>'+item.people+'</span></span><span class="catalog-open">Смотреть проект<i aria-hidden="true"></i></span></span></button>';
 }
 
 function renderCatalog(){
   catalogGrid.innerHTML=CATALOG.map(catalogCard).join("");
+  if(!REDUCE)requestAnimationFrame(function(){Array.prototype.forEach.call(catalogGrid.querySelectorAll(".catalog-card"),function(card,i){card.style.setProperty("--enter-delay",Math.min(i,5)*55+"ms");card.classList.add("is-entering");card.addEventListener("animationend",function(){card.classList.remove("is-entering");},{once:true});});});
 }
 
 function closeProjectRoute(){
@@ -4455,6 +4519,9 @@ function openCatalogProject(slug, setHash){
   activeCatalog=item;
   document.getElementById("projectHeroImage").src=item.image;
   document.getElementById("projectHeroImage").alt="Проект дома "+item.name;
+  document.getElementById("projectImageLabel").textContent=GENERATED_COVERS[item.slug]?"Архитектурная визуализация":"Референс из материалов проекта";
+  document.getElementById("projectImageNumber").textContent=String(CATALOG.indexOf(item)+1).padStart(2,"0")+" / "+String(CATALOG.length).padStart(2,"0");
+  document.getElementById("projectStatus").textContent=V2_CONSTRUCTORS[item.slug]?"Проверенная 3D-модель готова к настройке":"Основа доступна для архитектурной адаптации";
   document.getElementById("projectTitle").textContent=item.name;
   document.getElementById("projectLede").textContent=item.lede;
   document.getElementById("projectStory").textContent=item.story;
@@ -4463,12 +4530,10 @@ function openCatalogProject(slug, setHash){
   ].map(function(x){return '<div class="project-fact"><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>';}).join("");
   document.getElementById("projectGallery").innerHTML=item.gallery.map(function(src,i){
     var label=i===0?(GENERATED_COVERS[item.slug]?"Архитектурная визуализация":"Референс из материалов проекта"):"План · исходный материал проекта";
-    return '<figure><img src="'+src+'" alt="'+(i===0?'Вид дома ':'Планировка ')+item.name+'" loading="'+(i?'lazy':'eager')+'"><figcaption>'+label+'</figcaption></figure>';
+    return '<figure tabindex="0" role="button" aria-label="Открыть: '+label+'"><img src="'+src+'" alt="'+(i===0?'Вид дома ':'Планировка ')+item.name+'" loading="'+(i?'lazy':'eager')+'"><figcaption>'+label+'</figcaption></figure>';
   }).join("");
   var constructorButton=document.getElementById("projectToStudio"),constructorUrl=V2_CONSTRUCTORS[item.slug];
-  constructorButton.disabled=!constructorUrl;
-  constructorButton.classList.toggle("constructor-disabled",!constructorUrl);
-  constructorButton.querySelector("span").textContent=constructorUrl?"Перенести в конструктор":"3D-модель готовится";
+  [constructorButton,document.getElementById("projectHeroToStudio")].forEach(function(button){button.disabled=!constructorUrl;button.classList.toggle("constructor-disabled",!constructorUrl);button.querySelector("span").textContent=constructorUrl?"Перенести в конструктор":"3D-модель готовится";});
   projectPage.hidden=false;
   document.body.classList.add("project-route");
   if(setHash) history.pushState(null,"","#project/"+item.slug);
@@ -4483,7 +4548,16 @@ function openInConstructor(item){
 }
 
 renderCatalog();
-catalogGrid.addEventListener("click",function(e){var b=e.target.closest("[data-slug]");if(b){lastCatalogTrigger=b;openCatalogProject(b.dataset.slug,true);}});
+function withProjectTransition(card,action){
+  var source=card&&card.querySelector("img"),target=document.getElementById("projectHeroImage");
+  if(REDUCE||!document.startViewTransition){action();return;}
+  if(source)source.style.viewTransitionName="house-visual";
+  target.style.viewTransitionName="house-visual";
+  var transition=document.startViewTransition(action);
+  transition.finished.finally(function(){if(source)source.style.viewTransitionName="";target.style.viewTransitionName="";});
+}
+catalogGrid.addEventListener("click",function(e){var b=e.target.closest("[data-slug]");if(b){lastCatalogTrigger=b;withProjectTransition(b,function(){openCatalogProject(b.dataset.slug,true);});}});
+catalogGrid.addEventListener("pointermove",function(e){var card=e.target.closest(".catalog-card");if(!card||REDUCE)return;var r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.setProperty("--image-x",(-x*5).toFixed(1)+"px");card.style.setProperty("--image-y",(-y*5).toFixed(1)+"px");});
 document.getElementById("catalogFilters").addEventListener("click",function(e){
   var b=e.target.closest("[data-filter]");if(!b)return;var f=b.dataset.filter,n=0;
   Array.prototype.forEach.call(document.querySelectorAll(".catalog-filter"),function(x){x.setAttribute("aria-pressed",String(x===b));});
@@ -4499,12 +4573,21 @@ document.getElementById("catalogFilters").addEventListener("click",function(e){
   cards.forEach(function(card){if(f==="all"||card.dataset.floors===f)n++;});
   document.getElementById("catalogCount").textContent=n+" "+(n===1?"проект":n<5?"проекта":"проектов");
 });
-document.getElementById("projectBack").addEventListener("click",function(){closeProjectRoute();history.pushState(null,"","#plans");document.getElementById("plans").scrollIntoView();if(lastCatalogTrigger)setTimeout(function(){lastCatalogTrigger.focus({preventScroll:true});},0);});
+document.getElementById("projectBack").addEventListener("click",function(){withProjectTransition(lastCatalogTrigger,function(){closeProjectRoute();history.pushState(null,"","#plans");document.getElementById("plans").scrollIntoView();});if(lastCatalogTrigger)setTimeout(function(){lastCatalogTrigger.focus({preventScroll:true});},0);});
 document.getElementById("projectToStudio").addEventListener("click",function(){openInConstructor(activeCatalog);});
+document.getElementById("projectHeroToStudio").addEventListener("click",function(){openInConstructor(activeCatalog);});
+document.getElementById("projectToGallery").addEventListener("click",function(){document.getElementById("projectGallery").scrollIntoView({behavior:REDUCE?"auto":"smooth",block:"start"});});
 window.addEventListener("hashchange",function(){
   var m=location.hash.match(/^#project\/(.+)$/);if(m)openCatalogProject(m[1],false);else closeProjectRoute();
 });
 var initialProject=location.hash.match(/^#project\/(.+)$/);if(initialProject)openCatalogProject(initialProject[1],false);
+
+(function(){
+  var bar=document.getElementById("projectProgressBar"),ticking=false;
+  function update(){var max=Math.max(1,document.documentElement.scrollHeight-innerHeight),value=document.body.classList.contains("project-route")?Math.min(1,scrollY/max):0;bar.style.transform="scaleX("+value+")";ticking=false;}
+  addEventListener("scroll",function(){if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
+  addEventListener("resize",update,{passive:true});update();
+})();
 
 function params(){
   ensureOp(res.w,S.wallH);
@@ -5779,6 +5862,10 @@ if (REDUCE || !("IntersectionObserver" in window)){
     if (!fig) return;
     var pic = fig.querySelector("img");
     if (pic) open(pic.currentSrc || pic.src, pic.alt, fig);
+  });
+  gallery.addEventListener("keydown",function(e){
+    if(e.key!=="Enter"&&e.key!==" ")return;
+    var fig=e.target.closest("figure");if(!fig)return;e.preventDefault();var pic=fig.querySelector("img");if(pic)open(pic.currentSrc||pic.src,pic.alt,fig);
   });
   close.addEventListener("click", shut);
   box.addEventListener("click", function(e){ if (e.target === box) shut(); });
