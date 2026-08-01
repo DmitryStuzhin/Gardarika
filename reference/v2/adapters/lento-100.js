@@ -47,19 +47,30 @@
   }
 
   function openingVisual(group,project,kit,o){
-    var m=kit.materials,base=project.levels.find(function(l){return l.id===o.level;}).elevation,wall=project.geometry.wallSegments.find(function(w){return w.id===o.wall;}),a=wall.from,b=wall.to,h=o.height,y=base+o.sill+h/2,horizontal=Math.abs(a[0]-b[0])>Math.abs(a[1]-b[1]),cx,cz;
-    if(horizontal){cx=(a[0]+b[0])/2+o.center;cz=a[1];addBox(group,kit,o.width,h,.07,o.type==="door"?m.doorWarm:m.glass,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,true);}
+    var m=kit.materials,base=project.levels.find(function(l){return l.id===o.level;}).elevation,wall=project.geometry.wallSegments.find(function(w){return w.id===o.wall;}),a=wall.from,b=wall.to,h=o.height,y=base+o.sill+h/2,horizontal=Math.abs(a[0]-b[0])>Math.abs(a[1]-b[1]),cx,cz,glazed=o.visualType!=="solid-door",surface=glazed?m.glass:m.wood;
+    if(horizontal){cx=(a[0]+b[0])/2+o.center;cz=a[1];addBox(group,kit,o.width,h,.07,surface,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,true,o.visualType);}
     else{
       cx=a[0]+(o.wall==="main-left"?-.215:(o.wall==="main-right"?.215:0));cz=(a[1]+b[1])/2+o.center;
-      addBox(group,kit,.075,h,o.width,o.type==="door"?m.doorWarm:m.glass,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,false);
+      addBox(group,kit,.075,h,o.width,surface,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,false,o.visualType);
       if(o.id==="carport-side-door")addBox(group,kit,.34,.08,1.15,m.stone,cx-.1,project.levels[0].elevation+.04,cz);
     }
   }
 
-  function frameOpening(group,kit,x,y,z,w,h,horizontal){
-    var f=.065,m=kit.materials.frame;
+  function frameOpening(group,kit,x,y,z,w,h,horizontal,visualType){
+    var f=.065,m=kit.materials.frame,isDoor=visualType==="solid-door"||visualType==="glazed-door";
     if(horizontal){addBox(group,kit,w+f,f,.09,m,x,y+h/2,z);addBox(group,kit,w+f,f,.09,m,x,y-h/2,z);addBox(group,kit,f,h,.09,m,x-w/2,y,z);addBox(group,kit,f,h,.09,m,x+w/2,y,z);}
     else{addBox(group,kit,.09,f,w+f,m,x,y+h/2,z);addBox(group,kit,.09,f,w+f,m,x,y-h/2,z);addBox(group,kit,.09,h,f,m,x,y,z-w/2);addBox(group,kit,.09,h,f,m,x,y,z+w/2);}
+    if(visualType==="glazed-door"){
+      if(horizontal){addBox(group,kit,f,h*.92,.1,m,x,y,z);addBox(group,kit,w*.82,f,.1,m,x,y-.18*h,z);}
+      else{addBox(group,kit,.1,h*.92,f,m,x,y,z);addBox(group,kit,.1,f,w*.82,m,x,y-.18*h,z);}
+    }
+    if(visualType==="solid-door"){
+      if(horizontal){addBox(group,kit,w*.62,h*.5,.082,kit.materials.charcoal,x,y+.12,z-.006);addBox(group,kit,.055,.055,.13,kit.materials.brass,x+w*.3,y,z-.055);}
+      else{addBox(group,kit,.082,h*.5,w*.62,kit.materials.charcoal,x-.006,y+.12,z);addBox(group,kit,.13,.055,.055,kit.materials.brass,x-.055,y,z+w*.3);}
+    }else if(isDoor){
+      if(horizontal)addBox(group,kit,.04,.04,.14,kit.materials.brass,x+w*.3,y-.05,z-.07);
+      else addBox(group,kit,.14,.04,.04,kit.materials.brass,x-.07,y-.05,z+w*.3);
+    }
   }
 
   function partitions(group,project,kit,level,config){
@@ -119,7 +130,11 @@
   function exterior(out,project,kit,config){
     var m=kit.materials;
     if(config.facade==="clinker"){
-      addBox(out.cladding,kit,2.45,2.1,.055,m.terracotta,1.2,1.52,-4.795);addBox(out.cladding,kit,1.75,2.1,.055,m.terracotta,.15,1.52,4.79);addBox(out.cladding,kit,.055,1.2,2.0,m.terracotta,3.85,1.05,-.65);
+      addBox(out.cladding,kit,.18,2.28,.055,m.terracotta,.61,1.59,-4.795);
+      addBox(out.cladding,kit,.18,2.28,.055,m.terracotta,1.89,1.59,-4.795);
+      addBox(out.cladding,kit,1.46,.18,.055,m.terracotta,1.25,2.67,-4.795);
+      addBox(out.cladding,kit,.055,2.2,.32,m.terracotta,3.85,1.55,3.92);
+      addBox(out.cladding,kit,.055,2.2,.32,m.terracotta,-3.85,1.55,3.92);
     }
     addBox(out.terraceDeck,kit,3.25,.14,7.35,m.wood,-5.2,.08,.9375);
     var canopyAngle=13*Math.PI/180,canopyX=-5.1,canopyY=2.69,canopyThickness=.16,deckTop=.15;
@@ -130,13 +145,14 @@
     var canopy=addBox(out.terraceDeck,kit,3.55,canopyThickness,7.85,m.roof,canopyX,canopyY,.9375);canopy.rotation.z=canopyAngle;
     addBox(out.terraceDeck,kit,.16,.2,7.35,m.wood,-3.78,2.87,.9375);
     addBox(out.terraceDeck,kit,.16,.18,7.35,m.wood,-6.5,2.22,.9375);
-    addBox(out.terracePergola,kit,5.2,.14,2.0,m.wood,.3,.08,5.55);
-    for(var i=0;i<5;i++){
-      var pergolaX=-2+i*1.15;
-      addBox(out.terracePergola,kit,.12,2.25,.12,m.wood,pergolaX,1.12,6.35);
-      addBox(out.terracePergola,kit,.1,.1,2.05,m.wood,pergolaX,2.27,5.55);
-    }
-    addBox(out.terracePergola,kit,5.2,.16,.16,m.wood,.3,2.25,6.35);
+    addBox(out.terracePergola,kit,5.4,.14,2.2,m.wood,.3,.08,5.58);
+    var terraceAngle=12*Math.PI/180,terraceRoofY=2.58,terraceRoofZ=5.58,terraceRoofDepth=2.5,terraceRoofThickness=.14;
+    function terraceRoofUnderside(z){return terraceRoofY-Math.sin(terraceAngle)*(z-terraceRoofZ)-terraceRoofThickness/2*Math.cos(terraceAngle);}
+    [-2.18,.3,2.78].forEach(function(x){var z=6.52,top=terraceRoofUnderside(z),height=top-deckTop+.02;addBox(out.terracePergola,kit,.14,height,.14,m.wood,x,deckTop+height/2,z);});
+    addBox(out.terracePergola,kit,5.55,.18,.18,m.wood,.3,terraceRoofUnderside(6.52)-.08,6.52);
+    addBox(out.terracePergola,kit,5.55,.16,.16,m.wood,.3,terraceRoofUnderside(4.66)-.07,4.66);
+    [-2.18,-.95,.3,1.55,2.78].forEach(function(x){var rafter=addBox(out.terracePergola,kit,.11,.11,2.28,m.wood,x,terraceRoofY-.12,terraceRoofZ);rafter.rotation.x=terraceAngle;});
+    var terraceRoof=addBox(out.terracePergola,kit,5.75,terraceRoofThickness,terraceRoofDepth,m.roof,.3,terraceRoofY,terraceRoofZ);terraceRoof.rotation.x=terraceAngle;
   }
 
   function engineering(group,project,kit,config){
@@ -174,14 +190,21 @@
   }
 
   function validate(project){
-    var errors=[],byWall={};
+    var errors=[],byWall={},visualTypes={"window":true,"glazed-door":true,"solid-door":true};
     project.openings.forEach(function(o){
       if(o.width<.55)errors.push({id:o.id,message:"Проём слишком узкий."});
       if(Math.abs(o.center)+o.width/2>o.wallLength/2-.38)errors.push({id:o.id,message:"До края стены нужно оставить 380 мм."});
+      if(!visualTypes[o.visualType])errors.push({id:o.id,message:"Не задан допустимый visualType проёма."});
+      if(o.type==="window"&&o.visualType!=="window")errors.push({id:o.id,message:"Окно должно визуализироваться как window."});
+      if(o.type==="door"&&o.visualType!=="solid-door"&&o.visualType!=="glazed-door")errors.push({id:o.id,message:"Для двери нужно выбрать solid-door или glazed-door."});
       var key=o.level+":"+o.wall;(byWall[key]=byWall[key]||[]).push(o);
     });
     Object.keys(byWall).forEach(function(key){var a=byWall[key].sort(function(x,y){return x.center-y.center;});for(var i=1;i<a.length;i++)if(a[i].center-a[i].width/2-(a[i-1].center+a[i-1].width/2)<.3)errors.push({id:a[i].id,message:"Между проёмами нужен простенок не менее 300 мм."});});
-    return {valid:errors.length===0,errors:errors,checks:16-errors.length};
+    var canopyAngle=13*Math.PI/180,canopyX=-5.1,canopyY=2.69,canopyThickness=.16,deckTop=.15;
+    [-6.5,-4.0].forEach(function(x){var underside=canopyY+Math.sin(canopyAngle)*(x-canopyX)-canopyThickness/2*Math.cos(canopyAngle),postHeight=underside-deckTop+.025;if(Math.abs(deckTop+postHeight-underside)>.03)errors.push({id:"carport-post-"+x,message:"Стойка навеса не примыкает к кровле."});});
+    var terraceAngle=12*Math.PI/180,terraceRoofY=2.58,terraceRoofZ=5.58,terraceRoofThickness=.14,z=6.52,terraceUnder=terraceRoofY-Math.sin(terraceAngle)*(z-terraceRoofZ)-terraceRoofThickness/2*Math.cos(terraceAngle),terracePostHeight=terraceUnder-deckTop+.02;
+    if(Math.abs(deckTop+terracePostHeight-terraceUnder)>.03)errors.push({id:"terrace-posts",message:"Стойки задней террасы не примыкают к кровле."});
+    return {valid:errors.length===0,errors:errors,checks:20-errors.length};
   }
 
   function quantities(project){

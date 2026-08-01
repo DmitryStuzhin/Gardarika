@@ -33,6 +33,9 @@ Calculator V2 currently assumes a ground level plus an upper/mansard level and a
 - Keep source evidence and confidence alongside every uncertain architectural value.
 - Keep catalogue identity dimensions separate from configurable package choices.
 - Do not let a roof, slab, wall, opening, or stair exist as an unrelated visual overlay.
+- Give every exterior opening both semantic `type` and explicit `visualType`; never render all doors as one opaque slab.
+- Subtract openings from every facade skin or build trim around their clear rectangles. Never cover a window or door with a decorative box.
+- Derive porch, terrace, and carport support heights from the rotated roof underside and validate every contact within 30 mm.
 - Do not expose an option unless its selected state produces a visible 3D change or an explicitly labeled non-geometric system visualization.
 - Do not call pricing production-ready unless rates came from an approved source. Mark calculated examples as `illustrative`.
 - Stop and ask for the missing section, facade, or dimension when the omission can change massing, roof intersections, floor heights, or openings.

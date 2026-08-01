@@ -38,12 +38,24 @@ Add `geometry` with explicit `footprintPolygons`, `volumes`, `wallSegments`, `ro
 
 Custom adapters must implement `build(project, config, kit)`, `validate(project, kit)`, `quantities(project, kit)`, and `planSvg(project, levelId, config, kit)`. `quantities` returns `footprint`, `wallGross`, `wallNet`, `glazing`, `roofComputed`, `roofPublished`, `usefulArea`, `costs`, and `total`. `planSvg` returns a complete SVG string using the custom footprint and walls.
 
+## Opening contract
+
+Every exterior opening requires both a semantic `type` and a rendered `visualType`:
+
+- `{type:"window", visualType:"window"}` for a glazed window;
+- `{type:"door", visualType:"glazed-door"}` for a terrace or balcony door whose leaf is predominantly glass;
+- `{type:"door", visualType:"solid-door"}` for an opaque entrance or service door.
+
+Never derive the material from `type:"door"` alone. Render `window` and `glazed-door` with glass plus frames; render `solid-door` as a complete leaf with frame, threshold, panel or inset, and handle. Attach the visual to the same wall segment and opening dimensions used to cut the shell.
+
 For the standard engine, provide `adaptedPartitions`, `interiorDoors`, `furniture`, and `exteriorDetails` in HouseSpec. These prevent Lilia-specific interior/detail coordinates from leaking into another project.
 
 - Interior door: `{x, z, rotation, width, height}`.
 - Staircase: `{steps, rise, run, width, direction}`; `steps × rise` must reach the upper-floor elevation.
 - Furniture item types: `bed`, `sofa`, `dining`, `kitchen`, `bath`, `light`, `rug`, `storage`; provide `x`, `z`, optional `rotation` and the dimensions supported by that type (`bed`/`rug`/`storage`). Other types use their calibrated library size unless a custom adapter supplies bespoke furniture.
 - Exterior detail primitive: `{size:[w,h,d], position:[x,y,z], rotation:[rx,ry,rz], material}` inside `terraceDeck`, `terracePergola`, `cladding`, `balcony`, or `other`.
+
+Facade details must be aperture-aware. Do not place a solid cladding box across an opening rectangle. Split surrounds and trims into left, right, head, and sill pieces, or derive a skin with the same opening subtraction as the wall. Covered extensions must contain a roof plane, ledger/header, supports, and any required deck; calculate support tops from the roof underside so every contact is within 30 mm.
 
 ## Package groups
 

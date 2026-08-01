@@ -33,6 +33,10 @@ Every package selection must change a named layer/material/object:
 - interior: shell, white-box, or finished/furnished state;
 - terrace: none, deck, or full terrace/pergola.
 
+Opening visuals use `visualType`, not semantic `type`: `window` and `glazed-door` remain transparent glazing, while `solid-door` receives a complete opaque door assembly. Facade skins and decorative overlays must reuse the wall's opening rectangles or be split around them; no finish mesh may cover a window or door.
+
+For a covered terrace, porch, or carport, the visible option is complete only when its roof, edge/ledger/header, supports, and deck are present. Compute each support top from the actual rotated roof underside and validate the contact within 30 mm rather than assigning a visually guessed height.
+
 If a system is normally hidden, reveal it during its build stage and label the visualization as schematic.
 
 ## Compatibility

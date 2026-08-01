@@ -6,6 +6,7 @@ from pathlib import Path
 
 GROUPS = {"foundation", "walls", "slab", "roofCover", "facade", "windows", "engineering", "layout", "interior", "terrace"}
 CONFIDENCE = {"published", "measured", "traced", "inferred", "illustrative"}
+OPENING_VISUAL_TYPES = {"window", "glazed-door", "solid-door"}
 STANDARD_OPTIONS = {"foundation":{"slab","strip","piles"},"walls":{"aerated","arbolit","frame"},"slab":{"concrete","beams"},"roofCover":{"ceramic","soft","metal"},"facade":{"clinker","plaster","prepared"},"windows":{"premium","standard"},"engineering":{"full","basic","later"},"layout":{"original","custom"},"interior":{"turnkey","prefinish","shell"},"terrace":{"full","base","later"}}
 
 def positive(value): return isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0
@@ -88,6 +89,13 @@ def validate(spec, strict=False, base_dir=None):
         if mode == "custom-adapter" and (not isinstance(wall,str) or not wall or not positive(opening.get("wallLength"))): err(path + ".wall", "custom opening needs a wall segment id and positive wallLength")
         for key in ("width", "height"):
             if not positive(opening.get(key)): err(path + "." + key, "must be positive")
+        visual_type = opening.get("visualType")
+        if visual_type not in OPENING_VISUAL_TYPES:
+            (err if strict else warn)(path + ".visualType", "must be window, glazed-door, or solid-door")
+        if opening.get("type") == "window" and visual_type not in {None, "window"}:
+            err(path + ".visualType", "a semantic window must use visualType window")
+        if opening.get("type") == "door" and visual_type not in {None, "glazed-door", "solid-door"}:
+            err(path + ".visualType", "a semantic door must use visualType glazed-door or solid-door")
         if not isinstance(opening.get("center"), (int, float)) or not isinstance(opening.get("sill"), (int, float)): err(path, "center and sill must be numeric")
         if positive(opening.get("width")) and ((wall in {"front", "back", "left", "right"} and len(fp) == 2 and all(positive(v) for v in fp)) or positive(opening.get("wallLength"))):
             length = opening.get("wallLength") or (fp[0] if wall in {"front", "back"} else fp[1])

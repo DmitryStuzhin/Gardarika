@@ -17,6 +17,10 @@
 - [ ] No holes, z-fighting, floating slabs, roof-wall gaps, or roof intrusions.
 - [ ] Stair and protected slab opening align on both levels.
 - [ ] Openings match facade position/size and pass collision rules.
+- [ ] Every exterior opening is readable at close range; no facade, cladding, wall, or detail mesh covers its clear rectangle.
+- [ ] Glazed doors remain transparent and framed; solid doors have a leaf, frame, threshold, and handle.
+- [ ] Every covered terrace/carport has a complete roof, ledger/header, supports, and deck where specified.
+- [ ] Support tops meet the actual roof underside within 30 mm; no posts stop short or protrude through the roof.
 
 ## Calculator behavior
 
@@ -30,6 +34,7 @@
 ## Visual and browser QA
 
 - [ ] Exterior resembles references from front, rear, and both sides.
+- [ ] Front, rear, left, and right facades were inspected at both overview and close-opening distance.
 - [ ] Ground and upper cutaways contain partitions, doors, finishes, and furniture as specified.
 - [ ] Exploded view preserves component alignment.
 - [ ] Labels and dimensions are hydrated from HouseSpec, not hardcoded from another house.

@@ -29,7 +29,11 @@
       model.add(layers.foundation, layers.ground, layers.mansard, layers.roof, layers.details, layers.engineering, layers.openings);
 
       // TODO: add exact footprint, level, roof, openings, finish, interior and
-      // detail geometry. Use kit.box/materials when exposed by the host engine.
+      // detail geometry. Use opening.visualType (window / glazed-door /
+      // solid-door) for materials. Cut the shell and place the visual from the
+      // same opening record. Split cladding around opening rectangles; never
+      // cover them with a solid overlay. Derive support heights from the actual
+      // rotated roof underside and keep every contact within 30 mm.
 
       model.userData = layers;
       return model;
