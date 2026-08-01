@@ -948,6 +948,18 @@
       "sill": 0.85
     },
     {
+      "id": "carport-side-door",
+      "label": "Дверь под навес",
+      "level": "ground",
+      "wall": "main-left",
+      "wallLength": 7.25,
+      "type": "door",
+      "center": -1.15,
+      "width": 0.95,
+      "height": 2.15,
+      "sill": 0
+    },
+    {
       "id": "upper-front-a",
       "label": "Окно спальни слева",
       "level": "mansard",

@@ -49,7 +49,11 @@
   function openingVisual(group,project,kit,o){
     var m=kit.materials,base=project.levels.find(function(l){return l.id===o.level;}).elevation,wall=project.geometry.wallSegments.find(function(w){return w.id===o.wall;}),a=wall.from,b=wall.to,h=o.height,y=base+o.sill+h/2,horizontal=Math.abs(a[0]-b[0])>Math.abs(a[1]-b[1]),cx,cz;
     if(horizontal){cx=(a[0]+b[0])/2+o.center;cz=a[1];addBox(group,kit,o.width,h,.07,o.type==="door"?m.doorWarm:m.glass,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,true);}
-    else{cx=a[0];cz=(a[1]+b[1])/2+o.center;addBox(group,kit,.07,h,o.width,o.type==="door"?m.doorWarm:m.glass,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,false);}
+    else{
+      cx=a[0]+(o.wall==="main-left"?-.215:(o.wall==="main-right"?.215:0));cz=(a[1]+b[1])/2+o.center;
+      addBox(group,kit,.075,h,o.width,o.type==="door"?m.doorWarm:m.glass,cx,y,cz);frameOpening(group,kit,cx,y,cz,o.width,h,false);
+      if(o.id==="carport-side-door")addBox(group,kit,.34,.08,1.15,m.stone,cx-.1,project.levels[0].elevation+.04,cz);
+    }
   }
 
   function frameOpening(group,kit,x,y,z,w,h,horizontal){
@@ -118,9 +122,21 @@
       addBox(out.cladding,kit,2.45,2.1,.055,m.terracotta,1.2,1.52,-4.795);addBox(out.cladding,kit,1.75,2.1,.055,m.terracotta,.15,1.52,4.79);addBox(out.cladding,kit,.055,1.2,2.0,m.terracotta,3.85,1.05,-.65);
     }
     addBox(out.terraceDeck,kit,3.25,.14,7.35,m.wood,-5.2,.08,.9375);
-    [-6.45,-3.95].forEach(function(x){[-2.35,4.1].forEach(function(z){addBox(out.terraceDeck,kit,.14,2.25,.14,m.wood,x,1.12,z);});});
-    var canopy=addBox(out.terraceDeck,kit,3.55,.16,7.85,m.roof,-5.1,2.7,.9375);canopy.rotation.z=-13*Math.PI/180;
-    addBox(out.terracePergola,kit,5.2,.14,2.0,m.wood,.3,.08,5.55);for(var i=0;i<5;i++)addBox(out.terracePergola,kit,.12,2.25,.12,m.wood,-2+i*1.15,1.12,6.35);
+    var canopyAngle=13*Math.PI/180,canopyX=-5.1,canopyY=2.69,canopyThickness=.16,deckTop=.15;
+    [-6.5,-4.0].forEach(function(x){
+      var underside=canopyY+Math.sin(canopyAngle)*(x-canopyX)-canopyThickness/2*Math.cos(canopyAngle),postHeight=underside-deckTop+.025;
+      [-2.35,4.1].forEach(function(z){addBox(out.terraceDeck,kit,.15,postHeight,.15,m.wood,x,deckTop+postHeight/2,z);});
+    });
+    var canopy=addBox(out.terraceDeck,kit,3.55,canopyThickness,7.85,m.roof,canopyX,canopyY,.9375);canopy.rotation.z=canopyAngle;
+    addBox(out.terraceDeck,kit,.16,.2,7.35,m.wood,-3.78,2.87,.9375);
+    addBox(out.terraceDeck,kit,.16,.18,7.35,m.wood,-6.5,2.22,.9375);
+    addBox(out.terracePergola,kit,5.2,.14,2.0,m.wood,.3,.08,5.55);
+    for(var i=0;i<5;i++){
+      var pergolaX=-2+i*1.15;
+      addBox(out.terracePergola,kit,.12,2.25,.12,m.wood,pergolaX,1.12,6.35);
+      addBox(out.terracePergola,kit,.1,.1,2.05,m.wood,pergolaX,2.27,5.55);
+    }
+    addBox(out.terracePergola,kit,5.2,.16,.16,m.wood,.3,2.25,6.35);
   }
 
   function engineering(group,project,kit,config){
@@ -135,7 +151,7 @@
 
     wallWithOpenings(out.groundShell,kit,{axis:"x",length:7.25,height:2.5,depth:.4,base:base,offset:0,constant:-2.6875,material:wall,openings:openingsFor(project,"ground","main-front",[{center:1.25,width:1.05,height:2.1,sill:0}])});
     wallWithOpenings(out.groundShell,kit,{axis:"x",length:7.25,height:2.5,depth:.4,base:base,offset:0,constant:4.5625,material:wall,openings:openingsFor(project,"ground","main-back")});
-    wallWithOpenings(out.groundShell,kit,{axis:"z",length:7.25,height:2.5,depth:.4,base:base,offset:.9375,constant:-3.625,material:wall,openings:[]});
+    wallWithOpenings(out.groundShell,kit,{axis:"z",length:7.25,height:2.5,depth:.4,base:base,offset:.9375,constant:-3.625,material:wall,openings:openingsFor(project,"ground","main-left")});
     wallWithOpenings(out.groundShell,kit,{axis:"z",length:7.25,height:2.5,depth:.4,base:base,offset:.9375,constant:3.625,material:wall,openings:openingsFor(project,"ground","main-right")});
     wallWithOpenings(out.groundShell,kit,{axis:"x",length:2.1,height:2.25,depth:.4,base:base,offset:1.25,constant:-4.5625,material:wall,openings:openingsFor(project,"ground","vestibule-front")});
     wallWithOpenings(out.groundShell,kit,{axis:"z",length:1.875,height:2.25,depth:.4,base:base,offset:-3.625,constant:.2,material:wall,openings:[]});
