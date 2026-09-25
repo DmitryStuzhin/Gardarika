@@ -105,7 +105,7 @@ function cardHTML(h){
   return '<article class="card" data-floors="' + h.floors + '" data-size="' + (a < 110 ? "s" : a < 130 ? "m" : "l") + '">' +
     '<div class="card-media"><img src="' + h.image + '" alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy">' +
       (h.example ? '<span class="tag tag-new">Новый проект</span>' : "") + '<span class="prov">' + provLabel(h) + "</span></div>" +
-    '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + h.name + '</a></h3><p class="card-type">' + h.type + "</p>" +
+    '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + h.name + '</a></h3><p class="card-type">' + (h.tagline || h.type) + "</p>" +
       '<ul class="card-meta"><li>' + icon("i-area") + h.area + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + h.rooms + "</li>" : "") + "</ul>" +
       '<div class="card-foot"><div class="card-price">' +
         (h.example ? "<b>" + price(h) + '</b><small>ориентировочно, пример</small>' : "<b>Цена в калькуляторе</b><small>под ваш участок и комплектацию</small>") +
@@ -229,6 +229,10 @@ function showProject(h){
   $("#pType").textContent = h.type;
   $("#pLede").textContent = h.lede;
   $("#pStory").textContent = h.story;
+  $("#pAboutText").innerHTML = (h.about || []).map(function(t){ return "<p>" + esc(t) + "</p>"; }).join("");
+  $("#pFor").textContent = h.forWho || "";
+  $("#pFeatures").innerHTML = (h.features || []).map(function(f){ return "<li>" + icon("i-check") + esc(f) + "</li>"; }).join("");
+  $("#pAbout").hidden = !(h.about && h.about.length);
   var cells = [cell("Площадь", h.area + NB + "м²"), cell("Этажность", floorsLabel(h.floors)),
     cell("Габариты в плане", h.dims ? metres(h.dims) : "уточняются"), cell("Состав", h.rooms)];
   cells.push(h.example ? cell("Цена, пример", price(h), "span2") : cell("Цена", "под ваш участок", "span2"));
