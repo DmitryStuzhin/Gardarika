@@ -22,6 +22,8 @@
     <symbol id="i-rooms" viewBox="0 0 20 20"><path d="M3 15.5V8.5h14v7M3 12.5h14M6 8.5V6.2a1.2 1.2 0 011.2-1.2h5.6A1.2 1.2 0 0114 6.2v2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
     <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21 4.5L2.8 11.6c-.9.4-.9 1.1 0 1.4l4.6 1.4 1.8 5.4c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.5c.3-1.3-.5-1.9-1.8-1.6zM8.3 14.1l9.3-5.9-7.3 7.1-.3 3.2z" fill="currentColor"/></symbol>
     <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.5a9.4 9.4 0 00-8.1 14.2L2.5 21.5l4.9-1.3A9.4 9.4 0 1012 2.5zm0 17.1a7.7 7.7 0 01-3.9-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A7.7 7.7 0 1112 19.6zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.3 6.3 0 01-3.1-2.7c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.6.3 2.7 2.7 0 00-.9 2 4.7 4.7 0 001 2.5 10.7 10.7 0 004.1 3.6c1.5.7 2.1.7 2.9.6a2.4 2.4 0 001.6-1.1 2 2 0 00.1-1.1c0-.1-.2-.2-.4-.3z" fill="currentColor"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 20 20"><rect x="4" y="2.5" width="12" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 10h1.5M11.5 10H13M7 13.5h1.5M11.5 13.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 20 20"><path d="M6.2 2.8l2 3.4-1.6 1.5a10 10 0 004.7 4.7l1.5-1.6 3.4 2-1 2.6a1.6 1.6 0 01-1.7 1A14 14 0 012.4 5.5a1.6 1.6 0 011-1.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
     <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="i-check" viewBox="0 0 20 20"><path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <pattern id="h-arbolit" width="36" height="36" patternUnits="userSpaceOnUse">
@@ -49,6 +51,7 @@
       <span class="brand-mark">Гардарика</span>
     </a>
     <nav class="links" id="links" aria-label="Основное меню">
+      <a href="#/calc" class="links-calc">Калькулятор</a>
       <a href="#/catalog">Проекты</a>
       <a href="#quiz">Подбор дома</a>
       <a href="#price">Цены</a>
@@ -59,7 +62,7 @@
       <span class="msgr" data-msgr></span>
       <a class="nav-phone" href="tel:+79777144969">+7 977 714-49-69</a>
     </div>
-    <a class="btn btn-honey btn-sm nav-cta" href="#quiz">Подобрать дом</a>
+    <a class="btn btn-honey btn-sm nav-cta" href="#/calc"><svg><use href="#i-calc"/></svg>Рассчитать дом</a>
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="links" aria-label="Открыть меню"><svg><use href="#i-menu"/></svg></button>
   </div>
 </header>
@@ -83,8 +86,8 @@
         <div class="stamp" id="pStamp"></div>
         <p class="p-story" id="pStory"></p>
         <div class="p-actions">
-          <a class="btn btn-honey" id="pDiscuss" href="#contact">Обсудить этот дом<svg><use href="#i-arrow"/></svg></a>
-          <span class="btn btn-soon" aria-disabled="true">Собрать в конструкторе<em class="tag tag-soon">скоро</em></span>
+          <a class="btn btn-honey" id="pCalc" href="#/calc">Рассчитать этот дом<svg><use href="#i-calc"/></svg></a>
+          <a class="btn btn-line" id="pDiscuss" href="#contact">Обсудить с инженером<svg><use href="#i-arrow"/></svg></a>
         </div>
       </aside>
     </div>
@@ -100,6 +103,7 @@
       <h1 id="catTitle" tabindex="-1">Каталог домов</h1>
       <p>Шестнадцать проектов от 96 до 164 м². Любой можно перекроить под участок, бюджет и то, как вы живёте.</p>
     </div>
+    <a class="calc-banner" href="#/calc"><svg><use href="#i-calc"/></svg><span><b>Не нашли свой дом?</b> Соберите его в калькуляторе: площадь, стены, кровля, комплектация — и смета.</span><em>Открыть калькулятор</em></a>
     <div class="filters" id="filters">
       <div class="fgroup" role="group" aria-label="Этажность">
         <span class="flabel">Этажность</span>
@@ -125,6 +129,43 @@
   </div>
 </section>
 
+<!-- Калькулятор: открывается по адресу #/calc или #/calc/<slug> -->
+<section class="calc-page section" id="calcPage" hidden aria-labelledby="calcTitle">
+  <div class="wrap">
+    <a class="back" href="#top"><svg><use href="#i-back"/></svg>На главную</a>
+    <div class="calc-head">
+      <h1 id="calcTitle" tabindex="-1">Калькулятор дома</h1>
+      <p>Шесть шагов — и у вас на руках параметры дома для сметы по этапам. Скоро здесь появится 3D-модель, которая будет собираться вместе с вашим выбором.</p>
+    </div>
+    <!-- Точка монтирования будущего 3D-калькулятора: заменить содержимое #calculator-root -->
+    <div class="calc" id="calculator-root">
+      <form class="calc-form" id="calcForm" novalidate>
+        <ol class="calc-nav" id="calcNav"></ol>
+        <div class="calc-steps-body" id="calcBody"></div>
+        <div class="calc-foot">
+          <button type="button" class="btn btn-line" id="calcPrev">Назад</button>
+          <button type="button" class="btn btn-honey" id="calcNext">Дальше<svg><use href="#i-arrow"/></svg></button>
+        </div>
+      </form>
+      <aside class="calc-side" aria-label="Ваш дом">
+        <div class="calc-visual">
+          <img id="calcPhoto" alt="" hidden>
+          <svg class="axo axo-dark" id="calcAxo" viewBox="80 0 440 500" role="img" aria-label="Дом по слоям: фундамент, стены, фасад, инженерия, кровля">
+            <g class="lyr" data-layer="found" transform="translate(0 110)"><path d="M120 300 L260 380 L400 300 L260 220 Z"/><path d="M120 300 v18 L260 398 v-18 M260 398 L400 318 v-18"/><path class="thin" d="M155 300 L260 360 L365 300 M190 300 L260 340 L330 300"/></g>
+            <g class="lyr" data-layer="walls" transform="translate(0 50)"><path d="M130 300 L260 375 L390 300 L260 225 Z" class="thin"/><path d="M130 300 V210 L260 285 V375 M260 285 L390 210 V300 M130 210 L260 135 L390 210"/></g>
+            <g class="lyr" data-layer="facade" transform="translate(0 50)"><path d="M150 244 L180 261 V300 L150 283 Z M200 272 L240 295 V335 L200 312 Z M285 311 L330 285 V240 L285 266 Z M345 276 L370 262 V230 L345 244 Z"/></g>
+            <g class="lyr" data-layer="inside" transform="translate(0 50)"><path class="dash" d="M150 300 L260 363 L370 300 M200 272 V330 M320 272 V330"/><circle cx="232" cy="318" r="5"/><circle cx="296" cy="318" r="5"/></g>
+            <g class="lyr" data-layer="roof" transform="translate(0 -50)"><path d="M115 215 L260 298 L405 215 L325 110 L180 195 Z"/><path d="M180 195 L115 215 M325 110 L260 20 L180 105 L180 195 M260 20 L325 110"/><path class="thin" d="M200 205 L270 245 M230 185 L300 225 M260 165 L330 205"/></g>
+          </svg>
+          <span class="tag tag-soft" id="calcVisualTag">Схема · 3D-версия скоро</span>
+        </div>
+        <dl class="calc-sum" id="calcSum"></dl>
+        <div class="calc-total" id="calcTotal"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <main id="main">
   <section class="hero" id="top" aria-labelledby="heroTitle">
     <div class="hero-stage">
@@ -144,8 +185,8 @@
             <li><svg><use href="#i-check"/></svg>16 готовых проектов или дом по вашему эскизу</li>
           </ul>
           <div class="actions">
-            <a class="btn btn-honey" href="#quiz">Подобрать дом за минуту<svg><use href="#i-arrow"/></svg></a>
-            <a class="btn btn-glass" href="#/catalog">Смотреть проекты</a>
+            <a class="btn btn-honey" href="#/calc"><svg><use href="#i-calc"/></svg>Рассчитать стоимость дома</a>
+            <a class="btn btn-glass" href="#quiz">Подобрать дом за минуту</a>
           </div>
         </div>
         <aside class="hero-card" aria-label="Дом на фото">
@@ -153,6 +194,7 @@
             <div class="dim dim-x" aria-hidden="true"><span class="dim-val" data-mm="9600">9 600</span></div>
             <a class="stamp stamp-hero" id="heroStamp" href="#/p/birch-132" aria-live="polite"></a>
           </figure>
+          <a class="hero-calc" id="heroCalc" href="#/calc/birch-132"><svg><use href="#i-calc"/></svg>Рассчитать этот дом под себя<svg><use href="#i-arrow"/></svg></a>
         </aside>
       </div>
       <div class="wrap hero-bar">
@@ -165,6 +207,37 @@
       </div>
     </div>
     <ul class="wrap stats" id="stats"></ul>
+  </section>
+
+  <section class="section forest calc-teaser" id="calculator" aria-labelledby="calcTeaserTitle">
+    <div class="wrap calc-teaser-grid">
+      <div>
+        <h2 id="calcTeaserTitle">Соберите свой дом в калькуляторе</h2>
+        <p>Выберите основу из каталога или начните с нуля, затем пройдите шесть шагов: от фундамента до комплектации. В конце — смета по этапам.</p>
+        <ol class="calc-steps">
+          <li data-layer="found"><b>1</b>Основа и площадь</li>
+          <li data-layer="found"><b>2</b>Фундамент</li>
+          <li data-layer="walls"><b>3</b>Стены</li>
+          <li data-layer="roof"><b>4</b>Кровля</li>
+          <li data-layer="facade"><b>5</b>Комплектация</li>
+          <li data-layer="inside"><b>6</b>Смета</li>
+        </ol>
+        <div class="actions">
+          <a class="btn btn-honey" href="#/calc"><svg><use href="#i-calc"/></svg>Начать расчёт</a>
+          <a class="btn btn-ghost" href="#/catalog">Сначала выбрать проект</a>
+        </div>
+      </div>
+      <a class="con-stage calc-teaser-stage" href="#/calc" aria-label="Открыть калькулятор">
+        <span class="tag tag-light">3D-версия скоро</span>
+        <svg class="axo" viewBox="80 0 440 500" aria-hidden="true" id="teaserAxo">
+            <g class="lyr" data-layer="found" transform="translate(0 110)"><path d="M120 300 L260 380 L400 300 L260 220 Z"/><path d="M120 300 v18 L260 398 v-18 M260 398 L400 318 v-18"/><path class="thin" d="M155 300 L260 360 L365 300 M190 300 L260 340 L330 300"/></g>
+            <g class="lyr" data-layer="walls" transform="translate(0 50)"><path d="M130 300 L260 375 L390 300 L260 225 Z" class="thin"/><path d="M130 300 V210 L260 285 V375 M260 285 L390 210 V300 M130 210 L260 135 L390 210"/></g>
+            <g class="lyr" data-layer="facade" transform="translate(0 50)"><path d="M150 244 L180 261 V300 L150 283 Z M200 272 L240 295 V335 L200 312 Z M285 311 L330 285 V240 L285 266 Z M345 276 L370 262 V230 L345 244 Z"/></g>
+            <g class="lyr" data-layer="inside" transform="translate(0 50)"><path class="dash" d="M150 300 L260 363 L370 300 M200 272 V330 M320 272 V330"/><circle cx="232" cy="318" r="5"/><circle cx="296" cy="318" r="5"/></g>
+            <g class="lyr" data-layer="roof" transform="translate(0 -50)"><path d="M115 215 L260 298 L405 215 L325 110 L180 195 Z"/><path d="M180 195 L115 215 M325 110 L260 20 L180 105 L180 195 M260 20 L325 110"/><path class="thin" d="M200 205 L270 245 M230 185 L300 225 M260 165 L330 205"/></g>
+          </svg>
+      </a>
+    </div>
   </section>
 
   <section class="section popular" id="projects" aria-labelledby="projTitle">
@@ -244,6 +317,7 @@
           <p class="pack-for">Заезжаете и живёте</p>
         </article>
       </div>
+      <div class="more"><a class="btn btn-honey" href="#/calc"><svg><use href="#i-calc"/></svg>Рассчитать свою комплектацию</a></div>
     </div>
   </section>
 
@@ -294,31 +368,13 @@
     <div class="wrap faq-grid">
       <h2 id="faqTitle">Частые вопросы</h2>
       <div class="faq">
+        <details open><summary>Сколько будет стоить мой дом?<svg><use href="#i-plus"/></svg></summary><p>Зависит от площади, фундамента, стен, кровли и комплектации. Пройдите шесть шагов в <a href="#/calc">калькуляторе дома</a> — по вашим параметрам мы подготовим смету по этапам.</p></details>
         <details><summary>Можно изменить готовый проект?<svg><use href="#i-plus"/></svg></summary><p>Да. Любой проект из каталога — основа: меняем планировку, площадь, материалы и посадку дома на участке под вашу семью.</p></details>
         <details><summary>Вырастет ли цена во время стройки?<svg><use href="#i-plus"/></svg></summary><p>Нет. Смета фиксируется в договоре при подписании, и цена, которую вы согласовали, не меняется по ходу стройки.</p></details>
         <details><summary>Из чего вы строите?<svg><use href="#i-plus"/></svg></summary><p>Подбираем материал под грунт, климат, бюджет и режим жизни: арболит, газобетон, железобетон или каркас. У каждого свои сильные стороны, расскажем о них на встрече.</p></details>
         <details><summary>Что делать, если участок ещё не куплен?<svg><use href="#i-plus"/></svg></summary><p>Поможем его проверить: смотрим ГПЗУ, геологию, воду, ограничения и реальное время в дороге до того, как вы заплатите за землю.</p></details>
         <details><summary>Как понять, удобна ли планировка?<svg><use href="#i-plus"/></svg></summary><p>Проецируем планировку на пол в масштабе 1:1. Вы проходите от спальни до кухни и переставляете стены, пока они существуют только на плане.</p></details>
-        <details><summary>Когда появится онлайн-конструктор?<svg><use href="#i-plus"/></svg></summary><p>Мы готовим 3D-конструктор: вы соберёте дом от фундамента до отделки и получите смету в PDF. Пока его нет, подборку и расчёт сделает инженер — оставьте заявку.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <section class="section forest soon" id="constructor" aria-labelledby="conTitle">
-    <div class="wrap soon-grid">
-      <div>
-        <span class="tag tag-light">Скоро</span>
-        <h2 id="conTitle">3D-конструктор: соберите дом сами и получите смету в PDF</h2>
-        <p>От фундамента до кровли и отделки: каждое решение сразу видно на модели и в цене. Оставьте контакт — сообщим о запуске первыми.</p>
-        <a class="btn btn-honey" href="#contact" data-topic="Сообщить о запуске конструктора">Сообщить о запуске<svg><use href="#i-arrow"/></svg></a>
-      </div>
-      <!-- Точка монтирования будущего 3D-калькулятора: заменить содержимое #calculator-root -->
-      <div class="con-stage" id="calculator-root">
-        <svg class="axo" id="axo" viewBox="80 0 440 500" role="img" aria-label="Схема дома по слоям">
-          <g class="lyr is-on" transform="translate(0 110)"><path d="M120 300 L260 380 L400 300 L260 220 Z"/><path d="M120 300 v18 L260 398 v-18 M260 398 L400 318 v-18"/></g>
-          <g class="lyr is-on" transform="translate(0 50)"><path d="M130 300 V210 L260 285 V375 M260 285 L390 210 V300 M130 210 L260 135 L390 210"/><path d="M150 244 L180 261 V300 L150 283 Z M200 272 L240 295 V335 L200 312 Z M285 311 L330 285 V240 L285 266 Z" class="thin"/></g>
-          <g class="lyr is-on" transform="translate(0 -50)"><path d="M115 215 L260 298 L405 215 L325 110 L180 195 Z"/><path d="M180 195 L115 215 M325 110 L260 20 L180 105 L180 195 M260 20 L325 110"/></g>
-        </svg>
+        <details><summary>Когда появится 3D-калькулятор?<svg><use href="#i-plus"/></svg></summary><p>Мы готовим 3D-версию калькулятора: дом будет собираться на модели в реальном времени, а смета — выгружаться в PDF. Уже сейчас можно пройти те же шаги в <a href="#/calc">калькуляторе</a> и получить расчёт.</p></details>
       </div>
     </div>
   </section>
@@ -328,6 +384,7 @@
       <div class="contact-copy">
         <h2 id="contactTitle">Расскажите про участок и семью</h2>
         <p>Перезвоним, зададим несколько вопросов и предложим, с какого дома начать. Без обязательств и без навязчивых продаж.</p>
+        <a class="calc-inline" href="#/calc"><svg><use href="#i-calc"/></svg>Или рассчитайте дом сами — это займёт пару минут</a>
         <div class="msgr-big" data-msgr-big></div>
         <dl class="contacts">
           <div><dt>Телефон</dt><dd><a href="tel:+79777144969">+7 977 714-49-69</a></dd></div>
@@ -351,6 +408,11 @@
   </section>
 </main>
 
+<div class="mbar" id="mbar">
+  <a class="btn btn-honey" href="#/calc"><svg><use href="#i-calc"/></svg>Рассчитать дом</a>
+  <a class="mbar-call" href="tel:+79777144969" aria-label="Позвонить"><svg><use href="#i-phone"/></svg></a>
+</div>
+
 <footer class="foot">
   <div class="wrap">
     <div class="foot-top">
@@ -359,7 +421,7 @@
         <p>Проектируем, производим и строим загородные дома для семей в Москве и области.</p>
       </div>
       <nav class="foot-links" aria-label="Разделы">
-        <a href="#/catalog">Проекты</a><a href="#quiz">Подбор дома</a><a href="#price">Цены</a><a href="#built">Построено</a><a href="#method">Как строим</a><a href="#faq">Вопросы</a>
+        <a href="#/calc">Калькулятор дома</a><a href="#/catalog">Проекты</a><a href="#quiz">Подбор дома</a><a href="#price">Цены</a><a href="#built">Построено</a><a href="#method">Как строим</a><a href="#faq">Вопросы</a>
       </nav>
       <div class="stamp stamp-dark">
         <div><span class="sl">Телефон</span><a class="sv" href="tel:+79777144969">+7 977 714-49-69</a></div>
