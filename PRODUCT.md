@@ -26,26 +26,26 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 
 ## Capabilities and Constraints
 
-- Static, self-contained HTML/CSS/JavaScript build with embedded Three.js and PDF tooling.
-- The `#studio` calculator remains an established product surface, but every catalog project now seeds its own named shape, area, architecture, materials, openings, and plan so a visitor can continue editing that house without restarting.
-- Catalog houses are assembled from project-specific 3D pavilion modules; their floor plans are generated from the same module footprints, so rooms cannot drift outside the built silhouette.
-- Each catalog project carries an allowed compatibility set. Floors, roof, and architectural style choices that would break its defining geometry are disabled, while area, site, construction, facade, windows, and engineering remain editable.
-- Existing factual content, Moscow-region service area, contacts, project names, illustrative prices, and calculator disclaimers must remain truthful and must not be supplemented with invented awards, customer counts, guarantees, testimonials, or performance claims.
-- The site must remain responsive and usable when opened as a local file.
+- The current marketing site lives in `site/` as static HTML/CSS/JavaScript (`index.html`, `assets/`), with no build step and no external requests; it must stay usable when opened as a local file.
+- The catalog holds sixteen houses: three new example houses (Birch 132, Lilac 96, Vesper 164) whose names, sizes and indicative prices are illustrative and always marked «Пример», plus thirteen existing bases built from their source materials.
+- The stage-by-stage 3D calculator (foundation → walls → roof → facade → engineering and finishing → PDF estimate) is planned but not built. `site/` reserves `#constructor` with the mount point `#calculator-root`; until it ships, the section is labeled «В разработке» and project pages show the constructor action as disabled «скоро».
+- The legacy eleven-step calculator and the previous site remain in `reference/` as an archive and source of facts; they are not linked from the new site.
+- The lead form validates input but does not send data yet; its success message says so honestly.
+- The contract fixes the estimate; guarantee and deadlines are written into the contract. No specific guarantee years or construction durations have been provided, so none may be stated.
+- Existing factual content, Moscow-region service area and contacts must remain truthful and must not be supplemented with invented awards, customer counts, testimonials, or performance claims.
 
 ## Brand Commitments
 
 - Name: «Гардарика» / Gardarika Homes.
 - Russian-language voice: assured, concise, architectural, specific; premium without ornamental luxury clichés.
 - Core promise: «Дом, собранный вокруг вашей жизни».
-- The user requested a complete, expensive-looking, conversion-oriented redesign, then expanded the scope to a full project catalog, individual project pages, and a direct handoff from every house into the calculator-constructor.
+- The owner wants a modern, conversion-oriented site with a deliberately non-generic, non-AI look. The signature product still to come is a 3D calculator in which a visitor assembles a house stage by stage and receives a PDF estimate.
 
 ## Evidence on Hand
 
-- Existing working product and copy: `reference/index.src.html`.
-- Existing generated artifact: `reference/index.html`.
-- Existing procedural house visualizations and project silhouettes are real product demonstrations.
-- Existing style record: `DESIGN.md`; it is evidence of the incumbent world, not authority for the requested replacement.
+- Current site: `site/index.html`, project data in `site/assets/js/data.js`.
+- Previous site and copy source: `reference/index.src.html` (archive).
+- Three user-supplied house visualizations for the new example projects (`site/assets/img/*.webp`); all house imagery is visualization or project reference material and is labeled as such.
 - No verified client testimonials, completed-project photography, awards, quantitative conversion data, or third-party endorsements are present; future work must not fabricate them.
 
 ## Product Principles
@@ -54,8 +54,8 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 2. Make the calculator the natural consequence of the story, not an isolated widget.
 3. Communicate premium value through precision, restraint, materiality, and editorial confidence.
 4. Keep every factual claim auditable and visibly distinguish illustrative pricing.
-5. Preserve the working eleven-step calculation while making the constructor visually continuous with the catalog and able to accept every catalog house as an editable, geometrically coherent base.
-6. Treat a catalog house as one source of spatial truth: its 3D pavilions, floor-plan modules, and compatibility constraints must remain synchronized.
+5. Reserve a clear, honest place for the future 3D calculator and route every house toward it once it exists.
+6. Keep every size and price traceable: published source figures stay as given, illustrative figures are marked as examples.
 
 ## Accessibility & Inclusion
 

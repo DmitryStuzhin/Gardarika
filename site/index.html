@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гардарика — дома, собранные вокруг вашей жизни</title>
+<meta name="description" content="Проектируем, производим и строим загородные дома в Москве и области. Шестнадцать проектов-основ, смета фиксируется в договоре.">
+<meta name="theme-color" content="#fafbfa">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 20 20"><path d="M17 10H4M9 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M6 2.8h8.2L19 7.6V21.2H6z M14 2.8v5h5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8.8 12.5h7.4M8.8 15.3h7.4M8.8 18.1h4.6" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <!-- Штриховки материалов по мотивам ГОСТ 2.306 -->
+    <pattern id="h-arbolit" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M3 6l7-3M18 4l5 6M29 3l4 4M7 15l-3 7M14 13l8-1M27 14l6 5M4 30l7 2M17 24l4 7M26 27l8-3M12 22l-2 4M31 31l-2 4" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+      <circle cx="12" cy="8" r=".9" fill="currentColor"/><circle cx="24" cy="20" r=".9" fill="currentColor"/><circle cx="6" cy="25" r=".9" fill="currentColor"/><circle cx="33" cy="11" r=".9" fill="currentColor"/><circle cx="19" cy="33" r=".9" fill="currentColor"/>
+    </pattern>
+    <pattern id="h-gas" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="18" cy="4" r="1.3" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="23" cy="15" r="2.6" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="10" cy="17" r="1.5" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="4" cy="24" r="1.2" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="15" cy="25" r="2" fill="none" stroke="currentColor" stroke-width="1"/>
+    </pattern>
+    <pattern id="h-rc" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M-5 10L10 -5M-5 25L25 -5M5 35L35 5M20 35L35 20" stroke="currentColor" stroke-width=".9"/>
+      <path d="M6 20l3-4 3 4z M20 9l2.6-3.4L25 9z" fill="none" stroke="currentColor" stroke-width=".9"/>
+      <circle cx="16" cy="18" r="1" fill="currentColor"/><circle cx="26" cy="25" r="1" fill="currentColor"/><circle cx="4" cy="5" r="1" fill="currentColor"/>
+    </pattern>
+    <pattern id="h-frame" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 10c5 0 5-8 10-8s5 8 10 8 5-8 10-8 5 8 10 8 M0 30c5 0 5-8 10-8s5 8 10 8 5-8 10-8 5 8 10 8" fill="none" stroke="currentColor" stroke-width="1"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Гардарика — на главную">
+      <span class="brand-mark">ГАРДАРИКА</span>
+      <span class="brand-sub">бюро полного цикла</span>
+    </a>
+    <nav class="sheets" id="sheets" aria-label="Ведомость листов">
+      <a href="#projects"><b>02</b>Проекты</a>
+      <a href="#method"><b>03</b>Порядок работ</a>
+      <a href="#materials"><b>04</b>Материалы</a>
+      <a href="#constructor"><b>05</b>Конструктор</a>
+      <a href="#bureau"><b>06</b>Бюро</a>
+      <a href="#contact"><b>07</b>Заявка</a>
+    </nav>
+    <a class="nav-phone" href="tel:+79777144969">+7 977 714-49-69</a>
+    <a class="btn btn-ink btn-sm nav-cta" href="#contact">Обсудить проект</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="sheets" aria-label="Открыть ведомость листов"><svg><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<!-- Лист проекта: открывается по адресу #/p/<slug> -->
+<section class="project" id="project" hidden aria-labelledby="pTitle">
+  <div class="wrap">
+    <a class="back" href="#projects"><svg><use href="#i-back"/></svg>Ко всем проектам</a>
+    <div class="p-head">
+      <div>
+        <h1 class="p-title" id="pTitle" tabindex="-1"></h1>
+        <p class="p-type" id="pType"></p>
+      </div>
+      <p class="p-lede" id="pLede"></p>
+    </div>
+    <div class="p-grid">
+      <figure class="dimfig p-figure" id="pFigure">
+        <div class="dimfig-frame"><img id="pImage" src="assets/img/birch-132.webp" alt=""><figcaption class="prov" id="pProv"></figcaption></div>
+      </figure>
+      <aside class="p-side">
+        <div class="stamp" id="pStamp"></div>
+        <p class="p-story" id="pStory"></p>
+        <div class="p-actions">
+          <a class="btn btn-ink" id="pDiscuss" href="#contact">Обсудить этот проект<svg><use href="#i-arrow"/></svg></a>
+          <span class="btn btn-line is-soon" aria-disabled="true">Рассчитать в конструкторе<em class="mark mark-red">скоро</em></span>
+        </div>
+      </aside>
+    </div>
+    <div class="p-gallery" id="pGallery"></div>
+  </div>
+</section>
+
+<main id="main">
+  <!-- Лист 01 · Общие данные -->
+  <section class="sheet hero" id="top" aria-labelledby="heroTitle">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 id="heroTitle">Дом, собранный вокруг вашей жизни.</h1>
+        <p class="lede">Проектируем изнутри наружу, от маршрутов вашего дня к планировке, конструкции и участку. Проект, производство и стройка в одних руках, смета фиксируется в договоре.</p>
+        <div class="actions">
+          <a class="btn btn-ink" href="#projects">Подобрать проект<svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-line" href="#constructor">Как будет работать конструктор</a>
+        </div>
+      </div>
+
+      <div class="hero-sheet">
+        <figure class="dimfig hero-fig" id="heroFig">
+          <div class="dim dim-x" aria-hidden="true"><span class="dim-val" data-dim="w"></span></div>
+          <div class="dim dim-y" aria-hidden="true"><span class="dim-val" data-dim="d"></span></div>
+          <div class="dimfig-frame">
+            <img class="hero-img is-on" src="assets/img/birch-132.webp" alt="Проект Birch 132: двухэтажный деревянный дом с крытой террасой осенью" width="2000" height="1115">
+            <img class="hero-img" src="assets/img/lilac-96.webp" alt="Проект Lilac 96: одноэтажный дом с перголой весной" width="2000" height="1122" loading="lazy">
+            <img class="hero-img" src="assets/img/vesper-164.webp" alt="Проект Vesper 164: одноэтажный дом под вальмовой кровлей с террасой и бассейном" width="2000" height="1109" loading="lazy">
+            <span class="prov">Визуализация</span>
+          </div>
+        </figure>
+        <div class="hero-foot">
+          <div class="hero-tabs" role="tablist" aria-label="Проекты на листе">
+            <button role="tab" type="button" aria-selected="true" data-i="0">Birch 132</button>
+            <button role="tab" type="button" aria-selected="false" data-i="1">Lilac 96</button>
+            <button role="tab" type="button" aria-selected="false" data-i="2">Vesper 164</button>
+          </div>
+          <a class="stamp stamp-hero" id="heroStamp" href="#/p/birch-132" aria-live="polite"></a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap notes">
+      <h2 class="notes-title">Общие указания</h2>
+      <ol class="notes-list">
+        <li><b>Сначала жизнь.</b> Начинаем с ваших маршрутов, привычек и состава семьи, а не с готовой коробки из каталога.</li>
+        <li><b>Основа, а не приговор.</b> Любой проект служит отправной точкой: геометрию, планировку и материалы меняем под участок.</li>
+        <li><b>Смета в договоре.</b> Стоимость, которую вы подписали, фиксируется и не растёт по ходу стройки.</li>
+        <li><b>Одна ответственность.</b> Гарантия и сроки прописаны в договоре, а проект, производство и стройка живут в одном бюро.</li>
+      </ol>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 01</span>
+  </section>
+
+  <!-- Лист 02 · Проекты -->
+  <section class="sheet projects" id="projects" aria-labelledby="projTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="projTitle">Выберите основу — остальное подстроим.</h2>
+        <p>Шестнадцать проектов от 96 до 164 м². Три новых дома открывают каталог, остальные тринадцать собраны по исходным материалам проектов, и любой из них можно перекроить под участок и семью.</p>
+      </div>
+
+      <div class="featured" id="featured"></div>
+
+      <div class="spec-head">
+        <h3>Спецификация проектов</h3>
+        <div class="filters" role="group" aria-label="Фильтр по этажности">
+          <button type="button" class="is-on" data-f="all" aria-pressed="true">Все</button>
+          <button type="button" data-f="1" aria-pressed="false">1 этаж</button>
+          <button type="button" data-f="1.5" aria-pressed="false">Мансарда</button>
+          <button type="button" data-f="2" aria-pressed="false">2 этажа</button>
+        </div>
+      </div>
+      <div class="spec" role="table" aria-label="Спецификация проектов" id="spec">
+        <div class="spec-row spec-th" role="row">
+          <span role="columnheader">Поз.</span>
+          <span role="columnheader">Эскиз</span>
+          <span role="columnheader">Наименование</span>
+          <span role="columnheader">Этажность</span>
+          <span role="columnheader" class="num">Площадь, м²</span>
+          <span role="columnheader" class="num">Габариты, м</span>
+          <span role="columnheader"><span class="sr">Открыть</span></span>
+        </div>
+        <div id="specBody" role="rowgroup"></div>
+      </div>
+      <p class="spec-count" id="specCount" role="status"></p>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 02</span>
+  </section>
+
+  <!-- Вид А: врезка с выносками -->
+  <section class="view" aria-labelledby="viewTitle">
+    <figure class="view-fig">
+      <img src="assets/img/vesper-164.webp" alt="Vesper 164 на закате: терраса, панорамные окна гостиной и встроенный гараж" width="2000" height="1109" loading="lazy">
+      <ol class="callouts" aria-label="Выноски к виду">
+        <li style="--x:60%;--y:30%"><i>1</i><span>Вальмовая кровля без фронтонов: спокойный силуэт</span></li>
+        <li class="down" style="--x:43%;--y:57%"><i>2</i><span>Гостиная открывается на террасу стеклом во всю высоту</span></li>
+        <li style="--x:14%;--y:58%"><i>3</i><span>Гараж в общем объёме, под одной кровлей с домом</span></li>
+        <li class="left" style="--x:70%;--y:72%"><i>4</i><span>Терраса вдоль всего фасада до бассейна</span></li>
+      </ol>
+      <span class="prov">Визуализация · Vesper 164</span>
+    </figure>
+    <div class="wrap view-copy">
+      <h2 id="viewTitle">Дом начинается не со стен, а с утра, которое в нём хочется провести.</h2>
+      <p class="view-stamp">Вид А · фасад со стороны сада</p>
+    </div>
+  </section>
+
+  <!-- Лист 03 · Порядок работ -->
+  <section class="sheet method" id="method" aria-labelledby="methodTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="methodTitle">Сначала жизнь. Потом стены.</h2>
+        <p>Не подгоняем семью под готовую коробку: снимаем мерки с привычек, участка и бюджета — и собираем дом как единую конструкцию. На каждом этапе у вас на руках документ.</p>
+      </div>
+      <ol class="route">
+        <li>
+          <span class="route-n">1</span>
+          <h3>Выбрать основу</h3>
+          <p>Масштаб и характер будущего дома: из каталога или с нуля.</p>
+          <p class="route-doc"><span>На руках</span>подборка основ под участок</p>
+        </li>
+        <li>
+          <span class="route-n">2</span>
+          <h3>Снять мерки</h3>
+          <p>Планировка, конструкция, материалы, участок и предварительная смета.</p>
+          <p class="route-doc"><span>На руках</span>планировка и расчёт по этапам</p>
+        </li>
+        <li>
+          <span class="route-n">3</span>
+          <h3>Примерить 1:1</h3>
+          <p>Пройти будущий дом в натуральном масштабе до начала стройки.</p>
+          <p class="route-doc"><span>На руках</span>утверждённый проект</p>
+        </li>
+        <li>
+          <span class="route-n">4</span>
+          <h3>Построить</h3>
+          <p>Проект, производство и стройка остаются в одной команде до ключей.</p>
+          <p class="route-doc"><span>На руках</span>договор с фиксированной сметой</p>
+        </li>
+      </ol>
+      <div class="terms">
+        <h3>Что закреплено в договоре</h3>
+        <dl>
+          <div><dt>Смета</dt><dd>Фиксируется при подписании. Цена, которую вы согласовали, не растёт по ходу стройки.</dd></div>
+          <div><dt>Сроки</dt><dd>Прописываются в договоре по этапам: фундамент, коробка, кровля, отделка.</dd></div>
+          <div><dt>Гарантия</dt><dd>Оформляется в договоре на конструкцию и выполненные работы.</dd></div>
+        </dl>
+      </div>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 03</span>
+  </section>
+
+  <!-- Лист 04 · Материалы -->
+  <section class="sheet materials" id="materials" aria-labelledby="matTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="matTitle">Материал следует задаче.</h2>
+        <p>Подбираем конструкцию под грунт, климат, бюджет и режим жизни — не под складские остатки и привычную технологию бригады.</p>
+      </div>
+      <ul class="mats">
+        <li>
+          <svg class="hatch" viewBox="0 0 200 150" role="img" aria-label="Условная штриховка арболита"><rect width="200" height="150" fill="url(#h-arbolit)"/></svg>
+          <h3>Арболит</h3>
+          <p>Тёплый, устойчив к циклам заморозки. Древесная щепа на цементном вяжущем.</p>
+        </li>
+        <li>
+          <svg class="hatch" viewBox="0 0 200 150" role="img" aria-label="Условная штриховка газобетона"><rect width="200" height="150" fill="url(#h-gas)"/></svg>
+          <h3>Газобетон</h3>
+          <p>Точный, быстрый, предсказуемый. Ровная геометрия блока — тонкий шов.</p>
+        </li>
+        <li>
+          <svg class="hatch" viewBox="0 0 200 150" role="img" aria-label="Условная штриховка железобетона"><rect width="200" height="150" fill="url(#h-rc)"/></svg>
+          <h3>Железобетон</h3>
+          <p>Долговечный, для сложной архитектуры: консоли, большие пролёты, панорамы.</p>
+        </li>
+        <li>
+          <svg class="hatch" viewBox="0 0 200 150" role="img" aria-label="Условная штриховка каркаса с утеплителем"><rect width="200" height="150" fill="url(#h-frame)"/><rect x="0" y="0" width="200" height="16" class="hatch-wood"/><rect x="0" y="134" width="200" height="16" class="hatch-wood"/></svg>
+          <h3>Каркас</h3>
+          <p>Лёгкий и быстрый в сборке. Хорош для сезонной жизни и сложных участков.</p>
+        </li>
+      </ul>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 04</span>
+  </section>
+
+  <!-- Лист 05 · Конструктор (место под будущий 3D-калькулятор) -->
+  <section class="sheet blueprint" id="constructor" aria-labelledby="conTitle">
+    <div class="wrap con-grid">
+      <div class="con-copy">
+        <h2 id="conTitle">Соберите дом слой за слоем — и заберите смету в PDF.</h2>
+        <p>Конструктор проведёт от фундамента до кровли и внутренней отделки. Каждое решение сразу видно на 3D-модели и в стоимости, а в конце вы получаете смету по этапам одним файлом.</p>
+        <ol class="layers" id="layers">
+          <li><button type="button" data-layer="found"><b>1</b>Фундамент<span>плита, лента или сваи под геологию участка</span></button></li>
+          <li><button type="button" data-layer="walls"><b>2</b>Стены и перекрытия<span>материал, толщина, утепление</span></button></li>
+          <li><button type="button" data-layer="roof"><b>3</b>Кровля<span>форма, уклон, покрытие</span></button></li>
+          <li><button type="button" data-layer="facade"><b>4</b>Фасад и окна<span>облицовка, остекление, двери</span></button></li>
+          <li><button type="button" data-layer="inside"><b>5</b>Инженерия и отделка<span>отопление, вода, свет, чистовая отделка</span></button></li>
+          <li><button type="button" data-layer="pdf"><b>6</b>Смета в PDF<span>все этапы, объёмы и стоимость одним файлом</span></button></li>
+        </ol>
+        <div class="actions">
+          <a class="btn btn-paper" href="#contact" data-topic="Расчёт с инженером">Рассчитать с инженером сейчас<svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost-light" href="#contact" data-topic="Сообщить о запуске конструктора">Сообщить о запуске</a>
+        </div>
+      </div>
+
+      <!-- Точка монтирования будущего 3D-калькулятора: заменить содержимое #calculator-root -->
+      <div class="con-stage" id="calculator-root">
+        <p class="mark mark-line">В разработке</p>
+        <svg class="axo" id="axo" viewBox="0 0 520 520" role="img" aria-labelledby="axoTitle">
+          <title id="axoTitle">Разнесённая аксонометрия дома: фундамент, стены, кровля, фасад, инженерия и смета</title>
+          <g class="lyr" data-layer="found" transform="translate(0 120)">
+            <path d="M120 300 L260 380 L400 300 L260 220 Z"/>
+            <path d="M120 300 v18 L260 398 v-18 M260 398 L400 318 v-18"/>
+            <path class="thin" d="M155 300 L260 360 L365 300 M190 300 L260 340 L330 300"/>
+          </g>
+          <g class="lyr" data-layer="walls" transform="translate(0 60)">
+            <path d="M130 300 L260 375 L390 300 L260 225 Z" class="thin"/>
+            <path d="M130 300 V210 L260 285 V375 M260 285 L390 210 V300 M130 210 L260 135 L390 210"/>
+            <path class="thin" d="M195 238 L260 200 L325 238 M195 238 V300 M325 238 V300"/>
+          </g>
+          <g class="lyr" data-layer="facade" transform="translate(0 60)">
+            <path d="M150 244 L180 261 V300 L150 283 Z M200 272 L240 295 V335 L200 312 Z"/>
+            <path d="M285 311 L330 285 V240 L285 266 Z M345 276 L370 262 V230 L345 244 Z"/>
+          </g>
+          <g class="lyr" data-layer="inside" transform="translate(0 60)">
+            <path class="dash" d="M150 300 L260 363 L370 300 M200 272 V330 M320 272 V330"/>
+            <circle cx="232" cy="318" r="5"/><circle cx="296" cy="318" r="5"/>
+          </g>
+          <g class="lyr" data-layer="roof" transform="translate(0 -40)">
+            <path d="M115 215 L260 298 L405 215 L325 110 L180 195 Z"/>
+            <path d="M180 195 L115 215 M325 110 L260 20 L180 105 L180 195 M260 20 L325 110"/>
+            <path class="thin" d="M200 205 L270 245 M230 185 L300 225 M260 165 L330 205"/>
+          </g>
+          <g class="lyr lyr-pdf" data-layer="pdf" transform="translate(410 330)">
+            <path d="M0 0 h66 l22 22 v96 h-88 z M66 0 v22 h22"/>
+            <path class="thin" d="M14 44 h60 M14 58 h60 M14 72 h60 M14 86 h38"/>
+          </g>
+          <g class="axo-dims" aria-hidden="true">
+            <path d="M88 452 L228 532" class="thin"/>
+          </g>
+        </svg>
+        <p class="con-note">Схема. Здесь появится интерактивная 3D-модель конструктора.</p>
+      </div>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 05</span>
+  </section>
+
+  <!-- Лист 06 · Бюро -->
+  <section class="sheet bureau" id="bureau" aria-labelledby="bureauTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="bureauTitle">Один замысел. Одна ответственность.</h2>
+        <p>Архитекторы, производство и стройка работают как одно бюро. Решения собираются в одной рабочей системе — и не теряются на стыках.</p>
+      </div>
+      <div class="cycle">
+        <div><h3>Проектируем</h3><p>Планировка, посадка дома на участок и инженерия.</p></div>
+        <div><h3>Производим</h3><p>Свой материал и контроль каждой партии.</p></div>
+        <div><h3>Строим</h3><p>Штатная команда и смета, зафиксированная в договоре.</p></div>
+      </div>
+      <div class="duo">
+        <article>
+          <svg class="duo-art" viewBox="0 0 320 170" aria-hidden="true">
+            <path d="M20 150 H300 M20 20 H300 M20 20 V150 M300 20 V150 M140 20 V95 H300 M20 95 H100 M190 95 V150" class="thin"/>
+            <path d="M100 95 a40 40 0 0 1 40 -40" class="dash"/>
+            <circle cx="232" cy="124" r="6"/><path d="M232 130 v14 M225 136 h14 M226 152 l6-8 6 8"/>
+            <text x="30" y="46">Спальня</text><text x="152" y="46">Кухня-гостиная</text><text x="200" y="118">1 : 1</text>
+          </svg>
+          <h3>Примерьте дом до стройки.</h3>
+          <p>Проецируем будущую планировку на пол в масштабе 1:1. Пройдите маршрут от спальни до кухни и переставьте стены, пока они существуют только на плане.</p>
+        </article>
+        <article>
+          <svg class="duo-art" viewBox="0 0 320 170" aria-hidden="true">
+            <path d="M40 150 L70 24 L292 40 L280 156 Z"/>
+            <path d="M110 70 H200 V120 H110 Z" class="thin"/>
+            <path d="M70 24 L40 150 M60 62 h30 M52 98 h30" class="dash"/>
+            <circle cx="245" cy="75" r="9" class="thin"/><path d="M245 66 v18 M236 75 h18" class="thin"/>
+            <text x="118" y="100">Пятно дома</text><text x="222" y="104">Скважина</text><text x="84" y="142">Отступы по ГПЗУ</text>
+          </svg>
+          <h3>Участок тоже часть проекта.</h3>
+          <p>Проверяем ГПЗУ, геологию, воду, ограничения и реальное время в дороге — до того, как участок станет дорогой неизменяемой вводной.</p>
+        </article>
+      </div>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 06</span>
+  </section>
+
+  <!-- Лист 07 · Заявка -->
+  <section class="sheet contact" id="contact" aria-labelledby="contactTitle">
+    <div class="wrap contact-grid">
+      <div class="contact-copy">
+        <h2 id="contactTitle">Расскажите про участок и семью.</h2>
+        <p>Перезвоним, зададим несколько вопросов о вашем дне и предложим, с какой основы начать. Без обязательств и без продажи по телефону.</p>
+        <dl class="contacts">
+          <div><dt>Телефон</dt><dd><a href="tel:+79777144969">+7 977 714-49-69</a></dd></div>
+          <div><dt>Почта</dt><dd><a href="mailto:info@gardarika.moscow">info@gardarika.moscow</a></dd></div>
+          <div><dt>Офис</dt><dd>Москва, ул. Грина, 1к7</dd></div>
+          <div><dt>Часы</dt><dd>Пн–Вс, 8:00–20:00</dd></div>
+        </dl>
+      </div>
+      <form class="blank" id="leadForm" novalidate>
+        <p class="blank-title">Бланк заявки</p>
+        <label class="field"><span>Имя</span><input id="leadName" name="name" autocomplete="name" placeholder="Как к вам обращаться" required></label>
+        <label class="field"><span>Телефон</span><input id="leadPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__" required></label>
+        <label class="field"><span>Проект</span>
+          <select id="leadProject" name="project"><option value="">Ещё не выбрал</option></select>
+        </label>
+        <label class="field"><span>Тема</span><input id="leadTopic" name="topic" placeholder="Например: участок 12 соток в Истре"></label>
+        <label class="check"><input type="checkbox" id="leadConsent" required><span>Согласен на обработку персональных данных для ответа на заявку.</span></label>
+        <button class="btn btn-ink btn-wide" type="submit">Отправить заявку<svg><use href="#i-arrow"/></svg></button>
+        <p class="form-msg" id="leadMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <span class="sheet-no" aria-hidden="true">Лист 07</span>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-stamp">
+      <div class="fs-name"><span class="fs-label">Организация</span><strong>Гардарика</strong><small>Gardarika Homes</small></div>
+      <div class="fs-cell fs-wide"><span class="fs-label">Наименование</span>Дома, собранные вокруг жизни. Проектируем, производим и строим в Москве и области.</div>
+      <div class="fs-cell"><span class="fs-label">Телефон</span><a href="tel:+79777144969">+7 977 714-49-69</a></div>
+      <div class="fs-cell"><span class="fs-label">Почта</span><a href="mailto:info@gardarika.moscow">info@gardarika.moscow</a></div>
+      <div class="fs-cell"><span class="fs-label">Адрес</span>Москва, ул. Грина, 1к7</div>
+      <div class="fs-cell"><span class="fs-label">Часы</span>Пн–Вс, 8:00–20:00</div>
+    </div>
+    <p class="foot-note">© 2026 Гардарика · Gardarika Homes. Изображения домов — архитектурные визуализации. Параметры и цены проектов Birch 132, Lilac 96 и Vesper 164 даны как пример и уточняются при расчёте.</p>
+  </div>
+</footer>
+
+<div class="peek" id="peek" aria-hidden="true"><img src="assets/img/birch-132.webp" alt=""></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

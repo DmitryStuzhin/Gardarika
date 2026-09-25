@@ -1,217 +1,375 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-31T21:37:03Z",
-  "title": "Design System: Гардарика — Архитектурное ателье",
+  "generatedAt": "2026-09-25T16:42:01Z",
+  "title": "Design System: Гардарика — Лист проекта",
   "extensions": {
     "colorMeta": {
-      "graphite-wool": {
+      "table": {
         "role": "neutral",
-        "displayName": "Графитовая шерсть",
-        "canonical": "#151719",
-        "tonalRamp": ["oklch(15% 0.006 230)", "oklch(25% 0.006 230)", "oklch(36% 0.006 230)", "oklch(48% 0.006 230)", "oklch(60% 0.006 230)", "oklch(72% 0.006 230)", "oklch(84% 0.006 230)", "oklch(95% 0.006 230)"]
+        "displayName": "Чертёжный стол",
+        "canonical": "#e4e8ec",
+        "tonalRamp": [
+          "oklch(15% 0.008 240)",
+          "oklch(25% 0.008 240)",
+          "oklch(36% 0.008 240)",
+          "oklch(48% 0.008 240)",
+          "oklch(60% 0.008 240)",
+          "oklch(72% 0.008 240)",
+          "oklch(84% 0.008 240)",
+          "oklch(95% 0.008 240)"
+        ]
       },
-      "atelier-black": {
+      "paper": {
         "role": "neutral",
-        "displayName": "Ателье-чёрный",
-        "canonical": "#0b0d0f",
-        "tonalRamp": ["oklch(15% 0.006 240)", "oklch(25% 0.006 240)", "oklch(36% 0.006 240)", "oklch(48% 0.006 240)", "oklch(60% 0.006 240)", "oklch(72% 0.006 240)", "oklch(84% 0.006 240)", "oklch(95% 0.006 240)"]
+        "displayName": "Бумага",
+        "canonical": "#fafbfa",
+        "tonalRamp": [
+          "oklch(15% 0.002 150)",
+          "oklch(25% 0.002 150)",
+          "oklch(36% 0.002 150)",
+          "oklch(48% 0.002 150)",
+          "oklch(60% 0.002 150)",
+          "oklch(72% 0.002 150)",
+          "oklch(84% 0.002 150)",
+          "oklch(95% 0.002 150)"
+        ]
       },
-      "pattern-paper": {
+      "paper-2": {
         "role": "neutral",
-        "displayName": "Холодная выкройка",
-        "canonical": "#f1f0eb",
-        "tonalRamp": ["oklch(15% 0.012 95)", "oklch(25% 0.012 95)", "oklch(36% 0.012 95)", "oklch(48% 0.012 95)", "oklch(60% 0.012 95)", "oklch(72% 0.012 95)", "oklch(84% 0.012 95)", "oklch(95% 0.012 95)"]
+        "displayName": "Бумага, тень",
+        "canonical": "#f1f3f5",
+        "tonalRamp": [
+          "oklch(15% 0.004 240)",
+          "oklch(25% 0.004 240)",
+          "oklch(36% 0.004 240)",
+          "oklch(48% 0.004 240)",
+          "oklch(60% 0.004 240)",
+          "oklch(72% 0.004 240)",
+          "oklch(84% 0.004 240)",
+          "oklch(95% 0.004 240)"
+        ]
       },
-      "cobalt-chalk": {
+      "sheet-white": {
+        "role": "neutral",
+        "displayName": "Белая вклейка",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(36% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(60% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "ink": {
         "role": "primary",
-        "displayName": "Кобальтовый мел",
-        "canonical": "#1649c5",
-        "tonalRamp": ["oklch(15% 0.16 264)", "oklch(25% 0.18 264)", "oklch(36% 0.2 264)", "oklch(48% 0.22 264)", "oklch(60% 0.2 264)", "oklch(72% 0.16 264)", "oklch(84% 0.1 264)", "oklch(95% 0.03 264)"]
+        "displayName": "Тушь",
+        "canonical": "#111a2e",
+        "tonalRamp": [
+          "oklch(15% 0.04 265)",
+          "oklch(25% 0.04 265)",
+          "oklch(36% 0.04 265)",
+          "oklch(48% 0.04 265)",
+          "oklch(60% 0.04 265)",
+          "oklch(72% 0.04 265)",
+          "oklch(84% 0.04 265)",
+          "oklch(95% 0.04 265)"
+        ]
       },
-      "cobalt-highlight": {
-        "role": "primary",
-        "displayName": "Яркий кобальт",
-        "canonical": "#2f67ef",
-        "tonalRamp": ["oklch(15% 0.17 263)", "oklch(25% 0.2 263)", "oklch(36% 0.23 263)", "oklch(48% 0.25 263)", "oklch(60% 0.23 263)", "oklch(72% 0.18 263)", "oklch(84% 0.11 263)", "oklch(95% 0.035 263)"]
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Тушь, текст",
+        "canonical": "#394257",
+        "tonalRamp": [
+          "oklch(15% 0.035 265)",
+          "oklch(25% 0.035 265)",
+          "oklch(36% 0.035 265)",
+          "oklch(48% 0.035 265)",
+          "oklch(60% 0.035 265)",
+          "oklch(72% 0.035 265)",
+          "oklch(84% 0.035 265)",
+          "oklch(95% 0.035 265)"
+        ]
       },
-      "brass-registration": {
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Тушь, подпись",
+        "canonical": "#5f687a",
+        "tonalRamp": [
+          "oklch(15% 0.028 265)",
+          "oklch(25% 0.028 265)",
+          "oklch(36% 0.028 265)",
+          "oklch(48% 0.028 265)",
+          "oklch(60% 0.028 265)",
+          "oklch(72% 0.028 265)",
+          "oklch(84% 0.028 265)",
+          "oklch(95% 0.028 265)"
+        ]
+      },
+      "hair": {
+        "role": "neutral",
+        "displayName": "Волосная линия",
+        "canonical": "#c3c9d3",
+        "tonalRamp": [
+          "oklch(15% 0.015 260)",
+          "oklch(25% 0.015 260)",
+          "oklch(36% 0.015 260)",
+          "oklch(48% 0.015 260)",
+          "oklch(60% 0.015 260)",
+          "oklch(72% 0.015 260)",
+          "oklch(84% 0.015 260)",
+          "oklch(95% 0.015 260)"
+        ]
+      },
+      "blueprint": {
         "role": "secondary",
-        "displayName": "Латунная регистрация",
-        "canonical": "#a98a45",
-        "tonalRamp": ["oklch(15% 0.06 82)", "oklch(25% 0.075 82)", "oklch(36% 0.09 82)", "oklch(48% 0.1 82)", "oklch(60% 0.09 82)", "oklch(72% 0.07 82)", "oklch(84% 0.045 82)", "oklch(95% 0.015 82)"]
+        "displayName": "Синька",
+        "canonical": "#0e335e",
+        "tonalRamp": [
+          "oklch(15% 0.09 255)",
+          "oklch(25% 0.09 255)",
+          "oklch(36% 0.09 255)",
+          "oklch(48% 0.09 255)",
+          "oklch(60% 0.09 255)",
+          "oklch(72% 0.09 255)",
+          "oklch(84% 0.09 255)",
+          "oklch(95% 0.09 255)"
+        ]
       },
-      "pale-seam": {
-        "role": "neutral",
-        "displayName": "Светлый шов",
-        "canonical": "rgba(241,240,235,.2)",
-        "tonalRamp": ["oklch(15% 0.008 95)", "oklch(25% 0.008 95)", "oklch(36% 0.008 95)", "oklch(48% 0.008 95)", "oklch(60% 0.008 95)", "oklch(72% 0.008 95)", "oklch(84% 0.008 95)", "oklch(95% 0.008 95)"]
+      "blueprint-line": {
+        "role": "secondary",
+        "displayName": "Линия на синьке",
+        "canonical": "rgba(233,241,252,.9)",
+        "tonalRamp": [
+          "oklch(15% 0.02 255)",
+          "oklch(25% 0.02 255)",
+          "oklch(36% 0.02 255)",
+          "oklch(48% 0.02 255)",
+          "oklch(60% 0.02 255)",
+          "oklch(72% 0.02 255)",
+          "oklch(84% 0.02 255)",
+          "oklch(95% 0.02 255)"
+        ]
       },
-      "panel-graphite": {
-        "role": "neutral",
-        "displayName": "Панельный графит",
-        "canonical": "#23272b",
-        "tonalRamp": ["oklch(15% 0.008 245)", "oklch(25% 0.008 245)", "oklch(36% 0.008 245)", "oklch(48% 0.008 245)", "oklch(60% 0.008 245)", "oklch(72% 0.008 245)", "oklch(84% 0.008 245)", "oklch(95% 0.008 245)"]
+      "blueprint-soft": {
+        "role": "secondary",
+        "displayName": "Текст на синьке",
+        "canonical": "rgba(214,227,246,.8)",
+        "tonalRamp": [
+          "oklch(15% 0.03 255)",
+          "oklch(25% 0.03 255)",
+          "oklch(36% 0.03 255)",
+          "oklch(48% 0.03 255)",
+          "oklch(60% 0.03 255)",
+          "oklch(72% 0.03 255)",
+          "oklch(84% 0.03 255)",
+          "oklch(95% 0.03 255)"
+        ]
+      },
+      "stamp-red": {
+        "role": "tertiary",
+        "displayName": "Красная печать",
+        "canonical": "#c02a1e",
+        "tonalRamp": [
+          "oklch(15% 0.17 30)",
+          "oklch(25% 0.17 30)",
+          "oklch(36% 0.17 30)",
+          "oklch(48% 0.17 30)",
+          "oklch(60% 0.17 30)",
+          "oklch(72% 0.17 30)",
+          "oklch(84% 0.17 30)",
+          "oklch(95% 0.17 30)"
+        ]
       }
     },
     "typographyMeta": {
-      "brand": {"displayName": "Brand", "purpose": "Монументальное имя Гардарики в герое и футере."},
-      "display": {"displayName": "Display", "purpose": "Крупные секционные тезисы маркетинговой поверхности."},
-      "headline": {"displayName": "Headline", "purpose": "Тезис героя и заголовки шагов метода."},
-      "body": {"displayName": "Body", "purpose": "Пояснения, вводные и подписи проектных решений."},
-      "label": {"displayName": "Measured Label", "purpose": "Навигация, индексы, мерки и техническая маркировка."}
+      "hero": {
+        "displayName": "Заголовок листа 01",
+        "purpose": "Единственный h1 главной."
+      },
+      "project-title": {
+        "displayName": "Название проекта",
+        "purpose": "h1 листа проекта."
+      },
+      "headline": {
+        "displayName": "Заголовок листа",
+        "purpose": "h2 каждого раздела-листа."
+      },
+      "title": {
+        "displayName": "Подзаголовок",
+        "purpose": "Этапы, материалы, условия, названия домов."
+      },
+      "body": {
+        "displayName": "Текст",
+        "purpose": "Абзацы, Golos Text."
+      },
+      "lede": {
+        "displayName": "Лид",
+        "purpose": "Вводный абзац первого экрана и проекта."
+      },
+      "data": {
+        "displayName": "Значение",
+        "purpose": "Цифры в штампах и спецификации, tabular-nums."
+      },
+      "drafting-label": {
+        "displayName": "Чертёжная подпись",
+        "purpose": "Наклон 10°: подписи граф, номера листов, происхождение изображений."
+      }
     },
-    "shadows": [
+    "shadows": [],
+    "motion": [
       {
-        "name": "registration-ring",
-        "value": "inset 0 0 0 17px #151719, inset 0 0 0 18px rgba(169,138,69,.5)",
-        "purpose": "Концентрическая латунная регистрационная точка в герое; не использовать как elevation поверхности."
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Все переходы состояний и прорисовка размерных линий."
+      },
+      {
+        "name": "dim-draw",
+        "value": "clip-path 900ms",
+        "purpose": "Прорисовка размерной линии от центра; вертикальная с задержкой 250ms."
+      },
+      {
+        "name": "hero-crossfade",
+        "value": "opacity 1000ms, смена каждые 7s",
+        "purpose": "Смена домов на листе 01; останавливается при выборе вручную."
+      },
+      {
+        "name": "layer-cycle",
+        "value": "2400ms",
+        "purpose": "Автоперебор слоёв конструктора, пока пользователь не выбрал слой."
       }
     ],
-    "motion": [
-      {"name": "tab-state", "value": "background .2s, transform .2s", "purpose": "Hover вкладок CTA; отключается при reduced motion."},
-      {"name": "atelier-reveal", "value": ".85s cubic-bezier(.16,1,.3,1)", "purpose": "Последовательное раскрытие элементов копирайта героя; отключается при reduced motion."},
-      {"name": "catalog-image", "value": "transform .65s cubic-bezier(.2,.8,.2,1), filter .3s", "purpose": "Мягкое приближение фотографии внутри неподвижной каталожной карточки."}
-    ],
     "breakpoints": [
-      {"name": "mobile", "value": "620px"},
-      {"name": "catalog-tablet", "value": "900px"},
-      {"name": "atelier-stack", "value": "980px"}
+      {
+        "name": "nav",
+        "value": "1240px"
+      },
+      {
+        "name": "lg",
+        "value": "1180px"
+      },
+      {
+        "name": "md",
+        "value": "900px"
+      },
+      {
+        "name": "sm",
+        "value": "760px"
+      }
     ]
   },
   "components": [
     {
-      "name": "Clipped Primary Tab",
+      "name": "Главная кнопка",
       "kind": "button",
-      "refersTo": "tab-primary",
-      "description": "Основное маркетинговое действие с клиновидным правым краем.",
-      "html": "<a class=\"ds-tab-primary\" href=\"#\">Рассчитать дом</a>",
-      "css": ".ds-tab-primary{display:inline-flex;align-items:center;min-height:46px;padding:0 23px;color:#fff;background:var(--at-blue,#1649c5);text-decoration:none;font:700 16px var(--font,'Golos Text',sans-serif);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);transition:background .2s,transform .2s}.ds-tab-primary:hover{background:var(--at-blue-hi,#2f67ef);transform:translateY(-2px)}.ds-tab-primary:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:4px}.ds-tab-primary:active{transform:translateY(0)}"
+      "refersTo": "button-primary",
+      "description": "Основное действие: залита тушью, при наведении уходит в синьку.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Подобрать проект<svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\"><path d=\"M3 10h13M11 5l5 5-5 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/></svg></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 22px;border:1.5px solid #111a2e;background:#111a2e;color:#fff;font:600 15.5px/1.2 Geologica,'Golos Text',sans-serif;text-decoration:none;transition:background-color .22s cubic-bezier(.16,1,.3,1)}.ds-btn svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}.ds-btn:hover{background:#0e335e;border-color:#0e335e}.ds-btn:hover svg{transform:translateX(3px)}.ds-btn:focus-visible{outline:2px solid #0e335e;outline-offset:3px}"
     },
     {
-      "name": "Ghost Tab",
+      "name": "Контурная кнопка",
       "kind": "button",
-      "refersTo": "tab-ghost",
-      "description": "Вторичное действие на тёмной раскройной поверхности.",
-      "html": "<a class=\"ds-tab-ghost\" href=\"#\">Выбрать основу</a>",
-      "css": ".ds-tab-ghost{display:inline-flex;align-items:center;min-height:46px;padding:0 23px;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.45);text-decoration:none;font:700 16px var(--font,'Golos Text',sans-serif);transition:background .2s,transform .2s}.ds-tab-ghost:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}.ds-tab-ghost:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:4px}.ds-tab-ghost:active{transform:translateY(0)}"
+      "refersTo": "button-line",
+      "description": "Второе действие: рамка тушью, при наведении заливка тушью.",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">Как будет работать конструктор</a>",
+      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;border:1.5px solid #111a2e;background:transparent;color:#111a2e;font:600 15.5px/1.2 Geologica,'Golos Text',sans-serif;text-decoration:none;transition:background-color .22s,color .22s}.ds-btn-line:hover{background:#111a2e;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #0e335e;outline-offset:3px}"
     },
     {
-      "name": "Atelier Navigation",
-      "kind": "nav",
-      "refersTo": "nav-bar",
-      "description": "Тёмная рейка с компрессированным брендом и измерительными разделителями.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">Гардарика</a><a href=\"#\">Проекты</a><a href=\"#\">Материалы</a></nav>",
-      "css": ".ds-nav{min-height:70px;display:flex;align-items:stretch;background:rgba(11,13,15,.95);color:var(--at-paper,#f1f0eb);border:1px solid rgba(241,240,235,.12)}.ds-nav a{display:flex;align-items:center;padding:0 24px;border-right:1px solid rgba(241,240,235,.12);color:rgba(241,240,235,.68);text-decoration:none;font:700 13px var(--font,'Golos Text',sans-serif);letter-spacing:.08em;text-transform:uppercase}.ds-nav .ds-nav-brand{font:600 28px var(--at-display,'Alumni Sans',sans-serif);letter-spacing:.08em;color:var(--at-paper,#f1f0eb)}.ds-nav a:hover{color:#fff;background:rgba(255,255,255,.04)}.ds-nav a:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:-4px}.ds-nav a:active{background:rgba(255,255,255,.08)}"
-    },
-    {
-      "name": "Pattern Step",
+      "name": "Штамп",
       "kind": "card",
-      "refersTo": "pattern-card",
-      "description": "Пронумерованное бумажное лекало шага метода.",
-      "html": "<a class=\"ds-pattern\" href=\"#\"><span class=\"ds-pattern-no\">01</span><div><h3>Выбрать основу</h3><p>Масштаб и характер будущего дома.</p></div></a>",
-      "css": ".ds-pattern{position:relative;min-height:270px;padding:36px 38px 32px;border:1px solid rgba(11,13,15,.28);clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,18px 100%,0 calc(100% - 18px));display:flex;flex-direction:column;justify-content:space-between;color:var(--at-black,#0b0d0f);text-decoration:none;background:#e7e6e0}.ds-pattern:after{content:'';position:absolute;right:24px;top:28px;width:12px;height:12px;border:1px solid var(--at-brass,#a98a45);border-radius:50%;box-shadow:inset 0 0 0 3px #e7e6e0}.ds-pattern-no{font:600 72px/.75 var(--at-display,'Alumni Sans',sans-serif)}.ds-pattern h3{font:600 42px/.92 var(--at-display,'Alumni Sans',sans-serif);margin:0}.ds-pattern p{margin:10px 0 0;color:#66686b;font:400 14px var(--font,'Golos Text',sans-serif)}.ds-pattern:hover{background:#f7f6f1}.ds-pattern:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:4px}.ds-pattern:active{background:#dad9d2}"
+      "refersTo": "stamp-cell",
+      "description": "Основная надпись: контейнер фактов о доме.",
+      "html": "<div class=\"ds-stamp\"><div><span>Проект</span><b class=\"big\">Birch 132</b></div><div><span>Стадия</span><b class=\"red\">Пример</b></div><div><span>Лист</span><b>1 из 3</b></div><div><span>Площадь</span><b>132 м²</b></div><div><span>Этажность</span><b>2 этажа</b></div><div><span>Габариты</span><b>9,6 × 8,4 м</b></div></div>",
+      "css": ".ds-stamp{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:1px;background:#111a2e;border:1.5px solid #111a2e;max-width:520px}.ds-stamp>div{background:#fafbfa;padding:7px 11px 8px}.ds-stamp span{display:block;font:400 oblique 10deg 12px/1.2 Geologica,sans-serif;color:#5f687a;margin-bottom:3px}.ds-stamp b{display:block;font:600 15.5px/1.3 Geologica,sans-serif;color:#111a2e;font-variant-numeric:tabular-nums}.ds-stamp .big{font-size:21px}.ds-stamp .red{color:#c02a1e}"
     },
     {
-      "name": "Catalog Project Card",
-      "kind": "card",
-      "refersTo": "project-card",
-      "description": "Асимметричная тёмная карточка с окруженческой фотографией, меткой происхождения, индексом и фактами основы.",
-      "html": "<button class=\"ds-catalog-card\" type=\"button\"><span class=\"ds-catalog-media\"><span class=\"ds-catalog-image\" role=\"img\" aria-label=\"Дом в природном окружении\"></span><span class=\"ds-catalog-index\">01</span><span class=\"ds-catalog-kind\">визуализация</span><span class=\"ds-catalog-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\"><path d=\"M7 17 17 7M9 7h8v8\"/></svg></span></span><span class=\"ds-catalog-copy\"><strong>Lento 100</strong><span>100,9 м²<br>мансарда</span><small>Компактный дом · 10,4 × 9,1 м</small></span></button>",
-      "css": ".ds-catalog-card{display:grid;grid-template-rows:280px auto;background:#191c1f;color:var(--at-paper,#f1f0eb);border:1px solid rgba(241,240,235,.17);padding:0;text-align:left;font:inherit;overflow:hidden;cursor:pointer}.ds-catalog-media{position:relative;overflow:hidden;background:#24272a}.ds-catalog-image{position:absolute;inset:0;background:linear-gradient(145deg,#66705d,#b9ad91 52%,#343b31);transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .3s}.ds-catalog-index,.ds-catalog-kind{position:absolute;top:18px;padding:7px 9px;background:rgba(11,13,15,.78);letter-spacing:.08em}.ds-catalog-index{left:18px;font:600 16px var(--at-display,'Alumni Sans',sans-serif)}.ds-catalog-kind{right:18px;font:700 9px var(--font,'Golos Text',sans-serif);letter-spacing:.1em;text-transform:uppercase}.ds-catalog-arrow{position:absolute;right:18px;bottom:18px;width:42px;height:42px;display:grid;place-items:center;background:var(--at-blue,#1649c5);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}.ds-catalog-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter}.ds-catalog-copy{padding:23px 24px 25px;display:grid;grid-template-columns:1fr auto;gap:12px 18px;align-items:end;border-top:1px solid rgba(241,240,235,.14)}.ds-catalog-copy strong{font:600 41px/.9 var(--at-display,'Alumni Sans',sans-serif)}.ds-catalog-copy span{text-align:right;color:rgba(241,240,235,.72);font:700 11px var(--font,'Golos Text',sans-serif);letter-spacing:.08em;text-transform:uppercase}.ds-catalog-copy small{grid-column:1/-1;color:rgba(241,240,235,.57);font:400 13px var(--font,'Golos Text',sans-serif)}.ds-catalog-card:hover .ds-catalog-image{transform:scale(1.035);filter:brightness(1.04)}.ds-catalog-card:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:4px}.ds-catalog-card:active{background:#151719}"
-    },
-    {
-      "name": "Measured Proof Rail",
+      "name": "Размерная линия",
       "kind": "custom",
-      "refersTo": "nav-bar",
-      "description": "Полоса фактов у сгиба первого экрана.",
-      "html": "<div class=\"ds-proof\"><div class=\"ds-proof-intro\">Одна система.<br>Без разрывов.</div><div><strong>11 шагов</strong><small>предварительный расчёт</small></div><div><strong>1 команда</strong><small>до передачи ключей</small></div></div>",
-      "css": ".ds-proof{display:grid;grid-template-columns:1.2fr 1fr 1fr;background:rgba(11,13,15,.68);color:var(--at-paper,#f1f0eb);border-top:1px solid rgba(241,240,235,.2)}.ds-proof>div{min-height:106px;padding:20px 26px;border-right:1px solid rgba(241,240,235,.16);display:flex;flex-direction:column;justify-content:center}.ds-proof>div:last-child{border-right:0}.ds-proof-intro{color:rgba(241,240,235,.55);font:700 12px/1.5 var(--font,'Golos Text',sans-serif);letter-spacing:.11em;text-transform:uppercase}.ds-proof strong{font:600 34px var(--at-display,'Alumni Sans',sans-serif)}.ds-proof small{color:rgba(241,240,235,.48);font:700 10px var(--font,'Golos Text',sans-serif);letter-spacing:.12em;text-transform:uppercase}.ds-proof:hover{background:rgba(11,13,15,.78)}.ds-proof:focus-within{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:2px}"
+      "refersTo": "",
+      "description": "Фото в рамке тушью с размерной линией и засечками 45°.",
+      "html": "<figure class=\"ds-dim\"><div class=\"x\"><span>9 600</span></div><div class=\"f\"></div></figure>",
+      "css": ".ds-dim{position:relative;margin:0;padding-top:40px;width:360px}.ds-dim .x{position:absolute;left:0;right:0;top:0;height:40px;color:#111a2e;background:linear-gradient(currentColor,currentColor) 0 20px/100% 1px no-repeat,linear-gradient(currentColor,currentColor) 0 10px/1px calc(100% - 10px) no-repeat,linear-gradient(currentColor,currentColor) 100% 10px/1px calc(100% - 10px) no-repeat}.ds-dim .x::before,.ds-dim .x::after{content:'';position:absolute;top:20px;width:13px;height:1.6px;background:currentColor;transform:translate(-50%,-50%) rotate(-45deg)}.ds-dim .x::before{left:0}.ds-dim .x::after{left:100%}.ds-dim span{position:absolute;left:50%;top:1px;transform:translateX(-50%);background:#fafbfa;padding:0 6px;font:500 oblique 10deg 14px/1 Geologica,sans-serif}.ds-dim .f{aspect-ratio:16/10;border:1.5px solid #111a2e;background:#f1f3f5}"
     },
     {
-      "name": "Project Route Header",
+      "name": "Поле бланка",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Строка бланка: наклонная подпись в графе и значение.",
+      "html": "<label class=\"ds-field\"><span>Телефон</span><input placeholder=\"+7 ___ ___-__-__\"></label>",
+      "css": ".ds-field{display:grid;grid-template-columns:128px 1fr;border:1.5px solid #111a2e;background:#fff;max-width:480px}.ds-field span{padding:17px 0 0 18px;border-right:1px solid #c3c9d3;font:400 oblique 10deg 13px/1.2 Geologica,sans-serif;color:#5f687a}.ds-field input{min-height:56px;padding:0 18px;border:0;background:transparent;font:500 17px/1.3 Geologica,sans-serif;color:#111a2e;outline:none}.ds-field:focus-within{background:#eef3fa}.ds-field:focus-within span{color:#0e335e}"
+    },
+    {
+      "name": "Ведомость листов",
       "kind": "nav",
-      "refersTo": "nav-bar",
-      "description": "Светлая верхняя рейка маршрута проекта; возврат восстанавливает фокус на исходной карточке каталога.",
-      "html": "<div class=\"ds-project-top\"><button class=\"ds-project-back\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 12H5m6-6-6 6 6 6\"/></svg>Назад в каталог</button><span>Проектная карточка · меняется под вас</span></div>",
-      "css": ".ds-project-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 3vw;border-bottom:1px solid rgba(11,13,15,.2);background:var(--at-paper,#f1f0eb);color:var(--at-black,#0b0d0f)}.ds-project-back{min-height:44px;border:0;background:none;color:inherit;font:700 12px var(--font,'Golos Text',sans-serif);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:10px}.ds-project-back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}.ds-project-top>span{color:#666;font:700 11px var(--font,'Golos Text',sans-serif);letter-spacing:.15em;text-transform:uppercase}.ds-project-back:hover{color:var(--at-blue,#1649c5)}.ds-project-back:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:4px}.ds-project-back:active{opacity:.6}"
+      "refersTo": "",
+      "description": "Шапка: номера листов и названия разделов.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\"><b>02</b>Проекты</a><a href=\"#\" class=\"on\"><b>03</b>Порядок работ</a><a href=\"#\"><b>04</b>Материалы</a></nav>",
+      "css": ".ds-nav{display:flex;height:68px;border-bottom:1.5px solid #111a2e;background:#fafbfa}.ds-nav a{position:relative;display:flex;align-items:center;gap:7px;padding:0 14px;border-left:1px solid #c3c9d3;font:500 14.5px/1 Geologica,sans-serif;color:#111a2e;text-decoration:none}.ds-nav b{font:500 oblique 10deg 11.5px/1 Geologica,sans-serif;color:#5f687a}.ds-nav a:hover{background:#f1f3f5}.ds-nav a.on::after{content:'';position:absolute;left:0;right:0;bottom:-1.5px;height:3px;background:#111a2e}"
     },
     {
-      "name": "Catalog Filter",
-      "kind": "button",
-      "refersTo": "catalog-filter",
-      "description": "Один из трёх фильтров — Все, 1 этаж, Мансарда — с бумажной инверсией выбранного состояния.",
-      "html": "<button class=\"ds-filter\" type=\"button\" aria-pressed=\"false\">Мансарда</button>",
-      "css": ".ds-filter{min-height:44px;border:1px solid rgba(241,240,235,.28);background:transparent;color:rgba(241,240,235,.68);padding:10px 15px;font:700 11px var(--font,'Golos Text',sans-serif);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}.ds-filter:hover,.ds-filter[aria-pressed='true']{background:var(--at-paper,#f1f0eb);color:var(--at-black,#0b0d0f)}.ds-filter:focus-visible{outline:2px solid var(--at-blue-hi,#2f67ef);outline-offset:4px}.ds-filter:active{background:#deddd6}"
-    },
-    {
-      "name": "Project Transfer Strip",
-      "kind": "custom",
-      "refersTo": "tab-primary",
-      "description": "Кобальтовое завершение проектной карточки, передающее основу и клавиатурный фокус в конструктор.",
-      "html": "<div class=\"ds-transfer\"><h3>Возьмите этот дом за основу.</h3><button type=\"button\">Перенести в конструктор</button></div>",
-      "css": ".ds-transfer{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:48px;background:var(--at-blue,#1649c5);color:#fff}.ds-transfer h3{max-width:10ch;margin:0;font:600 64px/.9 var(--at-display,'Alumni Sans',sans-serif)}.ds-transfer button{min-height:46px;padding:0 23px;border:0;background:var(--at-paper,#f1f0eb);color:var(--at-black,#0b0d0f);font:700 16px var(--font,'Golos Text',sans-serif);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%);cursor:pointer;transition:transform .2s}.ds-transfer button:hover{transform:translateY(-2px)}.ds-transfer button:focus-visible{outline:2px solid #fff;outline-offset:4px}.ds-transfer button:active{transform:none}"
-    },
-    {
-      "name": "Constructor Project Seam",
-      "kind": "custom",
-      "refersTo": "preset-bar",
-      "description": "Подтверждение выбранной основы и явное объяснение защищённой модульной геометрии перед конструктором.",
-      "html": "<div class=\"ds-constructor-seam\"><div class=\"ds-preset\"><div class=\"ds-preset-main\"><span class=\"ds-preset-thumb\" role=\"img\" aria-label=\"Выбранный проект\"></span><div><strong>Lento 100</strong><small>100,9 м² · параметры перенесены в 11 шагов</small></div></div><a href=\"#\">Вернуться в каталог</a></div><div class=\"ds-compat\"><strong>Геометрия проекта сохранена</strong><span>Этажность, силуэт и кровля защищены от несовместимых сочетаний.</span><button type=\"button\" disabled aria-disabled=\"true\">Плоская кровля</button></div></div>",
-      "css": ".ds-constructor-seam{display:grid;gap:1px;background:#34383d}.ds-preset{display:flex;align-items:center;justify-content:space-between;gap:18px;background:var(--at-blue,#1649c5);color:#fff;padding:16px 20px}.ds-preset-main{display:flex;align-items:center;gap:14px}.ds-preset-thumb{width:76px;height:50px;background:linear-gradient(145deg,#66705d,#b9ad91 52%,#343b31);background-size:cover}.ds-preset strong{display:block;font:600 26px var(--at-display,'Alumni Sans',sans-serif)}.ds-preset small{display:block;color:rgba(255,255,255,.7);font:700 11px var(--font,'Golos Text',sans-serif);letter-spacing:.08em;text-transform:uppercase}.ds-preset a{color:#fff;font:700 12px var(--font,'Golos Text',sans-serif);letter-spacing:.08em;text-transform:uppercase}.ds-preset a:hover{opacity:.78}.ds-preset a:focus-visible{outline:2px solid #fff;outline-offset:4px}.ds-preset a:active{opacity:.58}.ds-compat{display:grid;grid-template-columns:auto 1fr auto;gap:10px 20px;align-items:center;padding:16px 20px;background:#202327;color:#f4f2ec;font:400 14px/1.45 var(--font,'Golos Text',sans-serif)}.ds-compat strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase}.ds-compat span{color:rgba(255,255,255,.67)}.ds-compat button{padding:9px 15px;border:1px solid rgba(255,255,255,.24);background:transparent;color:#fff;font:700 14px var(--font,'Golos Text',sans-serif)}.ds-compat button:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1px}"
+      "name": "Штамп-метка",
+      "kind": "chip",
+      "refersTo": "mark",
+      "description": "Красная печать: «Пример», «Скоро».",
+      "html": "<span class=\"ds-mark\">Пример</span>",
+      "css": ".ds-mark{display:inline-block;padding:3px 8px 4px;border:1.5px solid currentColor;color:#c02a1e;font:600 oblique 10deg 12px/1.2 Geologica,sans-serif;letter-spacing:.06em;text-transform:uppercase}"
     }
   ],
   "narrative": {
-    "northStar": "Архитектурное ателье",
-    "overview": "Маркетинговая поверхность устроена как раскройный стол архитектора-портного: графитовая шерсть, холодная выкройка, кобальтовый мел, латунные регистрационные точки и видимые мерные швы. Сжатая кириллическая типографика превращает обещание «дом по мерке жизни» в рабочий инструмент, а не в декоративную метафору.\n\nКомпозиция асимметрична и доказательна. Первый экран делит манифест и действие слева с живым процедурным домом справа; у сгиба их связывает мерная полоса фактов. Дальше система ведёт через метод «изнутри наружу» в визуальный каталог из 13 основ, отдельную маршрутную карточку проекта с фактами и планировками, затем переносит выбранную основу в одиннадцатишаговый конструктор. У каждой каталожной основы есть собственная shape-схема и набор допустимых решений; одна и та же система павильонных модулей порождает её 3D-объём и план.\n\n`#studio` сохраняет прежнюю визуальную систему и поведение. Его белые панели, округлые контролы, глиняный акцент и Golos Text не являются источником токенов для новых маркетинговых поверхностей ателье.",
+    "northStar": "Комплект рабочих чертежей вашего дома",
+    "overview": "Сайт читается как сброшюрованный альбом проекта. Вся страница — один непрерывный лист в рамке, лежащий на светло-сером чертёжном столе. Разделы — пронумерованные листы, отделённые основной линией; в верхнем правом углу каждого — графа «Лист 0N»; шапка — ведомость листов. Дом никогда не показан как «мечта в рамке»: фотография всегда стоит внутри размерных линий и рядом со штампом, где записаны площадь, этажность, габариты и цена «от».\n\nИнтерфейс говорит языком документа, потому что продукт — договор с фиксированной сметой и будущий конструктор, выдающий смету в PDF. Посетитель должен почувствовать: здесь мыслят размерами и бумагами, а не обещаниями.\n\nОдна цветная плоскость — синька (берлинская лазурь) листа конструктора. Всё остальное — тушь на белом. Красный живёт только в штампах «Пример», «Скоро», «В разработке» и в состояниях ошибки.",
     "keyCharacteristics": [
-      "Графитовый стол и холодная бумага сменяют друг друга крупными полноширинными полями.",
-      "Кобальт ведёт действие и смысловые переломы; латунь работает только как регистрационная метка.",
-      "Сжатый Alumni Sans несёт крупные русские заголовки, Golos Text — служебный и основной текст.",
-      "Один пиксель, пунктир, обрезанный угол и шкала заменяют декоративные карточки и мягкие тени.",
-      "Живой 3D-дом остаётся главным доказательством продукта в первом экране.",
-      "Каталожная фотография показывает архитектуру в разных сезонах и ландшафтах, а фактическая галерея связывает образ дома с его планом.",
-      "Каталожная основа сохраняет один пространственный характер в 3D, виде сверху и доступных настройках конструктора."
+      "Холодная белая бумага (не кремовая), сине-чёрная тушь, волосные линии, прямые углы без исключений.",
+      "Размерные линии с засечками 45° и значениями в миллиметрах — главный знак мира и единственный авторский момент движения.",
+      "Штамп (основная надпись) как контейнер фактов: сетка ячеек, наклонная подпись, прямое значение.",
+      "Штриховки материалов по мотивам ГОСТ 2.306 вместо фотографий «текстур».",
+      "Выноски с полкой (ГОСТ) поверх фотографии вместо маркетинговых плашек.",
+      "Geologica для чертёжного голоса, Golos Text для чтения."
     ],
     "rules": [
-      {"name": "The Chalk Leads Rule", "body": "Кобальт отмечает действие, фокус или ключевую смысловую полосу; не размазывайте его по нейтральным контейнерам.", "section": "colors"},
-      {"name": "The Brass Registers Rule", "body": "Латунь остаётся малой меткой измерения и никогда не конкурирует с кобальтом как призыв к действию.", "section": "colors"},
-      {"name": "The Compressed Thesis Rule", "body": "Alumni Sans предназначен для крупных тезисов, цифр и маркировки; длинный текст всегда остаётся в Golos Text.", "section": "typography"},
-      {"name": "The Measured Label Rule", "body": "Малые подписи пишутся прописными, с широким трекингом и служат шкалой, а не вступительным «эйброу» над каждым заголовком.", "section": "typography"},
-      {"name": "The Fold Proof Rule", "body": "У первого экрана всегда есть визуальное доказательство продукта и компактная мерная полоса у сгиба; один манифест без предмета недостаточен.", "section": "layout"},
-      {"name": "The Table Is Flat Rule", "body": "Не поднимайте маркетинговые карточки наружными тенями; разделяйте их поверхностью, швом, клипом или сдвигом.", "section": "elevation"},
-      {"name": "The Cut Edge Rule", "body": "Интерактивная или материальная деталь может получить один мотив среза; обычное скругление маркетинговых контейнеров не используется.", "section": "shapes"},
-      {"name": "The One Geometry Rule", "body": "Каталожный силуэт, 3D-павильоны и план этажа должны происходить из одной модульной схемы; не рисуйте план как независимую иллюстрацию.", "section": "shapes"}
+      {
+        "name": "The Ink Rule",
+        "body": "Если элемент можно сделать тушью, он делается тушью. Цвет — это событие: синька означает «конструктор», красный означает «пометка на полях».",
+        "section": "colors"
+      },
+      {
+        "name": "The Cold Paper Rule",
+        "body": "Бумага остаётся холодной и почти белой. Тёплый крем, пергамент и лён в этот мир не входят.",
+        "section": "colors"
+      },
+      {
+        "name": "The Drafting Hand Rule",
+        "body": "Наклон 10° принадлежит только служебным подписям — тому, что на чертеже пишется чертёжным шрифтом. Заголовки и значения стоят прямо.",
+        "section": "typography"
+      },
+      {
+        "name": "The Millimetre Rule",
+        "body": "Размеры пишутся в миллиметрах с узким неразрывным пробелом (9 600), габариты в тексте — в метрах с запятой (9,6 × 8,4 м).",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Ничто не поднимается над листом. Hover меняет заливку или двигает стрелку, но не создаёт тень и не поднимает карточку.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do используйте графитовый стол, холодную бумагу и швы 1px как основные способы разделения.",
-      "Do сохраняйте асимметрию: крупный тезис уравновешивается предметным доказательством или технической системой.",
-      "Do применяйте кобальт для CTA, фокуса, измерительной линии и одной крупной смысловой полосы.",
-      "Do используйте Alumni Sans только в крупных тезисах, цифрах и маркировке, сохраняя Golos Text для чтения.",
-      "Do отключайте раскрывающую анимацию и переходы вкладок при `prefers-reduced-motion: reduce`.",
-      "Do держите каталог асимметричным на широком экране и переводите его в две, затем одну равную колонку на планшете и телефоне.",
-      "Do чередуйте сезоны, ландшафты и условия света; используйте машины, людей и животных только как редкие признаки масштаба и жизни вокруг дома.",
-      "Do показывайте планировки и технические листы целиком, без декоративного кропа, рядом с фактическими характеристиками проекта.",
-      "Do маркируйте происхождение каждого каталожного и галерейного изображения: визуализация, референс или исходный материал проекта.",
-      "Do сохраняйте фокус при переходах каталог → проект → назад и переводите его к заголовку конструктора после переноса основы.",
-      "Do рисуйте стрелки каталога и возврата собственными inline SVG с прямой геометрией ателье.",
-      "Do строить каталожный 3D-дом и его план из одного списка павильонных модулей с общими координатами, размерами и этажами.",
-      "Do сохранять shape/allowed-контракт выбранного проекта и явно объяснять, какие параметры защищены, а какие остаются редактируемыми.",
-      "Do показывать несовместимые этажность, кровлю и стиль отключёнными, а не молча заменять выбор после нажатия."
+      "Ставьте каждую фотографию дома в рамку тушью с подписью происхождения («Визуализация», «Референс из материалов проекта»).",
+      "Давайте размеры там, где они известны, и не рисуйте размерную линию, если размера нет.",
+      "Помечайте иллюстративные данные штампом «Пример».",
+      "Держите синьку одной плоскостью на странице.",
+      "Пишите значения в штампах цифрами с `tabular-nums`."
     ],
     "donts": [
-      "Don't переносите круглые пилюли, глиняный акцент или белые панельные контролы калькулятора в маркетинговую систему ателье.",
-      "Don't заменяйте живой процедурный дом типовым фасадным рендером или лайфстайл-фотографией в первом экране.",
-      "Don't используйте внешние тени, мягкие радиусы и равномерные карточные сетки для маркетинговых секций.",
-      "Don't превращайте латунь в CTA-цвет или добавлять конкурирующие акценты рядом с кобальтом.",
-      "Don't добавляйте служебные надзаголовки перед каждым разделом: маркировка допустима только там, где она действительно измеряет, индексирует или навигирует.",
-      "Don't превращайте каталог в одинаковую сетку рендеров с одним ракурсом, сезоном или окружением.",
-      "Don't позволять автомобилям, людям, питомцам или пейзажу становиться главным сюжетом проектной фотографии.",
-      "Don't разрывайте связь выбранной основы с конструктором: preset-полоса обязана подтверждать, какой проект и параметры перенесены.",
-      "Don't выдавайте сгенерированную обложку за исходный материал проекта или скрывать происхождение пользовательского референса.",
-      "Don't использовать текстовые глифы, emoji или внешние библиотеки вместо авторских стрелок каталога и возврата.",
-      "Don't позволять независимому плану расходиться с модульным 3D-силуэтом или размещать комнаты вне пятна павильона.",
-      "Don't разрешать комбинации этажности, кровли или стиля, которые разрушают формообразующую схему каталожного дома.",
-      "Don't блокировать площадь, участок, конструкцию, фасад, окна и инженерию вместе с защищённой геометрией."
+      "Не вводите скругления, тени, стеклянные подложки и градиенты.",
+      "Не возвращайте тёплую кремовую бумагу и терракотовый акцент.",
+      "Не ставьте надзаголовки-киккеры над заголовками листов.",
+      "Не рисуйте клетчатую сетку на синьке: у настоящей синьки её нет.",
+      "Не выдумывайте годы гарантии, сроки, количество домов, отзывы и награды."
     ]
   }
 }
