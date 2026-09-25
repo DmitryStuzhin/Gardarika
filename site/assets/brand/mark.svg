@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="296 108 336 370" role="img" aria-label="Гардарика">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e3c47a"/><stop offset=".45" stop-color="#c79a3e"/><stop offset="1" stop-color="#a87a25"/>
+    </linearGradient>
+  </defs>
+  <path d="M317 466V262L464 128l147 134v204" fill="none" stroke="url(#g)" stroke-width="21" stroke-linejoin="miter"/>
+  <path fill="url(#g)" fill-rule="evenodd" d="M348 466V338l35-26v128h47V215l22 17v68h26v-68l22-17v225h45V312l35 26v128z M452 322h26v118h-26z"/>
+</svg>

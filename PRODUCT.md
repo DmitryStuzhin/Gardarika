@@ -31,6 +31,9 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 - The stage-by-stage 3D calculator (foundation → walls → roof → facade → engineering and finishing → PDF estimate) is planned but not built. `site/` reserves `#constructor` with the mount point `#calculator-root`; until it ships, the section is labeled «В разработке» and project pages show the constructor action as disabled «скоро».
 - The legacy eleven-step calculator and the previous site remain in `reference/` as an archive and source of facts; they are not linked from the new site.
 - The lead form validates input but does not send data yet; its success message says so honestly.
+- A four-question quiz on the home page filters the catalog by family size, floors and area and hands the result into the lead form; it makes no price claims.
+- Company facts the owner has not provided yet (years, houses built, warranty years, build time, price per m² per package, built houses, reviews, messenger links) live in `COMPANY` in `site/assets/js/data.js` and render as visible «заполнить» placeholders until filled. Never fill them with invented values.
+- Brand: gold house-fortress logo with a Forum wordmark (owner-supplied `site/assets/brand/logo-original.png`, vector copy `mark.svg`).
 - The contract fixes the estimate; guarantee and deadlines are written into the contract. No specific guarantee years or construction durations have been provided, so none may be stated.
 - Existing factual content, Moscow-region service area and contacts must remain truthful and must not be supplemented with invented awards, customer counts, testimonials, or performance claims.
 

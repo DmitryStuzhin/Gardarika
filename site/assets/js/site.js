@@ -98,9 +98,8 @@ setHero(0, false);
 watchDims(heroFig);
 autoHero();
 
-/* Каталог */
-var grid = $("#grid");
-grid.innerHTML = HOUSES.map(function(h){
+/* Карточки домов */
+function cardHTML(h){
   var a = areaNum(h);
   return '<a class="card" href="#/p/' + h.slug + '" data-floors="' + h.floors + '" data-size="' + (a < 110 ? "s" : a < 130 ? "m" : "l") + '">' +
     '<div class="card-media"><img src="' + h.image + '" alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy">' +
@@ -108,10 +107,14 @@ grid.innerHTML = HOUSES.map(function(h){
     '<div class="card-body"><h3>' + h.name + '</h3><p class="card-type">' + h.type + "</p>" +
       '<ul class="card-meta"><li>' + icon("i-area") + h.area + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + h.rooms + "</li>" : "") + "</ul>" +
       '<div class="card-foot"><div class="card-price">' +
-        (h.example ? "<b>" + price(h) + '</b><small>ориентировочно, пример</small>' : "<b>Цена под участок</b><small>рассчитаем после разговора</small>") +
+        (h.example ? "<b>" + price(h) + '</b><small>ориентировочно, пример</small>' : "<b>Узнать цену</b><small>рассчитаем под ваш участок</small>") +
       '</div><span class="card-go" aria-hidden="true">' + icon("i-arrow") + "</span></div></div></a>";
-}).join("");
+}
+var POPULAR = ["birch-132", "lilac-96", "vesper-164", "lento-100", "garden-106", "bgl-124", "alto-130", "pine-141"];
+$("#popular").innerHTML = POPULAR.map(function(slug){ return cardHTML(bySlug(slug)); }).join("");
 
+var grid = $("#grid");
+grid.innerHTML = HOUSES.map(cardHTML).join("");
 var cards = $$(".card", grid), count = $("#count"), empty = $("#empty");
 var filter = {floors: "all", area: "all"};
 function plural(n){ var m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? "проект" : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? "проекта" : "проектов"; }
@@ -132,10 +135,84 @@ $$(".chip").forEach(function(b){
     applyFilter();
   });
 });
-$("#resetFilters").addEventListener("click", function(){
-  $$('.chip[data-v="all"]').forEach(function(b){ b.click(); });
-});
+$("#resetFilters").addEventListener("click", function(){ $$('.chip[data-v="all"]').forEach(function(b){ b.click(); }); });
 applyFilter();
+
+/* Данные компании: цифры, цены, построенные дома, отзывы, мессенджеры */
+var C = window.COMPANY || {};
+function todo(text){ return '<span class="todo-mark">заполнить</span> ' + text; }
+var years = C.since ? new Date().getFullYear() - C.since : null;
+$("#stats").innerHTML = [
+  {v: "16", l: "проектов в каталоге, от 96 до 164 м²"},
+  {v: years, l: "лет строим дома", hint: "год основания — COMPANY.since"},
+  {v: C.housesBuilt, l: "домов построено", hint: "COMPANY.housesBuilt"},
+  {v: C.warrantyYears, l: "лет гарантии на конструктив", hint: "COMPANY.warrantyYears"}
+].map(function(x){
+  return x.v ? "<li><b>" + x.v + "</b><span>" + x.l + "</span></li>" : '<li class="todo"><b>—</b><span>' + x.l + "</span><span>" + todo(x.hint) + "</span></li>";
+}).join("");
+$$("#packs .pack").forEach(function(el){
+  var v = C.packages && C.packages[el.getAttribute("data-pack")], pp = $(".pack-price", el);
+  if (v){ pp.textContent = "от " + v + NB + "₽ за м²"; }
+  else { pp.classList.add("todo"); pp.innerHTML = todo("цена за м² — COMPANY.packages"); }
+});
+$("#builtList").innerHTML = (C.builtHouses && C.builtHouses.length) ? C.builtHouses.map(function(b){
+  return '<figure class="built-card"><img src="' + b.image + '" alt="' + esc(b.title) + '" loading="lazy"><div><b>' + esc(b.title) + "</b><small>" + esc(b.note || "") + "</small></div></figure>";
+}).join("") : [1, 2, 3].map(function(){
+  return '<div class="slot todo"><span class="todo-mark">заполнить</span><p>Фото построенного дома, где он стоит, срок и комплектация. Добавьте в COMPANY.builtHouses.</p></div>';
+}).join("");
+$("#reviewList").innerHTML = (C.reviews && C.reviews.length) ? C.reviews.map(function(r){
+  return '<blockquote class="review"><p>' + esc(r.text) + "</p><b>" + esc(r.name) + "</b><small>" + esc(r.place || "") + "</small></blockquote>";
+}).join("") : [1, 2, 3].map(function(){
+  return '<div class="slot todo"><span class="todo-mark">заполнить</span><p>Настоящий отзыв клиента: имя, где построен дом, пара предложений. Добавьте в COMPANY.reviews.</p></div>';
+}).join("");
+if (C.buildMonths) $('[data-term="months"]').textContent = "Типичный срок стройки — " + C.buildMonths + " мес. Этапы прописываются в договоре.";
+if (C.warrantyYears) $('[data-term="warranty"]').textContent = C.warrantyYears + " лет на конструкцию, гарантия оформляется в договоре.";
+var msgrs = [];
+if (C.telegram) msgrs.push({href: C.telegram, icon: "i-tg", label: "Telegram"});
+if (C.whatsapp) msgrs.push({href: C.whatsapp, icon: "i-wa", label: "WhatsApp"});
+$("[data-msgr]").innerHTML = msgrs.map(function(m){ return '<a href="' + m.href + '" target="_blank" rel="noopener" aria-label="Написать в ' + m.label + '">' + icon(m.icon) + "</a>"; }).join("");
+$("[data-msgr-big]").innerHTML = msgrs.length ? msgrs.map(function(m){ return '<a href="' + m.href + '" target="_blank" rel="noopener">' + icon(m.icon) + "Написать в " + m.label + "</a>"; }).join("")
+  : '<span class="todo">' + todo("ссылки на Telegram и WhatsApp — COMPANY.telegram, COMPANY.whatsapp") + "</span>";
+
+/* Квиз */
+var qForm = $("#quiz-form"), qs = $$(".q", qForm), qStep = $("#quizStep"), qBar = $("#quizBar"), qBack = $("#quizBack"), qi = 0, answers = {};
+function showQ(i){
+  qi = i;
+  qs.forEach(function(q, n){ q.classList.toggle("is-on", n === i); });
+  var last = i === qs.length - 1;
+  qStep.textContent = last ? "Ваша подборка" : "Вопрос " + (i + 1) + " из " + (qs.length - 1);
+  qBar.style.width = (last ? 100 : (i + 1) / (qs.length - 1) * 100) + "%";
+  qBack.hidden = i === 0;
+}
+function quizResult(){
+  var size = answers.area && answers.area !== "any" ? answers.area : answers.family === "2" ? "s" : answers.family === "5" ? "l" : "m";
+  var list = HOUSES.filter(function(h){
+    var a = areaNum(h), sz = a < 110 ? "s" : a < 130 ? "m" : "l";
+    var fl = answers.floors === "any" || (answers.floors === "1" ? h.floors === 1 : h.floors > 1);
+    return fl && sz === size;
+  });
+  if (!list.length) list = HOUSES.filter(function(h){ return answers.floors === "any" || (answers.floors === "1" ? h.floors === 1 : h.floors > 1); });
+  list = list.slice(0, 3);
+  $("#quizResultTitle").textContent = (list.length === 1 ? "Вам подойдёт " : "Вам подойдут ") + list.length + " " + plural(list.length);
+  $("#quizMatches").innerHTML = list.map(function(h){
+    return '<a class="q-match" href="#/p/' + h.slug + '"><img src="' + h.image + '" alt=""><span><b>' + h.name + "</b><small>" + h.area + NB + "м² · " + floorsLabel(h.floors).toLowerCase() + "</small></span>" + icon("i-arrow") + "</a>";
+  }).join("");
+  $("#quizToForm").setAttribute("data-topic", "Квиз: " + list.map(function(h){ return h.name; }).join(", ") + (answers.when ? " · " + answers.when : ""));
+}
+qs.forEach(function(q, n){
+  $$("input", q).forEach(function(inp){
+    inp.addEventListener("change", function(){
+      answers[inp.name] = inp.value;
+      setTimeout(function(){
+        if (n + 1 === qs.length - 1) quizResult();
+        showQ(n + 1);
+      }, 220);
+    });
+  });
+});
+qBack.addEventListener("click", function(){ showQ(Math.max(0, qi - 1)); });
+$("#quizToForm").addEventListener("click", function(){ topic.value = this.getAttribute("data-topic") || ""; });
+showQ(0);
 
 /* Страница проекта */
 var project = $("#project");
@@ -172,14 +249,32 @@ function hideProject(){
   if (project.hidden) return false;
   project.hidden = true;
   document.body.classList.remove("is-project");
-  document.title = "Гардарика — дома, собранные вокруг вашей жизни";
+  document.title = "Гардарика — дома под ключ для жизни за городом";
+  return true;
+}
+var catPage = $("#catalogPage");
+function showCatalog(){
+  hideProject();
+  catPage.hidden = false;
+  document.body.classList.add("is-catalog");
+  document.title = "Каталог домов — Гардарика";
+  window.scrollTo(0, 0);
+  $("#catTitle").focus({preventScroll: true});
+}
+function hideCatalog(){
+  if (catPage.hidden) return false;
+  catPage.hidden = true;
+  document.body.classList.remove("is-catalog");
+  document.title = "Гардарика — дома под ключ для жизни за городом";
   return true;
 }
 function route(){
+  if (/^#\/catalog/.test(location.hash)){ showCatalog(); return; }
   var m = /^#\/p\/([\w-]+)/.exec(location.hash);
   var h = m && bySlug(m[1]);
-  if (h){ showProject(h); return; }
-  if (hideProject()){
+  if (h){ hideCatalog(); showProject(h); return; }
+  var was = hideProject() | hideCatalog();
+  if (was){
     var t = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
     if (t) t.scrollIntoView(); else window.scrollTo(0, 0);
   }
@@ -238,7 +333,7 @@ toggle.addEventListener("click", function(){
 $$("a", links).forEach(function(a){ a.addEventListener("click", function(){ if (links.classList.contains("is-open")) toggle.click(); }); });
 document.addEventListener("keydown", function(e){ if (e.key === "Escape" && links.classList.contains("is-open")){ toggle.click(); toggle.focus(); } });
 if ("IntersectionObserver" in window){
-  var map = {};
+  var map = Object.create(null);
   $$("a", links).forEach(function(a){ map[a.getAttribute("href").slice(1)] = a; });
   var spy = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -250,26 +345,4 @@ if ("IntersectionObserver" in window){
   $$("main section[id]").forEach(function(s){ spy.observe(s); });
 }
 
-/* Конструктор: слои */
-var layerBtns = $$("#layers button"), lyrs = $$("#axo .lyr"), layerI = 0, layerTimer = null, layerTouched = false;
-var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-function setLayer(i){
-  layerI = i;
-  var key = layerBtns[i].getAttribute("data-layer");
-  layerBtns.forEach(function(b, n){ b.classList.toggle("is-on", n === i); b.setAttribute("aria-pressed", n === i ? "true" : "false"); });
-  lyrs.forEach(function(g){ g.classList.toggle("is-on", key === "pdf" || g.getAttribute("data-layer") === key); });
-}
-layerBtns.forEach(function(b, n){
-  b.addEventListener("click", function(){ layerTouched = true; clearInterval(layerTimer); setLayer(n); });
-  b.addEventListener("mouseenter", function(){ if (fine){ layerTouched = true; clearInterval(layerTimer); setLayer(n); } });
-});
-setLayer(0);
-if (!reduce && "IntersectionObserver" in window){
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      clearInterval(layerTimer);
-      if (e.isIntersecting && !layerTouched) layerTimer = setInterval(function(){ setLayer((layerI + 1) % layerBtns.length); }, 2400);
-    });
-  }, {threshold: .3}).observe($("#constructor"));
-}
 })();
