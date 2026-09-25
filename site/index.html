@@ -88,41 +88,44 @@
 
 <main id="main">
   <section class="hero" id="top" aria-labelledby="heroTitle">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1 id="heroTitle">Дом, собранный вокруг вашей жизни.</h1>
-        <p class="lede">Строим загородные дома для семей в Москве и области. Начинаем с того, как вы живёте, а цену фиксируем в договоре — чтобы стройка не стала сюрпризом.</p>
-        <div class="actions">
-          <a class="btn btn-honey" href="#projects">Выбрать дом<svg><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-line" href="#contact">Обсудить дом</a>
-        </div>
-        <ul class="facts">
-          <li><b>16 проектов</b>от 96 до 164 м²</li>
-          <li><b>Смета в договоре</b>цена не растёт по ходу стройки</li>
-          <li><b>Под ключ</b>проект, производство и стройка</li>
-        </ul>
+    <div class="hero-stage">
+      <div class="hero-slides" aria-hidden="false">
+        <img class="hero-img is-on" src="assets/img/birch-132.webp" alt="Семья собирает яблоки у двухэтажного деревянного дома Birch 132" width="2000" height="1115">
+        <img class="hero-img" src="assets/img/lilac-96.webp" alt="Семья сажает цветы у одноэтажного дома Lilac 96 с перголой" width="2000" height="1122">
+        <img class="hero-img" src="assets/img/vesper-164.webp" alt="Вечер у дома Vesper 164: дети играют в бадминтон, родители готовят ужин на террасе" width="2000" height="1109">
       </div>
-
-      <div class="hero-media">
-        <figure class="dimfig hero-fig has-x" id="heroFig">
-          <div class="dim dim-x" aria-hidden="true"><span class="dim-val" data-mm="9600">9 600</span></div>
-          <div class="dimfig-frame">
-            <img class="hero-img is-on" src="assets/img/birch-132.webp" alt="Семья собирает яблоки у двухэтажного деревянного дома Birch 132" width="2000" height="1115">
-            <img class="hero-img" src="assets/img/lilac-96.webp" alt="Семья сажает цветы у одноэтажного дома Lilac 96 с перголой" width="2000" height="1122" loading="lazy">
-            <img class="hero-img" src="assets/img/vesper-164.webp" alt="Вечер у дома Vesper 164: дети играют в бадминтон, родители готовят ужин на террасе" width="2000" height="1109" loading="lazy">
-            <span class="prov">Визуализация</span>
-          </div>
-        </figure>
-        <div class="hero-card">
-          <a class="stamp stamp-hero" id="heroStamp" href="#/p/birch-132" aria-live="polite"></a>
-          <div class="hero-tabs" role="tablist" aria-label="Дома на фото">
-            <button role="tab" type="button" aria-selected="true" data-i="0" aria-label="Birch 132"></button>
-            <button role="tab" type="button" aria-selected="false" data-i="1" aria-label="Lilac 96"></button>
-            <button role="tab" type="button" aria-selected="false" data-i="2" aria-label="Vesper 164"></button>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <h1 id="heroTitle">Дом, собранный вокруг вашей <span class="u">жизни<svg class="u-stroke" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path d="M2 14C50 6 120 3 190 4.5c44 1 80 3.5 108 6.5 2 .3 2 5-.5 5-35.5-1.5-71.5-2.4-109.5-2.2C124 14 64 18 7 23c-5 .5-7-8-5-9z"/></svg></span>.</h1>
+          <p class="lede">Строим загородные дома для семей в Москве и области. Начинаем с того, как вы живёте, а цену фиксируем в договоре, чтобы стройка не стала сюрпризом.</p>
+          <div class="actions">
+            <a class="btn btn-honey" href="#projects">Выбрать дом<svg><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-glass" href="#contact">Обсудить дом</a>
           </div>
         </div>
+        <aside class="hero-card" aria-label="Дом на фото">
+          <figure class="dimfig has-x" id="heroFig">
+            <div class="dim dim-x" aria-hidden="true"><span class="dim-val" data-mm="9600">9 600</span></div>
+            <a class="stamp stamp-hero" id="heroStamp" href="#/p/birch-132" aria-live="polite"></a>
+          </figure>
+        </aside>
+      </div>
+      <div class="wrap hero-bar">
+        <div class="hero-tabs" role="tablist" aria-label="Дома на фото">
+          <button role="tab" type="button" aria-selected="true" data-i="0"><span>Birch 132</span><i></i></button>
+          <button role="tab" type="button" aria-selected="false" data-i="1"><span>Lilac 96</span><i></i></button>
+          <button role="tab" type="button" aria-selected="false" data-i="2"><span>Vesper 164</span><i></i></button>
+        </div>
+        <span class="hero-prov">Визуализация</span>
       </div>
     </div>
+    <ul class="wrap facts">
+      <li><b>16 проектов</b>от 96 до 164 м²</li>
+      <li><b>Смета в договоре</b>цена не растёт по ходу стройки</li>
+      <li><b>Под ключ</b>проект, производство и стройка</li>
+      <li><b>Москва и область</b>проверяем участок до проекта</li>
+    </ul>
   </section>
 
   <section class="band" aria-labelledby="valuesTitle">
