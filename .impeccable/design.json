@@ -1,57 +1,42 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-25T16:42:01Z",
-  "title": "Design System: Гардарика — Лист проекта",
+  "generatedAt": "2026-09-25T17:04:03Z",
+  "title": "Design System: Гардарика — Дом у леса",
   "extensions": {
     "colorMeta": {
-      "table": {
+      "bg": {
         "role": "neutral",
-        "displayName": "Чертёжный стол",
-        "canonical": "#e4e8ec",
+        "displayName": "Утренний туман",
+        "canonical": "#f3f5f0",
         "tonalRamp": [
-          "oklch(15% 0.008 240)",
-          "oklch(25% 0.008 240)",
-          "oklch(36% 0.008 240)",
-          "oklch(48% 0.008 240)",
-          "oklch(60% 0.008 240)",
-          "oklch(72% 0.008 240)",
-          "oklch(84% 0.008 240)",
-          "oklch(95% 0.008 240)"
+          "oklch(15% 0.008 125)",
+          "oklch(25% 0.008 125)",
+          "oklch(36% 0.008 125)",
+          "oklch(48% 0.008 125)",
+          "oklch(60% 0.008 125)",
+          "oklch(72% 0.008 125)",
+          "oklch(84% 0.008 125)",
+          "oklch(95% 0.008 125)"
         ]
       },
-      "paper": {
+      "band": {
         "role": "neutral",
-        "displayName": "Бумага",
-        "canonical": "#fafbfa",
+        "displayName": "Шалфей",
+        "canonical": "#e6ebe2",
         "tonalRamp": [
-          "oklch(15% 0.002 150)",
-          "oklch(25% 0.002 150)",
-          "oklch(36% 0.002 150)",
-          "oklch(48% 0.002 150)",
-          "oklch(60% 0.002 150)",
-          "oklch(72% 0.002 150)",
-          "oklch(84% 0.002 150)",
-          "oklch(95% 0.002 150)"
+          "oklch(15% 0.014 130)",
+          "oklch(25% 0.014 130)",
+          "oklch(36% 0.014 130)",
+          "oklch(48% 0.014 130)",
+          "oklch(60% 0.014 130)",
+          "oklch(72% 0.014 130)",
+          "oklch(84% 0.014 130)",
+          "oklch(95% 0.014 130)"
         ]
       },
-      "paper-2": {
+      "card": {
         "role": "neutral",
-        "displayName": "Бумага, тень",
-        "canonical": "#f1f3f5",
-        "tonalRamp": [
-          "oklch(15% 0.004 240)",
-          "oklch(25% 0.004 240)",
-          "oklch(36% 0.004 240)",
-          "oklch(48% 0.004 240)",
-          "oklch(60% 0.004 240)",
-          "oklch(72% 0.004 240)",
-          "oklch(84% 0.004 240)",
-          "oklch(95% 0.004 240)"
-        ]
-      },
-      "sheet-white": {
-        "role": "neutral",
-        "displayName": "Белая вклейка",
+        "displayName": "Белая карточка",
         "canonical": "#ffffff",
         "tonalRamp": [
           "oklch(15% 0 0)",
@@ -64,143 +49,214 @@
           "oklch(95% 0 0)"
         ]
       },
-      "ink": {
-        "role": "primary",
-        "displayName": "Тушь",
-        "canonical": "#111a2e",
+      "field": {
+        "role": "neutral",
+        "displayName": "Поле ввода",
+        "canonical": "#f7f9f5",
         "tonalRamp": [
-          "oklch(15% 0.04 265)",
-          "oklch(25% 0.04 265)",
-          "oklch(36% 0.04 265)",
-          "oklch(48% 0.04 265)",
-          "oklch(60% 0.04 265)",
-          "oklch(72% 0.04 265)",
-          "oklch(84% 0.04 265)",
-          "oklch(95% 0.04 265)"
+          "oklch(15% 0.006 125)",
+          "oklch(25% 0.006 125)",
+          "oklch(36% 0.006 125)",
+          "oklch(48% 0.006 125)",
+          "oklch(60% 0.006 125)",
+          "oklch(72% 0.006 125)",
+          "oklch(84% 0.006 125)",
+          "oklch(95% 0.006 125)"
+        ]
+      },
+      "pine": {
+        "role": "primary",
+        "displayName": "Хвоя",
+        "canonical": "#1f3d31",
+        "tonalRamp": [
+          "oklch(15% 0.045 160)",
+          "oklch(25% 0.045 160)",
+          "oklch(36% 0.045 160)",
+          "oklch(48% 0.045 160)",
+          "oklch(60% 0.045 160)",
+          "oklch(72% 0.045 160)",
+          "oklch(84% 0.045 160)",
+          "oklch(95% 0.045 160)"
+        ]
+      },
+      "pine-2": {
+        "role": "primary",
+        "displayName": "Хвоя светлее",
+        "canonical": "#2b5242",
+        "tonalRamp": [
+          "oklch(15% 0.05 160)",
+          "oklch(25% 0.05 160)",
+          "oklch(36% 0.05 160)",
+          "oklch(48% 0.05 160)",
+          "oklch(60% 0.05 160)",
+          "oklch(72% 0.05 160)",
+          "oklch(84% 0.05 160)",
+          "oklch(95% 0.05 160)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Текст",
+        "canonical": "#18251f",
+        "tonalRamp": [
+          "oklch(15% 0.02 160)",
+          "oklch(25% 0.02 160)",
+          "oklch(36% 0.02 160)",
+          "oklch(48% 0.02 160)",
+          "oklch(60% 0.02 160)",
+          "oklch(72% 0.02 160)",
+          "oklch(84% 0.02 160)",
+          "oklch(95% 0.02 160)"
         ]
       },
       "ink-2": {
         "role": "neutral",
-        "displayName": "Тушь, текст",
-        "canonical": "#394257",
+        "displayName": "Абзац",
+        "canonical": "#3d4a43",
         "tonalRamp": [
-          "oklch(15% 0.035 265)",
-          "oklch(25% 0.035 265)",
-          "oklch(36% 0.035 265)",
-          "oklch(48% 0.035 265)",
-          "oklch(60% 0.035 265)",
-          "oklch(72% 0.035 265)",
-          "oklch(84% 0.035 265)",
-          "oklch(95% 0.035 265)"
+          "oklch(15% 0.018 160)",
+          "oklch(25% 0.018 160)",
+          "oklch(36% 0.018 160)",
+          "oklch(48% 0.018 160)",
+          "oklch(60% 0.018 160)",
+          "oklch(72% 0.018 160)",
+          "oklch(84% 0.018 160)",
+          "oklch(95% 0.018 160)"
         ]
       },
       "ink-3": {
         "role": "neutral",
-        "displayName": "Тушь, подпись",
-        "canonical": "#5f687a",
+        "displayName": "Подпись",
+        "canonical": "#5f6b64",
         "tonalRamp": [
-          "oklch(15% 0.028 265)",
-          "oklch(25% 0.028 265)",
-          "oklch(36% 0.028 265)",
-          "oklch(48% 0.028 265)",
-          "oklch(60% 0.028 265)",
-          "oklch(72% 0.028 265)",
-          "oklch(84% 0.028 265)",
-          "oklch(95% 0.028 265)"
+          "oklch(15% 0.015 160)",
+          "oklch(25% 0.015 160)",
+          "oklch(36% 0.015 160)",
+          "oklch(48% 0.015 160)",
+          "oklch(60% 0.015 160)",
+          "oklch(72% 0.015 160)",
+          "oklch(84% 0.015 160)",
+          "oklch(95% 0.015 160)"
         ]
       },
-      "hair": {
+      "line": {
         "role": "neutral",
-        "displayName": "Волосная линия",
-        "canonical": "#c3c9d3",
+        "displayName": "Линия",
+        "canonical": "#d3dacf",
         "tonalRamp": [
-          "oklch(15% 0.015 260)",
-          "oklch(25% 0.015 260)",
-          "oklch(36% 0.015 260)",
-          "oklch(48% 0.015 260)",
-          "oklch(60% 0.015 260)",
-          "oklch(72% 0.015 260)",
-          "oklch(84% 0.015 260)",
-          "oklch(95% 0.015 260)"
+          "oklch(15% 0.014 135)",
+          "oklch(25% 0.014 135)",
+          "oklch(36% 0.014 135)",
+          "oklch(48% 0.014 135)",
+          "oklch(60% 0.014 135)",
+          "oklch(72% 0.014 135)",
+          "oklch(84% 0.014 135)",
+          "oklch(95% 0.014 135)"
         ]
       },
-      "blueprint": {
+      "honey": {
         "role": "secondary",
-        "displayName": "Синька",
-        "canonical": "#0e335e",
+        "displayName": "Мёд",
+        "canonical": "#e8a93a",
         "tonalRamp": [
-          "oklch(15% 0.09 255)",
-          "oklch(25% 0.09 255)",
-          "oklch(36% 0.09 255)",
-          "oklch(48% 0.09 255)",
-          "oklch(60% 0.09 255)",
-          "oklch(72% 0.09 255)",
-          "oklch(84% 0.09 255)",
-          "oklch(95% 0.09 255)"
+          "oklch(15% 0.14 75)",
+          "oklch(25% 0.14 75)",
+          "oklch(36% 0.14 75)",
+          "oklch(48% 0.14 75)",
+          "oklch(60% 0.14 75)",
+          "oklch(72% 0.14 75)",
+          "oklch(84% 0.14 75)",
+          "oklch(95% 0.14 75)"
         ]
       },
-      "blueprint-line": {
+      "honey-hi": {
         "role": "secondary",
-        "displayName": "Линия на синьке",
-        "canonical": "rgba(233,241,252,.9)",
+        "displayName": "Мёд, наведение",
+        "canonical": "#d9962a",
         "tonalRamp": [
-          "oklch(15% 0.02 255)",
-          "oklch(25% 0.02 255)",
-          "oklch(36% 0.02 255)",
-          "oklch(48% 0.02 255)",
-          "oklch(60% 0.02 255)",
-          "oklch(72% 0.02 255)",
-          "oklch(84% 0.02 255)",
-          "oklch(95% 0.02 255)"
+          "oklch(15% 0.14 72)",
+          "oklch(25% 0.14 72)",
+          "oklch(36% 0.14 72)",
+          "oklch(48% 0.14 72)",
+          "oklch(60% 0.14 72)",
+          "oklch(72% 0.14 72)",
+          "oklch(84% 0.14 72)",
+          "oklch(95% 0.14 72)"
         ]
       },
-      "blueprint-soft": {
-        "role": "secondary",
-        "displayName": "Текст на синьке",
-        "canonical": "rgba(214,227,246,.8)",
+      "on-honey": {
+        "role": "neutral",
+        "displayName": "Текст на мёде",
+        "canonical": "#1b1a12",
         "tonalRamp": [
-          "oklch(15% 0.03 255)",
-          "oklch(25% 0.03 255)",
-          "oklch(36% 0.03 255)",
-          "oklch(48% 0.03 255)",
-          "oklch(60% 0.03 255)",
-          "oklch(72% 0.03 255)",
-          "oklch(84% 0.03 255)",
-          "oklch(95% 0.03 255)"
+          "oklch(15% 0.015 95)",
+          "oklch(25% 0.015 95)",
+          "oklch(36% 0.015 95)",
+          "oklch(48% 0.015 95)",
+          "oklch(60% 0.015 95)",
+          "oklch(72% 0.015 95)",
+          "oklch(84% 0.015 95)",
+          "oklch(95% 0.015 95)"
         ]
       },
-      "stamp-red": {
+      "on-pine": {
+        "role": "neutral",
+        "displayName": "Текст на хвое",
+        "canonical": "#eef3ee",
+        "tonalRamp": [
+          "oklch(15% 0.01 150)",
+          "oklch(25% 0.01 150)",
+          "oklch(36% 0.01 150)",
+          "oklch(48% 0.01 150)",
+          "oklch(60% 0.01 150)",
+          "oklch(72% 0.01 150)",
+          "oklch(84% 0.01 150)",
+          "oklch(95% 0.01 150)"
+        ]
+      },
+      "on-pine-2": {
+        "role": "neutral",
+        "displayName": "Вторичный текст на хвое",
+        "canonical": "rgba(226,236,228,.78)",
+        "tonalRamp": [
+          "oklch(15% 0.01 150)",
+          "oklch(25% 0.01 150)",
+          "oklch(36% 0.01 150)",
+          "oklch(48% 0.01 150)",
+          "oklch(60% 0.01 150)",
+          "oklch(72% 0.01 150)",
+          "oklch(84% 0.01 150)",
+          "oklch(95% 0.01 150)"
+        ]
+      },
+      "error": {
         "role": "tertiary",
-        "displayName": "Красная печать",
-        "canonical": "#c02a1e",
+        "displayName": "Ошибка",
+        "canonical": "#b3372a",
         "tonalRamp": [
-          "oklch(15% 0.17 30)",
-          "oklch(25% 0.17 30)",
-          "oklch(36% 0.17 30)",
-          "oklch(48% 0.17 30)",
-          "oklch(60% 0.17 30)",
-          "oklch(72% 0.17 30)",
-          "oklch(84% 0.17 30)",
-          "oklch(95% 0.17 30)"
+          "oklch(15% 0.15 30)",
+          "oklch(25% 0.15 30)",
+          "oklch(36% 0.15 30)",
+          "oklch(48% 0.15 30)",
+          "oklch(60% 0.15 30)",
+          "oklch(72% 0.15 30)",
+          "oklch(84% 0.15 30)",
+          "oklch(95% 0.15 30)"
         ]
       }
     },
     "typographyMeta": {
       "hero": {
-        "displayName": "Заголовок листа 01",
-        "purpose": "Единственный h1 главной."
-      },
-      "project-title": {
-        "displayName": "Название проекта",
-        "purpose": "h1 листа проекта."
+        "displayName": "Заголовок главной",
+        "purpose": "Единственный h1."
       },
       "headline": {
-        "displayName": "Заголовок листа",
-        "purpose": "h2 каждого раздела-листа."
+        "displayName": "Заголовок секции",
+        "purpose": "h2 секций."
       },
       "title": {
-        "displayName": "Подзаголовок",
-        "purpose": "Этапы, материалы, условия, названия домов."
+        "displayName": "Название",
+        "purpose": "Дома в карточках, этапы, материалы."
       },
       "body": {
         "displayName": "Текст",
@@ -208,45 +264,52 @@
       },
       "lede": {
         "displayName": "Лид",
-        "purpose": "Вводный абзац первого экрана и проекта."
+        "purpose": "Вводные абзацы."
       },
       "data": {
-        "displayName": "Значение",
-        "purpose": "Цифры в штампах и спецификации, tabular-nums."
+        "displayName": "Данные",
+        "purpose": "Цифры штампа и карточек."
       },
       "drafting-label": {
         "displayName": "Чертёжная подпись",
-        "purpose": "Наклон 10°: подписи граф, номера листов, происхождение изображений."
+        "purpose": "Наклонные подписи ячеек штампа."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "shadow",
+        "value": "0 1px 2px rgba(24,37,31,.05),0 10px 28px -14px rgba(24,37,31,.22)",
+        "purpose": "Карточки, форма, медиа."
+      },
+      {
+        "name": "shadow-up",
+        "value": "0 2px 4px rgba(24,37,31,.06),0 22px 44px -18px rgba(24,37,31,.32)",
+        "purpose": "Наведение на карточку, наплывающий штамп, форма."
+      }
+    ],
     "motion": [
       {
         "name": "ease-out-expo",
         "value": "cubic-bezier(.16,1,.3,1)",
-        "purpose": "Все переходы состояний и прорисовка размерных линий."
+        "purpose": "Все переходы."
       },
       {
         "name": "dim-draw",
         "value": "clip-path 900ms",
-        "purpose": "Прорисовка размерной линии от центра; вертикальная с задержкой 250ms."
+        "purpose": "Прорисовка размерной линии."
+      },
+      {
+        "name": "card-lift",
+        "value": "translateY(-4px) 350ms",
+        "purpose": "Наведение на карточку дома."
       },
       {
         "name": "hero-crossfade",
-        "value": "opacity 1000ms, смена каждые 7s",
-        "purpose": "Смена домов на листе 01; останавливается при выборе вручную."
-      },
-      {
-        "name": "layer-cycle",
-        "value": "2400ms",
-        "purpose": "Автоперебор слоёв конструктора, пока пользователь не выбрал слой."
+        "value": "opacity 1000ms, каждые 7s",
+        "purpose": "Смена домов на первом экране."
       }
     ],
     "breakpoints": [
-      {
-        "name": "nav",
-        "value": "1240px"
-      },
       {
         "name": "lg",
         "value": "1180px"
@@ -266,109 +329,104 @@
       "name": "Главная кнопка",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Основное действие: залита тушью, при наведении уходит в синьку.",
-      "html": "<a class=\"ds-btn\" href=\"#\">Подобрать проект<svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\"><path d=\"M3 10h13M11 5l5 5-5 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/></svg></a>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 22px;border:1.5px solid #111a2e;background:#111a2e;color:#fff;font:600 15.5px/1.2 Geologica,'Golos Text',sans-serif;text-decoration:none;transition:background-color .22s cubic-bezier(.16,1,.3,1)}.ds-btn svg{transition:transform .3s cubic-bezier(.16,1,.3,1)}.ds-btn:hover{background:#0e335e;border-color:#0e335e}.ds-btn:hover svg{transform:translateX(3px)}.ds-btn:focus-visible{outline:2px solid #0e335e;outline-offset:3px}"
+      "description": "Медовая пилюля для главного действия.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Выбрать дом</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:999px;background:#e8a93a;color:#1b1a12;font:600 16px/1.2 Geologica,'Golos Text',sans-serif;text-decoration:none;transition:background-color .22s,box-shadow .22s}.ds-btn:hover{background:#d9962a;box-shadow:0 8px 20px -10px rgba(217,150,42,.7)}.ds-btn:focus-visible{outline:2px solid #1f3d31;outline-offset:3px}"
     },
     {
       "name": "Контурная кнопка",
       "kind": "button",
       "refersTo": "button-line",
-      "description": "Второе действие: рамка тушью, при наведении заливка тушью.",
-      "html": "<a class=\"ds-btn-line\" href=\"#\">Как будет работать конструктор</a>",
-      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;border:1.5px solid #111a2e;background:transparent;color:#111a2e;font:600 15.5px/1.2 Geologica,'Golos Text',sans-serif;text-decoration:none;transition:background-color .22s,color .22s}.ds-btn-line:hover{background:#111a2e;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #0e335e;outline-offset:3px}"
+      "description": "Второе действие.",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">Обсудить дом</a>",
+      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:999px;border:1.5px solid #1f3d31;color:#1f3d31;font:600 16px/1.2 Geologica,'Golos Text',sans-serif;text-decoration:none;transition:background-color .22s,color .22s}.ds-btn-line:hover{background:#1f3d31;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #1f3d31;outline-offset:3px}"
+    },
+    {
+      "name": "Фильтр",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Пилюля фильтра каталога.",
+      "html": "<button class=\"ds-chip\">1 этаж</button><button class=\"ds-chip on\">Любая</button>",
+      "css": ".ds-chip{min-height:40px;padding:0 16px;margin-right:8px;border:1.5px solid #d3dacf;border-radius:999px;background:#fff;color:#3d4a43;font:500 15px/1 Geologica,'Golos Text',sans-serif;cursor:pointer}.ds-chip:hover{border-color:#2b5242;color:#1f3d31}.ds-chip.on{background:#1f3d31;border-color:#1f3d31;color:#fff}"
+    },
+    {
+      "name": "Карточка дома",
+      "kind": "card",
+      "refersTo": "house-card",
+      "description": "Фото, название, метрики, цена и стрелка.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"m\"><span>Новый проект</span></div><div class=\"b\"><h3>Birch 132</h3><p>Двухэтажный дом с крытой террасой</p><div class=\"f\"><b>от 9,8 млн ₽</b><i>→</i></div></div></a>",
+      "css": ".ds-card{display:block;width:300px;border-radius:22px;background:#fff;overflow:hidden;text-decoration:none;color:#18251f;box-shadow:0 1px 2px rgba(24,37,31,.05),0 10px 28px -14px rgba(24,37,31,.22);transition:transform .35s,box-shadow .35s}.ds-card:hover{transform:translateY(-4px);box-shadow:0 2px 4px rgba(24,37,31,.06),0 22px 44px -18px rgba(24,37,31,.32)}.ds-card .m{aspect-ratio:4/3;background:#e6ebe2;position:relative}.ds-card .m span{position:absolute;left:14px;top:14px;padding:3px 10px;border-radius:999px;background:#e8a93a;font:600 12.5px/1.3 Geologica,'Golos Text',sans-serif}.ds-card .b{padding:18px}.ds-card h3{margin:0;font:600 22px/1.15 Geologica,'Golos Text',sans-serif;color:#1f3d31}.ds-card p{margin:4px 0 0;font-size:15px;color:#5f6b64}.ds-card .f{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid #d3dacf}.ds-card b{font:650 19px/1.2 Geologica,'Golos Text',sans-serif;color:#1f3d31}.ds-card i{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#e6ebe2;font-style:normal}.ds-card:hover i{background:#e8a93a}"
     },
     {
       "name": "Штамп",
-      "kind": "card",
-      "refersTo": "stamp-cell",
-      "description": "Основная надпись: контейнер фактов о доме.",
-      "html": "<div class=\"ds-stamp\"><div><span>Проект</span><b class=\"big\">Birch 132</b></div><div><span>Стадия</span><b class=\"red\">Пример</b></div><div><span>Лист</span><b>1 из 3</b></div><div><span>Площадь</span><b>132 м²</b></div><div><span>Этажность</span><b>2 этажа</b></div><div><span>Габариты</span><b>9,6 × 8,4 м</b></div></div>",
-      "css": ".ds-stamp{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:1px;background:#111a2e;border:1.5px solid #111a2e;max-width:520px}.ds-stamp>div{background:#fafbfa;padding:7px 11px 8px}.ds-stamp span{display:block;font:400 oblique 10deg 12px/1.2 Geologica,sans-serif;color:#5f687a;margin-bottom:3px}.ds-stamp b{display:block;font:600 15.5px/1.3 Geologica,sans-serif;color:#111a2e;font-variant-numeric:tabular-nums}.ds-stamp .big{font-size:21px}.ds-stamp .red{color:#c02a1e}"
-    },
-    {
-      "name": "Размерная линия",
       "kind": "custom",
-      "refersTo": "",
-      "description": "Фото в рамке тушью с размерной линией и засечками 45°.",
-      "html": "<figure class=\"ds-dim\"><div class=\"x\"><span>9 600</span></div><div class=\"f\"></div></figure>",
-      "css": ".ds-dim{position:relative;margin:0;padding-top:40px;width:360px}.ds-dim .x{position:absolute;left:0;right:0;top:0;height:40px;color:#111a2e;background:linear-gradient(currentColor,currentColor) 0 20px/100% 1px no-repeat,linear-gradient(currentColor,currentColor) 0 10px/1px calc(100% - 10px) no-repeat,linear-gradient(currentColor,currentColor) 100% 10px/1px calc(100% - 10px) no-repeat}.ds-dim .x::before,.ds-dim .x::after{content:'';position:absolute;top:20px;width:13px;height:1.6px;background:currentColor;transform:translate(-50%,-50%) rotate(-45deg)}.ds-dim .x::before{left:0}.ds-dim .x::after{left:100%}.ds-dim span{position:absolute;left:50%;top:1px;transform:translateX(-50%);background:#fafbfa;padding:0 6px;font:500 oblique 10deg 14px/1 Geologica,sans-serif}.ds-dim .f{aspect-ratio:16/10;border:1.5px solid #111a2e;background:#f1f3f5}"
+      "refersTo": "stamp-cell",
+      "description": "Факты дома сеткой ячеек.",
+      "html": "<div class=\"ds-stamp\"><div><span>Площадь</span><b>132 м²</b></div><div><span>Этажность</span><b>2 этажа</b></div><div><span>Габариты</span><b>9,6 × 8,4 м</b></div></div>",
+      "css": ".ds-stamp{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;max-width:420px;background:#d3dacf;border:1px solid #d3dacf;border-radius:12px;overflow:hidden}.ds-stamp div{background:#fff;padding:9px 12px 10px}.ds-stamp span{display:block;font:400 oblique 8deg 12px/1.2 Geologica,'Golos Text',sans-serif;color:#5f6b64}.ds-stamp b{font:600 16px/1.3 Geologica,'Golos Text',sans-serif;color:#1f3d31}"
     },
     {
-      "name": "Поле бланка",
+      "name": "Поле",
       "kind": "input",
       "refersTo": "field",
-      "description": "Строка бланка: наклонная подпись в графе и значение.",
+      "description": "Поле формы заявки.",
       "html": "<label class=\"ds-field\"><span>Телефон</span><input placeholder=\"+7 ___ ___-__-__\"></label>",
-      "css": ".ds-field{display:grid;grid-template-columns:128px 1fr;border:1.5px solid #111a2e;background:#fff;max-width:480px}.ds-field span{padding:17px 0 0 18px;border-right:1px solid #c3c9d3;font:400 oblique 10deg 13px/1.2 Geologica,sans-serif;color:#5f687a}.ds-field input{min-height:56px;padding:0 18px;border:0;background:transparent;font:500 17px/1.3 Geologica,sans-serif;color:#111a2e;outline:none}.ds-field:focus-within{background:#eef3fa}.ds-field:focus-within span{color:#0e335e}"
+      "css": ".ds-field{display:flex;flex-direction:column;gap:7px;max-width:380px;font:500 14.5px/1.3 Geologica,'Golos Text',sans-serif;color:#3d4a43}.ds-field input{min-height:52px;padding:0 16px;border:1.5px solid #d3dacf;border-radius:12px;background:#f7f9f5;font:400 17px 'Golos Text',sans-serif;outline:none}.ds-field input:focus{border-color:#1f3d31;background:#fff;box-shadow:0 0 0 4px rgba(31,61,49,.1)}"
     },
     {
-      "name": "Ведомость листов",
+      "name": "Шапка",
       "kind": "nav",
       "refersTo": "",
-      "description": "Шапка: номера листов и названия разделов.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\"><b>02</b>Проекты</a><a href=\"#\" class=\"on\"><b>03</b>Порядок работ</a><a href=\"#\"><b>04</b>Материалы</a></nav>",
-      "css": ".ds-nav{display:flex;height:68px;border-bottom:1.5px solid #111a2e;background:#fafbfa}.ds-nav a{position:relative;display:flex;align-items:center;gap:7px;padding:0 14px;border-left:1px solid #c3c9d3;font:500 14.5px/1 Geologica,sans-serif;color:#111a2e;text-decoration:none}.ds-nav b{font:500 oblique 10deg 11.5px/1 Geologica,sans-serif;color:#5f687a}.ds-nav a:hover{background:#f1f3f5}.ds-nav a.on::after{content:'';position:absolute;left:0;right:0;bottom:-1.5px;height:3px;background:#111a2e}"
-    },
-    {
-      "name": "Штамп-метка",
-      "kind": "chip",
-      "refersTo": "mark",
-      "description": "Красная печать: «Пример», «Скоро».",
-      "html": "<span class=\"ds-mark\">Пример</span>",
-      "css": ".ds-mark{display:inline-block;padding:3px 8px 4px;border:1.5px solid currentColor;color:#c02a1e;font:600 oblique 10deg 12px/1.2 Geologica,sans-serif;letter-spacing:.06em;text-transform:uppercase}"
+      "description": "Ссылки с медовым подчёркиванием.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"on\">Проекты</a><a href=\"#\">Как строим</a><a href=\"#\">Контакты</a></nav>",
+      "css": ".ds-nav{display:flex;gap:24px;padding:20px;background:rgba(243,245,240,.9)}.ds-nav a{position:relative;padding:8px 0;font:500 15.5px/1 Geologica,'Golos Text',sans-serif;color:#3d4a43;text-decoration:none}.ds-nav a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:#e8a93a;transform:scaleX(0);transform-origin:left;transition:transform .3s}.ds-nav a:hover,.ds-nav a.on{color:#1f3d31}.ds-nav a:hover::after,.ds-nav a.on::after{transform:scaleX(1)}"
     }
   ],
   "narrative": {
-    "northStar": "Комплект рабочих чертежей вашего дома",
-    "overview": "Сайт читается как сброшюрованный альбом проекта. Вся страница — один непрерывный лист в рамке, лежащий на светло-сером чертёжном столе. Разделы — пронумерованные листы, отделённые основной линией; в верхнем правом углу каждого — графа «Лист 0N»; шапка — ведомость листов. Дом никогда не показан как «мечта в рамке»: фотография всегда стоит внутри размерных линий и рядом со штампом, где записаны площадь, этажность, габариты и цена «от».\n\nИнтерфейс говорит языком документа, потому что продукт — договор с фиксированной сметой и будущий конструктор, выдающий смету в PDF. Посетитель должен почувствовать: здесь мыслят размерами и бумагами, а не обещаниями.\n\nОдна цветная плоскость — синька (берлинская лазурь) листа конструктора. Всё остальное — тушь на белом. Красный живёт только в штампах «Пример», «Скоро», «В разработке» и в состояниях ошибки.",
+    "northStar": "Дом у леса, в который хочется приехать",
+    "overview": "Сайт для семьи, которая выбирает загородный дом. Главные герои — фотографии домов, где живут люди: осенний сад, весенние грядки, летний вечер у бассейна. Интерфейс вокруг них спокойный, светлый и мягкий: скругления, пилюли-кнопки, мягкие тени у карточек.\n\nТочность строителя живёт в деталях, а не в общем тоне. Над фото стоит размерная линия с засечками и габаритом в миллиметрах, рядом — «штамп» с фактами дома. На фото Vesper 164 — выноски, материалы показаны условными штриховками, конструктор нарисован разнесённой аксонометрией. Эти детали отличают сайт от шаблона и честно показывают, что здесь думают размерами.\n\nПервая версия («Лист проекта», холодный чертёжный комплект) отвергнута владельцем как неуютная для семьи. От неё остались только детали, перечисленные выше.",
     "keyCharacteristics": [
-      "Холодная белая бумага (не кремовая), сине-чёрная тушь, волосные линии, прямые углы без исключений.",
-      "Размерные линии с засечками 45° и значениями в миллиметрах — главный знак мира и единственный авторский момент движения.",
-      "Штамп (основная надпись) как контейнер фактов: сетка ячеек, наклонная подпись, прямое значение.",
-      "Штриховки материалов по мотивам ГОСТ 2.306 вместо фотографий «текстур».",
-      "Выноски с полкой (ГОСТ) поверх фотографии вместо маркетинговых плашек.",
-      "Geologica для чертёжного голоса, Golos Text для чтения."
+      "Светлый туманный фон с зелёно-серым подтоном — не кремовый и не бумажный.",
+      "Хвойный зелёный держит мир: заголовки, конструктор, блок договора, подвал.",
+      "Медовый — только главные действия и номера выносок.",
+      "Крупные скругления медиа (22px), кнопки-пилюли, мягкие тени у карточек.",
+      "Каталог — сетка карточек с фото, фильтрами по этажности и площади и ценой.",
+      "Чертёжные детали (размерная линия, штамп, штриховки, выноски) — точечно."
     ],
     "rules": [
       {
-        "name": "The Ink Rule",
-        "body": "Если элемент можно сделать тушью, он делается тушью. Цвет — это событие: синька означает «конструктор», красный означает «пометка на полях».",
+        "name": "The Honey Means Go Rule",
+        "body": "Мёд — это действие. Если элемент мёдом не нажимается и не нумерует выноску, он не должен быть мёдом.",
         "section": "colors"
       },
       {
-        "name": "The Cold Paper Rule",
-        "body": "Бумага остаётся холодной и почти белой. Тёплый крем, пергамент и лён в этот мир не входят.",
+        "name": "The No Cream Rule",
+        "body": "Фон остаётся туманно-светлым с зелёным подтоном. Кремовые, пергаментные и терракотовые поля в этот мир не входят.",
         "section": "colors"
       },
       {
-        "name": "The Drafting Hand Rule",
-        "body": "Наклон 10° принадлежит только служебным подписям — тому, что на чертеже пишется чертёжным шрифтом. Заголовки и значения стоят прямо.",
+        "name": "The Drafting Detail Rule",
+        "body": "Наклон и миллиметры — это чертёжная деталь, а не голос сайта. Заголовки, кнопки и тексты стоят прямо и говорят по-человечески.",
         "section": "typography"
       },
       {
-        "name": "The Millimetre Rule",
-        "body": "Размеры пишутся в миллиметрах с узким неразрывным пробелом (9 600), габариты в тексте — в метрах с запятой (9,6 × 8,4 м).",
-        "section": "typography"
-      },
-      {
-        "name": "The Flat Sheet Rule",
-        "body": "Ничто не поднимается над листом. Hover меняет заливку или двигает стрелку, но не создаёт тень и не поднимает карточку.",
+        "name": "The Floating Object Rule",
+        "body": "Тень получает только то, что можно «взять в руки»: карточку дома, форму, штамп. Секции и полосы остаются плоскими.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Ставьте каждую фотографию дома в рамку тушью с подписью происхождения («Визуализация», «Референс из материалов проекта»).",
-      "Давайте размеры там, где они известны, и не рисуйте размерную линию, если размера нет.",
-      "Помечайте иллюстративные данные штампом «Пример».",
-      "Держите синьку одной плоскостью на странице.",
-      "Пишите значения в штампах цифрами с `tabular-nums`."
+      "Показывайте дома крупно и с людьми в кадре, подписывайте происхождение изображения.",
+      "Держите мёд для действий, хвою — для заголовков и больших полей.",
+      "Помечайте иллюстративные цены «ориентировочно, пример».",
+      "Давайте размерную линию только там, где размер известен.",
+      "Сохраняйте полные ряды в сетке каталога."
     ],
     "donts": [
-      "Не вводите скругления, тени, стеклянные подложки и градиенты.",
-      "Не возвращайте тёплую кремовую бумагу и терракотовый акцент.",
-      "Не ставьте надзаголовки-киккеры над заголовками листов.",
-      "Не рисуйте клетчатую сетку на синьке: у настоящей синьки её нет.",
+      "Не делайте каталог таблицей или списком.",
+      "Не возвращайте холодную «документную» подачу: сплошные рамки, прямые углы, номера листов.",
+      "Не используйте кремовый фон и терракотовый акцент.",
+      "Не ставьте надзаголовки-киккеры над заголовками секций.",
       "Не выдумывайте годы гарантии, сроки, количество домов, отзывы и награды."
     ]
   }
