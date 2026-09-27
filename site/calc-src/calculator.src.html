@@ -3599,7 +3599,7 @@ function build(st, P){
     });
   }
   if (P.roof !== "flat"){
-    var gy = wallTop - 0.02, gutMat = P.gutter === "metal" ? metalMat : mat(0xecebe7, 0.6);
+    var gy = wallTop - 0.02, gutMat = P.gutter === "metal" ? metalMat : mat(0x6a4a34, 0.55);
     [[-hw + 0.12, -1],[hw - 0.12, 1]].forEach(function(p){
       var gt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, L + 2*ov, 14), gutMat);
       gt.rotation.x = Math.PI/2; gt.position.set(p[0], gy, 0); gt.castShadow = true; g8.add(gt);
@@ -3680,7 +3680,7 @@ function build(st, P){
     }
     var openingLevelUsed={};
     st.groundModules=[];
-    var gutMat=P.gutter==="metal"?metalMat:mat(0xecebe7,.6);
+    var gutMat=P.gutter==="metal"?metalMat:mat(0x6a4a34,.55);
     /* наклонная пластина кровли между двумя точками профиля (ось x — поперёк конька) */
     function slopePlate(x,z,xa,ya,xb,yb,depth,m,g,thk){
       var len=Math.hypot(xb-xa,yb-ya),p=B(len,thk,depth,m,x+(xa+xb)/2,(ya+yb)/2,z,g,{edgeOpacity:.14});
@@ -3909,6 +3909,18 @@ function build(st, P){
       if(nf>1)pavilion({x:P.project==="cascade"?W*.22:W*.10,z:P.project==="monolith"?-L*.18:-L*.08,w:P.project==="monolith"?W*.84:W*.76,d:L*.58,h:h,base:y0+h+.20,upper:true,roof:"flat",sideGlass:true});
       B(W*.30,.16,L*.38,accent,W*.33,y0+.08,-L*.28,g8,{edgeOpacity:.08});
     }
+    /* перекрытие над каждым наземным объёмом — по выбору шага 5, видно сверху до установки кровли */
+    st.groundModules.forEach(function(m){
+      var iw=m.w-thick*2+.02,id=m.d-thick*2+.02,sT=P.slabType==="beams"?.24:.22,yT=m.top-.02;
+      if(P.slabType==="beams"){
+        var nb=Math.max(4,Math.round(id/.9));
+        for(var q=0;q<nb;q++)B(iw,.2,.1,woodMat,m.x,yT-.14,m.z-id/2+.3+q*((id-.6)/(nb-1)),g5,NOE);
+        B(iw,.04,id,woodMat,m.x,yT-.02,m.z,g5);
+      }else if(P.slabType==="rc"){
+        var np=Math.max(4,Math.round(iw/1.2));
+        for(var q2=0;q2<np;q2++)B(iw/np-.04,sT,id,concMat,m.x-iw/2+(iw/np)*(q2+.5),yT-sT/2,m.z,g5);
+      }else B(iw,sT,id,concMat,m.x,yT-sT/2,m.z,g5);
+    });
     /* инженерия в фундаменте: разводка поверх плиты каждого наземного объёма, видна на шаге 3 */
     if(P.eng){
       var hot=mat(MC.pipeHot,.5),cold=mat(MC.pipeCold,.5),sew=mat(MC.pipeSewer,.7);
