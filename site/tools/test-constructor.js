@@ -8,7 +8,7 @@
    Запуск: node site/tools/test-constructor.js */
 "use strict";
 const path = require("path");
-const dir = path.join(__dirname, "..", "assets", "constructor");
+const dir = path.join(__dirname, "..", "assets", "configurator");
 ["houses.js", "engine.js", "pricing.js"].forEach(f => require(path.join(dir, f)));
 const GC = globalThis.GC, cat = GC.catalog();
 
