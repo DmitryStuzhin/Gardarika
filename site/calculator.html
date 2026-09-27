@@ -11,6 +11,7 @@
   <a class="cx-brand" href="index.html#top" aria-label="Гардарика — на главную"><img src="assets/brand/mark.svg" alt="" width="30" height="34"><span>Гардарика</span></a>
   <nav class="cx-links" aria-label="Разделы сайта">
     <a href="index.html#/catalog">Проекты</a>
+    <a href="constructor.html">Конструктор</a>
     <a href="index.html#price">Цены</a>
     <a href="index.html#contact">Контакты</a>
   </nav>
@@ -1537,8 +1538,8 @@ p.mkt-label,p.kicker,.sec-head .mkt-label,.projects-head .mkt-label,.method-head
               </div>
               <div class="ctl">
                 <span class="ctl-lbl">Отделка</span>
-                <label class="chk"><input type="checkbox" id="opt-rough"><span>Черновая<small>Стяжка, штукатурка, электрика</small></span></label>
-                <label class="chk"><input type="checkbox" id="opt-fine"><span>Чистовая «под ключ»<small>Полы, двери, санузлы, свет</small></span></label>
+                <label class="chk"><input type="checkbox" id="opt-rough"><span>Черновая<small>Стяжка, штукатурка, электрика</small><em class="nomodel">внутри дома — на модели не показывается</em></span></label>
+                <label class="chk"><input type="checkbox" id="opt-fine"><span>Чистовая «под ключ»<small>Полы, двери, санузлы, свет</small><em class="nomodel">внутри дома — на модели не показывается</em></span></label>
               </div>
             </div>
 
@@ -3949,9 +3950,9 @@ var STEPS = [
 ];
 
 var PROJECTS = {
-  birch132:  {name:"Birch 132", meta:"Двухэтажный дом с террасой",area:132,floors:2,wallH:2.9,roof:"gable",facade:"plaster",wall:"frame",thk:"300",win:"lam",portal:true,slabType:"beams",style:"classic",plan:"b"},
-  lilac96:   {name:"Lilac 96", meta:"Одноэтажный дом с перголой",area:96,floors:1,wallH:3.0,roof:"gable",facade:"plaster",wall:"aerated",thk:"400",win:"lam",portal:true,slabType:"mono",style:"organic",plan:"c"},
-  vesper164: {name:"Vesper 164", meta:"Одноэтажный дом с гаражом",area:164,floors:1,wallH:3.0,roof:"hip",facade:"plaster",wall:"aerated",thk:"400",win:"tint",portal:true,slabType:"mono",style:"classic",plan:"a"},
+  birch132:  {name:"Birch 132", meta:"Двухэтажный дом с террасой",area:132,floors:2,wallH:2.9,roof:"gable",facade:"plaster",wall:"frame",thk:"300",win:"lam",portal:true,slabType:"beams",style:"classic",plan:"b",allowed:{floors:[1,1.5,2],roof:["gable","hip","broken","flat"],style:["classic"]}},
+  lilac96:   {name:"Lilac 96", meta:"Одноэтажный дом с перголой",area:96,floors:1,wallH:3.0,roof:"gable",facade:"plaster",wall:"aerated",thk:"400",win:"lam",portal:true,slabType:"mono",style:"classic",plan:"c",allowed:{floors:[1,1.5,2],roof:["gable","hip","broken","flat"],style:["classic"]}},
+  vesper164: {name:"Vesper 164", meta:"Одноэтажный дом с гаражом",area:164,floors:1,wallH:3.0,roof:"hip",facade:"plaster",wall:"aerated",thk:"400",win:"tint",portal:true,slabType:"mono",style:"classic",plan:"a",allowed:{floors:[1,1.5,2],roof:["gable","hip","broken","flat"],style:["classic"]}},
   lento100:  {name:"Lento 100", meta:"Компактный дом с мансардой",area:101,floors:1.5,wallH:2.9,roof:"gable",facade:"clinker",wall:"arbolit",thk:"400",win:"lam",portal:true,slabType:"beams",style:"classic",plan:"b",catalog:true,shape:"compact_mansard",allowed:{floors:[1.5],roof:["gable"],style:["classic"]}},
   linea101:  {name:"Linea 101", meta:"Одноэтажный дом для четверых",area:101,floors:1,wallH:3.0,roof:"gable",facade:"plaster",wall:"arbolit",thk:"400",win:"lam",portal:true,slabType:"mono",style:"organic",plan:"c",catalog:true,shape:"linear_gable",allowed:{floors:[1],roof:["gable"],style:["organic"]}},
   lilia105:  {name:"Lilia 105", meta:"Дом с жилой мансардой",area:105,floors:1.5,wallH:3.0,roof:"gable",facade:"clinker",wall:"aerated",thk:"400",win:"lam",portal:true,slabType:"beams",style:"classic",plan:"b",catalog:true,shape:"tall_mansard",allowed:{floors:[1.5],roof:["gable"],style:["classic"]}},
@@ -3964,17 +3965,7 @@ var PROJECTS = {
   patio127:  {name:"Patio 127",meta:"Бунгало с кабинетом",area:127,floors:1,wallH:3.0,roof:"gable",facade:"plaster",wall:"aerated",thk:"400",win:"lam",portal:true,slabType:"mono",style:"courtyard",plan:"b",catalog:true,shape:"patio_bungalow",allowed:{floors:[1],roof:["gable"],style:["courtyard"]}},
   alto130:   {name:"Alto 130",meta:"Дом для семьи с гостевой",area:130,floors:1.5,wallH:3.0,roof:"gable",facade:"plaster",wall:"aerated",thk:"400",win:"lam",portal:true,slabType:"beams",style:"classic",plan:"b",catalog:true,shape:"alto_mansard",allowed:{floors:[1.5],roof:["gable"],style:["classic"]}},
   danar138:  {name:"Danar 138",meta:"Современный одноэтажный дом",area:138,floors:1,wallH:3.2,roof:"gable",facade:"clinker",wall:"arbolit",thk:"400",win:"tint",portal:true,slabType:"mono",style:"organic",plan:"c",catalog:true,shape:"low_gable",allowed:{floors:[1],roof:["gable"],style:["organic"]}},
-  pine141:   {name:"Pine 141",meta:"Просторный дом в одном уровне",area:141,floors:1,wallH:3.1,roof:"gable",facade:"plaster",wall:"arbolit",thk:"400",win:"lam",portal:true,slabType:"mono",style:"classic",plan:"a",catalog:true,shape:"wide_gable",allowed:{floors:[1],roof:["gable"],style:["classic"]}},
-  arc:       {name:"Arc",       meta:"Радиусный павильон",area:132,floors:1,wallH:3.3,roof:"flat",facade:"plaster",wall:"precast",thk:"400",win:"tint",portal:true,slabType:"mono",style:"organic",plan:"b"},
-  horizon:   {name:"Horizon",   meta:"Хай-тек · консоль",area:186,floors:2,wallH:3.0,roof:"flat",facade:"plaster",wall:"precast",thk:"400",win:"tint",portal:true,slabType:"mono",style:"hitech",plan:"c"},
-  courtyard: {name:"Courtyard", meta:"Г-образный · двор",area:168,floors:1,wallH:3.0,roof:"flat",facade:"clinker",wall:"arbolit",thk:"300",win:"lam",portal:true,slabType:"mono",style:"courtyard",plan:"c"},
-  barn:      {name:"Barn",      meta:"Два барна · галерея",area:148,floors:1.5,wallH:3.0,roof:"broken",facade:"clinker",wall:"frame",thk:"300",win:"tint",portal:true,slabType:"beams",style:"barn",plan:"b"},
-  villa:     {name:"Villa",     meta:"Резиденция · колонны",area:248,floors:2,wallH:3.3,roof:"flat",facade:"plaster",wall:"precast",thk:"400",win:"tint",portal:true,slabType:"mono",style:"classic",plan:"b"},
-  atrium:    {name:"Atrium",    meta:"Патио в центре",area:214,floors:1,wallH:3.3,roof:"flat",facade:"plaster",wall:"precast",thk:"400",win:"tint",portal:true,slabType:"mono",style:"courtyard",plan:"b"},
-  cascade:   {name:"Cascade",   meta:"Каскад на рельефе",area:276,floors:2,wallH:3.3,roof:"flat",facade:"clinker",wall:"precast",thk:"400",win:"tint",portal:true,slabType:"mono",style:"hitech",plan:"c"},
-  gallery:   {name:"Gallery",   meta:"Дом-галерея",area:196,floors:1,wallH:3.3,roof:"gable",facade:"plaster",wall:"arbolit",thk:"400",win:"lam",portal:true,slabType:"mono",style:"classic",plan:"a"},
-  monolith:  {name:"Monolith",  meta:"Бетон и стекло",area:232,floors:2,wallH:3.0,roof:"flat",facade:"none",wall:"precast",thk:"400",win:"tint",portal:true,slabType:"mono",style:"hitech",plan:"b"},
-  forest:    {name:"Forest",    meta:"Три лесных павильона",area:174,floors:1,wallH:3.0,roof:"gable",facade:"clinker",wall:"frame",thk:"300",win:"lam",portal:true,slabType:"beams",style:"barn",plan:"c"}
+  pine141:   {name:"Pine 141",meta:"Просторный дом в одном уровне",area:141,floors:1,wallH:3.1,roof:"gable",facade:"plaster",wall:"arbolit",thk:"400",win:"lam",portal:true,slabType:"mono",style:"classic",plan:"a",catalog:true,shape:"wide_gable",allowed:{floors:[1],roof:["gable"],style:["classic"]}}
 };
 
 var CATALOG = [
@@ -4014,17 +4005,18 @@ function calc(){
   var a = S.area, f = S.floors, foot = a/f;
   var w = Math.sqrt(foot/1.55), l = w*1.55, perim = 2*(w+l);
   var thkK = S.thk === "400" ? 1.22 : 1;
+  var hK = S.wallH / 3;                       /* ставки заданы для стены 3,0 м: площадь стен и фасада растёт с высотой */
   ensureOp(w, S.wallH);
   var c = [];
   c[0] = SURVEY;
   c[1] = S.soil === "unknown" ? GEO : 0;
   c[2] = FOUND[S.found]*foot*SOIL_K[S.soil] + (S.eng ? ENG*foot : 0);
-  c[3] = WALL[S.wall]*thkK*foot;
+  c[3] = WALL[S.wall]*thkK*hK*foot;
   c[4] = SLAB[S.slabType]*foot +
-         (f === 2 ? WALL[S.wall]*thkK*foot : f === 1.5 ? WALL[S.wall]*thkK*foot*0.45 : 0);
+         (f === 2 ? WALL[S.wall]*thkK*hK*foot : f === 1.5 ? WALL[S.wall]*thkK*hK*foot*0.45 : 0);
   c[5] = ROOF[S.roof]*foot*1.18 + INS[S.ins]*foot;
   c[6] = WINM2[S.win]*glazing() + (S.portal ? PORTAL : 0);
-  c[7] = FACADE[S.facade]*a + GUTTER[S.gutter]*perim;
+  c[7] = FACADE[S.facade]*hK*a + GUTTER[S.gutter]*perim;
   c[8] = (S.boiler?BOILER:0) + (S.septic?SEPTIC:0) + (S.land?LAND*a:0) +
          (S.drain?DRAIN*a:0) + (S.rough?ROUGH*a:0) + (S.fine?FINE_F*a:0);
   c[9] = 0;                                   /* готовая планировка входит в проект */
@@ -5187,12 +5179,27 @@ function build(st, P){
       }else B(ex,fh,ez,concMat,x,fh/2,z,g3,{edgeOpacity:.14});
     }
     var openingLevelUsed={};
+    st.groundModules=[];
+    var gutMat=P.gutter==="metal"?metalMat:mat(0xecebe7,.6);
+    /* наклонная пластина кровли между двумя точками профиля (ось x — поперёк конька) */
+    function slopePlate(x,z,xa,ya,xb,yb,depth,m,g,thk){
+      var len=Math.hypot(xb-xa,yb-ya),p=B(len,thk,depth,m,x+(xa+xb)/2,(ya+yb)/2,z,g,{edgeOpacity:.14});
+      p.rotation.z=Math.atan2(yb-ya,xb-xa);return p;
+    }
+    /* водосток по карнизу и две водосточные трубы — материал из шага «Фасад» */
+    function gutterRun(x1,z1,x2,z2,y){
+      var len=Math.hypot(x2-x1,z2-z1),gt=new THREE.Mesh(new THREE.CylinderGeometry(.075,.075,len,12),gutMat);
+      gt.position.set((x1+x2)/2,y,(z1+z2)/2);gt.rotation.z=Math.PI/2;gt.rotation.y=-Math.atan2(z2-z1,x2-x1);gt.castShadow=true;g8.add(gt);
+      [[x1,z1],[x2,z2]].forEach(function(pt){
+        var dp=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,y,10),gutMat);dp.position.set(pt[0],y/2,pt[1]);dp.castShadow=true;g8.add(dp);
+      });
+    }
     function pavilion(cfg){
       var x=cfg.x||0,z=cfg.z||0,mw=cfg.w,md=cfg.d,mh=cfg.h||h,base=cfg.base==null?y0:cfg.base;
       var wallG=(cfg.upper||cfg.stack)?g5:g4, t=thick, front=z-md/2, back=z+md/2;
       if(P.catalog)st.projectModules.push({x:x,z:z,w:mw,d:md,floor:(cfg.upper||cfg.stack)?1:0,kind:cfg.kind||"living"});
       /* фундамент повторяет пятно конкретного наземного модуля */
-      if(!cfg.upper&&!cfg.stack)moduleBase(x,z,mw,md);
+      if(!cfg.upper&&!cfg.stack){moduleBase(x,z,mw,md);st.groundModules.push({x:x,z:z,w:mw,d:md,top:base+mh});}
       /* цельные боковые и задняя стены, панорамный фасад с простенками */
       B(t,mh,md,structMat,x-mw/2+t/2,base+mh/2,z,wallG,SOFT);
       B(t,mh,md,structMat,x+mw/2-t/2,base+mh/2,z,wallG,SOFT);
@@ -5226,34 +5233,67 @@ function build(st, P){
             }else glassPanel(px,oy,pz,ow,oh,rot,g7,pk);
           });
         });
-      }else glassPanel(x,base+(mh-head)/2,front-.025,mw-pier*2-.08,mh-head-.10,Math.PI,g7);
+      }else if(P.portal){
+        glassPanel(x,base+(mh-head)/2,front-.025,mw-pier*2-.08,mh-head-.10,Math.PI,g7);
+      }else{
+        /* без портала проём зашивается стеной, в ней — два обычных окна */
+        var inW=mw-pier*2,inH=mh-head;
+        B(inW,inH,t,structMat,x,base+inH/2,front+t/2,wallG,SOFT);
+        if(P.facade!=="none")B(inW,inH,.055,shell,x,base+inH/2,front-.03,g8,NOE);
+        [-1,1].forEach(function(k){glassPanel(x+k*inW*.24,base+inH*.56,front-.075,Math.min(2.1,inW*.30),Math.min(1.6,inH*.52),Math.PI,g7);});
+      }
       /* торцевое окно делает объём лёгким, но оставляет несущий угол */
       if(cfg.sideGlass)glassPanel(x+mw/2+.015,base+mh*.54,z,md*.56,mh*.64,-Math.PI/2,g7);
-      if(!cfg.noRoof&&cfg.roof==="gable"){
-        var rise=cfg.roofRise||Math.min(2.5,mw*.30), ang=Math.atan2(rise,mw/2), len=Math.hypot(mw/2+.55,rise);
-        [-1,1].forEach(function(s){
-          var rp=B(len,.16,md+1.0,roofMat,x+s*(mw/4),base+mh+rise/2,z,g6,{edgeOpacity:.14});
-          rp.rotation.z=s*-ang;
-        });
-        /* стеклянный фронтон под коньком */
+      var top=base+mh;
+      if(!cfg.noRoof&&(cfg.roof==="gable"||cfg.roof==="broken")){
+        var rise=cfg.roofRise||Math.min(2.5,mw*.30),ex=mw/2+.55,dep=md+1.0;
+        if(cfg.roof==="gable"){
+          [-1,1].forEach(function(sd){
+            slopePlate(x,z,sd*ex,top,0,top+rise,dep,roofMat,g6,.16);
+            /* утеплитель под кровлей: виден в торце ската, цвет зависит от выбора */
+            slopePlate(x,z,sd*(ex-.12),top-.13,0,top+rise-.13,dep-.30,insMat,g6,.12);
+          });
+        }else{
+          /* ломаная (мансардная) кровля: крутой нижний скат и пологий верхний */
+          var r1=Math.max(1.6,rise*.78),r2=Math.max(.7,rise*.42),kx=mw*.30;
+          [-1,1].forEach(function(sd){
+            slopePlate(x,z,sd*ex,top,sd*kx,top+r1,dep,roofMat,g6,.16);
+            slopePlate(x,z,sd*kx,top+r1,0,top+r1+r2,dep,roofMat,g6,.16);
+            slopePlate(x,z,sd*(ex-.12),top-.13,sd*(kx-.08),top+r1-.13,dep-.30,insMat,g6,.12);
+          });
+          rise=r1+r2;
+        }
         var sh=new THREE.Shape();sh.moveTo(-mw/2+.28,0);sh.lineTo(0,rise-.10);sh.lineTo(mw/2-.28,0);sh.closePath();
-        var fg=new THREE.Mesh(new THREE.ShapeGeometry(sh),glassMat);fg.position.set(x,base+mh,front-.04);fg.rotation.y=Math.PI;g7.add(fg);
+        var fg=new THREE.Mesh(new THREE.ShapeGeometry(sh),glassMat);fg.position.set(x,top,front-.04);fg.rotation.y=Math.PI;g7.add(fg);
+        [-1,1].forEach(function(sd){gutterRun(x+sd*(ex-.05),z-dep/2+.15,x+sd*(ex-.05),z+dep/2-.15,top-.06);});
       }else if(!cfg.noRoof&&cfg.roof==="hip"){
-        var hr=cfg.roofRise||Math.min(2.25,mw*.24),ov=.45;
-        var hg=new THREE.BufferGeometry(),hw=mw/2+ov,hd=md/2+ov;
-        hg.setAttribute("position",new THREE.Float32BufferAttribute([
-          x-hw,base+mh,z-hd, x+hw,base+mh,z-hd, x+hw,base+mh,z+hd, x-hw,base+mh,z+hd,
-          x,base+mh+hr,z
-        ],3));
-        hg.setIndex([0,1,4,1,2,4,2,3,4,3,0,4]);hg.computeVertexNormals();
-        var hip=new THREE.Mesh(hg,roofMat);hip.castShadow=true;hip.receiveShadow=true;g6.add(hip);addEdges(hip,28,.14);
+        var hr=cfg.roofRise||Math.min(2.25,mw*.24),ov=.45,hw=mw/2+ov,hd=md/2+ov;
+        function hipMesh(dy,m,shrink){
+          /* настоящая вальмовая кровля: конёк вдоль длинной стороны, четыре плоских ската */
+          var a=hw-shrink,d=hd-shrink,y=top+dy,yr=top+hr+dy,alongZ=d>=a,r=Math.abs(d-a);
+          var r1=alongZ?[x,yr,z-r]:[x-r,yr,z], r2=alongZ?[x,yr,z+r]:[x+r,yr,z];
+          var c0=[x-a,y,z-d],c1=[x+a,y,z-d],c2=[x+a,y,z+d],c3=[x-a,y,z+d];
+          var tris=alongZ
+            ?[c0,c1,r1, c2,c3,r2, c1,c2,r2, c1,r2,r1, c3,c0,r1, c3,r1,r2]
+            :[c3,c0,r1, c1,c2,r2, c0,c1,r2, c0,r2,r1, c2,c3,r1, c2,r1,r2];
+          var pos=[];tris.forEach(function(v){pos.push(v[0],v[1],v[2]);});
+          var hg=new THREE.BufferGeometry();hg.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));hg.computeVertexNormals();
+          var mm=m.clone();mm.side=THREE.DoubleSide;
+          var hm=new THREE.Mesh(hg,mm);hm.castShadow=true;hm.receiveShadow=true;g6.add(hm);return hm;
+        }
+        addEdges(hipMesh(0,roofMat,0),28,.14);
+        hipMesh(-.16,insMat,.10);
+        gutterRun(x-hw+.05,z-hd+.05,x+hw-.05,z-hd+.05,top-.06);
+        gutterRun(x-hw+.05,z+hd-.05,x+hw-.05,z+hd-.05,top-.06);
       }else if(!cfg.noRoof){
-        B(mw+.70,.18,md+.70,graphite,x,base+mh+.09,z,g6,{noEdge:true,soft:.045});
+        B(mw+.70,.18,md+.70,graphite,x,top+.09,z,g6,{noEdge:true,soft:.045});
+        /* утеплитель плоской кровли виден внутри парапета */
+        B(mw+.40,.10,md+.40,insMat,x,top+.23,z,g6,NOE);
         /* тонкий парапет и теневая щель делают плоскую кровлю собранной */
-        B(mw+.52,.16,.075,graphite,x,base+mh+.23,z-md/2-.22,g6,NOE);
-        B(mw+.52,.16,.075,graphite,x,base+mh+.23,z+md/2+.22,g6,NOE);
-        B(.075,.16,md+.38,graphite,x-mw/2-.22,base+mh+.23,z,g6,NOE);
-        B(.075,.16,md+.38,graphite,x+mw/2+.22,base+mh+.23,z,g6,NOE);
+        B(mw+.52,.16,.075,graphite,x,top+.23,z-md/2-.22,g6,NOE);
+        B(mw+.52,.16,.075,graphite,x,top+.23,z+md/2+.22,g6,NOE);
+        B(.075,.16,md+.38,graphite,x-mw/2-.22,top+.23,z,g6,NOE);
+        B(.075,.16,md+.38,graphite,x+mw/2+.22,top+.23,z,g6,NOE);
       }
       if(cfg.upper){
         /* балкон по панорамному фасаду и две тонкие опоры консоли */
@@ -5352,17 +5392,38 @@ function build(st, P){
       for(var a=0;a<15;a++){var aa=-Math.PI*.72+a*(Math.PI*1.44/14);B(.06,h*.78,.06,trim,cx+Math.cos(aa)*rr,y0+h*.43,cz+Math.sin(aa)*rr,g7,NOE);}
       bridge(W*.06,-L*.04,W*.22,L*.26,y0);
     }else if(P.style==="classic"){
-      pavilion({x:P.project==="gallery"?0:-W*.16,z:0,w:P.project==="gallery"?W*.92:W*.68,d:L*.84,h:h,roof:P.roof==="flat"?"flat":"gable",sideGlass:true});
-      if(P.project!=="gallery")pavilion({x:W*.30,z:-L*.12,w:W*.34,d:L*.54,h:h*.92,roof:"flat",sideGlass:true,screen:true});
-      if(P.project==="gallery")for(var gc=-3;gc<=3;gc++){
-        var col2=new THREE.Mesh(new THREE.CylinderGeometry(.13,.17,h*.82,18),slab);col2.position.set(gc*W*.11,y0+h*.41,-L*.48);col2.castShadow=true;g8.add(col2);
+      /* основной объём + пристройка; кровля — по выбору в шаге 6.
+         При мансарде или втором этаже кровля ставится только на верхний уровень, чтобы объёмы не пересекались. */
+      var mainRoof=P.roof, mw0=W*.68, md0=L*.84, mx0=-W*.16;
+      pavilion({x:mx0,z:0,w:mw0,d:md0,h:h,roof:mainRoof,noRoof:nf>1,sideGlass:true});
+      pavilion({x:W*.30,z:-L*.12,w:W*.34,d:L*.54,h:h*.92,roof:"flat",sideGlass:true,screen:true});
+      if(nf===1.5){
+        /* мансарда: уменьшенный верхний объём с кровлей до карниза первого этажа */
+        pavilion({x:mx0,z:L*.02,w:mw0*.86,d:md0*.80,h:h*.78,base:y0+h+.20,stack:true,roof:mainRoof==="flat"?"gable":mainRoof,roofRise:Math.min(2.8,mw0*.34),sideGlass:true});
+      }else if(nf===2){
+        pavilion({x:mx0,z:L*.02,w:mw0,d:md0*.86,h:h,base:y0+h+.20,upper:true,roof:mainRoof,sideGlass:true});
       }
-      if(nf>1)pavilion({x:-W*.10,z:L*.05,w:W*.54,d:L*.58,h:h,base:y0+h+.20,upper:true,roof:"flat",sideGlass:true});
     }else{
       /* Horizon: два чистых смещённых объёма, верхний работает как консоль. */
       pavilion({x:-W*.12,z:L*.08,w:W*.76,d:L*.72,h:h,roof:"flat",sideGlass:true,screen:true});
       if(nf>1)pavilion({x:P.project==="cascade"?W*.22:W*.10,z:P.project==="monolith"?-L*.18:-L*.08,w:P.project==="monolith"?W*.84:W*.76,d:L*.58,h:h,base:y0+h+.20,upper:true,roof:"flat",sideGlass:true});
       B(W*.30,.16,L*.38,accent,W*.33,y0+.08,-L*.28,g8,{edgeOpacity:.08});
+    }
+    /* инженерия в фундаменте: разводка поверх плиты каждого наземного объёма, видна на шаге 3 */
+    if(P.eng){
+      var hot=mat(MC.pipeHot,.5),cold=mat(MC.pipeCold,.5),sew=mat(MC.pipeSewer,.7);
+      st.groundModules.forEach(function(m){
+        var yy=fh+.05,rows=Math.max(3,Math.round(m.d/1.6));
+        for(var r=0;r<rows;r++){
+          var zz=m.z-m.d/2+.8+r*((m.d-1.6)/(rows-1));
+          var pp=new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,m.w-1.2,8),r%2?cold:hot);
+          pp.rotation.z=Math.PI/2;pp.position.set(m.x,yy,zz);g3.add(pp);
+        }
+        /* канализационные выпуски и стояки */
+        [[-.3,-.25],[.25,.3]].forEach(function(k){
+          var rs=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.7,10),sew);rs.position.set(m.x+k[0]*m.w,fh+.35,m.z+k[1]*m.d);g3.add(rs);
+        });
+      });
     }
   })();
 
@@ -5378,6 +5439,15 @@ function build(st, P){
   }
   /* финальный участок: семья и собака; траектории оживают в render loop */
   var life=new THREE.Group();g9.add(life);st.life=life;st.lifeActors=[];
+  /* котельная: дымоход над главным объёмом — видимый признак выбранной опции */
+  if (P.boiler && st.groundModules && st.groundModules.length){
+    var gm = st.groundModules[0], fx = gm.x + gm.w*.32, fz = gm.z + gm.d*.30, fTop = gm.top + 2.9;
+    var flueMat = mat(0x3b4046, 0.4, {metalness:0.5});
+    var flue = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, fTop, 16), flueMat);
+    flue.position.set(fx, fTop/2, fz); flue.castShadow = true; g9.add(flue);
+    var capF = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.2, 0.22, 16), flueMat);
+    capF.position.set(fx, fTop + 0.08, fz); g9.add(capF);
+  }
   var child1=person(life,-W*.20,-L*.64,.70,0xc96f46,false);child1.userData.run={ax:1.4,az:.45,phase:0};st.lifeActors.push(child1);
   var child2=person(life,-W*.02,-L*.58,.64,0x4d7392,false);child2.userData.run={ax:1.1,az:.65,phase:2.1};st.lifeActors.push(child2);
   person(life,W*.34,-L*.60,.96,0x685e54,false);
@@ -6099,7 +6169,7 @@ function params(){
     W:res.w, L:res.l, foundH:FOUND_H[S.found], wallH:S.wallH, floors:S.floors,
     found:S.found, eng:S.eng, thk:S.thk, facade:S.facade, roof:S.roof, win:S.win,
     portal:S.portal, gutter:S.gutter, land:S.land, septic:S.septic, soil:S.soil,
-    ins:S.ins, drain:S.drain, wall:S.wall, plan:S.plan, op:S.op,
+    ins:S.ins, drain:S.drain, boiler:S.boiler, wall:S.wall, plan:S.plan, op:S.op,
     pick: (current === 11 && S.sel >= 0) ? {side:S.face, level:S.lvl, i:S.sel} : null,
     slabType:S.slabType, plotW:S.plotW, plotL:S.plotL, entry:S.entry, fits:res.fits,
     catalog:!!base.catalog, shape:base.shape||"", allowed:base.allowed||null
@@ -6233,7 +6303,12 @@ function enforceProjectRules(){
 function applyCompatibility(){
   var p=PROJECTS[S.project],r=p&&p.allowed,note=document.getElementById("compatNote");
   note.hidden=!r;
-  if(r)document.getElementById("compatText").textContent="Можно менять площадь, участок, конструкцию, фасад, окна и инженерию. Этажность, силуэт и кровля защищены от несовместимых сочетаний.";
+  if(r){
+    var free=r.roof.length>1&&r.floors.length>1;
+    document.getElementById("compatText").textContent=free
+      ?"Этажность и форму кровли можно менять — модель перестроится. Архитектурный стиль задан проектом."
+      :"Можно менять площадь, участок, конструкцию, фасад, окна и инженерию. Этажность, силуэт и кровля защищены от несовместимых сочетаний.";
+  }
   Array.prototype.forEach.call(document.querySelectorAll(".style-choice"),function(b){
     var off=!!r&&r.style.indexOf(b.dataset.style)<0;b.disabled=off;b.setAttribute("aria-disabled",String(off));
     b.title=off?"Этот стиль меняет несущую геометрию выбранного проекта":"";

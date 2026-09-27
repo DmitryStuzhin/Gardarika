@@ -42,7 +42,7 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 - Name: «Гардарика» / Gardarika Homes.
 - Russian-language voice: assured, concise, architectural, specific; premium without ornamental luxury clichés.
 - Core promise: «Дом, собранный вокруг вашей жизни».
-- The owner wants a modern, conversion-oriented site with a deliberately non-generic, non-AI look. The signature product still to come is a 3D calculator in which a visitor assembles a house stage by stage and receives a PDF estimate.
+- The owner wants a modern, conversion-oriented site with a deliberately non-generic, non-AI look. The signature product is the 3D calculator (`site/calculator.html`, ported from the previous site) in which a visitor assembles a house stage by stage and receives a PDF estimate. A pilot constructor (`site/constructor.html`) lets visitors mix parts of existing houses (Lento 100, Lilia 105, Garden 106) with explained, fixable incompatibilities; its unit rates are demonstration values.
 
 ## Evidence on Hand
 
@@ -57,7 +57,7 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 2. Make the calculator the natural consequence of the story, not an isolated widget.
 3. Communicate premium value through precision, restraint, materiality, and editorial confidence.
 4. Keep every factual claim auditable and visibly distinguish illustrative pricing.
-5. Reserve a clear, honest place for the future 3D calculator and route every house toward it once it exists.
+5. Route every house toward the 3D calculator; every calculator option must visibly change the model or the estimate, and options not shown on the model say so.
 6. Keep every size and price traceable: published source figures stay as given, illustrative figures are marked as examples.
 
 ## Accessibility & Inclusion

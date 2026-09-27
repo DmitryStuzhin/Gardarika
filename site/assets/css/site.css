@@ -107,7 +107,7 @@ svg use{pointer-events:none}
 .nav-phone{font:600 15.5px/1 var(--display);text-decoration:none;color:var(--pine);white-space:nowrap}
 .nav-toggle{display:none;width:46px;height:46px;align-items:center;justify-content:center;border:1.5px solid var(--line);border-radius:999px;background:var(--card);color:var(--pine)}
 .nav-toggle svg{width:22px;height:22px}
-@media (max-width:1240px){
+@media (max-width:1320px){
   .nav-toggle{display:inline-flex}
   .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px var(--gutter) 18px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 30px -24px rgba(24,37,31,.3)}
   .links.is-open{display:flex}
@@ -115,6 +115,7 @@ svg use{pointer-events:none}
   .links a::after{display:none}
 }
 @media (max-width:860px){.nav-phone{display:none}}
+@media (min-width:1321px){.nav-phone{display:none}}
 @media (max-width:440px){.nav-cta{display:none}.brand-mark{font-size:21px}}
 
 /* Размерные линии — чертёжная деталь */

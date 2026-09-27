@@ -52,3 +52,4 @@ body.calc-standalone{padding-bottom:0}
 
 #studioLegacy{padding-top:clamp(28px,4vw,56px)!important}
 #studioLegacy>.wrap:first-child .head{padding-bottom:clamp(20px,2.4vw,32px)}
+#studioLegacy .nomodel{display:block;margin-top:3px;font-style:normal;font-size:12.5px;color:#8a6a2e}
