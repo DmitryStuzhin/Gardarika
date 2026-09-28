@@ -28,7 +28,7 @@ function signature(state){
 for (const core of cat.cores) for (const up of uppers) for (const roof of cat.roofs) for (const ax of annexSets)
 for (const walls of F.walls.options) for (const fnd of F.foundation.options) for (const fac of F.facade.options){
   total++;
-  const st = {core: core.id, upper: up, roof: roof.id, annexes: ax, finishes: {foundation: fnd.id, walls: walls.id, roofCover: "seam", facade: fac.id, windows: "lam"}};
+  const st = {core: core.id, upper: up, roof: roof.id, annexes: ax, finishes: {foundation: fnd.id, walls: walls.id, roofCover: "seam", facade: fac.id, windows: "lam", engineering: "base", interior: "none"}};
   let r;
   try { r = GC.resolve(st, cat); } catch (e){ fails.push("исключение: " + e.message + " " + JSON.stringify(st)); continue; }
   if (!r.ok){ r.issues.forEach(i => { if (!i.message || i.message.length < 10) fails.push("пустая причина запрета: " + JSON.stringify(st)); }); continue; }

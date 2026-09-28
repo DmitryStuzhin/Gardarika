@@ -59,7 +59,8 @@
     add("Фасад", GC.finishLabel("facade", f.facade), wallArea, "м²", rate("facade", f.facade));
     if (carport) add("Навес", "навес для машины", carport, "м²", RATES.carport);
     if (terrace) add("Терраса", "настил на опорах", terrace, "м²", RATES.terrace);
-    add("Инженерия", "отопление, вода, электрика", area, "м² дома", RATES.eng);
+    add("Инженерия", "инженерия «" + GC.finishLabel("engineering", f.engineering).toLowerCase() + "»", area, "м² дома", rate("engineering", f.engineering));
+    if (rate("interior", f.interior)) add("Отделка", GC.finishLabel("interior", f.interior) + " отделка", area, "м² дома", rate("interior", f.interior));
     lines.push({stage: "Проект", label: "проект, логистика, управление стройкой", qty: 1, unit: "", sum: FIXED});
     var total = lines.reduce(function(s, l){ return s + l.sum; }, 0);
     return {lines: lines, total: total, area: area, heatedFoot: heatedFoot, massing: V};

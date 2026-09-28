@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Собирает site/calculator.html — 11-шаговый калькулятор со старого сайта.
+"""Собирает site/calculator-legacy.html — 11-шаговый калькулятор со старого сайта (архив, с сайта не ссылается).
 
 Исходник: site/calc-src/calculator.src.html (копия reference/index.src.html с исправлениями) (калькулятор, 3D на Three.js, смета в PDF).
 Страница вшивает шрифты и библиотеки, как reference/build.py, показывает только
@@ -45,5 +45,5 @@ page = ('<!doctype html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n'
         + header + out +
         '\n<link rel="stylesheet" href="assets/calc/calc-theme.css">\n'
         '<script src="assets/js/data.js"></script>\n<script src="assets/calc/calc-bridge.js"></script>\n</body>\n</html>\n')
-(SITE / "calculator.html").write_text(page)
-print("calculator.html:", round(len(page) / 1024), "KB")
+(SITE / "calculator-legacy.html").write_text(page)
+print("calculator-legacy.html:", round(len(page) / 1024), "KB")

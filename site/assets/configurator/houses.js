@@ -95,29 +95,39 @@
      Ставки — демонстрационные, для проверки логики; перед публикацией их утверждает сметчик. */
   GC.finishes = {
     foundation: {label: "Фундамент", options: [
-      {id: "slab", label: "Монолитная плита", rate: 14500},
-      {id: "strip", label: "Лента с плитой", rate: 16800},
-      {id: "piles", label: "Сваи с ростверком", rate: 11200}
+      {id: "slab", label: "Монолитная плита", note: "утеплённая плита 300 мм — для большинства грунтов", rate: 14500},
+      {id: "strip", label: "Лента с плитой", note: "для пучинистых грунтов и участков с уклоном", rate: 16800},
+      {id: "piles", label: "Сваи с ростверком", note: "для слабых грунтов и лёгких домов", rate: 11200}
     ]},
     walls: {label: "Стены", options: [
-      {id: "aerated", label: "Газобетон 400 мм", rate: 10500, color: 0xd9dcd6},
-      {id: "arbolit", label: "Арболит 400 мм", rate: 11800, color: 0xb78667},
-      {id: "frame", label: "Каркас 250 мм", rate: 8200, color: 0xa87749}
+      {id: "aerated", label: "Газобетон 400 мм", note: "каменный дом без дополнительного утепления", rate: 10500, color: 0xd9dcd6},
+      {id: "arbolit", label: "Арболит 400 мм", note: "тёплый блок из щепы и цемента, дышит как дерево", rate: 11800, color: 0xb78667},
+      {id: "frame", label: "Каркас 250 мм", note: "быстрая сборка, минвата в каркасе", rate: 8200, color: 0xa87749}
     ]},
     roofCover: {label: "Покрытие кровли", options: [
-      {id: "seam", label: "Фальцевая сталь", rate: 3900, color: 0x2f3239},
-      {id: "tile", label: "Керамическая черепица", rate: 5200, color: 0x6e3b2c},
-      {id: "soft", label: "Мягкая кровля", rate: 2900, color: 0x4a4f55}
+      {id: "seam", label: "Фальцевая сталь", note: "строгие линии, служит долго", rate: 3900, color: 0x2f3239},
+      {id: "tile", label: "Керамическая черепица", note: "классика, тяжелее и дороже", rate: 5200, color: 0x6e3b2c},
+      {id: "soft", label: "Мягкая кровля", note: "тихая под дождём, проще в монтаже", rate: 2900, color: 0x4a4f55}
     ]},
     facade: {label: "Фасад", options: [
-      {id: "plaster", label: "Штукатурка", rate: 3800, color: 0xf1efe9},
-      {id: "clinker", label: "Клинкер", rate: 6900, color: 0xa9765d},
-      {id: "wood", label: "Планкен", rate: 5600, color: 0xb88a5a}
+      {id: "plaster", label: "Штукатурка", note: "светлый минеральный фасад", rate: 3800, color: 0xf1efe9},
+      {id: "clinker", label: "Клинкер", note: "кирпичная облицовка без ухода", rate: 6900, color: 0xa9765d},
+      {id: "wood", label: "Планкен", note: "деревянная доска на подсистеме", rate: 5600, color: 0xb88a5a}
     ]},
     windows: {label: "Окна", options: [
-      {id: "white", label: "ПВХ белые", rate: 21000, color: 0xf6f6f4},
-      {id: "lam", label: "ПВХ с ламинацией", rate: 26000, color: 0x5c564f},
-      {id: "alu", label: "Алюминий тёплый", rate: 38000, color: 0x2a2e33}
+      {id: "white", label: "ПВХ белые", note: "двухкамерный стеклопакет", rate: 21000, color: 0xf6f6f4},
+      {id: "lam", label: "ПВХ с ламинацией", note: "тёмный профиль под графит", rate: 26000, color: 0x5c564f},
+      {id: "alu", label: "Алюминий тёплый", note: "узкий профиль, большие стёкла", rate: 38000, color: 0x2a2e33}
+    ]},
+    /* внутри дома: на модели не показываются, но входят в смету */
+    engineering: {label: "Инженерия", inside: true, options: [
+      {id: "base", label: "Базовая", note: "котёл, радиаторы, вода, канализация, электрика", rate: 6200},
+      {id: "comfort", label: "Комфорт", note: "плюс тёплый пол и приточная вентиляция", rate: 9800}
+    ]},
+    interior: {label: "Отделка", inside: true, options: [
+      {id: "none", label: "Без отделки", note: "коробка с инженерией — отделку делаете сами", rate: 0},
+      {id: "rough", label: "Черновая", note: "стяжка, штукатурка стен, разводка под чистовую", rate: 7500},
+      {id: "fine", label: "Чистовая", note: "полы, стены, потолки и санузлы под ключ", rate: 19000}
     ]}
   };
 })(typeof window !== "undefined" ? window : globalThis);

@@ -115,7 +115,7 @@ svg use{pointer-events:none}
   .links a::after{display:none}
 }
 @media (max-width:860px){.nav-phone{display:none}}
-@media (min-width:1321px){.nav-phone{display:none}}
+@media (min-width:1321px){.nav-contacts .nav-phone{display:none}}
 @media (max-width:440px){.nav-cta{display:none}.brand-mark{font-size:21px}}
 
 /* Размерные линии — чертёжная деталь */
@@ -492,6 +492,7 @@ body.is-catalog main{display:none}
 .card-calc{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--band);color:var(--pine);font:600 14.5px/1 var(--display);text-decoration:none;white-space:nowrap;transition:background-color .2s var(--ease),color .2s var(--ease)}
 .card-calc svg{width:17px;height:17px}
 .card-calc:hover,.card:hover .card-calc{background:var(--honey);color:var(--on-honey)}
+.card-calc.is-soon,.card:hover .card-calc.is-soon{background:transparent;border:1.5px dashed var(--line);color:var(--ink-3);font-weight:500}
 .card .card-foot{flex-direction:column;align-items:stretch;gap:14px}
 
 

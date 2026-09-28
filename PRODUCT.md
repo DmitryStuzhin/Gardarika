@@ -18,17 +18,17 @@ Gardarika presents a full-cycle architecture, production, and construction burea
 
 ## Positioning
 
-The house is designed from the inside out around a client's life, then architecture, structure, engineering, site conditions, production, and construction are assembled by one accountable team. The eleven-step calculator demonstrates this mechanism instead of merely describing it.
+The house is designed from the inside out around a client's life, then architecture, structure, engineering, site conditions, production, and construction are assembled by one accountable team. The step-by-step 3D calculator demonstrates this mechanism instead of merely describing it.
 
 ## Operating Context
 
-Visitors compare house scales, materials, architectural approaches, preliminary prices, site constraints, and construction decisions. The principal conversion path is from the marketing page into the existing eleven-step calculator and its downloadable estimate.
+Visitors compare house scales, materials, architectural approaches, preliminary prices, site constraints, and construction decisions. The principal conversion path is from the marketing page into the 3D calculator and its downloadable estimate.
 
 ## Capabilities and Constraints
 
 - The current marketing site lives in `site/` as static HTML/CSS/JavaScript (`index.html`, `assets/`), with no build step and no external requests; it must stay usable when opened as a local file.
 - The catalog holds sixteen houses: three new example houses (Birch 132, Lilac 96, Vesper 164) whose names, sizes and indicative prices are illustrative and always marked «Пример», plus thirteen existing bases built from their source materials.
-- The house calculator is the site's primary conversion goal. `site/calculator.html` is the full eleven-step calculator from the previous site (3D model on Three.js, per-stage estimate, PDF export, account), rebuilt by `site/tools/build-calculator.py` from `reference/index.src.html`, restyled by `site/assets/calc/calc-theme.css` and linked to the catalog by `site/assets/calc/calc-bridge.js` (`calculator.html#<slug>` opens a house). Its prices are the legacy calculator's illustrative rates. Birch 132, Lilac 96 and Vesper 164 use the generic procedural model, not project-specific geometry. Every major surface of the site links to it.
+- The house calculator is the site's primary conversion goal. `site/calculator.html` runs on the configurator engine in `site/assets/configurator/` (see its README): three ready models, mixing of parts, per-stage estimate and PDF. The previous eleven-step calculator is kept as an unlinked archive in `site/calculator-legacy.html`. Every major surface of the site links to the calculator; houses without a ready model say «Расчёт в разработке».
 - The legacy eleven-step calculator and the previous site remain in `reference/` as an archive and source of facts; they are not linked from the new site.
 - The lead form validates input but does not send data yet; its success message says so honestly.
 - A four-question quiz on the home page filters the catalog by family size, floors and area and hands the result into the lead form; it makes no price claims.
@@ -42,7 +42,7 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 - Name: «Гардарика» / Gardarika Homes.
 - Russian-language voice: assured, concise, architectural, specific; premium without ornamental luxury clichés.
 - Core promise: «Дом, собранный вокруг вашей жизни».
-- The owner wants a modern, conversion-oriented site with a deliberately non-generic, non-AI look. The signature product is the 3D calculator (`site/calculator.html`, ported from the previous site) in which a visitor assembles a house stage by stage and receives a PDF estimate. A pilot constructor (`site/constructor.html`) lets visitors mix parts of existing houses (Lento 100, Lilia 105, Garden 106) with explained, fixable incompatibilities; its unit rates are demonstration values.
+- The owner wants a modern, conversion-oriented site with a deliberately non-generic, non-AI look. The signature product is the 3D calculator (`site/calculator.html`): an MVP with three ready house models (Lento 100, Lilia 105, Garden 106) whose parts can be mixed, with explained and fixable incompatibilities, a stage-by-stage build view and a PDF estimate. Other catalog houses are marked as «в разработке». Unit rates are demonstration values.
 
 ## Evidence on Hand
 

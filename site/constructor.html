@@ -2,71 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Конструктор дома — Гардарика</title>
-<meta name="description" content="Соберите дом из частей проектов Lento 100, Lilia 105 и Garden 106: несовместимые сочетания объясняются и исправляются, смета считается по объёмам модели.">
-<link rel="icon" href="assets/brand/mark.svg">
-<link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/configurator/constructor.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор дома — Гардарика</title>
+<meta name="robots" content="noindex">
+<script>location.replace("calculator.html" + location.hash);</script>
 </head>
-<body class="cx-page">
-<header class="nav is-scrolled" id="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="index.html#top" aria-label="Гардарика — на главную">
-      <img class="brand-sign" src="assets/brand/mark.svg" alt="" width="36" height="40">
-      <span class="brand-mark">Гардарика</span>
-    </a>
-    <nav class="links cx-links" aria-label="Разделы">
-      <a href="index.html#/catalog">Проекты</a>
-      <a href="calculator.html">Калькулятор</a>
-      <a href="index.html#contact">Контакты</a>
-    </nav>
-    <a class="nav-phone" href="tel:+79777144969">+7 977 714-49-69</a>
-  </div>
-</header>
-
-<main class="wrap cx">
-  <div class="cx-head">
-    <div>
-      <p class="cx-badge">Пилот · 3 дома</p>
-      <h1>Конструктор дома</h1>
-    </div>
-    <p>Возьмите основу одного дома, мансарду другого, пристройку третьего. Несовместимые сочетания не ломают модель: мы объясним причину и предложим, что поменять.</p>
-  </div>
-
-  <div class="cx-houses" id="houses" aria-label="Начать с дома"></div>
-
-  <div class="cx-grid">
-    <div class="cx-stage">
-      <div class="cx-viewer" id="viewer" aria-label="3D-модель дома"></div>
-      <div class="cx-stages" id="stages" role="group" aria-label="Этап стройки"></div>
-      <p class="cx-mix" id="mix"></p>
-      <div class="cx-conflict" id="conflict" hidden role="alert">
-        <p id="conflictText"></p>
-        <div><button type="button" class="btn btn-honey btn-sm" id="conflictFix"></button><button type="button" class="btn btn-line btn-sm" id="conflictCancel">Оставить как было</button></div>
-      </div>
-    </div>
-    <div class="cx-side">
-      <div id="parts"></div>
-      <section class="cx-est" aria-labelledby="estTitle">
-        <h3 id="estTitle">Смета по объёмам модели</h3>
-        <p class="cx-total" id="total"></p>
-        <p class="cx-area" id="area"></p>
-        <div class="cx-bill" id="bill"></div>
-        <p class="cx-assume" id="assume"></p>
-        <p class="cx-note">Ставки демонстрационные: количества берутся из модели, цены за единицу утверждает сметчик. Точный расчёт — после геологии и проекта.</p>
-        <a class="btn btn-honey btn-wide" href="index.html#contact">Обсудить этот дом с инженером</a>
-      </section>
-    </div>
-  </div>
-</main>
-
-<script src="assets/vendor/three.min.js"></script>
-<script src="assets/vendor/OrbitControls.js"></script>
-<script src="assets/configurator/houses.js"></script>
-<script src="assets/configurator/engine.js"></script>
-<script src="assets/configurator/pricing.js"></script>
-<script src="assets/configurator/geometry.js"></script>
-<script src="assets/configurator/app.js"></script>
-</body>
+<body><p>Конструктор стал частью калькулятора: <a href="calculator.html">открыть калькулятор дома</a>.</p></body>
 </html>

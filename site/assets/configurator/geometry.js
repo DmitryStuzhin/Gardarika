@@ -68,11 +68,11 @@
   };
   View.prototype.frame = function(V){
     var minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9, top = 0;
-    V.forEach(function(v){ minX = Math.min(minX, v.x - v.w / 2); maxX = Math.max(maxX, v.x + v.w / 2); minZ = Math.min(minZ, v.z - v.d / 2); maxZ = Math.max(maxZ, v.z + v.d / 2); top = Math.max(top, v.y0 + v.h + 3); });
-    var cx = (minX + maxX) / 2, cz = (minZ + maxZ) / 2, span = Math.max(Math.hypot(maxX - minX, maxZ - minZ), top * 1.6);
-    this.controls.target.set(cx, top * .32, cz);
+    V.forEach(function(v){ minX = Math.min(minX, v.x - v.w / 2); maxX = Math.max(maxX, v.x + v.w / 2); minZ = Math.min(minZ, v.z - v.d / 2); maxZ = Math.max(maxZ, v.z + v.d / 2); top = Math.max(top, v.y0 + v.h + (v.roof ? GC.roofGeom(v).rise : 0)); });
+    var cx = (minX + maxX) / 2, cz = (minZ + maxZ) / 2, span = Math.max(Math.hypot(maxX - minX, maxZ - minZ), top * 1.7);
+    this.controls.target.set(cx, top * .4, cz);
     var dir = new THREE.Vector3(-.62, .5, -.72).normalize();
-    this.camera.position.copy(this.controls.target).addScaledVector(dir, span * 1.3 / Math.min(1, (this.camera.aspect || 1) * .85) + 6);
+    this.camera.position.copy(this.controls.target).addScaledVector(dir, span * 1.45 / Math.min(1, (this.camera.aspect || 1) * .85) + 5);
     this.dirty = true;
   };
 

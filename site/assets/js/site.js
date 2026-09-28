@@ -64,7 +64,9 @@ function setHero(i, animate){
   var v = $(".dim-val", heroFig);
   v.setAttribute("data-mm", h.dims[0]);
   heroStamp.href = "#/p/" + h.slug;
-  $("#heroCalc").href = "calculator.html#" + h.slug;
+  var hc = $("#heroCalc");
+  hc.href = h.calc ? "calculator.html#" + h.slug : "calculator.html";
+  hc.innerHTML = icon("i-calc") + (h.calc ? "Рассчитать этот дом под себя" : "Собрать свой дом в калькуляторе") + icon("i-arrow");
   heroStamp.setAttribute("aria-label", "Открыть проект " + h.name);
   heroStamp.innerHTML = stampHTML([
     cell("Проект", h.name, "sv-big span2"), cell("Цена, пример", price(h)),
@@ -108,10 +110,10 @@ function cardHTML(h){
     '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + h.name + '</a></h3><p class="card-type">' + (h.tagline || h.type) + "</p>" +
       '<ul class="card-meta"><li>' + icon("i-area") + h.area + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + h.rooms + "</li>" : "") + "</ul>" +
       '<div class="card-foot"><div class="card-price">' +
-        (h.example ? "<b>" + price(h) + '</b><small>ориентировочно, пример</small>' : "<b>Цена в калькуляторе</b><small>под ваш участок и комплектацию</small>") +
-      '</div><a class="card-calc" href="calculator.html#' + h.slug + '" aria-label="Рассчитать ' + esc(h.name) + '">' + icon("i-calc") + "<span>Рассчитать этот дом</span></a></div></div></article>";
+        (h.example ? "<b>" + price(h) + '</b><small>ориентировочно, пример</small>' : h.calc ? "<b>Цена в калькуляторе</b><small>под ваш участок и комплектацию</small>" : "<b>Цена по запросу</b><small>3D-расчёт — в разработке</small>") +
+      "</div>" + (h.calc ? '<a class="card-calc" href="calculator.html#' + h.slug + '" aria-label="Рассчитать ' + esc(h.name) + '">' + icon("i-calc") + "<span>Рассчитать этот дом</span></a>" : '<span class="card-calc is-soon">Расчёт в разработке</span>') + "</div></div></article>";
 }
-var POPULAR = ["birch-132", "lilac-96", "vesper-164", "lento-100", "garden-106", "bgl-124", "alto-130", "pine-141"];
+var POPULAR = ["lento-100", "lilia-105", "garden-106", "birch-132", "lilac-96", "vesper-164", "bgl-124", "pine-141"];
 $("#popular").innerHTML = POPULAR.map(function(slug){ return cardHTML(bySlug(slug)); }).join("");
 
 var grid = $("#grid");
@@ -198,7 +200,8 @@ function quizResult(){
   $("#quizMatches").innerHTML = list.map(function(h){
     return '<a class="q-match" href="#/p/' + h.slug + '"><img src="' + h.image + '" alt=""><span><b>' + h.name + "</b><small>" + h.area + NB + "м² · " + floorsLabel(h.floors).toLowerCase() + "</small></span>" + icon("i-arrow") + "</a>";
   }).join("");
-  $("#quizToForm").href = list.length ? "calculator.html#" + list[0].slug : "calculator.html";
+  var calcFirst = list.filter(function(h){ return h.calc; })[0];
+  $("#quizToForm").href = calcFirst ? "calculator.html#" + calcFirst.slug : "calculator.html";
   $("#quizToContact").setAttribute("data-topic", "Квиз: " + list.map(function(h){ return h.name; }).join(", ") + (answers.when ? " · " + answers.when : ""));
 }
 qs.forEach(function(q, n){
@@ -246,6 +249,7 @@ function showProject(h){
   g.hidden = !h.gallery.length;
   $("#pDiscuss").setAttribute("data-project", h.slug);
   $("#pCalc").href = "calculator.html#" + h.slug;
+  $("#pCalc").innerHTML = (h.calc ? "Рассчитать этот дом" : "Собрать похожий в калькуляторе") + icon("i-calc");
   document.title = h.name + " — Гардарика";
   document.body.classList.add("is-project");
   project.hidden = false;

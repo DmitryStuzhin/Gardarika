@@ -25,7 +25,7 @@
       upper: h.upper ? h.upper.id : null,
       roof: h.roof.id,
       annexes: (h.annexes || []).map(function(a){ return a.id; }),
-      finishes: {foundation: "slab", walls: "aerated", roofCover: "seam", facade: "plaster", windows: "lam"}
+      finishes: {foundation: "slab", walls: "aerated", roofCover: "seam", facade: "plaster", windows: "lam", engineering: "base", interior: "none"}
     };
   };
 
@@ -111,7 +111,7 @@
     lay.placed.forEach(function(p){
       var a = p.annex;
       p.h = a.h === "core" ? core.wallH : a.kind === "terrace" ? 0 : Math.min(a.h, groundEave - 0.3);
-      if (a.kind !== "terrace" && a.h !== "core" && p.h < 2.2) issues.push({rule: "clearance", kind: "rule", message: "«" + a.label + "» получится ниже 2,2 м под карнизом этого дома."});
+      if (a.kind !== "terrace" && a.h !== "core" && p.h < 2.2) issues.push({rule: "clearance", kind: "rule", annex: a.id, message: "«" + a.label + "» получится ниже 2,2 м под карнизом этого дома."});
     });
     return {ctx: ctx, core: core, upper: upper, roof: roof, placed: lay.placed, issues: issues, ok: issues.length === 0, eave: eave};
   };
@@ -186,6 +186,12 @@
       var s2 = GC.apply(state, tries[i].slot, tries[i].value);
       if (tries[i].slot === "roof" && s2.roof === state.roof) continue;
       if (GC.resolve(s2, cat).ok) return tries[i];
+    }
+    /* последний вариант: снять все пристройки, которые не встают к новому дому */
+    var bad = GC.resolve(state, cat).issues.filter(function(x){ return x.annex; }).map(function(x){ return x.annex; });
+    if (bad.length && !(slot === "annex" && bad.indexOf(value) >= 0)){
+      var s3 = GC.apply(state, "annexes", state.annexes.filter(function(id){ return bad.indexOf(id) < 0; }));
+      if (GC.resolve(s3, cat).ok) return {slot: "annexes", value: s3.annexes, label: "убрать " + bad.map(function(id){ return "«" + cat.byId[id].label + "»"; }).join(", ")};
     }
     return null;
   };
