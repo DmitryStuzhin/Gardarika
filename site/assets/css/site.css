@@ -293,6 +293,7 @@ a.stamp:hover .sv-big{text-decoration:underline;text-decoration-thickness:1.5px;
 .check input:checked::after{opacity:1}
 .check.is-bad input{border-color:var(--error)}
 .form .btn{margin-top:4px}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .form-msg{font-size:15px;line-height:1.45;color:var(--pine)}
 .form-msg:empty{display:none}
 .form-msg.is-bad{color:var(--error)}

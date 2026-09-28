@@ -4,7 +4,8 @@
 
 - `assets/js/data.js` — каталог из 16 домов. У Birch 132, Lilac 96 и Vesper 164 стоит `example: true`: их параметры и цены — пример, замените их на свои.
 - `#calculator` в `index.html` — анонс калькулятора.
-- Форма заявки проверяет поля, но пока никуда не отправляет данные: подключите обработчик в `assets/js/site.js` (блок «Заявка»).
+- Форма заявки отправляет данные на `/api/lead` (сервер: `deploy/lead_server.py` → Telegram). Выкладка и настройка сервера — `deploy/README.md`. `COMPANY.draft` в `data.js` включает пометки «заполнить».
+- `privacy.html` — политика обработки персональных данных (реквизиты оператора помечены жёлтым, заполнить перед запуском).
 - Шрифты: Geologica (OFL, fontsource) и Golos Text (OFL) лежат в `assets/fonts/`.
 - `assets/js/data.js`, объект `COMPANY` — цифры компании, цены за м² по комплектациям, построенные дома, отзывы и ссылки на Telegram/WhatsApp. Пока поле пустое, на главной видна пунктирная пометка «заполнить».
 - Логотип: `assets/brand/mark.svg` (вектор), `assets/brand/logo-original.png` (исходник). Шрифт надписи — Forum (OFL), лежит в `assets/fonts/`.

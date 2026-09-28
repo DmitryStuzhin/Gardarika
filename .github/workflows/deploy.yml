@@ -1,0 +1,58 @@
+# Выкладка сайта на сервер Timeweb Cloud.
+# Запускается сама при изменениях в main и вручную: Actions → Deploy site → Run workflow (можно выбрать ветку).
+# Нужны секреты репозитория DEPLOY_HOST (IP сервера) и DEPLOY_KEY (ключ из вывода deploy/setup-server.sh).
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "deploy/lead_server.py", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверить секреты
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$KEY" ]; then
+            echo "::error::Добавьте секреты DEPLOY_HOST и DEPLOY_KEY (Settings → Secrets and variables → Actions)"; exit 1
+          fi
+
+      - name: Проверить калькулятор
+        run: node site/tools/test-constructor.js
+
+      - name: Ключ SSH
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Выложить сайт
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          rsync -az --delete --delete-excluded \
+            --exclude calc-src/ --exclude tools/ --exclude README.md --exclude calculator-legacy.html \
+            site/ "deploy@$HOST:/var/www/gardarika/"
+          rsync -az deploy/lead_server.py "deploy@$HOST:/home/deploy/lead_server.py"
+          ssh "deploy@$HOST" "sudo systemctl restart gardarika-lead"
+
+      - name: Проверить, что сайт отвечает
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          curl -fsS -o /dev/null -w "сервер ответил %{http_code}\n" "http://$HOST/"

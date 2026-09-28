@@ -143,6 +143,8 @@ applyFilter();
 
 /* Данные компании: цифры, цены, построенные дома, отзывы, мессенджеры */
 var C = window.COMPANY || {};
+/* draft: true — видны пометки «заполнить»; false (боевой сайт) — пустые блоки просто скрыты */
+var DRAFT = C.draft !== false;
 /* заглушка для владельца сайта: видимый текст — по-человечески, где заполнить — в подсказке */
 function todo(text, key){ return '<span class="todo-mark" title="assets/js/data.js → COMPANY.' + key + '">заполнить</span> ' + text; }
 var years = C.since ? new Date().getFullYear() - C.since : null;
@@ -151,13 +153,19 @@ $("#stats").innerHTML = [
   {v: years, l: "лет строим дома", hint: "год основания", key: "since"},
   {v: C.housesBuilt, l: "домов построено", hint: "число домов", key: "housesBuilt"},
   {v: C.warrantyYears, l: "лет гарантии на конструктив", hint: "срок гарантии", key: "warrantyYears"}
-].map(function(x){
+].filter(function(x){ return x.v || DRAFT; }).concat(DRAFT ? [] : [
+  /* пока цифры компании не заполнены, полосу держат проверяемые факты о сайте */
+  {v: "3", l: "дома можно собрать и смешать в 3D-калькуляторе"},
+  {v: "8", l: "шагов от проекта до сметы в PDF"},
+  {v: "1", l: "договор, где зафиксированы смета, сроки и гарантия"}
+]).slice(0, 4).map(function(x){
   return x.v ? "<li><b>" + x.v + "</b><span>" + x.l + "</span></li>" : '<li class="todo"><b>—</b><span>' + x.l + "</span><span>" + todo(x.hint, x.key) + "</span></li>";
 }).join("");
 $$("#packs .pack").forEach(function(el){
   var v = C.packages && C.packages[el.getAttribute("data-pack")], pp = $(".pack-price", el);
   if (v){ pp.textContent = "от " + v + NB + "₽ за м²"; }
-  else { pp.classList.add("todo"); pp.innerHTML = todo("цена за м²", "packages"); }
+  else if (DRAFT){ pp.classList.add("todo"); pp.innerHTML = todo("цена за м²", "packages"); }
+  else pp.hidden = true;
 });
 $("#builtList").innerHTML = (C.builtHouses && C.builtHouses.length) ? C.builtHouses.map(function(b){
   return '<figure class="built-card"><img src="' + b.image + '" alt="' + esc(b.title) + '" loading="lazy"><div><b>' + esc(b.title) + "</b><small>" + esc(b.note || "") + "</small></div></figure>";
@@ -176,7 +184,11 @@ if (C.telegram) msgrs.push({href: C.telegram, icon: "i-tg", label: "Telegram"});
 if (C.whatsapp) msgrs.push({href: C.whatsapp, icon: "i-wa", label: "WhatsApp"});
 $("[data-msgr]").innerHTML = msgrs.map(function(m){ return '<a href="' + m.href + '" target="_blank" rel="noopener" aria-label="Написать в ' + m.label + '">' + icon(m.icon) + "</a>"; }).join("");
 $("[data-msgr-big]").innerHTML = msgrs.length ? msgrs.map(function(m){ return '<a href="' + m.href + '" target="_blank" rel="noopener">' + icon(m.icon) + "Написать в " + m.label + "</a>"; }).join("")
-  : '<span class="todo">' + todo("ссылки на Telegram и WhatsApp", "telegram / whatsapp") + "</span>";
+  : DRAFT ? '<span class="todo">' + todo("ссылки на Telegram и WhatsApp", "telegram / whatsapp") + "</span>" : "";
+/* боевой режим: разделы без данных убираем вместе со ссылками на них */
+function hideSection(id){ var sec = document.getElementById(id); if (sec) sec.hidden = true; $$('a[href="#' + id + '"]').forEach(function(a){ a.hidden = true; }); }
+if (!DRAFT && !(C.builtHouses && C.builtHouses.length)) hideSection("built");
+if (!DRAFT && !(C.reviews && C.reviews.length)) hideSection("reviews");
 
 /* Квиз */
 var qForm = $("#quiz-form"), qs = $$(".q", qForm), qStep = $("#quizStep"), qBar = $("#quizBar"), qBack = $("#quizBack"), qi = 0, answers = {};
@@ -301,7 +313,7 @@ route();
 var form = $("#leadForm"), msg = $("#leadMsg"), sel = $("#leadProject"), topic = $("#leadTopic"), phone = $("#leadPhone");
 HOUSES.forEach(function(h){ var o = document.createElement("option"); o.value = h.slug; o.textContent = h.name + " · " + h.area + " м²"; sel.appendChild(o); });
 $("#pDiscuss").addEventListener("click", function(){ sel.value = this.getAttribute("data-project") || ""; });
-$$("[data-topic]").forEach(function(a){ a.addEventListener("click", function(){ topic.value = a.getAttribute("data-topic"); }); });
+$$("[data-topic]").forEach(function(a){ a.addEventListener("click", function(){ topic.value = a.getAttribute("data-topic"); topic.setAttribute("data-from", a.getAttribute("data-topic")); }); });
 function formatPhone(v){
   var d = v.replace(/\D/g, "");
   if (d[0] === "8") d = "7" + d.slice(1);
@@ -330,8 +342,18 @@ form.addEventListener("submit", function(e){
     (!nOk ? name : !pOk ? phone : consent).focus();
     return;
   }
-  msg.textContent = "Заявка заполнена верно. Это демонстрационная версия сайта, данные пока никуда не отправляются. Позвоните нам: +7 977 714-49-69.";
-  form.reset();
+  /* отправка на сервер (/api/lead → Telegram). Открыт файлом с диска — сервера нет, честно говорим об этом */
+  var btn = $("button[type=submit]", form), data = {
+    name: name.value.trim(), phone: phone.value, consent: true, project: sel.value ? sel.options[sel.selectedIndex].textContent : "",
+    note: topic.value.trim(), topic: topic.getAttribute("data-from") || "", page: location.hash || "/", website: $("#leadWebsite").value
+  };
+  if (location.protocol === "file:"){ msg.textContent = "Заявка заполнена верно. Сайт открыт с диска, поэтому отправки нет — на сервере заявка придёт вам в Telegram."; return; }
+  btn.disabled = true; msg.classList.remove("is-bad"); msg.textContent = "Отправляем…";
+  fetch("/api/lead", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)})
+    .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(){ msg.textContent = "Спасибо! Заявка у нас — перезвоним в рабочее время (Пн–Вс, 8:00–20:00)."; form.reset(); })
+    .catch(function(){ msg.classList.add("is-bad"); msg.textContent = "Не получилось отправить заявку. Позвоните нам: +7 977 714-49-69 — или попробуйте ещё раз."; })
+    .then(function(){ btn.disabled = false; });
 });
 ["leadName", "leadPhone", "leadConsent"].forEach(function(id){ $("#" + id).addEventListener("input", function(){ bad(this, false); }); });
 
