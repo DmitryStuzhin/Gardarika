@@ -45,7 +45,7 @@ jobs:
         env:
           HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
-          rsync -az --delete --delete-excluded \
+          rsync -az --delete --delete-excluded --chmod=D755,F644 \
             --exclude calc-src/ --exclude tools/ --exclude README.md --exclude calculator-legacy.html \
             site/ "deploy@$HOST:/var/www/gardarika/"
           rsync -az deploy/lead_server.py "deploy@$HOST:/home/deploy/lead_server.py"
