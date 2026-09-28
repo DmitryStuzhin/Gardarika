@@ -26,7 +26,21 @@
   var isPilot = function(id){ return GC.houses.some(function(h){ return h.id === id; }); };
   var missing = hash && !isPilot(hash) ? HOUSES.filter(function(h){ return h.slug === hash; })[0] : null;
   var state = GC.houseDefaults(isPilot(hash) ? hash : "lilia-105");
-  var step = 0, reached = 0, view = null, pending = null;
+  var step = 0, reached = 0, view = null, pending = null, shownStep = -1, shownTotal = null;
+  var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* итог меняется плавно: видно, насколько выбор сдвинул цену */
+  var tween = null;
+  function showTotal(v){
+    var el = $("#total"), from = shownTotal; shownTotal = v;
+    if (REDUCE || from == null || from === v){ el.textContent = rub(v); return; }
+    var t0 = performance.now(); cancelAnimationFrame(tween);
+    el.parentNode.classList.remove("is-bump"); void el.offsetWidth; el.parentNode.classList.add("is-bump");
+    (function tick(){
+      var k = Math.min(1, (performance.now() - t0) / 600), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = rub(from + (v - from) * e);
+      if (k < 1) tween = requestAnimationFrame(tick);
+    })();
+  }
 
   function rub(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, NB) + NB + "₽"; }
   function delta(n){ if (Math.abs(n) < 500) return "без изменения цены"; return (n > 0 ? "+" : "−") + NB + rub(Math.abs(n)); }
@@ -121,13 +135,19 @@
     }).join("");
     var body = s.id === "house" ? panelHouse() : s.id === "estimate" ? panelEstimate(res, est) : panelOptions(s, base, res);
     $("#panel").innerHTML = '<header class="kc-panel-h"><span>Шаг ' + (step + 1) + " из " + STEPS.length + "</span><h2>" + s.title + "</h2><p>" + s.hint + "</p></header>" + body;
+    if (shownStep !== step && !REDUCE){
+      var pn = $("#panel"); pn.classList.remove("is-fwd", "is-back"); void pn.offsetWidth;
+      pn.classList.add(step > shownStep ? "is-fwd" : "is-back");
+      clearTimeout(pn._t); pn._t = setTimeout(function(){ pn.classList.remove("is-fwd", "is-back"); }, 700);
+    }
+    shownStep = step;
     $("#prev").hidden = step === 0;
     $("#next").hidden = step === STEPS.length - 1;
     $("#sum").hidden = step === STEPS.length - 1;
     $("#next").innerHTML = (step === STEPS.length - 2 ? "К смете" : "Далее") + '<svg><use href="#i-arrow"/></svg>';
     var names = mixNames(res);
     $("#mix").textContent = names.length > 1 ? "Собрано из: " + names.join(" + ") : "Как в проекте " + names[0];
-    $("#total").textContent = rub(est.total);
+    showTotal(est.total);
     $("#area").textContent = m2(est.area) + " по внешнему контуру";
     $("#stageBadge").textContent = houseOf(cat.byId[state.core].house).name + (names.length > 1 ? " + ещё " + (names.length - 1) : "") + " · " + (s.id === "house" ? "проект" : s.id === "estimate" ? "ваш дом" : GC.stages[stageFor(s)]);
     if (view){
@@ -143,7 +163,9 @@
   function go(i){
     step = Math.max(0, Math.min(STEPS.length - 1, i)); reached = Math.max(reached, step);
     hideConflict(); render(false);
-    if (window.innerWidth < 1180) $("#panel").scrollIntoView({behavior: "smooth", block: "start"});
+    /* новый шаг начинаем с заголовка, если он ушёл за верх экрана */
+    var top = $("#panel").getBoundingClientRect().top;
+    if (top < 90 || window.innerWidth < 1180) window.scrollTo({top: Math.max(0, scrollY + top - 96), behavior: REDUCE ? "auto" : "smooth"});
   }
 
   /* ---------- выбор с проверкой совместимости ---------- */

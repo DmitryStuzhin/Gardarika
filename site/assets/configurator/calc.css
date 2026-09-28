@@ -83,3 +83,29 @@
   .cx-phone{display:none}
 }
 .kc-sum[hidden]{display:none}
+
+/* анимации: смена шага, итог, выбор опции */
+@keyframes kcFwd{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes kcBack{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+@keyframes kcRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.kc-panel.is-fwd > *{animation:kcFwd .5s var(--ease) both}
+.kc-panel.is-back > *{animation:kcBack .5s var(--ease) both}
+.kc-panel.is-fwd .cx-opt,.kc-panel.is-back .cx-opt,.kc-panel.is-fwd .kc-house,.kc-panel.is-back .kc-house{animation:kcRise .45s var(--ease) both}
+.kc-panel .cx-opts > :nth-child(2),.kc-panel .kc-houses > :nth-child(2){animation-delay:.05s}
+.kc-panel .cx-opts > :nth-child(3),.kc-panel .kc-houses > :nth-child(3){animation-delay:.1s}
+.kc-panel .cx-opts > :nth-child(4){animation-delay:.15s}
+.kc-panel .cx-opts > :nth-child(5){animation-delay:.2s}
+.kc-panel .cx-opts > :nth-child(n+6){animation-delay:.25s}
+.cx-opt,.kc-house{transition:border-color .2s var(--ease),background-color .25s var(--ease),transform .2s var(--ease),box-shadow .25s var(--ease)}
+.cx-opt:active,.kc-house:active{transform:scale(.985)}
+.cx-opt:hover,.kc-house:hover{transform:translateY(-1px);box-shadow:0 10px 22px -18px rgba(24,37,31,.5)}
+.kc-sum.is-bump b{animation:kcBump .6s var(--ease)}
+@keyframes kcBump{0%{transform:none}30%{transform:scale(1.035)}100%{transform:none}}
+.kc-sum b{display:inline-block;transform-origin:left center}
+.kc-steps button{transition:background-color .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),opacity .3s var(--ease)}
+.cx-conflict:not([hidden]){animation:kcPop .4s var(--ease) both}
+@keyframes kcPop{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){
+  .kc-panel > *,.kc-panel .cx-opt,.kc-panel .kc-house,.kc-sum b,.cx-conflict{animation:none !important}
+  .cx-opt:hover,.kc-house:hover,.cx-opt:active{transform:none}
+}

@@ -143,30 +143,31 @@ applyFilter();
 
 /* Данные компании: цифры, цены, построенные дома, отзывы, мессенджеры */
 var C = window.COMPANY || {};
-function todo(text){ return '<span class="todo-mark">заполнить</span> ' + text; }
+/* заглушка для владельца сайта: видимый текст — по-человечески, где заполнить — в подсказке */
+function todo(text, key){ return '<span class="todo-mark" title="assets/js/data.js → COMPANY.' + key + '">заполнить</span> ' + text; }
 var years = C.since ? new Date().getFullYear() - C.since : null;
 $("#stats").innerHTML = [
   {v: "16", l: "проектов в каталоге, от 96 до 164 м²"},
-  {v: years, l: "лет строим дома", hint: "год основания — COMPANY.since"},
-  {v: C.housesBuilt, l: "домов построено", hint: "COMPANY.housesBuilt"},
-  {v: C.warrantyYears, l: "лет гарантии на конструктив", hint: "COMPANY.warrantyYears"}
+  {v: years, l: "лет строим дома", hint: "год основания", key: "since"},
+  {v: C.housesBuilt, l: "домов построено", hint: "число домов", key: "housesBuilt"},
+  {v: C.warrantyYears, l: "лет гарантии на конструктив", hint: "срок гарантии", key: "warrantyYears"}
 ].map(function(x){
-  return x.v ? "<li><b>" + x.v + "</b><span>" + x.l + "</span></li>" : '<li class="todo"><b>—</b><span>' + x.l + "</span><span>" + todo(x.hint) + "</span></li>";
+  return x.v ? "<li><b>" + x.v + "</b><span>" + x.l + "</span></li>" : '<li class="todo"><b>—</b><span>' + x.l + "</span><span>" + todo(x.hint, x.key) + "</span></li>";
 }).join("");
 $$("#packs .pack").forEach(function(el){
   var v = C.packages && C.packages[el.getAttribute("data-pack")], pp = $(".pack-price", el);
   if (v){ pp.textContent = "от " + v + NB + "₽ за м²"; }
-  else { pp.classList.add("todo"); pp.innerHTML = todo("цена за м² — COMPANY.packages"); }
+  else { pp.classList.add("todo"); pp.innerHTML = todo("цена за м²", "packages"); }
 });
 $("#builtList").innerHTML = (C.builtHouses && C.builtHouses.length) ? C.builtHouses.map(function(b){
   return '<figure class="built-card"><img src="' + b.image + '" alt="' + esc(b.title) + '" loading="lazy"><div><b>' + esc(b.title) + "</b><small>" + esc(b.note || "") + "</small></div></figure>";
 }).join("") : [1, 2, 3].map(function(){
-  return '<div class="slot todo"><span class="todo-mark">заполнить</span><p>Фото построенного дома, где он стоит, срок и комплектация. Добавьте в COMPANY.builtHouses.</p></div>';
+  return '<div class="slot todo"><span class="todo-mark" title="assets/js/data.js → COMPANY.builtHouses">заполнить</span><p>Фото построенного дома: где он стоит, срок и комплектация.</p></div>';
 }).join("");
 $("#reviewList").innerHTML = (C.reviews && C.reviews.length) ? C.reviews.map(function(r){
   return '<blockquote class="review"><p>' + esc(r.text) + "</p><b>" + esc(r.name) + "</b><small>" + esc(r.place || "") + "</small></blockquote>";
 }).join("") : [1, 2, 3].map(function(){
-  return '<div class="slot todo"><span class="todo-mark">заполнить</span><p>Настоящий отзыв клиента: имя, где построен дом, пара предложений. Добавьте в COMPANY.reviews.</p></div>';
+  return '<div class="slot todo"><span class="todo-mark" title="assets/js/data.js → COMPANY.reviews">заполнить</span><p>Настоящий отзыв клиента: имя, где построен дом, пара предложений.</p></div>';
 }).join("");
 if (C.buildMonths) $('[data-term="months"]').textContent = "Типичный срок стройки — " + C.buildMonths + " мес. Этапы прописываются в договоре.";
 if (C.warrantyYears) $('[data-term="warranty"]').textContent = C.warrantyYears + " лет на конструкцию, гарантия оформляется в договоре.";
@@ -175,7 +176,7 @@ if (C.telegram) msgrs.push({href: C.telegram, icon: "i-tg", label: "Telegram"});
 if (C.whatsapp) msgrs.push({href: C.whatsapp, icon: "i-wa", label: "WhatsApp"});
 $("[data-msgr]").innerHTML = msgrs.map(function(m){ return '<a href="' + m.href + '" target="_blank" rel="noopener" aria-label="Написать в ' + m.label + '">' + icon(m.icon) + "</a>"; }).join("");
 $("[data-msgr-big]").innerHTML = msgrs.length ? msgrs.map(function(m){ return '<a href="' + m.href + '" target="_blank" rel="noopener">' + icon(m.icon) + "Написать в " + m.label + "</a>"; }).join("")
-  : '<span class="todo">' + todo("ссылки на Telegram и WhatsApp — COMPANY.telegram, COMPANY.whatsapp") + "</span>";
+  : '<span class="todo">' + todo("ссылки на Telegram и WhatsApp", "telegram / whatsapp") + "</span>";
 
 /* Квиз */
 var qForm = $("#quiz-form"), qs = $$(".q", qForm), qStep = $("#quizStep"), qBar = $("#quizBar"), qBack = $("#quizBack"), qi = 0, answers = {};

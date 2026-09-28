@@ -310,7 +310,7 @@ a.stamp:hover .sv-big{text-decoration:underline;text-decoration-thickness:1.5px;
 .stamp-dark .sl{color:rgba(226,236,228,.66)}
 .stamp-dark .sv{color:#fff;font-size:15.5px}
 .stamp-dark a.sv:hover{text-decoration:underline}
-.foot-note{margin-top:clamp(32px,4vw,48px);padding-top:20px;border-top:1px solid var(--pine-line);font-size:13px;line-height:1.5;color:rgba(226,236,228,.66);max-width:100ch}
+.foot-note{margin-top:clamp(32px,4vw,48px);padding-top:20px;border-top:1px solid var(--pine-line);font-size:13px;line-height:1.5;color:rgba(226,236,228,.66)}
 
 /* Страница проекта */
 .project{padding-block:clamp(20px,3vw,40px) var(--section)}
@@ -618,6 +618,52 @@ body.is-catalog main{display:none}
   .p-figure.has-y .dim-x{right:0}
   .empty{padding:22px}
 }
+
+/* ---------- Анимации (motion.js добавляет .motion, если движение не отключено) ---------- */
+.motion .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease) var(--rv-d,0ms),transform .9s var(--ease) var(--rv-d,0ms)}
+.motion .rv.is-in{opacity:1;transform:none}
+
+/* первый экран: текст и карточка дома выходят по очереди */
+.motion .hero-copy > *{animation:heroUp .9s var(--ease) both}
+.motion .hero-copy > :nth-child(1){animation-delay:.05s}
+.motion .hero-copy > :nth-child(2){animation-delay:.15s}
+.motion .hero-copy > :nth-child(3){animation-delay:.35s}
+.motion .hero-copy > :nth-child(4){animation-delay:.5s}
+.motion .hero-card{animation:heroCard 1s .55s var(--ease) both}
+.motion .hero-bar{animation:heroUp .8s .75s var(--ease) both}
+.hero-slides{will-change:transform}
+@keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes heroCard{from{opacity:0;transform:translate(24px,12px) scale(.98)}to{opacity:1;transform:none}}
+.motion .stamp.is-swap > *{animation:stampIn .55s var(--ease) both}
+.motion .stamp.is-swap > :nth-child(2){animation-delay:.05s}
+.motion .stamp.is-swap > :nth-child(3){animation-delay:.1s}
+.motion .stamp.is-swap > :nth-child(4){animation-delay:.15s}
+.motion .stamp.is-swap > :nth-child(5){animation-delay:.2s}
+@keyframes stampIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* «Как строим»: пунктир рисуется слева направо, номера загораются по очереди */
+.motion .route::before{transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease) .2s}
+.motion .route.is-drawn::before{transform:scaleX(1)}
+.motion .route-n{transition:background-color .4s var(--ease),transform .5s var(--ease)}
+.motion .route:not(.is-drawn) .route-n{transform:scale(.6);background:var(--line)}
+.motion .route.is-drawn li:nth-child(2) .route-n{transition-delay:.35s}
+.motion .route.is-drawn li:nth-child(3) .route-n{transition-delay:.7s}
+.motion .route.is-drawn li:nth-child(4) .route-n{transition-delay:1.05s}
+
+/* вопросы: ответ раскрывается плавно */
+.motion .faq details[open] > p{animation:faqIn .45s var(--ease) both}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* медовые кнопки: отблеск при наведении */
+.btn-honey{position:relative;overflow:hidden;isolation:isolate}
+.motion .btn-honey::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 48%,transparent 66%);transform:translateX(-120%);transition:transform .8s var(--ease)}
+.motion .btn-honey:hover::after{transform:translateX(120%)}
+.btn svg{transition:transform .3s var(--ease)}
+.btn:hover svg:last-child:not(:first-child){transform:translateX(3px)}
+
+/* карточки: фото чуть приближается, кнопка расчёта подсвечивается */
+.motion .card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(20,34,28,.18));opacity:0;transition:opacity .5s var(--ease)}
+.motion .card:hover .card-media::after{opacity:1}
 
 @media (prefers-reduced-motion:reduce){
   .hero-img.is-on{animation:none}
