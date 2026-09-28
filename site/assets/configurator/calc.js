@@ -8,16 +8,19 @@
   var HOUSES = window.HOUSES || [];
 
   /* шаги: stage — какой этап стройки показывает модель */
+  /* Дом строится с нуля: после выбора проекта модель растёт вместе с шагами — от плиты до готового дома.
+     parts — части формы, которые выбираются на шаге; groups — конструктив и отделка. */
   var STEPS = [
-    {id: "house", title: "Дом-основа", hint: "С какого проекта начнём", stage: 5},
-    {id: "compose", title: "Состав дома", hint: "Смешайте части трёх домов", stage: 5},
-    {id: "foundation", title: "Фундамент", hint: "На чём стоит дом", stage: 0, groups: ["foundation"]},
-    {id: "walls", title: "Стены", hint: "Материал коробки", stage: 2, groups: ["walls"]},
-    {id: "roof", title: "Кровля", hint: "Форма и покрытие", stage: 3, roofForm: true, groups: ["roofCover"]},
+    {id: "house", title: "Проект", hint: "Выберите дом, с которого начнём. Дальше построим его с нуля — и на каждом этапе можно взять решение из другого проекта.", stage: 5},
+    {id: "foundation", title: "Пятно и фундамент", hint: "Размер первого этажа, пристройки и основание под них", stage: 0, parts: ["core", "annex"], groups: ["foundation"]},
+    {id: "walls", title: "Стены", hint: "Коробка первого этажа", stage: 1, groups: ["walls"]},
+    {id: "upper", title: "Второй уровень", hint: "Мансарда, этаж или одноэтажный дом", stage: 2, parts: ["upper"]},
+    {id: "roof", title: "Кровля", hint: "Форма и покрытие", stage: 3, parts: ["roof"], groups: ["roofCover"]},
     {id: "facade", title: "Окна и фасад", hint: "Как дом выглядит снаружи", stage: 4, groups: ["windows", "facade"]},
-    {id: "inside", title: "Инженерия и отделка", hint: "Что внутри", stage: 5, groups: ["engineering", "interior"]},
-    {id: "estimate", title: "Смета", hint: "Итог по этапам и PDF", stage: 5}
+    {id: "inside", title: "Инженерия и отделка", hint: "Дом готов снаружи — осталось то, что внутри", stage: 5, groups: ["engineering", "interior"]},
+    {id: "estimate", title: "Смета", hint: "Ваш дом целиком, итог по этапам и PDF", stage: 5}
   ];
+
 
   var hash = decodeURIComponent(location.hash.slice(1));
   var isPilot = function(id){ return GC.houses.some(function(h){ return h.id === id; }); };
@@ -64,21 +67,21 @@
       soon.map(function(h){ return '<li><img src="' + h.image + '" alt="" loading="lazy"><span>' + esc(h.name) + "<small>" + esc(h.area) + NB + "м²</small></span></li>"; }).join("") + "</ul></div>";
     return html;
   }
-  function panelCompose(base, res){
-    var html = group("Основной объём", "пятно и высота первого этажа", cat.cores.map(function(c){
-      return {slot: "core", value: c.id, label: "Как у " + c.houseName, sub: GC.fmt(c.w) + " × " + GC.fmt(c.d) + " м, стены " + GC.fmt(c.wallH) + " м", on: state.core === c.id}; }), base);
-    html += group("Второй уровень", "что стоит над первым этажом", [{slot: "upper", value: null, label: "Без второго уровня", sub: "одноэтажный дом", on: !state.upper}].concat(cat.uppers.map(function(u){
-      return {slot: "upper", value: u.id, label: u.label, sub: u.note, on: state.upper === u.id}; })), base);
-    html += group("Пристройки", "можно несколько, встают к свободной стене", cat.annexes.map(function(a){
+  var PART = {
+    core: function(base){ return group("Основной объём", "пятно и высота первого этажа", cat.cores.map(function(c){
+      return {slot: "core", value: c.id, label: "Как у " + c.houseName, sub: GC.fmt(c.w) + " × " + GC.fmt(c.d) + " м, стены " + GC.fmt(c.wallH) + " м", on: state.core === c.id}; }), base); },
+    annex: function(base, res){ return group("Пристройки", "можно несколько, встают к свободной стене", cat.annexes.map(function(a){
       var pl = res.placed.filter(function(p){ return p.annex.id === a.id; })[0];
-      return {slot: "annex", value: a.id, label: a.label, sub: a.note + (pl ? " · " + SIDE[pl.side] : ""), on: state.annexes.indexOf(a.id) >= 0}; }), base, true);
-    return html;
-  }
-  function panelOptions(s, base){
+      return {slot: "annex", value: a.id, label: a.label, sub: a.note + (pl ? " · " + SIDE[pl.side] : ""), on: state.annexes.indexOf(a.id) >= 0}; }), base, true); },
+    upper: function(base){ return group("Что над первым этажом", "", [{slot: "upper", value: null, label: "Без второго уровня", sub: "одноэтажный дом", on: !state.upper}].concat(cat.uppers.map(function(u){
+      return {slot: "upper", value: u.id, label: u.label, sub: u.note, on: state.upper === u.id}; })), base); },
+    roof: function(base){ return group("Форма кровли", "", cat.roofs.map(function(r){
+      return {slot: "roof", value: r.id, label: r.label, sub: r.family === "gable" ? "два ската, фронтоны на торцах" : r.family === "hip" ? "четыре ската, без фронтонов" : "эксплуатируемая, с парапетом", on: state.roof === r.id}; }), base); }
+  };
+  function panelOptions(s, base, res){
     var html = "";
-    if (s.roofForm) html += group("Форма кровли", "", cat.roofs.map(function(r){
-      return {slot: "roof", value: r.id, label: r.label, sub: r.family === "gable" ? "два ската, фронтоны на торцах" : r.family === "hip" ? "четыре ската, без фронтонов" : "эксплуатируемая, с парапетом", on: state.roof === r.id}; }), base);
-    s.groups.forEach(function(g){ html += group(GC.finishes[g].label, GC.finishes[g].inside ? "внутри дома — на модели не показывается" : "", finishItems(g), base); });
+    (s.parts || []).forEach(function(p){ html += PART[p](base, res); });
+    (s.groups || []).forEach(function(g){ html += group(GC.finishes[g].label, GC.finishes[g].inside ? "внутри дома — на модели не показывается" : "", finishItems(g), base); });
     return html;
   }
   function assumptions(res){
@@ -116,7 +119,7 @@
     $("#steps").innerHTML = STEPS.map(function(x, i){
       return '<li><button type="button" data-step="' + i + '"' + (i === step ? ' aria-current="step"' : "") + (i > reached ? " disabled" : "") + '><span>' + (i + 1) + "</span>" + x.title + "</button></li>";
     }).join("");
-    var body = s.id === "house" ? panelHouse() : s.id === "compose" ? panelCompose(base, res) : s.id === "estimate" ? panelEstimate(res, est) : panelOptions(s, base);
+    var body = s.id === "house" ? panelHouse() : s.id === "estimate" ? panelEstimate(res, est) : panelOptions(s, base, res);
     $("#panel").innerHTML = '<header class="kc-panel-h"><span>Шаг ' + (step + 1) + " из " + STEPS.length + "</span><h2>" + s.title + "</h2><p>" + s.hint + "</p></header>" + body;
     $("#prev").hidden = step === 0;
     $("#next").hidden = step === STEPS.length - 1;
@@ -126,7 +129,7 @@
     $("#mix").textContent = names.length > 1 ? "Собрано из: " + names.join(" + ") : "Как в проекте " + names[0];
     $("#total").textContent = rub(est.total);
     $("#area").textContent = m2(est.area) + " по внешнему контуру";
-    $("#stageBadge").textContent = houseOf(cat.byId[state.core].house).name + (names.length > 1 ? " + ещё " + (names.length - 1) : "") + " · " + GC.stages[stageFor(s)];
+    $("#stageBadge").textContent = houseOf(cat.byId[state.core].house).name + (names.length > 1 ? " + ещё " + (names.length - 1) : "") + " · " + (s.id === "house" ? "проект" : s.id === "estimate" ? "ваш дом" : GC.stages[stageFor(s)]);
     if (view){
       view.build(res, state.finishes);
       view.setStage(stageFor(s));
@@ -135,7 +138,7 @@
     try { history.replaceState(null, "", "#" + cat.byId[state.core].house); } catch (e) {}
     var pb = $("#pdfBtn"); if (pb) pb.addEventListener("click", function(){ makePDF(res, est); });
   }
-  function stageFor(s){ return s.id === "walls" && !state.upper ? 1 : s.stage; }
+  function stageFor(s){ return s.stage; }
 
   function go(i){
     step = Math.max(0, Math.min(STEPS.length - 1, i)); reached = Math.max(reached, step);

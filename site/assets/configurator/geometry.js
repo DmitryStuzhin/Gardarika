@@ -61,9 +61,24 @@
     var w = this.host.clientWidth || 600, h = this.host.clientHeight || 400;
     this.renderer.setSize(w, h); this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); this.dirty = true;
   };
+  var REDUCE = root.matchMedia && root.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* этап стройки: слои до n видимы; новый слой опускается на место — дом растёт на глазах */
   View.prototype.setStage = function(n){
+    var self = this, prev = this.stage == null ? n : this.stage;
     this.stage = n;
-    this.layers.forEach(function(g, i){ g.visible = i <= n; });
+    this.layers.forEach(function(g, i){
+      g.visible = i <= n;
+      if (!REDUCE && i > prev && i <= n){ g.position.y = 2.2; g.userData.drop = 1; }
+    });
+    if (!REDUCE && n > prev){
+      var t0 = performance.now();
+      (function tick(){
+        var k = Math.min(1, (performance.now() - t0) / 650), e = 1 - Math.pow(1 - k, 3);
+        self.layers.forEach(function(g){ if (g.userData.drop) g.position.y = 2.2 * (1 - e); });
+        self.dirty = true;
+        if (k < 1) requestAnimationFrame(tick); else self.layers.forEach(function(g){ g.userData.drop = 0; g.position.y = 0; });
+      })();
+    }
     this.dirty = true;
   };
   View.prototype.frame = function(V){

@@ -37,7 +37,7 @@
       <p class="cx-badge">3 готовые модели · остальные в разработке</p>
       <h1>Калькулятор дома</h1>
     </div>
-    <p>Выберите дом-основу и соберите свой: возьмите мансарду одного проекта, навес или крыло другого. Модель перестраивается на каждом шаге, смета считается по её объёмам.</p>
+    <p>Выберите проект — и постройте его с нуля: фундамент, стены, второй уровень, кровля, фасад. На любом этапе можно взять решение из другого дома. Смета считается по объёмам модели.</p>
   </div>
 
   <ol class="kc-steps" id="steps" aria-label="Шаги расчёта"></ol>
@@ -49,10 +49,6 @@
         <p class="kc-hint">Тяните, чтобы повернуть · колесо — приблизить</p>
       </div>
       <p class="cx-mix" id="mix"></p>
-      <div class="cx-conflict" id="conflict" hidden role="alert">
-        <p id="conflictText"></p>
-        <div><button type="button" class="btn btn-honey btn-sm" id="conflictFix"></button><button type="button" class="btn btn-line btn-sm" id="conflictCancel">Оставить как было</button></div>
-      </div>
     </div>
 
     <div class="kc-side">
@@ -69,6 +65,13 @@
     </div>
   </div>
 </main>
+
+<!-- плашка конфликта — вне липкого блока 3D, иначе её перекрывает панель шагов -->
+<div class="cx-conflict" id="conflict" hidden role="alert">
+  <p id="conflictText"></p>
+  <div><button type="button" class="btn btn-honey btn-sm" id="conflictFix"></button><button type="button" class="btn btn-line btn-sm" id="conflictCancel">Оставить как было</button></div>
+</div>
+
 
 <script src="assets/vendor/three.min.js"></script>
 <script src="assets/vendor/OrbitControls.js"></script>
