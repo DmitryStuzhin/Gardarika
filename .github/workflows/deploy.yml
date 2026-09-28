@@ -48,7 +48,7 @@ jobs:
           rsync -az --delete --delete-excluded --chmod=D755,F644 \
             --exclude calc-src/ --exclude tools/ --exclude README.md --exclude calculator-legacy.html \
             site/ "deploy@$HOST:/var/www/gardarika/"
-          rsync -az deploy/lead_server.py "deploy@$HOST:/home/deploy/lead_server.py"
+          rsync -az deploy/lead_server.py deploy/telegram-chats.txt "deploy@$HOST:/home/deploy/"
           ssh "deploy@$HOST" "sudo systemctl restart gardarika-lead"
 
       - name: Проверить, что сайт отвечает

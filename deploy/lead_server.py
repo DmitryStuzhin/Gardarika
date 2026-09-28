@@ -6,7 +6,8 @@
 
 Переменные окружения (задаются в /etc/gardarika-lead.env):
   TELEGRAM_BOT_TOKEN — токен бота от @BotFather
-  TELEGRAM_CHAT_ID   — куда присылать заявки (ваш id или id группы)
+  TELEGRAM_CHAT_ID   — запасной получатель, если нет файла получателей
+Получатели заявок — /home/deploy/telegram-chats.txt (копия deploy/telegram-chats.txt из репозитория).
 Заявки также дописываются в /var/lib/gardarika/leads.jsonl — на случай, если Telegram недоступен.
 """
 import json
@@ -19,6 +20,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 CHAT = os.environ.get("TELEGRAM_CHAT_ID", "")
+CHATS_FILE = os.environ.get("CHATS_FILE", "/home/deploy/telegram-chats.txt")
 LOG = os.environ.get("LEADS_FILE", "/var/lib/gardarika/leads.jsonl")
 PORT = int(os.environ.get("PORT", "8081"))
 TG_API = os.environ.get("TELEGRAM_API", "https://api.telegram.org")
@@ -30,17 +32,33 @@ def clean(v, n):
     return re.sub(r"\s+", " ", str(v or "")).strip()[:n]
 
 
-def send_telegram(text):
-    if not (TOKEN and CHAT):
-        return False
-    data = urllib.parse.urlencode({"chat_id": CHAT, "text": text, "disable_web_page_preview": "true"}).encode()
-    req = urllib.request.Request(f"{TG_API}/bot{TOKEN}/sendMessage", data=data)
+def recipients():
+    """Получатели из deploy/telegram-chats.txt (приезжает с выкладкой); если файла нет — из TELEGRAM_CHAT_ID.
+    Файл читается при каждой заявке, поэтому смена получателей не требует перезапуска."""
     try:
-        with urllib.request.urlopen(req, timeout=10) as r:
-            return r.status == 200
-    except Exception as e:  # noqa: BLE001 — любая сетевая ошибка: заявка останется в файле
-        print("telegram error:", e, flush=True)
+        with open(CHATS_FILE, encoding="utf-8") as f:
+            ids = [ln.split("#")[0].strip() for ln in f]
+        ids = [i for i in ids if i]
+        if ids:
+            return ids
+    except OSError:
+        pass
+    return [CHAT] if CHAT else []
+
+
+def send_telegram(text):
+    if not TOKEN:
         return False
+    ok = False
+    for chat in recipients():
+        data = urllib.parse.urlencode({"chat_id": chat, "text": text, "disable_web_page_preview": "true"}).encode()
+        req = urllib.request.Request(f"{TG_API}/bot{TOKEN}/sendMessage", data=data)
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                ok = ok or r.status == 200
+        except Exception as e:  # noqa: BLE001 — любая сетевая ошибка: заявка останется в файле
+            print("telegram error for", chat, ":", e, flush=True)
+    return ok
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -99,5 +117,5 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print(f"lead server on 127.0.0.1:{PORT}, telegram {'on' if TOKEN and CHAT else 'OFF'}", flush=True)
+    print(f"lead server on 127.0.0.1:{PORT}, telegram {'on' if TOKEN else 'OFF'}, recipients: {len(recipients())}", flush=True)
     ThreadingHTTPServer(("127.0.0.1", PORT), Handler).serve_forever()

@@ -11,7 +11,7 @@ git clone -q --depth 1 -b "$BRANCH" "$REPO" "$TMP/g"
 rsync -a --delete --chmod=D755,F644 \
   --exclude calc-src/ --exclude tools/ --exclude README.md --exclude calculator-legacy.html \
   "$TMP/g/site/" /var/www/gardarika/
-install -m 644 -o deploy -g deploy "$TMP/g/deploy/lead_server.py" /home/deploy/lead_server.py
+install -m 644 -o deploy -g deploy "$TMP/g/deploy/lead_server.py" "$TMP/g/deploy/telegram-chats.txt" /home/deploy/
 install -m 755 "$TMP/g/deploy/update-site.sh" /usr/local/bin/gardarika-update
 chown -R deploy:deploy /var/www/gardarika
 systemctl restart gardarika-lead
