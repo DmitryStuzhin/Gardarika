@@ -44,6 +44,16 @@ DOMAIN=ваш-домен.ru EMAIL=info@gardarika.moscow TG_TOKEN=123456:ABC... T
 Если домен ещё не заработал, HTTPS можно включить позже одной командой, которую напечатает скрипт:
 `certbot --nginx --redirect -d ваш-домен.ru -d www.ваш-домен.ru`.
 
+## 4½. Автоматика (один раз)
+
+На сервере от root:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-design-skills-non-ai-hyjlsh/deploy/enable-auto.sh | bash
+```
+
+Обновит сайт, поставит `gardarika-update`, включит автоматический HTTPS (таймер каждые 15 минут проверяет домен) и напечатает ключ для GitHub.
+
 ## 5. GitHub
 
 Репозиторий → **Settings → Secrets and variables → Actions → New repository secret**:
