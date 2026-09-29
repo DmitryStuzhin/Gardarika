@@ -109,3 +109,10 @@
   .kc-panel > *,.kc-panel .cx-opt,.kc-panel .kc-house,.kc-sum b,.cx-conflict{animation:none !important}
   .cx-opt:hover,.kc-house:hover,.cx-opt:active{transform:none}
 }
+/* ноутбуки 900–1180px: модель и шаги остаются рядом, чтобы видеть, как меняется дом */
+@media (max-width:1180px) and (min-width:901px){
+  .kc-grid{grid-template-columns:minmax(0,11fr) minmax(0,10fr);gap:20px}
+  .kc-grid .cx-stage{position:sticky;top:88px}
+  .kc-grid .cx-viewer{height:min(58vh,560px);min-height:320px}
+  .kc-head{grid-template-columns:minmax(0,1fr)}
+}

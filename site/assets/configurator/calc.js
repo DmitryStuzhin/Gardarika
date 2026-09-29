@@ -165,7 +165,7 @@
     hideConflict(); render(false);
     /* новый шаг начинаем с заголовка, если он ушёл за верх экрана */
     var top = $("#panel").getBoundingClientRect().top;
-    if (top < 90 || window.innerWidth < 1180) window.scrollTo({top: Math.max(0, scrollY + top - 96), behavior: REDUCE ? "auto" : "smooth"});
+    if (top < 90 || window.innerWidth <= 900) window.scrollTo({top: Math.max(0, scrollY + top - 96), behavior: REDUCE ? "auto" : "smooth"});
   }
 
   /* ---------- выбор с проверкой совместимости ---------- */
