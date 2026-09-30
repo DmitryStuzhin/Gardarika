@@ -55,4 +55,7 @@ jobs:
         env:
           HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
-          curl -fsS -o /dev/null -w "сервер ответил %{http_code}\n" "http://$HOST/"
+          # после включения HTTPS сервер отдаёт сайт по 443; по голому IP сертификат не совпадает — проверяем без проверки имени
+          code=$(curl -sSk -o /dev/null -w "%{http_code}" "https://$HOST/" || true)
+          [ "$code" = "200" ] || code=$(curl -sS -o /dev/null -w "%{http_code}" "http://$HOST/")
+          echo "сервер ответил $code"; [ "$code" = "200" ]
