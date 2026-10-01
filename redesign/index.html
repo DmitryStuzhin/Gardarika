@@ -130,6 +130,8 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 .j-kicker{color:#f6ead7;letter-spacing:.26em;margin-bottom:calc(22*var(--t));text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .j-h1{margin:0;color:#fff;line-height:.94;font-weight:400;text-shadow:0 6px 40px rgba(20,24,10,.45)}
 .j-h1 span{display:block;font-size:clamp(50px, 8.6vw, 144px)}
+.j-h1 .dom{display:inline;font-size:inherit}
+.j-h1 .l1{position:relative;left:0}
 .j-h1 .l1{font-family:'Playfair Display',Georgia,serif;font-style:italic;letter-spacing:-.04em}
 .j-h1 .l2{font-family:var(--body);letter-spacing:-.065em;margin-top:-.03em}
 .j-veil{position:absolute;inset:0;z-index:5;pointer-events:none;
@@ -502,7 +504,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
           <div class="j-text" id="jText">
             <div class="j-kicker lbl ha ha-fade" style="animation-delay:.2s">Бюро полного цикла · Москва и область</div>
             <h1 class="j-h1">
-              <span class="l1 ha ha-reveal" style="animation-delay:.35s">Дом, собранный</span>
+              <span class="l1 ha ha-reveal" style="animation-delay:.35s"><span class="dom">Дом,</span> собранный</span>
               <span class="l2 ha ha-reveal" style="animation-delay:.55s">вокруг вашей жизни</span>
             </h1>
           </div>
@@ -836,6 +838,29 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   var SPOT_R = 260;
   function measure(){ SPOT_R = innerWidth < 600 ? 150 : innerWidth < 1100 ? 210 : 260; spot.style.setProperty("--r", SPOT_R + "px"); reveal.style.setProperty("--r", SPOT_R + "px"); }
   measure(); addEventListener("resize", measure);
+
+  /* «Дом» не должен прятаться за ближней сосной: сдвигаем первую строку в сторону ствола,
+     который она пересекает (координаты ствола — в кадре 1920×1080, слой обрезан как cover) */
+  var l1 = $(".j-h1 .l1"), dom = $(".j-h1 .dom"), PINES = [[590, 706], [1266, 1372]];
+  function placeDom(){
+    l1.style.left = "0px";
+    var W = innerWidth, H = pin.clientHeight;
+    if (W / H < 1) return;
+    var LW = W * 1.06, LH = H * 1.06, s = Math.max(LW / 1920, LH / 1080), ox = -W * .03 + (LW - 1920 * s) / 2;
+    var d = dom.getBoundingClientRect(), gap = 30, shift = 0;
+    PINES.forEach(function(pn){
+      var pl = ox + pn[0] * s, pr = ox + pn[1] * s;
+      if (d.right + shift < pl - gap || d.left + shift > pr + gap) return;
+      // по возможности вправо: слева стоит крайняя сосна, туда «Дом» уходить не должен
+      var right = pr + gap - d.left, left = d.right - (pl - gap), rg = document.createRange(); rg.selectNodeContents(l1); var lineR = rg.getBoundingClientRect().right;
+      shift = lineR + right < W - 24 ? right : -left;
+    });
+    l1.style.left = shift.toFixed(0) + "px";
+  }
+  var pdT; addEventListener("resize", function(){ clearTimeout(pdT); pdT = setTimeout(placeDom, 150); });
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function(){ setTimeout(placeDom, 50); });
+  if (document.fonts && document.fonts.load) document.fonts.load("italic 400 100px 'Playfair Display'", "Дом").then(function(){ placeDom(); });
+  addEventListener("load", function(){ placeDom(); setTimeout(placeDom, 1200); });
 
   /* после входной анимации прозрачностью управляет прокрутка */
   $$(".journey .ha").forEach(function(el){ el.addEventListener("animationend", function(){ el.classList.remove("ha", "ha-fade", "ha-reveal"); }, {once:true}); });
