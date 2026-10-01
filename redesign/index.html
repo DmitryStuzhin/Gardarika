@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Гардарика — дом, собранный вокруг вашей жизни</title>
+<title>Гардарика</title>
 <meta name="description" content="Бюро полного цикла: архитектура, производство и строительство загородных домов в Москве и Московской области.">
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.className="anim";setTimeout(function(){document.documentElement.classList.remove("anim")},2400);}</script>
 <style>
@@ -43,6 +43,7 @@
   --label:'Tektur','Golos Text',sans-serif;
   --body:'Golos Text',-apple-system,'Helvetica Neue',Arial,sans-serif;
   --cut:14px;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
@@ -97,109 +98,117 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 .cn-tl{left:0;top:0}.cn-br{right:0;bottom:0}.cn-tr{right:0;top:0}.cn-bl{left:0;bottom:0}
 
 /* =====================================================================
-   ПЕРВЫЙ ЭКРАН — фасад, под курсором чертёж; прокрутка «роняет» в окно
+   ПУТЬ — лес с заголовком между стволами → поворот на полянку →
+   стройка (видео, ведомые прокруткой) → готовый дом с чертежом
    ===================================================================== */
-.fall{position:relative;height:280vh;background:#000}
-.fall-pin{position:sticky;top:0;height:100vh;height:100svh;min-height:560px;overflow:hidden;isolation:isolate}
-.fall-scene{position:absolute;inset:0;will-change:transform;z-index:1}
-.fall-zoom{position:absolute;inset:0;animation:heroZoom 1.8s cubic-bezier(.16,1,.3,1) both}
-.fall-zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.fall-reveal{--x:-999px;--y:-999px;--r:260px;
-  -webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, #000 40%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.4) 75%, rgba(0,0,0,.12) 88%, transparent 100%);
-          mask-image:radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, #000 40%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.4) 75%, rgba(0,0,0,.12) 88%, transparent 100%)}
-.fall-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(180deg, rgba(8,7,5,.55) 0%, rgba(8,7,5,.05) 30%, rgba(8,7,5,0) 52%, rgba(8,7,5,.5) 80%, rgba(8,7,5,.82) 100%)}
-.fall-mid{position:absolute;left:0;right:0;top:50%;margin-top:-1em;z-index:5;text-align:center;padding:0 24px;opacity:0;pointer-events:none}
-.fall-mid .lbl{color:rgba(214,232,255,.85);letter-spacing:.22em}
-.fall-mid p{margin:16px 0 0;font-size:clamp(34px, 5.4vw, 84px);line-height:1;letter-spacing:-.045em;color:#fff;text-shadow:0 4px 30px rgba(5,14,28,.6)}
-.fall-mid em{font-family:'Playfair Display',Georgia,serif;font-weight:400}
-.fall-dark{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;background:#0b1d33}
-
-/* кольцо прожектора */
-.spot{position:absolute;left:0;top:0;width:calc(var(--r) * 2);height:calc(var(--r) * 2);z-index:3;pointer-events:none;border-radius:50%;
-      transform:translate(-999px,-999px);opacity:0;transition:opacity .6s ease}
-.spot.on{opacity:1}
-.spot::before{content:"";position:absolute;inset:18%;border-radius:50%;border:1px dashed rgba(214,232,255,.28)}
-.spot::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;
-  background:linear-gradient(rgba(220,236,255,.8),rgba(220,236,255,.8)) center/1px 100% no-repeat, linear-gradient(rgba(220,236,255,.8),rgba(220,236,255,.8)) center/100% 1px no-repeat}
-.spot-tag{position:absolute;left:calc(50% + 22%);top:calc(50% + 22%);color:rgba(220,236,255,.9);font-size:10px;letter-spacing:.18em;white-space:nowrap;
-          padding:6px 9px;background:rgba(11,29,51,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-
-/* текст первого экрана */
-.fall-copy{position:absolute;top:15%;left:0;right:0;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;pointer-events:none;will-change:transform,opacity,filter}
-.fall-kicker{color:var(--cream);letter-spacing:.24em;margin-bottom:calc(22*var(--t))}
-.fall-h1{margin:0;color:#fff;line-height:.95;font-weight:400}
-.fall-h1 span{display:block;font-size:clamp(48px, 8.2vw, 132px)}
-.fall-h1 .l1{font-family:'Playfair Display',Georgia,serif;font-style:italic;letter-spacing:-.04em}
-.fall-h1 .l2{font-family:var(--body);letter-spacing:-.065em;margin-top:-.04em}
-.fall-l,.fall-r{position:absolute;z-index:5;max-width:290px;will-change:opacity}
-.fall-l{left:calc(64*var(--t));bottom:calc(120*var(--t))}
-.fall-r{right:calc(64*var(--t));bottom:calc(120*var(--t));display:flex;flex-direction:column;align-items:flex-start;gap:18px}
-.fall-l p,.fall-r p{margin:0;font-size:14px;line-height:1.65;color:rgba(243,237,228,.8)}
-.fall-l .lbl{display:block;color:rgba(214,232,255,.9);margin-bottom:12px;letter-spacing:.18em}
-.fall-r .row{display:flex;gap:8px;flex-wrap:wrap}
-.fall-r .btn{height:46px;padding:0 22px}
-.fall-cue{position:absolute;left:50%;bottom:calc(52*var(--t));transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:10px;color:rgba(243,237,228,.8);text-decoration:none}
-.fall-cue svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;animation:nudge 1.8s ease-in-out infinite}
+.journey{position:relative;height:1260vh;background:#0f140d}
+.j-pin{position:sticky;top:0;height:100vh;height:100svh;min-height:560px;overflow:hidden;isolation:isolate;--mx:0;--my:0}
+.j-pan{position:absolute;inset:0;will-change:transform;z-index:1}
+.j-panel{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}
+/* поляна стоит справа с нахлёстом 14% и растушёвкой — шва при повороте не видно */
+.j-clear{left:86%;z-index:2;-webkit-mask-image:linear-gradient(90deg, transparent 0, #000 14%);mask-image:linear-gradient(90deg, transparent 0, #000 14%)}
+.j-panel img,.j-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.j-layer{position:absolute;inset:-3%;will-change:transform}
+.j-bg{z-index:1}
+.j-front{z-index:4;pointer-events:none}
+/* подлесок поверх текста: тот же кадр, видна только нижняя часть — заголовок уходит в кусты */
+.j-floor{z-index:3;pointer-events:none;-webkit-mask-image:linear-gradient(180deg, transparent 60%, #000 74%);mask-image:linear-gradient(180deg, transparent 60%, #000 74%)}
+.j-rays{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:screen;opacity:.55;
+  background:
+    linear-gradient(112deg, rgba(255,214,150,.0) 18%, rgba(255,214,150,.22) 24%, rgba(255,214,150,0) 31%),
+    linear-gradient(118deg, rgba(255,214,150,0) 34%, rgba(255,220,160,.14) 39%, rgba(255,214,150,0) 45%),
+    radial-gradient(70% 60% at 8% 0%, rgba(255,205,140,.35), rgba(255,205,140,0) 70%);
+  animation:rays 9s ease-in-out infinite alternate}
+@keyframes rays{from{opacity:.4;transform:translateX(-1.5%)}to{opacity:.7;transform:translateX(1.5%)}}
+.j-dust{position:absolute;inset:0;z-index:3;pointer-events:none}
+.j-dust i{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,232,190,.8);filter:blur(.6px);opacity:0;animation:dust linear infinite}
+@keyframes dust{0%{opacity:0;transform:translate(0,0)}15%{opacity:.9}85%{opacity:.6}100%{opacity:0;transform:translate(60px,-90px)}}
+.j-text{position:absolute;left:0;right:0;top:27%;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;will-change:transform,opacity}
+.j-kicker{color:#f6ead7;letter-spacing:.26em;margin-bottom:calc(22*var(--t));text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.j-h1{margin:0;color:#fff;line-height:.94;font-weight:400;text-shadow:0 6px 40px rgba(20,24,10,.45)}
+.j-h1 span{display:block;font-size:clamp(46px, 7.6vw, 128px)}
+.j-h1 .l1{font-family:'Playfair Display',Georgia,serif;font-style:italic;letter-spacing:-.04em}
+.j-h1 .l2{font-family:var(--body);letter-spacing:-.065em;margin-top:-.03em}
+.j-veil{position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,7,5,.5) 0%, rgba(8,7,5,0) 22%, rgba(8,7,5,0) 62%, rgba(8,7,5,.6) 100%)}
+.j-l,.j-r{position:absolute;z-index:6;max-width:300px}
+.j-l{left:calc(64*var(--t));bottom:calc(120*var(--t))}
+.j-r{right:calc(64*var(--t));bottom:calc(120*var(--t));display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.j-l p,.j-r p{margin:0;font-size:14px;line-height:1.65;color:rgba(243,237,228,.86)}
+.j-l .lbl{display:block;color:var(--cream);margin-bottom:12px;letter-spacing:.18em}
+.j-r .row{display:flex;gap:8px;flex-wrap:wrap}
+.j-r .btn{height:46px;padding:0 22px}
+.j-cue{position:absolute;left:50%;bottom:calc(52*var(--t));transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:10px;color:rgba(243,237,228,.85);text-decoration:none}
+.j-cue svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;animation:nudge 1.8s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
 
-@keyframes heroReveal{0%{opacity:0;transform:translateY(28px);filter:blur(12px)}100%{opacity:1;transform:none;filter:blur(0)}}
-@keyframes heroFadeUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
-@keyframes heroZoom{0%{transform:scale(1.12)}100%{transform:scale(1)}}
-.ha{opacity:0;animation-fill-mode:forwards;animation-timing-function:cubic-bezier(.16,1,.3,1)}
-.ha-reveal{animation-name:heroReveal;animation-duration:1.1s}
-.ha-fade{animation-name:heroFadeUp;animation-duration:1s}
-@keyframes drawX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes drawY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-.anim .fall .ln-t,.anim .fall .ln-b{animation:drawX .7s var(--e-line) .3s both}
-.anim .fall .ln-l,.anim .fall .ln-r{animation:drawY .7s var(--e-line) .3s both}
+/* видео стройки и финальный кадр поверх панорамы */
+.j-video{position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none}
+.j-video.on{opacity:1}
+.j-video video,.j-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;visibility:hidden}
+.j-video video.on,.j-video img.on{visibility:visible}
+.j-video .j-final-bp{--x:-999px;--y:-999px;--r:260px;
+  -webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, #000 40%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.4) 75%, rgba(0,0,0,.12) 88%, transparent 100%);
+          mask-image:radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, #000 40%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.4) 75%, rgba(0,0,0,.12) 88%, transparent 100%)}
 
-/* =====================================================================
-   СТРОЙКА — 3D-сцена, ведомая прокруткой
-   ===================================================================== */
-.build{position:relative;height:1000vh;background:#0b1d33}
-.build-pin{position:sticky;top:0;height:100vh;height:100svh;min-height:560px;overflow:hidden;isolation:isolate}
-#buildCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
-.build-shade{position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(90deg, rgba(6,8,10,.55), rgba(6,8,10,0) 32%, rgba(6,8,10,0) 70%, rgba(6,8,10,.35)),
-             linear-gradient(180deg, rgba(6,8,10,0) 60%, rgba(6,8,10,.6))}
-.b-phases{position:absolute;left:calc(52*var(--t));top:40%;transform:translateY(-50%);list-style:none;margin:0;padding:0;z-index:5}
+/* кольцо прожектора на готовом доме */
+.spot{position:absolute;left:0;top:0;width:calc(var(--r) * 2);height:calc(var(--r) * 2);z-index:6;pointer-events:none;border-radius:50%;
+      transform:translate(-999px,-999px);opacity:0;transition:opacity .6s ease}
+.spot.on{opacity:1}
+.spot::before{content:"";position:absolute;inset:18%;border-radius:50%;border:1px dashed rgba(214,232,255,.3)}
+.spot::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;
+  background:linear-gradient(rgba(220,236,255,.8),rgba(220,236,255,.8)) center/1px 100% no-repeat, linear-gradient(rgba(220,236,255,.8),rgba(220,236,255,.8)) center/100% 1px no-repeat}
+.spot-tag{position:absolute;left:calc(50% + 22%);top:calc(50% + 22%);color:rgba(220,236,255,.92);font-size:10px;letter-spacing:.18em;white-space:nowrap;
+          padding:6px 9px;background:rgba(11,29,51,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* интерфейс стройки */
+.j-hud{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
+.j-hud .shade{position:absolute;inset:0;background:linear-gradient(90deg, rgba(6,8,10,.5), rgba(6,8,10,0) 34%, rgba(6,8,10,0) 72%, rgba(6,8,10,.3)), linear-gradient(180deg, rgba(6,8,10,0) 58%, rgba(6,8,10,.62))}
+.b-phases{position:absolute;left:calc(52*var(--t));top:40%;transform:translateY(-50%);list-style:none;margin:0;padding:0}
 .b-phases li{height:calc(30*var(--t));display:flex;align-items:center;gap:calc(10*var(--t));position:relative;
-  font-family:var(--label);font-weight:700;font-size:calc(10*var(--t));letter-spacing:.14em;text-transform:uppercase;color:rgba(240,232,220,.32);transition:color .4s}
+  font-family:var(--label);font-weight:700;font-size:calc(10*var(--t));letter-spacing:.14em;text-transform:uppercase;color:rgba(240,232,220,.4);transition:color .4s;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 .b-phases li .n{font-weight:400;opacity:.7}
-.b-phases li.done{color:rgba(240,232,220,.55)}
+.b-phases li.done{color:rgba(240,232,220,.65)}
 .b-phases li.on{color:#fff}
 .b-phases li.on::before{content:"";position:absolute;left:calc(-14*var(--t));top:50%;width:calc(6*var(--t));height:calc(7*var(--t));transform:translateY(-50%);background:var(--cream)}
-.b-meter{position:absolute;right:calc(64*var(--t));top:50%;transform:translateY(-50%);z-index:5;text-align:right;color:rgba(240,232,220,.55)}
+.b-meter{position:absolute;right:calc(64*var(--t));top:50%;transform:translateY(-50%);text-align:right;color:rgba(240,232,220,.7);text-shadow:0 1px 10px rgba(0,0,0,.45)}
 .b-meter b{display:block;font-family:var(--label);font-weight:700;font-size:calc(56*var(--t));line-height:1;color:#fff}
 .b-meter .of{display:block;margin-top:8px}
 .b-meter .pct{display:block;margin-top:26px;color:var(--cream)}
-.b-meter .vbar{position:absolute;right:calc(-18*var(--t));top:0;bottom:0;width:1px;background:rgba(255,255,255,.14)}
+.b-meter .vbar{position:absolute;right:calc(-18*var(--t));top:0;bottom:0;width:1px;background:rgba(255,255,255,.2)}
 .b-meter .vbar i{position:absolute;left:0;right:0;bottom:0;top:0;background:var(--cream);transform-origin:bottom;transform:scaleY(var(--p,0))}
-.b-cap{position:absolute;left:calc(64*var(--t));bottom:calc(110*var(--t));z-index:5;max-width:min(470px, 80vw)}
+.b-cap{position:absolute;left:calc(64*var(--t));bottom:calc(110*var(--t));max-width:min(480px, 80vw)}
 .b-cap .lbl{color:var(--cream);letter-spacing:.2em}
-.b-cap h2{margin:14px 0 10px;font-size:clamp(32px, 4vw, 60px);line-height:1;letter-spacing:-.025em;font-weight:700}
+.b-cap h2{margin:14px 0 10px;font-size:clamp(32px, 4vw, 60px);line-height:1;letter-spacing:-.025em;font-weight:700;text-shadow:0 4px 30px rgba(0,0,0,.4)}
 .b-cap h2 em{font-family:'Playfair Display',Georgia,serif;font-weight:400;letter-spacing:-.03em}
-.b-cap p{margin:0;color:rgba(243,237,228,.8);font-size:15.5px;line-height:1.6}
+.b-cap p{margin:0;color:rgba(243,237,228,.88);font-size:15.5px;line-height:1.6;text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .b-cap > *{transition:opacity .35s ease, transform .45s var(--e-mask), filter .35s ease}
 .b-cap.swapping > *{opacity:0;transform:translateY(14px);filter:blur(6px)}
-.b-progress{position:absolute;left:calc(30*var(--u));right:calc(30*var(--u));bottom:calc(31*var(--u));height:1px;z-index:6;overflow:hidden}
+.b-progress{position:absolute;left:calc(30*var(--u));right:calc(30*var(--u));bottom:calc(31*var(--u));height:1px;overflow:hidden;background:rgba(255,255,255,.08)}
 .b-progress i{position:absolute;inset:0;background:var(--cream);transform-origin:left;transform:scaleX(var(--p,0))}
-.b-note{position:absolute;right:calc(64*var(--t));bottom:calc(52*var(--t));z-index:5;color:rgba(240,232,220,.45);font-size:9.5px}
-.b-hint{position:absolute;left:50%;bottom:calc(52*var(--t));transform:translateX(-50%);z-index:5;color:rgba(243,237,228,.75);display:flex;gap:10px;align-items:center;transition:opacity .5s}
-.b-hint svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;animation:nudge 1.8s ease-in-out infinite}
-.b-end{background:radial-gradient(60% 50% at 50% 50%, rgba(8,8,10,.55), rgba(8,8,10,0) 75%);position:absolute;inset:0;z-index:7;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;opacity:0;pointer-events:none}
-.b-end.live{pointer-events:auto}
-.b-end h2{margin:0;font-size:clamp(44px, 7vw, 112px);line-height:.95;font-weight:400;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.35)}
-.b-end h2 .l1{display:block;font-family:'Playfair Display',Georgia,serif;font-style:italic;letter-spacing:-.04em}
-.b-end h2 .l2{display:block;letter-spacing:-.06em}
-.b-end p{color:rgba(243,237,228,.85);max-width:46ch;line-height:1.6;margin:22px 0 28px}
-.b-end .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.build.nogl{height:auto}
-.build.nogl .build-pin{position:relative}
-.build.nogl #buildCanvas{display:none}
-.build-fallback{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.build.nogl .build-fallback{display:block}
+.b-note{position:absolute;right:calc(64*var(--t));bottom:calc(52*var(--t));color:rgba(240,232,220,.55);font-size:9.5px}
+.b-load{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:rgba(243,237,228,.8);opacity:0;transition:opacity .3s}
+.b-load.on{opacity:1}
+.j-end{position:absolute;left:0;right:0;bottom:calc(96*var(--t));z-index:7;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px;opacity:0;pointer-events:none}
+.j-end.live{pointer-events:auto}
+.j-end .lbl{color:rgba(220,236,255,.92);letter-spacing:.22em;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.j-end h2{margin:12px 0 0;font-size:clamp(40px, 5.6vw, 92px);line-height:.95;font-weight:400;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.5)}
+.j-end h2 .l1{font-family:'Playfair Display',Georgia,serif;font-style:italic;letter-spacing:-.04em}
+.j-end h2 .l2{letter-spacing:-.06em}
+.j-end .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.j-end-shade{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:linear-gradient(180deg, rgba(6,8,10,0) 45%, rgba(6,8,10,.72))}
+
+@keyframes heroReveal{0%{opacity:0;transform:translateY(28px);filter:blur(12px)}100%{opacity:1;transform:none;filter:blur(0)}}
+@keyframes heroFadeUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
+@keyframes heroZoom{0%{transform:scale(1.1)}100%{transform:scale(1)}}
+.ha{opacity:0;animation-fill-mode:forwards;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+.ha-reveal{animation-name:heroReveal;animation-duration:1.2s}
+.ha-fade{animation-name:heroFadeUp;animation-duration:1s}
+.j-forest .j-zoom{position:absolute;inset:0;animation:heroZoom 2.2s cubic-bezier(.16,1,.3,1) both}
+@keyframes drawX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes drawY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.anim .journey .ln-t,.anim .journey .ln-b{animation:drawX .7s var(--e-line) .3s both}
+.anim .journey .ln-l,.anim .journey .ln-r{animation:drawY .7s var(--e-line) .3s both}
 
 /* =====================================================================
    ДАЛЕЕ — страница, в той же грамматике: волосяные линии, фаски, метки
@@ -402,22 +411,25 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   .models{grid-template-columns:1fr}
   .pj{grid-template-columns:1fr}
   .pj-media{min-height:0;aspect-ratio:4/3}
-  .fall-l{display:none}
-  .fall-r{left:calc(40*var(--t));right:calc(40*var(--t));max-width:none;bottom:calc(100*var(--t))}
-  .fall-cue{display:none}
+  .j-l{display:none}
+  .j-r{left:calc(40*var(--t));right:calc(40*var(--t));max-width:none;bottom:calc(100*var(--t))}
+  .j-cue{display:none}
 }
 @media (max-width:600px){
   :root{--u:clamp(.62px, min(100vw / 500, 100dvh / 820), 1.1px);--t:clamp(1.02px, calc(100vw / 489), 1.12px)}
   .frame{left:calc(14*var(--u));right:calc(14*var(--u));top:calc(14*var(--u));bottom:calc(14*var(--u))}
   .logo{left:calc(30*var(--t));top:calc(34*var(--t))}
   .masthead{right:calc(22*var(--t));top:calc(24*var(--t))}
-  .fall-copy{top:18%}
-  .fall-r{left:24px;right:24px;bottom:44px}
-  .fall-r p{font-size:13.5px}
-  .b-meter{top:calc(96*var(--t));transform:none;right:calc(34*var(--t))}
+  .j-text{top:24%}
+  .j-r{left:24px;right:24px;bottom:44px}
+  .j-r p{font-size:13.5px}
+  .j-end{bottom:64px}
+  .b-meter{display:none}
   .b-meter b{font-size:34px}
   .b-meter .pct{margin-top:10px}
-  .b-cap{left:24px;right:24px;bottom:56px;max-width:none}
+  .b-cap{left:24px;right:24px;bottom:auto;top:calc(92*var(--t));max-width:none}
+  .b-cap h2{font-size:30px}
+  .j-hud .shade{background:linear-gradient(180deg, rgba(6,8,10,.72) 0%, rgba(6,8,10,.35) 38%, rgba(6,8,10,0) 55%)}
   .b-cap p{font-size:14px}
   .b-note{display:none}
   .b-hint{bottom:24px}
@@ -431,7 +443,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   .facts{grid-template-columns:1fr 1fr}
   .facts div:nth-child(3){grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line)}
 }
-@media (max-height:620px) and (min-width:601px){ .fall-l,.fall-r p{display:none} .b-cap p{display:none} }
+@media (max-height:620px) and (min-width:601px){ .j-l,.j-r p{display:none} .b-cap p{display:none} }
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
@@ -451,7 +463,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   <div class="masthead" id="masthead">
     <div class="navset" id="navset">
       <nav class="links lbl" aria-label="Разделы">
-        <a href="#build"><span class="t">Стройка</span></a>
+        <a href="#top"><span class="t">Стройка</span></a>
         <a href="#catalog"><span class="t">Проекты</span></a>
         <a href="#method"><span class="t">Метод</span></a>
         <a href="#studio"><span class="t">Конструктор</span></a>
@@ -474,76 +486,85 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
 </header>
 
 <!-- ================================================================== -->
-<section class="fall" id="top" aria-label="Гардарика — дом, собранный вокруг вашей жизни">
-  <div class="fall-pin" id="fallPin">
-    <div class="fall-scene" id="fallScene">
-      <div class="fall-zoom">
-        <img class="fall-base" src="assets/img/house-141.jpg" alt="Одноэтажный дом Pine 141 в сумерках: свет в панорамных окнах, терраса, сосны вокруг" fetchpriority="high">
-        <img class="fall-reveal" id="reveal" src="assets/img/house-141-blueprint.jpg" alt="" aria-hidden="true">
+<section class="journey" id="top" aria-label="Гардарика — дом, собранный вокруг вашей жизни">
+  <div class="j-pin" id="jPin">
+    <div class="j-pan" id="jPan">
+      <div class="j-panel j-forest">
+        <div class="j-zoom">
+          <div class="j-layer j-bg" id="jBg"><img src="media/forest.jpg" alt="Густой хвойный лес на закате" fetchpriority="high"></div>
+          <div class="j-rays" aria-hidden="true"></div>
+          <div class="j-dust" id="jDust" aria-hidden="true"></div>
+          <div class="j-text" id="jText">
+            <div class="j-kicker lbl ha ha-fade" style="animation-delay:.2s">Бюро полного цикла · Москва и область</div>
+            <h1 class="j-h1">
+              <span class="l1 ha ha-reveal" style="animation-delay:.35s">Дом, собранный</span>
+              <span class="l2 ha ha-reveal" style="animation-delay:.55s">вокруг вашей жизни</span>
+            </h1>
+          </div>
+          <div class="j-layer j-floor" id="jFloor" aria-hidden="true"><img src="media/forest.jpg" alt=""></div>
+          <div class="j-layer j-front" id="jFront" aria-hidden="true"><img src="media/trunks.webp" alt=""></div>
+        </div>
       </div>
+      <div class="j-panel j-clear"><img src="media/clearing.jpg" alt="Лесная поляна, размеченная под строительство дома" loading="eager"></div>
+    </div>
+
+    <div class="j-video" id="jVideo" aria-hidden="true">
+      <video data-src="media/build-1.mp4" muted playsinline preload="auto" class="on"></video>
+      <video data-src="media/build-2.mp4" muted playsinline preload="auto"></video>
+      <video data-src="media/build-3.mp4" muted playsinline preload="auto"></video>
+      <video data-src="media/build-4.mp4" muted playsinline preload="auto"></video>
+      <video data-src="media/build-5.mp4" muted playsinline preload="auto"></video>
+      <video data-src="media/build-6.mp4" muted playsinline preload="auto"></video>
+      <img class="j-final" data-src="media/final.jpg" alt="">
+      <img class="j-final-bp" id="reveal" data-src="media/final-blueprint.jpg" alt="">
     </div>
     <div class="spot" id="spot" aria-hidden="true"><span class="spot-tag lbl">Чертёж</span></div>
-    <div class="fall-veil"></div>
-    <div class="fall-mid" id="fallMid" aria-hidden="true"><span class="lbl">Чертёж · Pine 141</span><p><em>Каждый дом</em> начинается с чертежа</p></div>
-    <div class="fall-dark" id="fallDark"></div>
+
+    <div class="j-veil" id="jVeil"></div>
     <div class="frame" aria-hidden="true">
       <i class="ln ln-t"></i><i class="ln ln-b"></i><i class="ln ln-l"></i><i class="ln ln-r"></i>
       <i class="cn cn-tl"></i><i class="cn cn-tr"></i><i class="cn cn-bl"></i><i class="cn cn-br"></i>
     </div>
 
-    <div class="fall-copy" id="fallCopy">
-      <div class="fall-kicker lbl ha ha-fade" style="animation-delay:.1s">Бюро полного цикла · Москва и область</div>
-      <h1 class="fall-h1">
-        <span class="l1 ha ha-reveal" style="animation-delay:.25s">Дом, собранный</span>
-        <span class="l2 ha ha-reveal" style="animation-delay:.42s">вокруг вашей жизни</span>
-      </h1>
+    <div class="j-l ha ha-fade" id="jL" style="animation-delay:.8s">
+      <span class="lbl">Проект · производство · стройка</span>
+      <p>Проектируем изнутри наружу — от маршрутов вашего дня к планировке, конструкции и участку. Одна команда от разметки до ключей.</p>
     </div>
-    <div class="fall-l ha ha-fade" id="fallL" style="animation-delay:.7s">
-      <span class="lbl" id="spotHint">Наведите курсор на фасад</span>
-      <p>Под каждым фасадом — точный чертёж: оси, проёмы, конструкция. Посмотрите сквозь стены Pine 141.</p>
-    </div>
-    <div class="fall-r ha ha-fade" id="fallR" style="animation-delay:.85s">
-      <p>Проектируем изнутри наружу — от маршрутов вашего дня к планировке, конструкции и участку. Проект, производство и стройка — в одном бюро.</p>
+    <div class="j-r ha ha-fade" id="jR" style="animation-delay:.95s">
+      <p>Листайте вниз — и посмотрите, как на лесной поляне собирается дом.</p>
       <div class="row">
-        <a class="btn" href="#build">Войти в дом<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1v10M2 7l4 4 4-4"/></svg></a>
-        <a class="btn ghost" href="#catalog">Проекты</a>
+        <a class="btn" href="#catalog">Проекты</a>
+        <a class="btn ghost" href="#studio">Рассчитать дом</a>
       </div>
     </div>
-    <a class="fall-cue lbl ha ha-fade" id="fallCue" href="#build" style="animation-delay:1.1s"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5 6 6l3.5-3.5M2.5 6.5 6 10l3.5-3.5"/></svg>Листайте — от чертежа к дому</a>
-  </div>
-</section>
+    <a class="j-cue lbl ha ha-fade" id="jCue" href="#top" style="animation-delay:1.2s"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5 6 6l3.5-3.5M2.5 6.5 6 10l3.5-3.5"/></svg>Листайте — к поляне</a>
 
-<!-- ================================================================== -->
-<section class="build" id="build" aria-label="Дом собирается по мере прокрутки">
-  <div class="build-pin">
-    <img class="build-fallback" src="assets/img/house-121.jpg" alt="Дом с мансардой: тёплое дерево на фасаде" loading="lazy">
-    <canvas id="buildCanvas" aria-hidden="true"></canvas>
-    <div class="build-shade"></div>
-    <div class="frame" aria-hidden="true">
-      <i class="ln ln-t"></i><i class="ln ln-l"></i><i class="ln ln-r"></i>
-      <i class="cn cn-tl"></i><i class="cn cn-tr"></i><i class="cn cn-bl"></i><i class="cn cn-br"></i>
+    <div class="j-hud" id="jHud">
+      <div class="shade"></div>
+      <ol class="b-phases" id="bPhases" aria-hidden="true">
+        <li><span class="n">01</span>Фундамент</li>
+        <li><span class="n">02</span>Первый этаж</li>
+        <li><span class="n">03</span>Каркас</li>
+        <li><span class="n">04</span>Обшивка</li>
+        <li><span class="n">05</span>Кровля и окна</li>
+        <li><span class="n">06</span>Отделка</li>
+        <li><span class="n">07</span>Ваш дом</li>
+      </ol>
+      <div class="b-meter lbl" aria-hidden="true"><b id="bNum">01</b><span class="of">/ 07</span><span class="pct" id="bPct">Готовность 0%</span><span class="vbar"><i id="bBar"></i></span></div>
+      <div class="b-cap" id="bCap" aria-live="polite">
+        <div class="lbl" id="bCapK"></div>
+        <h2 id="bCapH"></h2>
+        <p id="bCapP"></p>
+      </div>
+      <div class="b-load lbl" id="bLoad">Загружаем стройку…</div>
+      <div class="b-note lbl">Иллюстративная визуализация</div>
+      <div class="b-progress" aria-hidden="true"><i id="bProg"></i></div>
     </div>
-    <ol class="b-phases" id="bPhases" aria-hidden="true">
-      <li><span class="n">01</span>Разметка</li>
-      <li><span class="n">02</span>Фундамент</li>
-      <li><span class="n">03</span>Стены</li>
-      <li><span class="n">04</span>Кровля</li>
-      <li><span class="n">05</span>Фасад и окна</li>
-      <li><span class="n">06</span>Внутри</li>
-      <li><span class="n">07</span>Ваш дом</li>
-    </ol>
-    <div class="b-meter lbl" aria-hidden="true"><b id="bNum">01</b><span class="of">/ 07</span><span class="pct" id="bPct">Готовность 0%</span><span class="vbar"><i id="bBar"></i></span></div>
-    <div class="b-cap" id="bCap" aria-live="polite">
-      <div class="lbl" id="bCapK">Этап 01 · Разметка</div>
-      <h2 id="bCapH">Сначала — <em>план</em></h2>
-      <p id="bCapP">Дом начинается с чертежа: оси стен, проёмы и маршруты вашего дня переносятся на участок.</p>
-    </div>
-    <div class="b-hint lbl" id="bHint"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5 6 6l3.5-3.5M2.5 6.5 6 10l3.5-3.5"/></svg>Листайте — дом соберётся</div>
-    <div class="b-note lbl">Иллюстративная 3D-визуализация</div>
-    <div class="b-progress" aria-hidden="true"><i id="bProg"></i></div>
-    <div class="b-end" id="bEnd">
-      <h2><span class="l1">Следующий дом —</span><span class="l2">ваш</span></h2>
-      <p>Выберите основу из каталога или соберите свой вариант в конструкторе — с предварительной сметой.</p>
+
+    <div class="j-end-shade" id="jEndShade"></div>
+    <div class="j-end" id="jEnd">
+      <span class="lbl" id="jEndHint">Наведите курсор — посмотрите чертёж</span>
+      <h2><span class="l1">Следующий дом — </span><span class="l2">ваш</span></h2>
       <div class="row">
         <a class="btn" href="#catalog">Выбрать проект</a>
         <a class="btn ghost" href="#studio">Открыть конструктор</a>
@@ -710,7 +731,6 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   </div>
 </dialog>
 
-<script src="assets/js/three.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -760,455 +780,135 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   addEventListener("resize", function(){ if (innerWidth > 900 && mh.classList.contains("open")) setMenu(false); });
 
   /* =====================================================================
-     ПЕРВЫЙ ЭКРАН: прожектор-чертёж; при прокрутке чертёж раскрывается на весь
-     кадр — фасад превращается в чертёж, с которого начинается стройка ниже
-     ===================================================================== */
-  var fall = $("#top"), pin = $("#fallPin"), fScene = $("#fallScene"), reveal = $("#reveal"), spot = $("#spot");
-  var fCopy = $("#fallCopy"), fL = $("#fallL"), fR = $("#fallR"), fCue = $("#fallCue"), fMid = $("#fallMid"), dark = $("#fallDark"), nav = $("#nav");
-  var SPOT_R = 260, W = innerWidth, H = innerHeight;
-  if (!finePointer) $("#spotHint").textContent = "Проведите пальцем по фасаду";
-  function measure(){
-    W = innerWidth; H = pin.clientHeight;
-    SPOT_R = W < 600 ? 150 : W < 1100 ? 210 : 260;
-    spot.style.setProperty("--r", SPOT_R + "px");
-  }
-  measure(); addEventListener("resize", measure);
-  // после входной анимации отдаём прозрачность скрипту прокрутки
-  $$(".fall .ha").forEach(function(el){ el.addEventListener("animationend", function(){ el.style.opacity = el.style.opacity || 1; el.classList.remove("ha", "ha-fade", "ha-reveal"); fallScroll(); }, {once:true}); });
-
-  var mouse = {x:-999, y:-999}, sm = {x:innerWidth * .5, y:innerHeight * .62}, lastMove = -1e9, q = 0, fallVisible = true;
-  addEventListener("pointermove", function(e){ mouse.x = e.clientX; mouse.y = e.clientY; lastMove = performance.now(); }, {passive:true});
-  function fallTick(now){
-    var idle = now - lastMove > 2600, tx = mouse.x, ty = mouse.y;
-    if (idle && reduce) { tx = W * .45; ty = H * .62; }
-    else if (idle) { // сам гуляет по фасаду, пока курсор не двигается
-      var t = now / 1000;
-      tx = W * (.47 + .2 * Math.sin(t * .42)); ty = H * (.6 + .1 * Math.sin(t * .77 + 1.3));
-    }
-    var k = reduce ? 1 : (idle ? .03 : .1);
-    sm.x += (tx - sm.x) * k; sm.y += (ty - sm.y) * k;
-    // по мере прокрутки круг уходит к центру и растёт, пока не накроет кадр целиком
-    var g = smooth(seg(q, .04, .55)), cx = sm.x + (W / 2 - sm.x) * g, cy = sm.y + (H / 2 - sm.y) * g;
-    var r = SPOT_R + Math.pow(g, 1.4) * Math.hypot(W, H) * 1.25;
-    var s = fScene._s || 1, lx = W / 2 + (cx - W / 2) / s, ly = H / 2 + (cy - H / 2) / s;
-    reveal.style.setProperty("--x", lx.toFixed(1) + "px"); reveal.style.setProperty("--y", ly.toFixed(1) + "px");
-    reveal.style.setProperty("--r", (r / s).toFixed(1) + "px");
-    spot.style.transform = "translate(" + (sm.x - SPOT_R).toFixed(1) + "px," + (sm.y - SPOT_R).toFixed(1) + "px)";
-    spot.classList.toggle("on", q < .03);
-  }
-  function fallScroll(){
-    var rc = fall.getBoundingClientRect(), vh = innerHeight;
-    q = clamp(-rc.top / (rc.height - vh), 0, 1);
-    var s = 1 + .08 * smooth(q);                   // лёгкий наезд, без зума в пиксели
-    fScene._s = s;
-    fScene.style.transform = "scale(" + s.toFixed(4) + ")";
-    if (!reduce) fCopy.style.transform = "translateY(" + (-q * 90).toFixed(1) + "px)";
-    fCopy.style.opacity = clamp(1 - q * 3, 0, 1);
-    var side = clamp(1 - q * 3.5, 0, 1);
-    fL.style.opacity = fR.style.opacity = fCue.style.opacity = side;
-    fL.style.visibility = fR.style.visibility = fCue.style.visibility = side ? "" : "hidden";
-    var mid = seg(q, .32, .5) * (1 - seg(q, .78, .92));
-    fMid.style.opacity = mid.toFixed(3);
-    if (!reduce) fMid.style.transform = "translateY(" + ((1 - seg(q, .32, .6)) * 24 - seg(q, .78, .92) * 24).toFixed(1) + "px)";
-    dark.style.opacity = seg(q, .8, .98).toFixed(3);
-    nav.classList.toggle("solid", rc.bottom < vh * .3);
-  }
-  addEventListener("scroll", fallScroll, {passive:true}); addEventListener("resize", fallScroll); fallScroll();
-  if ("IntersectionObserver" in window) new IntersectionObserver(function(es){ fallVisible = es[0].isIntersecting; }).observe(fall);
-  (function loop(now){ if (fallVisible) fallTick(now); requestAnimationFrame(loop); })(performance.now());
-
-  /* =====================================================================
-     СТРОЙКА: дом собирается из блоков по мере прокрутки, камера входит внутрь
+     ПУТЬ: лес → поворот на поляну → стройка (видео по прокрутке) → чертёж
      ===================================================================== */
   (function(){
+  var sec = $("#top"), pin = $("#jPin"), pan = $("#jPan"), bgL = $("#jBg"), floorL = $("#jFloor"), front = $("#jFront"), txt = $("#jText");
+  var jL = $("#jL"), jR = $("#jR"), jCue = $("#jCue"), vwrap = $("#jVideo"), hud = $("#jHud"), endEl = $("#jEnd"), endShade = $("#jEndShade");
+  var vids = $$("#jVideo video"), finalImg = $("#jVideo .j-final"), reveal = $("#reveal"), spot = $("#spot"), nav = $("#nav");
+  var phaseLis = $$("#bPhases li");
+  // отрезки прокрутки в долях всего пути (длина пути — 1160vh)
+  var T_TEXT = 110 / 1160, T_PAN = 230 / 1160, T_BUILD = 1030 / 1160;
+  var easeIO = function(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
   var PH = [
-    {at:0,   k:"Разметка",     h:"Сначала — <em>план</em>",            p:"Дом начинается с чертежа: оси стен, проёмы и маршруты вашего дня переносятся на участок."},
-    {at:.10, k:"Фундамент",    h:"Основание <em>под грунт</em>",        p:"Тип фундамента выбирается по грунту и нагрузке конкретного участка. Здесь показана монолитная плита."},
-    {at:.20, k:"Стены",        h:"Ряд за <em>рядом</em>",               p:"Газобетон, арболит, железобетон или каркас — конструкцию подбираем под климат, бюджет и режим жизни."},
-    {at:.43, k:"Кровля",       h:"Контур <em>закрыт</em>",              p:"Стропильная система и кровля завершают силуэт: здесь — двускатная крыша под 30°."},
-    {at:.57, k:"Фасад и окна", h:"Свет <em>с двух сторон</em>",         p:"Панорамное остекление, вход и фасад: дом закрывается от погоды и раскрывается в сад."},
-    {at:.68, k:"Внутри",       h:"Вокруг <em>вашего дня</em>",          p:"Общая зона на всю ширину дома, спальни — в тихой части. Комнаты встают туда, где проходит ваш день."},
-    {at:.87, k:"Ваш дом",      h:"Сквозь гостиную — <em>на террасу</em>", p:"Проект, производство и стройка — одна команда от разметки до ключей."}
+    {k:"Фундамент",     h:"Основание <em>под грунт</em>",   p:"Разметка переносит план на участок, затем бетонируется фундамент. Тип основания выбирается по грунту конкретного участка."},
+    {k:"Первый этаж",   h:"Стены <em>встают</em>",          p:"Каркас первого этажа собирается по проекту: проёмы окон и дверей — там, где их задумал архитектор."},
+    {k:"Каркас",        h:"Дом <em>обретает форму</em>",    p:"Второй этаж и стропильная система: силуэт дома виден целиком уже на этой стадии."},
+    {k:"Обшивка",       h:"Контур <em>закрыт</em>",         p:"Плиты обшивки придают каркасу жёсткость и закрывают стены и кровлю."},
+    {k:"Кровля и окна", h:"Свет <em>в доме</em>",           p:"Кровля, окна и ветрозащитная мембрана — дом закрывается от погоды."},
+    {k:"Отделка",       h:"Фасад <em>и веранда</em>",       p:"Отделка фасада, камень цоколя, веранда и благоустройство участка."},
+    {k:"Ваш дом",       h:"Дом, собранный <em>вокруг жизни</em>", p:"Проект, производство и стройка — одна команда от разметки до ключей."}
   ];
-  var bsec = $("#build"), canvas = $("#buildCanvas"), phaseLis = $$("#bPhases li");
-  var gl = null, ctxOpts = {antialias: finePointer, alpha:false, powerPreference:"high-performance"};
-  try { gl = canvas.getContext("webgl2", ctxOpts) || canvas.getContext("webgl", ctxOpts); } catch (e) {}
-  if (!window.THREE || !gl) { bsec.classList.add("nogl"); return; }
 
-  var T = THREE, lite = !finePointer || innerWidth < 700;
-  var R = new T.WebGLRenderer({canvas:canvas, context:gl, antialias:finePointer});
-  R.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1.5 : 1.75));
-  R.outputEncoding = T.sRGBEncoding;
-  R.toneMapping = T.ACESFilmicToneMapping; R.toneMappingExposure = 1.05;
-  R.shadowMap.enabled = !lite; R.shadowMap.type = T.PCFSoftShadowMap;
-  var scene = new T.Scene(), cam = new T.PerspectiveCamera(50, 1, .05, 600);
-  scene.fog = new T.Fog(0x0b1d33, 28, 120);
-
-  /* небо — градиентная сфера */
-  var skyU = {top:{value:new T.Color()}, hor:{value:new T.Color()}};
-  var sky = new T.Mesh(new T.SphereGeometry(400, 32, 16), new T.ShaderMaterial({
-    side:T.BackSide, depthWrite:false, fog:false, uniforms:skyU,
-    vertexShader:"varying vec3 vP;void main(){vP=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}",
-    fragmentShader:"uniform vec3 top;uniform vec3 hor;varying vec3 vP;void main(){float h=normalize(vP).y;gl_FragColor=vec4(mix(hor,top,smoothstep(-0.02,0.5,h)),1.0);}"
-  }));
-  scene.add(sky);
-  var SKY = [ // [p, top, horizon, fog, sun, hemi]
-    [0,   "#071426", "#0e2440", "#0b1d33", .55, .55],
-    [.22, "#1d2733", "#4a5664", "#3a4552", 1.45, .7],
-    [.7,  "#222c38", "#56606b", "#454f5a", 1.25, .65],
-    [.86, "#141c2b", "#5b4a4a", "#2b2d36", .55, .45],
-    [1,   "#0b1120", "#b0703f", "#2a2630", .25, .32]
-  ];
-  var cA = new T.Color(), cB = new T.Color();
-  function skyAt(p){
-    for (var i = 0; i < SKY.length - 1 && p > SKY[i + 1][0]; i++);
-    var a = SKY[i], b = SKY[Math.min(i + 1, SKY.length - 1)], t = a === b ? 0 : smooth(clamp((p - a[0]) / (b[0] - a[0]), 0, 1));
-    skyU.top.value.copy(cA.set(a[1])).lerp(cB.set(b[1]), t);
-    skyU.hor.value.copy(cA.set(a[2])).lerp(cB.set(b[2]), t);
-    scene.fog.color.copy(cA.set(a[3])).lerp(cB.set(b[3]), t);
-    sun.intensity = a[4] + (b[4] - a[4]) * t; hemi.intensity = a[5] + (b[5] - a[5]) * t;
-    sun.color.set(0xfff1dc).lerp(cA.set(0xff9a5c), seg(p, .8, 1));
+  /* пылинки в лучах */
+  var dust = $("#jDust");
+  if (!reduce) for (var d = 0; d < 18; d++) {
+    var s = document.createElement("i");
+    s.style.left = (5 + Math.random() * 60) + "%"; s.style.top = (20 + Math.random() * 60) + "%";
+    s.style.animationDuration = (7 + Math.random() * 8) + "s"; s.style.animationDelay = (-Math.random() * 12) + "s";
+    s.style.transform = "scale(" + (.5 + Math.random()) + ")"; dust.appendChild(s);
   }
 
-  /* свет */
-  var hemi = new T.HemisphereLight(0xdfe8f5, 0x2a2620, .6); scene.add(hemi);
-  var sun = new T.DirectionalLight(0xfff1dc, 1.4); sun.position.set(-16, 24, 18); scene.add(sun);
-  sun.castShadow = !lite; sun.shadow.mapSize.set(2048, 2048);
-  var sc = sun.shadow.camera; sc.left = -17; sc.right = 17; sc.top = 17; sc.bottom = -17; sc.near = 1; sc.far = 80; sun.shadow.bias = -.0006; sun.shadow.normalBias = .02;
-  var warm = [[-4.2, 2.5, 1], [0, 2.6, -1.5], [4.6, 2.4, 1.2], [0, 2.4, 2.8]].map(function(v){ var l = new T.PointLight(0xffbf7a, 0, 10, 2); l.position.set(v[0], v[1], v[2]); scene.add(l); return l; });
-
-  /* земля и сетка */
-  var groundMat = new T.MeshStandardMaterial({color:0x0d2340, roughness:1}), cNavy = new T.Color(0x0c2140), cEarth = new T.Color(0x1d1c17);
-  var ground = new T.Mesh(new T.PlaneGeometry(600, 600), groundMat);
-  ground.rotation.x = -Math.PI / 2; ground.position.y = -.42; ground.receiveShadow = true; scene.add(ground);
-  var grid = new T.GridHelper(140, 140, 0x8fb4e0, 0x8fb4e0); grid.position.y = -.4;
-  grid.material.transparent = true; grid.material.opacity = .3; grid.material.depthWrite = false; scene.add(grid);
-
-  /* ---------- геометрия дома (метры) ---------- */
-  var L = 15, D = 9, H = 3, CH = .25, BL = .625, ROOF_Y = 3.2, RISE = 4.5 * Math.tan(Math.PI / 6), RIDGE = ROOF_Y + RISE;
-  // стены: ось, фиксированная координата, начало, длина, толщина, проёмы [s0, s1, y0, y1, тип]
-  var WALLS = [
-    {ax:"x", c: 4.35, s:-7.5, len:15,  th:.3,  op:[[1.5,4.1,.1,2.6,"win"],[5.9,7.1,0,2.3,"door"],[8.9,12.9,.1,2.6,"win"]]},
-    {ax:"x", c:-4.35, s:-7.5, len:15,  th:.3,  op:[[1.5,2.9,.9,2.4,"win"],[5.3,9.7,0,2.6,"slide"],[11.5,13.1,.9,2.4,"win"]]},
-    {ax:"z", c:-7.35, s:-4.2, len:8.4, th:.3,  op:[[3.2,5.2,.9,2.4,"win"]]},
-    {ax:"z", c: 7.35, s:-4.2, len:8.4, th:.3,  op:[[2.6,4.0,.9,2.4,"win"],[5.2,6.4,.9,2.4,"win"]]},
-    {ax:"z", c: 3.2,  s:-4.2, len:3.6, th:.15, op:[[2.5,3.4,0,2.1,"in"]]},
-    {ax:"z", c:-4.4,  s:-4.2, len:3.4, th:.15, op:[[2.3,3.2,0,2.1,"in"]]}
-  ];
-  function place(w, s, y){ return w.ax === "x" ? [w.s + s, y, w.c] : [w.c, y, w.s + s]; }
-
-  // блоки (InstancedMesh), с перевязкой швов и перемычками над проёмами
-  var blocks = [], COURSES = Math.round(H / CH);
-  for (var c = 0; c < COURSES; c++) {
-    var row = [], y0 = c * CH;
-    WALLS.forEach(function(w){
-      var iv = [[0, w.len]];
-      w.op.forEach(function(o){
-        if (y0 < o[3] && y0 + CH > o[2]) {
-          var nx = [];
-          iv.forEach(function(r){ if (o[1] <= r[0] || o[0] >= r[1]) nx.push(r); else { if (o[0] > r[0]) nx.push([r[0], o[0]]); if (o[1] < r[1]) nx.push([o[1], r[1]]); } });
-          iv = nx;
-        }
-      });
-      iv.forEach(function(r){
-        var x = r[0], first = (c % 2) ? BL / 2 : BL;
-        while (x < r[1] - .001) {
-          var l = Math.min(first || BL, r[1] - x); first = 0;
-          row.push({w:w, s:x + l / 2, y:y0 + CH / 2, l:l, h:CH, kind:0});
-          x += l;
-        }
-      });
-    });
-    row.forEach(function(b, i){ b.t = (c + i / row.length) / COURSES; blocks.push(b); });
+  /* загрузка видео: первое сразу, остальные по очереди */
+  function load(el){ if (el.dataset.src && !el.getAttribute("src")) { el.src = el.dataset.src; if (el.load) el.load(); } }
+  var qi = 0;
+  function nextLoad(){
+    if (qi >= vids.length) { load(finalImg); load(reveal); return; }
+    var v = vids[qi++]; load(v);
+    var go = function(){ v.removeEventListener("loadeddata", go); nextLoad(); };
+    if (v.readyState >= 2) nextLoad(); else v.addEventListener("loadeddata", go);
   }
-  WALLS.forEach(function(w){
-    w.op.forEach(function(o){
-      var top = Math.ceil(o[3] / CH - 1e-6) * CH, h = top - o[3];
-      if (o[3] >= H - .01 || h < .02) return;
-      blocks.push({w:w, s:(o[0] + o[1]) / 2, y:o[3] + h / 2, l:o[1] - o[0], h:h, kind:1, t:(top / CH - .5) / COURSES});
-    });
-  });
-  var blockGeo = new T.BoxGeometry(1, 1, 1);
-  var blockMat = new T.MeshStandardMaterial({color:0xffffff, roughness:.92});
-  var BM = new T.InstancedMesh(blockGeo, blockMat, blocks.length);
-  BM.castShadow = BM.receiveShadow = true; BM.instanceMatrix.setUsage(T.DynamicDrawUsage);
-  var cBlock = new T.Color(0xe6e1d6), cLintel = new T.Color(0xa9a59c), cPlaster = new T.Color(0xf3f1ec), tmpC = new T.Color();
-  blocks.forEach(function(b, i){ b.base = (b.kind ? cLintel.clone() : cBlock.clone()).offsetHSL(0, 0, (Math.random() - .5) * .05); });
-  scene.add(BM);
-  var M4 = new T.Matrix4(), V3 = new T.Vector3(), Q0 = new T.Quaternion(), S3 = new T.Vector3();
-  var lastW = -1, lastPl = -1;
-  function updateBlocks(wp, pl){
-    var plGap = .012 * (1 - smooth(clamp(pl * 1.4, 0, 1)));
-    if (Math.abs(wp - lastW) > 1e-5 || Math.abs(pl - lastPl) > 1e-4) {
-      for (var i = 0; i < blocks.length; i++) {
-        var b = blocks[i], a = clamp((wp * 1.06 - b.t) / .06, 0, 1), e = ease(a), pos = place(b.w, b.s, b.y + (1 - e) * 1.8);
-        V3.set(pos[0], pos[1], pos[2]);
-        var gap = b.kind ? 0 : plGap;
-        if (b.w.ax === "x") S3.set(Math.max(b.l - gap, .001) * (a > 0 ? 1 : 0), (b.h - gap) * (a > 0 ? 1 : 0), b.w.th);
-        else S3.set(b.w.th, (b.h - gap) * (a > 0 ? 1 : 0), Math.max(b.l - gap, .001) * (a > 0 ? 1 : 0));
-        if (!a) S3.set(0, 0, 0);
-        BM.setMatrixAt(i, M4.compose(V3, Q0, S3));
-      }
-      BM.instanceMatrix.needsUpdate = true; lastW = wp;
-    }
-    if (Math.abs(pl - lastPl) > 1e-4 || lastPl < 0) {
-      for (var j = 0; j < blocks.length; j++) BM.setColorAt(j, tmpC.copy(blocks[j].base).lerp(cPlaster, pl));
-      BM.instanceColor.needsUpdate = true; lastPl = pl;
-    }
+  // на iOS кадр видео отрисуется после первого play/pause
+  var unlocked = false;
+  function unlock(){ if (unlocked) return; unlocked = true; vids.forEach(function(v){ var p = v.play(); if (p && p.then) p.then(function(){ v.pause(); }).catch(function(){}); }); }
+  addEventListener("touchstart", unlock, {passive:true, once:true});
+  setTimeout(nextLoad, 600);
+
+  /* курсор: параллакс леса и прожектор на готовом доме */
+  var mouse = {x:innerWidth / 2, y:innerHeight * .6}, sm = {x:mouse.x, y:mouse.y}, lastMove = -1e9, par = {x:0, y:0};
+  addEventListener("pointermove", function(e){ mouse.x = e.clientX; mouse.y = e.clientY; lastMove = performance.now(); }, {passive:true});
+  var SPOT_R = 260;
+  function measure(){ SPOT_R = innerWidth < 600 ? 150 : innerWidth < 1100 ? 210 : 260; spot.style.setProperty("--r", SPOT_R + "px"); reveal.style.setProperty("--r", SPOT_R + "px"); }
+  measure(); addEventListener("resize", measure);
+
+  /* после входной анимации прозрачностью управляет прокрутка */
+  $$(".journey .ha").forEach(function(el){ el.addEventListener("animationend", function(){ el.classList.remove("ha", "ha-fade", "ha-reveal"); }, {once:true}); });
+
+  var P = 0, Ps = 0, lastK = -1, lastPhase = -1, capT, visible = true;
+  function readScroll(){
+    var r = sec.getBoundingClientRect(), L = r.height - innerHeight;
+    P = clamp(-r.top / L, 0, 1);
+    nav.classList.toggle("solid", r.bottom < innerHeight * .3 || P > T_TEXT * .6);
+  }
+  addEventListener("scroll", readScroll, {passive:true}); addEventListener("resize", readScroll); readScroll(); Ps = P;
+  if ("IntersectionObserver" in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe(sec);
+
+  function setPhase(ph){
+    if (ph === lastPhase) return;
+    var first = lastPhase < 0; lastPhase = ph;
+    phaseLis.forEach(function(li, j){ li.classList.toggle("on", j === ph); li.classList.toggle("done", j < ph); });
+    $("#bNum").textContent = String(ph + 1).padStart(2, "0");
+    var apply = function(){ $("#bCapK").textContent = "Этап " + String(ph + 1).padStart(2, "0") + " · " + PH[ph].k; $("#bCapH").innerHTML = PH[ph].h; $("#bCapP").textContent = PH[ph].p; $("#bCap").classList.remove("swapping"); };
+    clearTimeout(capT);
+    if (first || reduce) apply(); else { $("#bCap").classList.add("swapping"); capT = setTimeout(apply, 380); }
   }
 
-  // разметка на земле: оси стен, проёмы, размерные линии
-  var planPts = [];
-  function L2(a, b){ planPts.push(a[0], .03, a[1], b[0], .03, b[1]); }
-  WALLS.forEach(function(w){
-    var half = w.th / 2;
-    [-half, half].forEach(function(o){
-      var a = w.ax === "x" ? [w.s, w.c + o] : [w.c + o, w.s], b = w.ax === "x" ? [w.s + w.len, w.c + o] : [w.c + o, w.s + w.len];
-      L2(a, b);
-    });
-    w.op.forEach(function(op){ [op[0], op[1]].forEach(function(s){ var p = place(w, s, 0); if (w.ax === "x") L2([p[0], w.c - .6], [p[0], w.c + .6]); else L2([w.c - .6, p[2]], [w.c + .6, p[2]]); }); });
-  });
-  L2([-7.5, 6.2], [7.5, 6.2]); L2([-7.5, 5.8], [-7.5, 6.6]); L2([7.5, 5.8], [7.5, 6.6]);
-  L2([9, -4.5], [9, 4.5]); L2([8.6, -4.5], [9.4, -4.5]); L2([8.6, 4.5], [9.4, 4.5]);
-  for (var gx = -6; gx <= 6; gx += 3) L2([gx, -5.6], [gx, -6.4]);
-  var planGeo = new T.BufferGeometry(); planGeo.setAttribute("position", new T.Float32BufferAttribute(planPts, 3));
-  var planMat = new T.LineBasicMaterial({color:0xdcecff, transparent:true, opacity:1, depthWrite:false});
-  var plan = new T.LineSegments(planGeo, planMat); scene.add(plan);
-  var planCount = planPts.length / 3;
-
-  // «призрак» будущего дома — каркасные линии
-  var gp = [], hl = L / 2, hd = D / 2;
-  function G(a, b){ gp.push(a[0], a[1], a[2], b[0], b[1], b[2]); }
-  [[-hl, -hd], [hl, -hd], [hl, hd], [-hl, hd]].forEach(function(p, i, arr){ var n = arr[(i + 1) % 4]; G([p[0], 0, p[1]], [n[0], 0, n[1]]); G([p[0], ROOF_Y, p[1]], [n[0], ROOF_Y, n[1]]); G([p[0], 0, p[1]], [p[0], ROOF_Y, p[1]]); });
-  [-hl, hl].forEach(function(x){ G([x, ROOF_Y, -hd], [x, RIDGE, 0]); G([x, ROOF_Y, hd], [x, RIDGE, 0]); });
-  G([-hl, RIDGE, 0], [hl, RIDGE, 0]);
-  var ghostGeo = new T.BufferGeometry(); ghostGeo.setAttribute("position", new T.Float32BufferAttribute(gp, 3));
-  var ghostMat = new T.LineBasicMaterial({color:0x9cc3ff, transparent:true, opacity:.5, depthWrite:false});
-  scene.add(new T.LineSegments(ghostGeo, ghostMat));
-
-  // плита
-  var slab = new T.Mesh(new T.BoxGeometry(L + .6, .42, D + .6), new T.MeshStandardMaterial({color:0x9c9890, roughness:.95}));
-  slab.receiveShadow = slab.castShadow = true; scene.add(slab);
-
-  // армопояс
-  var concrete = new T.MeshStandardMaterial({color:0xa9a59c, roughness:.95});
-  var beams = [[0, 4.35, L, .3], [0, -4.35, L, .3], [-7.35, 0, .3, D], [7.35, 0, .3, D]].map(function(v){
-    var m = new T.Mesh(new T.BoxGeometry(v[2], .2, v[3]), concrete); m.position.set(v[0], H + .1, v[1]); m.castShadow = m.receiveShadow = true; scene.add(m); return m;
-  });
-
-  // фронтоны
-  var gShape = new T.Shape(); gShape.moveTo(-hd, 0); gShape.lineTo(hd, 0); gShape.lineTo(0, RISE); gShape.closePath();
-  var gableGeo = new T.ExtrudeGeometry(gShape, {depth:.3, bevelEnabled:false}); gableGeo.translate(0, 0, -.15); gableGeo.rotateY(Math.PI / 2);
-  var plasterMat = new T.MeshStandardMaterial({color:0xf3f1ec, roughness:.9});
-  var gables = [-7.35, 7.35].map(function(x){ var m = new T.Mesh(gableGeo, plasterMat); m.position.set(x, ROOF_Y, 0); m.castShadow = m.receiveShadow = true; scene.add(m); return m; });
-
-  // стропильные фермы
-  var timber = new T.MeshStandardMaterial({color:0xc69c6a, roughness:.8});
-  var OVH = .6, rafLen = Math.hypot(hd + OVH, RISE + OVH * Math.tan(Math.PI / 6)), trusses = [], NT = 17;
-  function stick(len, a, b){ var m = new T.Mesh(new T.BoxGeometry(.07, .16, len), timber); m.castShadow = true; return m; }
-  for (var ti = 0; ti < NT; ti++) {
-    var g = new T.Group(), x = -7.3 + ti * (14.6 / (NT - 1));
-    var chord = stick(D); chord.position.set(0, ROOF_Y + .08, 0); g.add(chord);
-    [-1, 1].forEach(function(sd){
-      var r = stick(rafLen); r.position.set(0, ROOF_Y + RISE / 2 - OVH * Math.tan(Math.PI / 6) / 2 + .08, sd * (hd + OVH) / 2);
-      r.rotation.x = sd * Math.PI / 6; g.add(r);
-      var dg = stick(Math.hypot(hd / 2, RISE / 2)); dg.position.set(0, ROOF_Y + RISE * .3, sd * hd * .3); dg.rotation.x = -sd * Math.atan2(RISE / 2, hd / 2) * .9; g.add(dg);
-    });
-    var post = new T.Mesh(new T.BoxGeometry(.07, RISE, .12), timber); post.position.set(0, ROOF_Y + RISE / 2, 0); post.castShadow = true; g.add(post);
-    g.position.x = x; g.userData.t = ti / NT; scene.add(g); trusses.push(g);
-  }
-
-  // кровля с фальцем
-  var seam = document.createElement("canvas"); seam.width = 64; seam.height = 8;
-  var sx = seam.getContext("2d"); sx.fillStyle = "#3a3d42"; sx.fillRect(0, 0, 64, 8); sx.fillStyle = "#55595f"; sx.fillRect(0, 0, 4, 8); sx.fillStyle = "#26282c"; sx.fillRect(4, 0, 2, 8);
-  var seamTex = new T.CanvasTexture(seam); seamTex.wrapS = seamTex.wrapT = T.RepeatWrapping; seamTex.repeat.set(32, 1); seamTex.encoding = T.sRGBEncoding;
-  var roofMat = new T.MeshStandardMaterial({map:seamTex, roughness:.45, metalness:.35});
-  var RW = L + 1.2, roofs = [-1, 1].map(function(sd){
-    var geo = new T.BoxGeometry(RW, .06, rafLen + .1); geo.translate(RW / 2, 0, 0);
-    var m = new T.Mesh(geo, roofMat);
-    m.position.set(-RW / 2, ROOF_Y + RISE / 2 - OVH * Math.tan(Math.PI / 6) / 2 + .2, sd * (hd + OVH) / 2);
-    m.rotation.x = sd * Math.PI / 6; m.castShadow = m.receiveShadow = true; scene.add(m); return m;
-  });
-
-  // окна, дверь, раздвижная створка
-  var frameMat = new T.MeshStandardMaterial({color:0x26272a, roughness:.6, metalness:.3});
-  var glassMat = new T.MeshStandardMaterial({color:0xaec4d4, roughness:.05, metalness:.2, transparent:true, opacity:.26, emissive:0xffb15e, emissiveIntensity:0, depthWrite:false, side:T.DoubleSide});
-  var doorMat = new T.MeshStandardMaterial({color:0x4e3220, roughness:.6});
-  var openings = [], door = null, slider = null;
-  WALLS.forEach(function(w){
-    if (w.th < .3) return;
-    w.op.forEach(function(o, idx){
-      var g = new T.Group(), wd = o[1] - o[0], ht = o[3] - o[2], p = place(w, (o[0] + o[1]) / 2, o[2] + ht / 2);
-      g.position.set(p[0], p[1], p[2]); if (w.ax === "z") g.rotation.y = Math.PI / 2;
-      if (o[4] === "door") {
-        var hinge = new T.Group(); hinge.position.set(-wd / 2, 0, 0);
-        var leaf = new T.Mesh(new T.BoxGeometry(wd - .04, ht - .02, .06), doorMat); leaf.position.set(wd / 2, 0, 0); leaf.castShadow = true; hinge.add(leaf);
-        g.add(hinge); door = hinge;
-      } else {
-        var panes = o[4] === "slide" ? 2 : Math.max(1, Math.round(wd / 1.4));
-        for (var k = 0; k < panes; k++) {
-          var pw = wd / panes, pg = new T.Group(); pg.position.x = -wd / 2 + pw * (k + .5);
-          var gl2 = new T.Mesh(new T.PlaneGeometry(pw - .08, ht - .08), glassMat); pg.add(gl2);
-          [[0, ht / 2 - .03, pw, .06], [0, -ht / 2 + .03, pw, .06], [-pw / 2 + .03, 0, .06, ht], [pw / 2 - .03, 0, .06, ht]].forEach(function(f){
-            var fm = new T.Mesh(new T.BoxGeometry(f[2], f[3], .08), frameMat); fm.position.set(f[0], f[1], 0); pg.add(fm);
-          });
-          g.add(pg);
-          if (o[4] === "slide" && k === 1) slider = pg;
-        }
-      }
-      g.userData.t = openings.length; scene.add(g); openings.push(g);
-    });
-  });
-  if (slider) slider.userData.x0 = slider.position.x;
-
-  // интерьер
-  var wood = new T.MeshStandardMaterial({color:0xa27a52, roughness:.65});
-  var floor = new T.Mesh(new T.BoxGeometry(L - .6, .04, D - .6), wood); floor.position.y = .02; floor.receiveShadow = true; scene.add(floor);
-  var soft = new T.MeshStandardMaterial({color:0xcfc2b0, roughness:.95}), dark2 = new T.MeshStandardMaterial({color:0x3b3833, roughness:.8});
-  var lampMat = new T.MeshStandardMaterial({color:0xffe2b8, emissive:0xffc27a, emissiveIntensity:0});
-  var furniture = [];
-  function F(geo, mat, x, y, z, t){ var m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; m.userData = {y:y, t:t}; scene.add(m); furniture.push(m); return m; }
-  F(new T.BoxGeometry(1.0, .45, 2.6), soft, -5.4, .25, 1.6, 0);          // диван
-  F(new T.BoxGeometry(.22, .5, 2.6), soft, -5.95, .55, 1.6, .05);
-  F(new T.BoxGeometry(.7, .32, 1.1), wood, -4.2, .2, 1.6, .1);           // журнальный стол
-  F(new T.BoxGeometry(2.6, .02, 3.0), new T.MeshStandardMaterial({color:0x6d675e, roughness:1}), -4.6, .05, 1.6, .02); // ковёр
-  F(new T.BoxGeometry(2.0, .06, 1.0), wood, 2.4, .76, 1.6, .2);          // обеденный стол
-  [[1.8, 1.0], [2.4, 1.0], [3.0, 1.0], [1.8, 2.2], [2.4, 2.2], [3.0, 2.2]].forEach(function(c, i){ F(new T.BoxGeometry(.45, .9, .45), dark2, c[0], .45, c[1] + (c[1] < 1.6 ? -.15 : .15), .25 + i * .03); });
-  F(new T.BoxGeometry(.9, .9, 2.0), soft, 1.6, .45, -2.3, .45);          // остров
-  F(new T.BoxGeometry(.6, 2.2, 2.2), dark2, 2.85, 1.1, -3.0, .5);        // кухня вдоль перегородки
-  [1.9, 2.9].forEach(function(x, i){ F(new T.CylinderGeometry(.16, .2, .26, 18), lampMat, x, 2.35, 1.6, .55 + i * .05); });
-  // терраса
-  var deck = new T.Mesh(new T.BoxGeometry(L, .14, 3.6), wood); deck.position.set(0, .07, -6.3); deck.receiveShadow = deck.castShadow = true; scene.add(deck);
-  var bollards = [-6, -2.5, 2.5, 6].map(function(x){ var m = new T.Mesh(new T.CylinderGeometry(.06, .06, .5, 10), lampMat); m.position.set(x, .25, -8.4); scene.add(m); return m; });
-
-  // сосны вокруг
-  var treeGeo = new T.ConeGeometry(1.5, 6, 7); treeGeo.translate(0, 3 + 1.2, 0);
-  var trunkGeo = new T.CylinderGeometry(.12, .16, 1.4, 6); trunkGeo.translate(0, .7, 0);
-  var trees = [], seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
-  while (trees.length < 70) {
-    var a = rnd() * Math.PI * 2, r = 20 + rnd() * 40, tx = Math.cos(a) * r, tz = Math.sin(a) * r;
-    if (tz > 4 && Math.abs(tx) < 22) continue;              // окно на фасад со стороны подлёта
-    if (tz < -4 && tx > -4 && tx < 24 && tz > -40) continue; // финальный ракурс
-    trees.push([tx, tz, .7 + rnd() * .7]);
-  }
-  var TM = new T.InstancedMesh(treeGeo, new T.MeshStandardMaterial({color:0x1d2b22, roughness:1, flatShading:true}), trees.length);
-  var TK = new T.InstancedMesh(trunkGeo, new T.MeshStandardMaterial({color:0x3a2c20, roughness:1}), trees.length);
-  trees.forEach(function(t, i){ M4.compose(V3.set(t[0], -.4, t[1]), Q0, S3.set(t[2], t[2] * (.9 + (i % 5) * .08), t[2])); TM.setMatrixAt(i, M4); TK.setMatrixAt(i, M4); });
-  TM.castShadow = true; scene.add(TM); scene.add(TK);
-  var lastTree = -1;
-  function updateTrees(g){
-    if (Math.abs(g - lastTree) < 1e-4) return; lastTree = g;
-    trees.forEach(function(t, i){
-      var d = Math.hypot(t[0], t[1]), a = ease(clamp((g * 1.5 - (d - 20) / 40 * .5) / 1, 0, 1)), k = t[2] * Math.max(a, .001);
-      M4.compose(V3.set(t[0], -.4, t[1]), Q0, S3.set(k, k * (.9 + (i % 5) * .08), k)); TM.setMatrixAt(i, M4); TK.setMatrixAt(i, M4);
-    });
-    TM.instanceMatrix.needsUpdate = TK.instanceMatrix.needsUpdate = true;
-  }
-
-  /* ---------- траектория камеры ---------- */
-  var KEYS = [
-    [0,    [0, 30, 34],      [0, 0, 0]],
-    [.1,   [16, 16, 24],     [0, 0, 0]],
-    [.22,  [20, 7, 14],      [0, 1, 0]],
-    [.36,  [12, 6, 17],      [0, 1.6, 0]],
-    [.48,  [-12, 11, 14],    [0, 3, 0]],
-    [.58,  [-6, 3.2, 15],    [-1, 2, 2]],
-    [.65,  [-1, 1.7, 9.5],   [-1, 1.6, 4]],
-    [.71,  [-1, 1.65, 4.75], [-1, 1.6, 0]],
-    [.77,  [-1.3, 1.65, 2.3], [3, 1.2, 1.0]],
-    [.83,  [0, 1.65, -2.2],  [0, 1.6, -6]],
-    [.87,  [0, 1.65, -5.6],  [.5, 1.6, -9]],
-    [.9,   [3.5, 2.0, -8.5], [7, 1.8, -5]],
-    [.945, [6, 3.2, -13],    [0, 1.8, -3]],
-    [1,    [10, 5.5, -21],   [0, 2.2, -1]]
-  ];
-  function cr(p0, p1, p2, p3, t){ var t2 = t * t, t3 = t2 * t; return .5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3); }
-  var camPos = new T.Vector3(), camTgt = new T.Vector3(), right = new T.Vector3(), up = new T.Vector3(0, 1, 0);
-  function camAt(p){
-    var i = 0; while (i < KEYS.length - 2 && p > KEYS[i + 1][0]) i++;
-    var t = smooth(clamp((p - KEYS[i][0]) / (KEYS[i + 1][0] - KEYS[i][0]), 0, 1));
-    var k0 = KEYS[Math.max(i - 1, 0)], k1 = KEYS[i], k2 = KEYS[i + 1], k3 = KEYS[Math.min(i + 2, KEYS.length - 1)];
-    for (var d = 0; d < 3; d++) {
-      camPos.setComponent(d, cr(k0[1][d], k1[1][d], k2[1][d], k3[1][d], t));
-      camTgt.setComponent(d, cr(k0[2][d], k1[2][d], k2[2][d], k3[2][d], t));
-    }
-  }
-
-  /* ---------- состояние сцены по прогрессу ---------- */
-  var lastPhase = -1, capT;
-  function setScene(p){
-    skyAt(p);
-    planGeo.setDrawRange(0, Math.floor(planCount * seg(p, .01, .11) / 2) * 2);
-    planMat.opacity = 1 - .85 * seg(p, .3, .46);
-    ghostMat.opacity = .5 * (1 - seg(p, .3, .52));
-    grid.material.opacity = .42 - .37 * seg(p, .18, .48);
-    var gr = smooth(seg(p, .14, .4)); groundMat.color.copy(cNavy).lerp(cEarth, gr); hemi.groundColor.set(0x0c2140).lerp(cA.set(0x2a2620), gr);
-    updateTrees(seg(p, .16, .46));
-    var sp = ease(seg(p, .09, .18)); slab.position.y = -.21 - (1 - sp) * .9; slab.visible = sp > 0;
-    updateBlocks(seg(p, .18, .42), smooth(seg(p, .56, .63)));
-    var bp = ease(seg(p, .41, .44)); beams.forEach(function(m){ m.scale.set(1, Math.max(bp, .001), 1); m.visible = bp > 0; });
-    trusses.forEach(function(g){ var a = ease(clamp((seg(p, .43, .51) * 1.25 - g.userData.t) / .25, 0, 1)); g.visible = a > 0; g.position.y = (1 - a) * 3; });
-    var gp2 = ease(seg(p, .47, .52)); gables.forEach(function(m){ m.scale.set(1, Math.max(gp2, .001), 1); m.visible = gp2 > 0; });
-    roofs.forEach(function(m, i){ var a = ease(seg(p, .5 + i * .012, .565 + i * .012)); m.scale.x = Math.max(a, .001); m.visible = a > 0; });
-    openings.forEach(function(g, i){ var a = ease(clamp((seg(p, .57, .64) * 1.5 - i / openings.length * .5) / .5, 0, 1)); g.scale.setScalar(Math.max(a, .001)); g.visible = a > 0; });
-    if (door) door.rotation.y = 1.45 * smooth(seg(p, .645, .695));
-    if (slider) slider.position.x = slider.userData.x0 - 2.1 * smooth(seg(p, .8, .855));
-    var fp = ease(seg(p, .62, .67)); floor.scale.set(Math.max(fp, .001), 1, Math.max(fp, .001)); floor.visible = fp > 0;
-    furniture.forEach(function(m){ var a = ease(clamp((seg(p, .66, .78) - m.userData.t) / .3, 0, 1)); m.visible = a > 0; m.position.y = m.userData.y + (1 - a) * 1.6; });
-    var dk = ease(seg(p, .78, .86)); deck.scale.set(1, 1, Math.max(dk, .001)); deck.position.z = -4.5 - 1.8 * dk; deck.visible = dk > 0;
-    var li = smooth(seg(p, .62, .76)), night = smooth(seg(p, .84, .98));
-    warm.forEach(function(l){ l.intensity = li * (.85 + night * .75); });
-    lampMat.emissiveIntensity = li * 1.8;
-    bollards.forEach(function(m){ m.visible = dk > .9; });
-    glassMat.emissiveIntensity = night * .55; glassMat.opacity = .26 + night * .2;
-    R.toneMappingExposure = 1.05 + night * .15;
-
-    var ph = 0; for (var k = 0; k < PH.length; k++) if (p >= PH[k].at) ph = k;
-    if (ph !== lastPhase) {
-      var first = lastPhase < 0; lastPhase = ph;
-      phaseLis.forEach(function(li2, j){ li2.classList.toggle("on", j === ph); li2.classList.toggle("done", j < ph); });
-      $("#bNum").textContent = String(ph + 1).padStart(2, "0");
-      var apply = function(){ $("#bCapK").textContent = "Этап " + String(ph + 1).padStart(2, "0") + " · " + PH[ph].k; $("#bCapH").innerHTML = PH[ph].h; $("#bCapP").textContent = PH[ph].p; $("#bCap").classList.remove("swapping"); };
-      clearTimeout(capT);
-      if (first || reduce) apply(); else { $("#bCap").classList.add("swapping"); capT = setTimeout(apply, 380); }
-    }
-    $("#bPct").textContent = "Готовность " + Math.round(seg(p, 0, .9) * 100) + "%";
-    $("#bBar").style.setProperty("--p", seg(p, 0, .9).toFixed(3));
-    $("#bProg").style.setProperty("--p", p.toFixed(4));
-    $("#bHint").style.opacity = 1 - seg(p, .01, .04);
-    var end = seg(p, .955, .99), capOut = 1 - seg(p, .95, .975);
-    $("#bEnd").style.opacity = end; $("#bEnd").classList.toggle("live", end > .5);
-    $("#bCap").style.opacity = capOut;
-  }
-
-  /* ---------- цикл ---------- */
-  var target = 0, cur = 0, mx = 0, my = 0, smx = 0, smy = 0, live = false, dirty = true;
-  function readScroll(){ var r = bsec.getBoundingClientRect(); target = clamp(-r.top / (r.height - innerHeight), 0, 1); }
-  function resize(){
-    var w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
-    R.setSize(w, h, false); cam.aspect = w / h; cam.fov = w / h < .8 ? 64 : 50; cam.updateProjectionMatrix(); dirty = true;
-  }
-  addEventListener("resize", resize); addEventListener("scroll", readScroll, {passive:true});
-  bsec.addEventListener("pointermove", function(e){ if (e.pointerType !== "mouse") return; mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; });
-  if ("IntersectionObserver" in window) new IntersectionObserver(function(es){ live = es[0].isIntersecting; if (live) { readScroll(); resize(); } }, {rootMargin:"200px 0px"}).observe(bsec);
-  else live = true;
-  readScroll(); resize(); cur = target; setScene(cur);
-  window.__build = {jump:function(p){ target = cur = p; dirty = true; }};
-  (function frame(){
+  function frame(now){
     requestAnimationFrame(frame);
-    if (!live) return;
-    var k = reduce ? 1 : .085, prev = cur;
-    cur += (target - cur) * k; if (Math.abs(target - cur) < 1e-5) cur = target;
-    smx += (mx - smx) * .05; smy += (my - smy) * .05;
-    if (!dirty && Math.abs(cur - prev) < 1e-6 && Math.abs(mx - smx) < 1e-3 && Math.abs(my - smy) < 1e-3) return;
-    dirty = false;
-    setScene(cur); camAt(cur);
-    right.subVectors(camTgt, camPos).cross(up).normalize();
-    var inside = seg(cur, .66, .72) * (1 - seg(cur, .86, .9)), amp = .6 - .45 * inside;
-    cam.position.copy(camPos).addScaledVector(right, smx * amp).addScaledVector(up, -smy * amp * .5);
-    cam.lookAt(camTgt);
-    R.render(scene, cam);
-  })();
+    if (!visible) return;
+    Ps += (P - Ps) * (reduce ? 1 : .12); if (Math.abs(P - Ps) < 1e-5) Ps = P;
+    var W = innerWidth, H = innerHeight;
+
+    /* 1. лес: заголовок медленно опускается за стволы */
+    var tq = seg(Ps, 0, T_TEXT), pq = easeIO(seg(Ps, T_TEXT, T_PAN));
+    if (!reduce) { var k = performance.now() - lastMove < 4000 ? 1 : 0; par.x += ((mouse.x / W - .5) * k - par.x) * .05; par.y += ((mouse.y / H - .5) * k - par.y) * .05; }
+    bgL.style.transform = "translate3d(" + (-par.x * 10).toFixed(1) + "px," + (-par.y * 6).toFixed(1) + "px,0) scale(" + (1 + tq * .04).toFixed(4) + ")";
+    floorL.style.transform = bgL.style.transform;
+    front.style.transform = "translate3d(" + (-par.x * 34 - pq * W * .45).toFixed(1) + "px," + (-par.y * 14).toFixed(1) + "px,0) scale(" + (1 + tq * .09).toFixed(4) + ")";
+    txt.style.transform = "translate3d(" + (-par.x * 18).toFixed(1) + "px," + (tq * H * .42 - par.y * 8).toFixed(1) + "px,0)";
+    txt.style.opacity = (1 - seg(tq, .8, 1)).toFixed(3);
+    var side = 1 - seg(tq, 0, .35);
+    jL.style.opacity = jR.style.opacity = jCue.style.opacity = side.toFixed(3);
+    jL.style.visibility = jR.style.visibility = jCue.style.visibility = side > 0 ? "" : "hidden";
+
+    /* 2. поворот камеры направо: панорама уезжает, ближние стволы — быстрее */
+    pan.style.transform = "translate3d(" + (-pq * W * .86).toFixed(1) + "px,0,0)";
+    pan.style.filter = !reduce && pq > .02 && pq < .98 ? "blur(" + (Math.sin(Math.PI * pq) * 1.6).toFixed(2) + "px)" : "";
+
+    /* 3. стройка: видео по прокрутке */
+    var bq = seg(Ps, T_PAN, T_BUILD), inBuild = Ps >= T_PAN - 1e-4;
+    vwrap.classList.toggle("on", inBuild);
+    hud.style.opacity = (seg(Ps, T_PAN - .01, T_PAN + .02) * (1 - seg(Ps, T_BUILD + .02, T_BUILD + .05))).toFixed(3);
+    var n = vids.length, kk = Math.min(n - 1, Math.floor(bq * n)), lt = bq * n - kk;
+    var atFinal = Ps >= T_BUILD && finalImg.complete && finalImg.naturalWidth;
+    if (kk !== lastK) { vids.forEach(function(v, j){ v.classList.toggle("on", j === kk); }); lastK = kk; }
+    var v = vids[kk];
+    $("#bLoad").classList.toggle("on", inBuild && v.readyState < 2);
+    if (v.readyState >= 1 && v.duration) {
+      var t = Math.min(v.duration - .04, lt * v.duration);
+      if (!v.seeking && Math.abs(v.currentTime - t) > .03) v.currentTime = t;
+    }
+    finalImg.classList.toggle("on", !!atFinal); reveal.classList.toggle("on", !!atFinal);
+    if (inBuild) setPhase(Ps >= T_BUILD ? 6 : kk);
+    $("#bPct").textContent = "Готовность " + Math.round(bq * 100) + "%";
+    $("#bBar").style.setProperty("--p", bq.toFixed(3));
+    $("#bProg").style.setProperty("--p", bq.toFixed(4));
+
+    /* 4. готовый дом: чертёж под курсором и призыв */
+    var eq = seg(Ps, T_BUILD + .01, T_BUILD + .05);
+    endEl.style.opacity = eq.toFixed(3); endShade.style.opacity = eq.toFixed(3); endEl.classList.toggle("live", eq > .5);
+    var idle = now - lastMove > 2600, tx = mouse.x, ty = mouse.y;
+    if (idle || !finePointer) { var tt = now / 1000; tx = W * (.5 + .2 * Math.sin(tt * .42)); ty = H * (.42 + .1 * Math.sin(tt * .77 + 1.3)); }
+    var kq = reduce ? 1 : (idle ? .03 : .1); sm.x += (tx - sm.x) * kq; sm.y += (ty - sm.y) * kq;
+    if (atFinal) {
+      reveal.style.setProperty("--x", sm.x.toFixed(1) + "px"); reveal.style.setProperty("--y", sm.y.toFixed(1) + "px");
+      spot.style.transform = "translate(" + (sm.x - SPOT_R).toFixed(1) + "px," + (sm.y - SPOT_R).toFixed(1) + "px)";
+    }
+    spot.classList.toggle("on", !!atFinal && eq > .3);
+  }
+  if (!finePointer) $("#jEndHint").textContent = "Проведите пальцем — посмотрите чертёж";
+  requestAnimationFrame(frame);
+  window.__journey = {jump:function(p){ P = Ps = p; }};
   })();
 
   /* ---------- каталог (данные — из действующего сайта) ---------- */
