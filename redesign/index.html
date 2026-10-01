@@ -111,6 +111,9 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 .j-layer{position:absolute;inset:-3%;will-change:transform}
 .j-bg{z-index:1}
 .j-front{z-index:4;pointer-events:none}
+/* тень ближних стволов на заголовке: солнце слева, тень падает вправо */
+.j-shadow{z-index:3;pointer-events:none;opacity:.38}
+.j-shadow img{filter:brightness(0) blur(16px)}
 /* подлесок поверх текста: тот же кадр, видна только нижняя часть — заголовок уходит в кусты */
 .j-floor{z-index:3;pointer-events:none;-webkit-mask-image:linear-gradient(180deg, transparent 60%, #000 74%);mask-image:linear-gradient(180deg, transparent 60%, #000 74%)}
 .j-rays{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:screen;opacity:.55;
@@ -126,7 +129,7 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 .j-text{position:absolute;left:0;right:0;top:27%;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;will-change:transform,opacity}
 .j-kicker{color:#f6ead7;letter-spacing:.26em;margin-bottom:calc(22*var(--t));text-shadow:0 1px 12px rgba(0,0,0,.5)}
 .j-h1{margin:0;color:#fff;line-height:.94;font-weight:400;text-shadow:0 6px 40px rgba(20,24,10,.45)}
-.j-h1 span{display:block;font-size:clamp(46px, 7.6vw, 128px)}
+.j-h1 span{display:block;font-size:clamp(50px, 8.6vw, 144px)}
 .j-h1 .l1{font-family:'Playfair Display',Georgia,serif;font-style:italic;letter-spacing:-.04em}
 .j-h1 .l2{font-family:var(--body);letter-spacing:-.065em;margin-top:-.03em}
 .j-veil{position:absolute;inset:0;z-index:5;pointer-events:none;
@@ -443,6 +446,8 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   .facts{grid-template-columns:1fr 1fr}
   .facts div:nth-child(3){grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line)}
 }
+/* портрет: сдвигаем кадр леса, чтобы ближняя сосна прошла сквозь заголовок */
+@media (max-aspect-ratio:3/4){ .j-forest img{object-position:45% 50%} }
 @media (max-height:620px) and (min-width:601px){ .j-l,.j-r p{display:none} .b-cap p{display:none} }
 
 @media (prefers-reduced-motion:reduce){
@@ -501,6 +506,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
               <span class="l2 ha ha-reveal" style="animation-delay:.55s">вокруг вашей жизни</span>
             </h1>
           </div>
+          <div class="j-layer j-shadow" id="jShadow" aria-hidden="true"><img src="media/trunks.webp" alt=""></div>
           <div class="j-layer j-floor" id="jFloor" aria-hidden="true"><img src="media/forest.jpg" alt=""></div>
           <div class="j-layer j-front" id="jFront" aria-hidden="true"><img src="media/trunks.webp" alt=""></div>
         </div>
@@ -783,7 +789,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
      ПУТЬ: лес → поворот на поляну → стройка (видео по прокрутке) → чертёж
      ===================================================================== */
   (function(){
-  var sec = $("#top"), pin = $("#jPin"), pan = $("#jPan"), bgL = $("#jBg"), floorL = $("#jFloor"), front = $("#jFront"), txt = $("#jText");
+  var sec = $("#top"), pin = $("#jPin"), pan = $("#jPan"), bgL = $("#jBg"), floorL = $("#jFloor"), shadowL = $("#jShadow"), front = $("#jFront"), txt = $("#jText");
   var jL = $("#jL"), jR = $("#jR"), jCue = $("#jCue"), vwrap = $("#jVideo"), hud = $("#jHud"), endEl = $("#jEnd"), endShade = $("#jEndShade");
   var vids = $$("#jVideo video"), finalImg = $("#jVideo .j-final"), reveal = $("#reveal"), spot = $("#spot"), nav = $("#nav");
   var phaseLis = $$("#bPhases li");
@@ -864,8 +870,10 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
     if (!reduce) { var k = performance.now() - lastMove < 4000 ? 1 : 0; par.x += ((mouse.x / W - .5) * k - par.x) * .05; par.y += ((mouse.y / H - .5) * k - par.y) * .05; }
     bgL.style.transform = "translate3d(" + (-par.x * 10).toFixed(1) + "px," + (-par.y * 6).toFixed(1) + "px,0) scale(" + (1 + tq * .04).toFixed(4) + ")";
     floorL.style.transform = bgL.style.transform;
-    front.style.transform = "translate3d(" + (-par.x * 34 - pq * W * .45).toFixed(1) + "px," + (-par.y * 14).toFixed(1) + "px,0) scale(" + (1 + tq * .09).toFixed(4) + ")";
-    txt.style.transform = "translate3d(" + (-par.x * 18).toFixed(1) + "px," + (tq * H * .42 - par.y * 8).toFixed(1) + "px,0)";
+    var fx = -par.x * 64 - pq * W * .45, fy = -par.y * 22, fs = 1 + tq * .09;
+    front.style.transform = "translate3d(" + fx.toFixed(1) + "px," + fy.toFixed(1) + "px,0) scale(" + fs.toFixed(4) + ")";
+    shadowL.style.transform = "translate3d(" + (fx + 26).toFixed(1) + "px," + fy.toFixed(1) + "px,0) scale(" + fs.toFixed(4) + ")";
+    txt.style.transform = "translate3d(" + (-par.x * 22).toFixed(1) + "px," + (tq * H * .42 - par.y * 8).toFixed(1) + "px,0)";
     txt.style.opacity = (1 - seg(tq, .8, 1)).toFixed(3);
     var side = 1 - seg(tq, 0, .35);
     jL.style.opacity = jR.style.opacity = jCue.style.opacity = side.toFixed(3);
