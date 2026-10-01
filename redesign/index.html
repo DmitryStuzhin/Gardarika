@@ -99,7 +99,7 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 /* =====================================================================
    ПЕРВЫЙ ЭКРАН — фасад, под курсором чертёж; прокрутка «роняет» в окно
    ===================================================================== */
-.fall{position:relative;height:250vh;background:#000}
+.fall{position:relative;height:280vh;background:#000}
 .fall-pin{position:sticky;top:0;height:100vh;height:100svh;min-height:560px;overflow:hidden;isolation:isolate}
 .fall-scene{position:absolute;inset:0;will-change:transform;z-index:1}
 .fall-zoom{position:absolute;inset:0;animation:heroZoom 1.8s cubic-bezier(.16,1,.3,1) both}
@@ -109,8 +109,10 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
           mask-image:radial-gradient(circle var(--r) at var(--x) var(--y), #000 0%, #000 40%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.4) 75%, rgba(0,0,0,.12) 88%, transparent 100%)}
 .fall-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(180deg, rgba(8,7,5,.55) 0%, rgba(8,7,5,.05) 30%, rgba(8,7,5,0) 52%, rgba(8,7,5,.5) 80%, rgba(8,7,5,.82) 100%)}
-.fall-glow{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;
-  background:radial-gradient(60% 60% at var(--ox,50%) var(--oy,60%), rgba(255,214,160,.95), rgba(255,170,96,.55) 35%, rgba(40,26,14,.0) 75%)}
+.fall-mid{position:absolute;left:0;right:0;top:50%;margin-top:-1em;z-index:5;text-align:center;padding:0 24px;opacity:0;pointer-events:none}
+.fall-mid .lbl{color:rgba(214,232,255,.85);letter-spacing:.22em}
+.fall-mid p{margin:16px 0 0;font-size:clamp(34px, 5.4vw, 84px);line-height:1;letter-spacing:-.045em;color:#fff;text-shadow:0 4px 30px rgba(5,14,28,.6)}
+.fall-mid em{font-family:'Playfair Display',Georgia,serif;font-weight:400}
 .fall-dark{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;background:#0b1d33}
 
 /* кольцо прожектора */
@@ -482,7 +484,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
     </div>
     <div class="spot" id="spot" aria-hidden="true"><span class="spot-tag lbl">Чертёж</span></div>
     <div class="fall-veil"></div>
-    <div class="fall-glow" id="fallGlow"></div>
+    <div class="fall-mid" id="fallMid" aria-hidden="true"><span class="lbl">Чертёж · Pine 141</span><p><em>Каждый дом</em> начинается с чертежа</p></div>
     <div class="fall-dark" id="fallDark"></div>
     <div class="frame" aria-hidden="true">
       <i class="ln ln-t"></i><i class="ln ln-b"></i><i class="ln ln-l"></i><i class="ln ln-r"></i>
@@ -507,7 +509,7 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
         <a class="btn ghost" href="#catalog">Проекты</a>
       </div>
     </div>
-    <a class="fall-cue lbl ha ha-fade" id="fallCue" href="#build" style="animation-delay:1.1s"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5 6 6l3.5-3.5M2.5 6.5 6 10l3.5-3.5"/></svg>Листайте — войдём внутрь</a>
+    <a class="fall-cue lbl ha ha-fade" id="fallCue" href="#build" style="animation-delay:1.1s"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5 6 6l3.5-3.5M2.5 6.5 6 10l3.5-3.5"/></svg>Листайте — от чертежа к дому</a>
   </div>
 </section>
 
@@ -758,62 +760,58 @@ dialog.project[open]{animation:dlgIn .5s var(--e-mask)}
   addEventListener("resize", function(){ if (innerWidth > 900 && mh.classList.contains("open")) setMenu(false); });
 
   /* =====================================================================
-     ПЕРВЫЙ ЭКРАН: прожектор-чертёж + «провал» в освещённое окно
+     ПЕРВЫЙ ЭКРАН: прожектор-чертёж; при прокрутке чертёж раскрывается на весь
+     кадр — фасад превращается в чертёж, с которого начинается стройка ниже
      ===================================================================== */
-  var fall = $("#top"), fScene = $("#fallScene"), reveal = $("#reveal"), spot = $("#spot");
-  var fCopy = $("#fallCopy"), fL = $("#fallL"), fR = $("#fallR"), fCue = $("#fallCue"), glow = $("#fallGlow"), dark = $("#fallDark"), nav = $("#nav");
-  // точка «входа» — освещённая дверь-витраж на фото Pine 141 (доли кадра 1536×1024)
-  var DOOR = {u:.405, v:.6}, IMG_W = 1536, IMG_H = 1024, origin = {x:0, y:0};
-  var SPOT_R = 260;
+  var fall = $("#top"), pin = $("#fallPin"), fScene = $("#fallScene"), reveal = $("#reveal"), spot = $("#spot");
+  var fCopy = $("#fallCopy"), fL = $("#fallL"), fR = $("#fallR"), fCue = $("#fallCue"), fMid = $("#fallMid"), dark = $("#fallDark"), nav = $("#nav");
+  var SPOT_R = 260, W = innerWidth, H = innerHeight;
   if (!finePointer) $("#spotHint").textContent = "Проведите пальцем по фасаду";
   function measure(){
-    var W = innerWidth, H = fall.querySelector(".fall-pin").clientHeight, s = Math.max(W / IMG_W, H / IMG_H);
-    origin.x = (W - IMG_W * s) / 2 + DOOR.u * IMG_W * s;
-    origin.y = (H - IMG_H * s) / 2 + DOOR.v * IMG_H * s;
-    fScene.style.transformOrigin = origin.x + "px " + origin.y + "px";
-    glow.style.setProperty("--ox", origin.x + "px"); glow.style.setProperty("--oy", origin.y + "px");
+    W = innerWidth; H = pin.clientHeight;
     SPOT_R = W < 600 ? 150 : W < 1100 ? 210 : 260;
-    reveal.style.setProperty("--r", SPOT_R + "px"); spot.style.setProperty("--r", SPOT_R + "px");
+    spot.style.setProperty("--r", SPOT_R + "px");
   }
   measure(); addEventListener("resize", measure);
+  // после входной анимации отдаём прозрачность скрипту прокрутки
+  $$(".fall .ha").forEach(function(el){ el.addEventListener("animationend", function(){ el.style.opacity = el.style.opacity || 1; el.classList.remove("ha", "ha-fade", "ha-reveal"); fallScroll(); }, {once:true}); });
 
   var mouse = {x:-999, y:-999}, sm = {x:innerWidth * .5, y:innerHeight * .62}, lastMove = -1e9, q = 0, fallVisible = true;
-  addEventListener("pointermove", function(e){
-    if (e.pointerType === "mouse" || e.pointerType === "pen" || e.pointerType === "touch") { mouse.x = e.clientX; mouse.y = e.clientY; lastMove = performance.now(); }
-  }, {passive:true});
+  addEventListener("pointermove", function(e){ mouse.x = e.clientX; mouse.y = e.clientY; lastMove = performance.now(); }, {passive:true});
   function fallTick(now){
-    var idle = now - lastMove > 2600;
-    var tx = mouse.x, ty = mouse.y;
-    if (idle && reduce) { tx = innerWidth * .45; ty = innerHeight * .62; }
+    var idle = now - lastMove > 2600, tx = mouse.x, ty = mouse.y;
+    if (idle && reduce) { tx = W * .45; ty = H * .62; }
     else if (idle) { // сам гуляет по фасаду, пока курсор не двигается
       var t = now / 1000;
-      tx = innerWidth * (.47 + .2 * Math.sin(t * .42)); ty = innerHeight * (.6 + .1 * Math.sin(t * .77 + 1.3));
+      tx = W * (.47 + .2 * Math.sin(t * .42)); ty = H * (.6 + .1 * Math.sin(t * .77 + 1.3));
     }
     var k = reduce ? 1 : (idle ? .03 : .1);
     sm.x += (tx - sm.x) * k; sm.y += (ty - sm.y) * k;
-    // прожектор в координатах увеличенного кадра
-    var s = fScene._s || 1, lx = origin.x + (sm.x - origin.x) / s, ly = origin.y + (sm.y - origin.y) / s;
+    // по мере прокрутки круг уходит к центру и растёт, пока не накроет кадр целиком
+    var g = smooth(seg(q, .04, .55)), cx = sm.x + (W / 2 - sm.x) * g, cy = sm.y + (H / 2 - sm.y) * g;
+    var r = SPOT_R + Math.pow(g, 1.4) * Math.hypot(W, H) * 1.25;
+    var s = fScene._s || 1, lx = W / 2 + (cx - W / 2) / s, ly = H / 2 + (cy - H / 2) / s;
     reveal.style.setProperty("--x", lx.toFixed(1) + "px"); reveal.style.setProperty("--y", ly.toFixed(1) + "px");
+    reveal.style.setProperty("--r", (r / s).toFixed(1) + "px");
     spot.style.transform = "translate(" + (sm.x - SPOT_R).toFixed(1) + "px," + (sm.y - SPOT_R).toFixed(1) + "px)";
-    spot.classList.toggle("on", q < .12);
+    spot.classList.toggle("on", q < .03);
   }
   function fallScroll(){
-    var r = fall.getBoundingClientRect(), H = innerHeight;
-    q = clamp(-r.top / (r.height - H), 0, 1);
-    var s = 1 + 9 * Math.pow(q, 2.3);
+    var rc = fall.getBoundingClientRect(), vh = innerHeight;
+    q = clamp(-rc.top / (rc.height - vh), 0, 1);
+    var s = 1 + .08 * smooth(q);                   // лёгкий наезд, без зума в пиксели
     fScene._s = s;
     fScene.style.transform = "scale(" + s.toFixed(4) + ")";
-    if (!reduce) {
-      fCopy.style.transform = "translateY(" + (-q * 70).toFixed(1) + "px) scale(" + (1 + q * 1.1).toFixed(3) + ")";
-      fCopy.style.filter = q > .01 ? "blur(" + (q * 16).toFixed(1) + "px)" : "";
-    }
-    fCopy.style.opacity = clamp(1 - q * 2.3, 0, 1);
-    var side = clamp(1 - q * 3.2, 0, 1);
+    if (!reduce) fCopy.style.transform = "translateY(" + (-q * 90).toFixed(1) + "px)";
+    fCopy.style.opacity = clamp(1 - q * 3, 0, 1);
+    var side = clamp(1 - q * 3.5, 0, 1);
     fL.style.opacity = fR.style.opacity = fCue.style.opacity = side;
-    fL.style.visibility = fR.style.visibility = side ? "" : "hidden";
-    glow.style.opacity = seg(q, .38, .72).toFixed(3);
-    dark.style.opacity = seg(q, .74, .97).toFixed(3);
-    nav.classList.toggle("solid", r.bottom < H * .3);
+    fL.style.visibility = fR.style.visibility = fCue.style.visibility = side ? "" : "hidden";
+    var mid = seg(q, .32, .5) * (1 - seg(q, .78, .92));
+    fMid.style.opacity = mid.toFixed(3);
+    if (!reduce) fMid.style.transform = "translateY(" + ((1 - seg(q, .32, .6)) * 24 - seg(q, .78, .92) * 24).toFixed(1) + "px)";
+    dark.style.opacity = seg(q, .8, .98).toFixed(3);
+    nav.classList.toggle("solid", rc.bottom < vh * .3);
   }
   addEventListener("scroll", fallScroll, {passive:true}); addEventListener("resize", fallScroll); fallScroll();
   if ("IntersectionObserver" in window) new IntersectionObserver(function(es){ fallVisible = es[0].isIntersecting; }).observe(fall);
