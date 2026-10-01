@@ -41,6 +41,8 @@ boot = ("<script>var IMG=" + json.dumps(imgs) + ";"
         "document.querySelectorAll('[data-img]').forEach(function(i){i.src=IMG[i.dataset.img]});"
         "document.querySelectorAll('[data-lazy]').forEach(function(i){i.dataset.src=IMG[i.dataset.lazy]});</script>\n<script>\n(function(){")
 html = html.replace("<script>\n(function(){", boot, 1)
-assert "assets/" not in html, re.findall(r".{40}assets/.{40}", html)[:3]
+three = (HERE / "assets/js/three.min.js").read_text()
+html = html.replace('<script src="assets/js/three.min.js"></script>', "<script>" + three + "</script>", 1)
+assert '<script src="assets/' not in html and 'url(assets/' not in html and 'src="assets/img' not in html, re.findall(r".{40}assets/.{40}", html)[:3]
 (HERE / "gardarika-redesign.html").write_text(html)
 print("ok", len(imgs), "images,", round(len(html) / 1e6, 2), "MB")
