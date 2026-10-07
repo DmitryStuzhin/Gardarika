@@ -14,15 +14,15 @@
 .cx-house small{display:block;margin-top:2px;font-size:13.5px;color:var(--ink-3);line-height:1.35}
 .cx-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,36px);align-items:start}
 .cx-stage{position:sticky;top:92px}
-.cx-viewer{position:relative;height:min(62vh,620px);min-height:360px;border-radius:var(--r-lg);overflow:hidden;background:#e7ece4;box-shadow:var(--shadow)}
+.cx-viewer{position:relative;height:min(62vh,620px);min-height:360px;border-radius:var(--r-lg);overflow:hidden;background:#e9e6e1;box-shadow:var(--shadow)}
 .cx-viewer canvas{display:block;width:100%;height:100%}
 .cx-nogl{padding:24px;color:var(--ink-2)}
 .cx-stages{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .cx-stages button{min-height:38px;padding:0 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);font:500 14px/1 var(--display);color:var(--ink-2);cursor:pointer}
 .cx-stages button[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:#fff}
 .cx-mix{margin-top:10px;font:600 15px/1.4 var(--display);color:var(--pine)}
-.cx-conflict{margin-top:12px;padding:16px 18px;border-radius:16px;background:#fbf1dc;border:1.5px solid #e2c27a}
-.cx-conflict p{color:#5a3f0f;font-size:15.5px}
+.cx-conflict{margin-top:12px;padding:16px 18px;border-radius:16px;background:#f7ebe1;border:1.5px solid #dcb393}
+.cx-conflict p{color:#5c3a22;font-size:15.5px}
 .cx-conflict div{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .cx-side{display:flex;flex-direction:column;gap:14px}
 .cx-sec{padding:18px;border-radius:var(--r);background:var(--card);box-shadow:var(--shadow)}
@@ -34,18 +34,18 @@
 .cx-opt b{font:600 15.5px/1.25 var(--display);color:var(--pine)}
 .cx-opt small{font-size:13.5px;color:var(--ink-3);line-height:1.35}
 .cx-opt:hover{border-color:var(--pine-2)}
-.cx-opt.is-on{border-color:var(--pine);background:#eef3ee;box-shadow:inset 0 0 0 1px var(--pine)}
+.cx-opt.is-on{border-color:var(--pine);background:#e9eff0;box-shadow:inset 0 0 0 1px var(--pine)}
 .cx-opts.is-multi .cx-opt.is-on::after{content:"";position:absolute;right:12px;top:12px;width:18px;height:18px;border-radius:5px;background:var(--pine) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3 3 7-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
 .cx-opt.is-conflict{border-style:dashed;background:#fcfbf7}
-.cx-opt em{font-style:normal;font:600 12.5px/1.2 var(--display);color:#8a6a2e}
+.cx-opt em{font-style:normal;font:600 12.5px/1.2 var(--display);color:#8f5f3e}
 .cx-fin{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
 .cx-fin:first-of-type{border-top:0}
 .cx-fin>span{padding-top:8px;font-size:14px;color:var(--ink-3)}
 .cx-chips{display:flex;flex-wrap:wrap;gap:6px}
 .cx-chip{min-height:36px;padding:0 12px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font:500 14px/1 var(--display);color:var(--ink-2);cursor:pointer}
 .cx-chip.is-on{background:var(--pine);border-color:var(--pine);color:#fff}
-.cx-chip.is-conflict{border-style:dashed;color:#8a6a2e}
-.cx-est{padding:20px;border-radius:var(--r);background:var(--pine);color:var(--on-pine)}
+.cx-chip.is-conflict{border-style:dashed;color:#8f5f3e}
+.cx-est{padding:20px;border-radius:var(--r);background:var(--graphite);color:var(--on-pine)}
 .cx-est h3{color:#fff;font-size:18px}
 .cx-total{margin-top:8px;font:650 clamp(28px,2.6vw,38px)/1.1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
 .cx-area{margin-top:4px;font-size:14px;color:var(--on-pine-2)}
@@ -61,7 +61,7 @@
 @media (max-width:1180px){.cx-grid,.cx-head{grid-template-columns:minmax(0,1fr)}.cx-stage{position:static}}
 @media (max-width:760px){.cx-houses{grid-template-columns:minmax(0,1fr)}.cx-viewer{height:52vh;min-height:300px}.cx-links{display:none}.cx-fin{grid-template-columns:minmax(0,1fr)}.cx-fin>span{padding-top:0}}
 /* конфликт показываем там, где его точно увидят, — плашкой внизу экрана */
-.cx-conflict{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;width:min(640px,calc(100% - 24px));margin:0;box-shadow:0 18px 40px -16px rgba(24,37,31,.45)}
+.cx-conflict{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;width:min(640px,calc(100% - 24px));margin:0;box-shadow:0 18px 40px -16px rgba(30,36,38,.45)}
 .cx-conflict .btn{white-space:normal;height:auto;min-height:44px;padding:10px 18px;text-align:left;line-height:1.3}
 /* Короткое меню калькулятора всегда в одну строку: выпадающий вариант из site.css (≤1320px) рассчитан на кнопку-гамбургер главной, которой здесь нет */
 @media (max-width:1320px) and (min-width:761px){

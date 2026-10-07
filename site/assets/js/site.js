@@ -263,7 +263,7 @@ function showProject(h){
   $("#pDiscuss").setAttribute("data-project", h.slug);
   $("#pCalc").href = "calculator.html#" + h.slug;
   $("#pCalc").innerHTML = (h.calc ? "Рассчитать этот дом" : "Собрать похожий в калькуляторе") + icon("i-calc");
-  document.title = h.name + " — Гардарика";
+  document.title = h.name + " — Vozdvizhen";
   document.body.classList.add("is-project");
   project.hidden = false;
   window.scrollTo(0, 0);
@@ -274,7 +274,7 @@ function hideProject(){
   if (project.hidden) return false;
   project.hidden = true;
   document.body.classList.remove("is-project");
-  document.title = "Гардарика — дома под ключ для жизни за городом";
+  document.title = "Vozdvizhen — дома под ключ для жизни за городом";
   return true;
 }
 var catPage = $("#catalogPage");
@@ -282,7 +282,7 @@ function showCatalog(){
   hideProject();
   catPage.hidden = false;
   document.body.classList.add("is-catalog");
-  document.title = "Каталог домов — Гардарика";
+  document.title = "Каталог домов — Vozdvizhen";
   window.scrollTo(0, 0);
   $("#catTitle").focus({preventScroll: true});
 }
@@ -290,7 +290,7 @@ function hideCatalog(){
   if (catPage.hidden) return false;
   catPage.hidden = true;
   document.body.classList.remove("is-catalog");
-  document.title = "Гардарика — дома под ключ для жизни за городом";
+  document.title = "Vozdvizhen — дома под ключ для жизни за городом";
   return true;
 }
 function route(){

@@ -39,7 +39,7 @@ Visitors compare house scales, materials, architectural approaches, preliminary 
 
 ## Brand Commitments
 
-- Name: «Гардарика» / Gardarika Homes.
+- Name: Vozdvizhen (с октября 2026; прежнее рабочее название — «Гардарика»). Домен: vozdvizhen.ru.
 - Russian-language voice: assured, concise, architectural, specific; premium without ornamental luxury clichés.
 - Core promise: «Дом, собранный вокруг вашей жизни».
 - The owner wants a modern, conversion-oriented site with a deliberately non-generic, non-AI look. The signature product is the 3D calculator (`site/calculator.html`): an MVP with three ready house models (Lento 100, Lilia 105, Garden 106) whose parts can be mixed, with explained and fixable incompatibilities, a stage-by-stage build view and a PDF estimate. Other catalog houses are marked as «в разработке». Unit rates are demonstration values.

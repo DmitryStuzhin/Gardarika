@@ -13,14 +13,14 @@
 
 .kc-grid{align-items:start}
 .cx-viewer{position:relative}
-.kc-badge{position:absolute;left:14px;top:14px;z-index:2;margin:0;padding:7px 14px;border-radius:999px;background:rgba(24,37,31,.82);color:#fff;font:600 14px/1.2 var(--display);pointer-events:none}
-.kc-hint{position:absolute;left:16px;bottom:12px;z-index:2;margin:0;font-size:13px;color:rgba(24,37,31,.62);pointer-events:none}
+.kc-badge{position:absolute;left:14px;top:14px;z-index:2;margin:0;padding:7px 14px;border-radius:999px;background:rgba(30,36,38,.82);color:#fff;font:600 14px/1.2 var(--display);pointer-events:none}
+.kc-hint{position:absolute;left:16px;bottom:12px;z-index:2;margin:0;font-size:13px;color:rgba(30,36,38,.62);pointer-events:none}
 .cx-viewer canvas{position:absolute;inset:0}
 
 .kc-side{display:flex;flex-direction:column;gap:14px;scroll-margin-top:92px}
 .kc-panel{padding:20px;border-radius:var(--r);background:var(--card);box-shadow:var(--shadow);scroll-margin-top:92px}
 .kc-panel-h{margin-bottom:14px}
-.kc-panel-h span{font:600 13px/1.2 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#8a6a2e}
+.kc-panel-h span{font:600 13px/1.2 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#8f5f3e}
 .kc-panel-h h2{margin-top:4px;font-size:clamp(24px,2.2vw,30px);letter-spacing:-.02em}
 .kc-panel-h p{margin-top:2px;color:var(--ink-3);font-size:15px}
 .kc-group+.kc-group{margin-top:18px}
@@ -32,7 +32,7 @@
 .kc-houses{display:grid;gap:10px}
 .kc-house{display:flex;align-items:center;gap:14px;padding:8px;border:1.5px solid var(--line);border-radius:16px;background:#fff;text-align:left;cursor:pointer;transition:border-color .2s var(--ease)}
 .kc-house:hover{border-color:var(--pine-2)}
-.kc-house.is-on{border-color:var(--pine);background:#eef3ee;box-shadow:inset 0 0 0 1px var(--pine)}
+.kc-house.is-on{border-color:var(--pine);background:#e9eff0;box-shadow:inset 0 0 0 1px var(--pine)}
 .kc-house img{width:120px;aspect-ratio:4/3;object-fit:cover;border-radius:10px;flex:none}
 .kc-house b{display:block;font:600 18px/1.2 var(--display);color:var(--pine)}
 .kc-house small{display:block;margin-top:3px;font-size:14px;color:var(--ink-3);line-height:1.4}
@@ -45,7 +45,7 @@
 .kc-soon img{width:44px;height:34px;object-fit:cover;border-radius:6px;filter:grayscale(1);opacity:.6;flex:none}
 .kc-soon small{display:block;font:400 12.5px/1.3 inherit}
 
-.kc-note{margin-bottom:14px;padding:12px 14px;border-radius:12px;background:#fbf1dc;border:1.5px solid #e2c27a;color:#5a3f0f;font-size:15px}
+.kc-note{margin-bottom:14px;padding:12px 14px;border-radius:12px;background:#f7ebe1;border:1.5px solid #dcb393;color:#5c3a22;font-size:15px}
 .kc-note a{color:inherit}
 
 .kc-nav{display:flex;justify-content:space-between;gap:10px}
@@ -53,14 +53,14 @@
 .kc-nav .btn[hidden]{display:none}
 .kc-nav .btn svg{width:18px;height:18px}
 
-.kc-sum{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:16px 20px;border-radius:var(--r);background:var(--pine);color:var(--on-pine)}
+.kc-sum{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:16px 20px;border-radius:var(--r);background:var(--graphite);color:var(--on-pine)}
 .kc-sum span{width:100%;font:600 12.5px/1.2 var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--honey)}
 .kc-sum b{font:650 clamp(26px,2.4vw,34px)/1.1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
 .kc-sum small{font-size:14px;color:var(--on-pine-2)}
 
 .kc-bill{display:grid;gap:10px}
 .kc-bill-g{border-top:1px solid var(--line);padding-top:8px}
-.kc-bill-g>b{display:block;margin-bottom:4px;font:600 12.5px/1.2 var(--display);letter-spacing:.05em;text-transform:uppercase;color:#8a6a2e}
+.kc-bill-g>b{display:block;margin-bottom:4px;font:600 12.5px/1.2 var(--display);letter-spacing:.05em;text-transform:uppercase;color:#8f5f3e}
 .kc-bill-g div{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:15px}
 .kc-bill-g small{display:block;font-size:12.5px;color:var(--ink-3)}
 .kc-bill-g i{font-style:normal;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -98,7 +98,7 @@
 .kc-panel .cx-opts > :nth-child(n+6){animation-delay:.25s}
 .cx-opt,.kc-house{transition:border-color .2s var(--ease),background-color .25s var(--ease),transform .2s var(--ease),box-shadow .25s var(--ease)}
 .cx-opt:active,.kc-house:active{transform:scale(.985)}
-.cx-opt:hover,.kc-house:hover{transform:translateY(-1px);box-shadow:0 10px 22px -18px rgba(24,37,31,.5)}
+.cx-opt:hover,.kc-house:hover{transform:translateY(-1px);box-shadow:0 10px 22px -18px rgba(30,36,38,.5)}
 .kc-sum.is-bump b{animation:kcBump .6s var(--ease)}
 @keyframes kcBump{0%{transform:none}30%{transform:scale(1.035)}100%{transform:none}}
 .kc-sum b{display:inline-block;transform-origin:left center}

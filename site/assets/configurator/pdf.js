@@ -19,7 +19,7 @@
   function money(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб."; }
   function num(n){ return (Math.round(n * 10) / 10).toString().replace(".", ","); }
 
-  var PINE = [31, 61, 49], INK = [24, 37, 31], ASH = [110, 120, 114], HONEY = [176, 132, 46], LINE = [214, 219, 211];
+  var PINE = [47, 88, 97], INK = [31, 36, 38], ASH = [104, 110, 112], HONEY = [168, 112, 74], LINE = [217, 212, 204], GRAPHITE = [48, 52, 54];
 
   GC.pdf = function(o){
     return ready().then(function(){
@@ -51,9 +51,9 @@
       }
 
       /* шапка */
-      d.setFillColor(PINE[0], PINE[1], PINE[2]); d.rect(0, 0, 210, 26, "F");
-      font(15, true, [255, 255, 255]); d.text("ГАРДАРИКА", M, 15.5);
-      font(9, false, [214, 226, 218]); d.text("Предварительная смета · " + new Date().toLocaleDateString("ru-RU"), M + W, 15.5, {align: "right"});
+      d.setFillColor(GRAPHITE[0], GRAPHITE[1], GRAPHITE[2]); d.rect(0, 0, 210, 26, "F");
+      font(15, true, [255, 255, 255]); d.text("VOZDVIZHEN", M, 15.5);
+      font(9, false, [226, 214, 202]); d.text("Предварительная смета · " + new Date().toLocaleDateString("ru-RU"), M + W, 15.5, {align: "right"});
       y = 36;
       text(o.title, 20, true, PINE, {gap: 1.5});
       text((o.mix.length > 1 ? "Собрано из: " + o.mix.join(" + ") : "Как в проекте " + o.mix[0]) + " · " + num(o.area) + " кв. м по внешнему контуру", 10, false, ASH, {gap: 5});
@@ -95,8 +95,8 @@
 
       /* номера страниц */
       var n = d.getNumberOfPages();
-      for (var i = 1; i <= n; i++){ d.setPage(i); font(7.5, false, ASH); d.text("Гардарика · смета дома · стр. " + i + " из " + n, M, 297 - 9); }
-      d.save("gardarika-smeta.pdf");
+      for (var i = 1; i <= n; i++){ d.setPage(i); font(7.5, false, ASH); d.text("Vozdvizhen · смета дома · стр. " + i + " из " + n, M, 297 - 9); }
+      d.save("vozdvizhen-smeta.pdf");
     });
   };
 })(window);
