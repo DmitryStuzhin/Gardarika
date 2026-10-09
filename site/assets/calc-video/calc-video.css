@@ -5,10 +5,11 @@
 .vc-frame{opacity:0;transition:opacity .7s var(--ease)}
 .vc-frame.is-on{opacity:1}
 .vc-frame.is-instant{transition:none}
-.vc-clip{opacity:0;pointer-events:none}
+.vc-clip{z-index:2;opacity:0;pointer-events:none}
+.vc-viewer .kc-badge,.vc-bar{z-index:3}
 .vc-clip.is-on{opacity:1}
 .vc-viewer .kc-badge{transition:opacity .3s var(--ease)}
-.vc-bar{position:absolute;left:0;right:0;bottom:0;z-index:2;height:4px;background:rgba(30,36,38,.18);opacity:0;transition:opacity .3s var(--ease)}
+.vc-bar{position:absolute;left:0;right:0;bottom:0;z-index:3;height:4px;background:rgba(30,36,38,.18);opacity:0;transition:opacity .3s var(--ease)}
 .vc-bar i{display:block;height:100%;width:0;background:var(--honey)}
 .vc-viewer.is-playing .vc-bar{opacity:1}
 
