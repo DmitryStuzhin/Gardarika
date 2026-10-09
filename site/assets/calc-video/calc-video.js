@@ -6,7 +6,7 @@
   var DIR = "assets/calc-video/v1/";
   var REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* clip — ролик перехода с предыдущего этапа на этот; null — ролика пока нет, будет наплыв */
+  /* clip — ролик перехода с предыдущего этапа на этот (у этапа или у выбранного варианта); null — ролика пока нет, будет наплыв */
   var STEPS = [
     {id: "plot", name: "Участок", frame: "s01", clip: null,
      title: "Участок", lead: "Геодезия, вынос осей в натуру, подготовка площадки.",
@@ -35,7 +35,7 @@
      title: "Кровля и благоустройство", lead: "Плоская кровля, свет на фасаде, газон и мощение. Дом готов.",
      choice: "roof",
      options: [
-       {id: "membrane", name: "Мембрана с гравием", note: "Графитовая ПВХ-мембрана, балласт из гравия, металлические парапеты", frame: "s06a1", price: 3100000},
+       {id: "membrane", name: "Мембрана с гравием", note: "Графитовая ПВХ-мембрана, балласт из гравия, металлические парапеты", frame: "s06a1", clip: "t05", price: 3100000},
        {id: "green", name: "Зелёная кровля", note: "Седум по гидроизоляции, гравийная кромка", soon: true}
      ]},
     {id: "terrace", name: "Терраса", frame: null, clip: null,
@@ -55,6 +55,7 @@
 
   function opt(s){ return s.options ? s.options.filter(function(o){ return o.id === pick[s.choice]; })[0] : null; }
   function frameOf(i){ var s = STEPS[Math.min(i, LAST - 1)]; return s.frame || opt(s).frame; }
+  function clipOf(s){ return s.clip || (s.options && opt(s).clip) || null; }
   function priceOf(s){ return s.options ? opt(s).price : s.price; }
   function money(n){ return n.toLocaleString("ru-RU").replace(/,/g, " ") + " ₽"; }
   function src(name, ext){ return DIR + name + ext; }
@@ -76,7 +77,7 @@
   /* что понадобится с этапа i: ролик вперёд (в i+1) и ролик назад (из i в i-1); ближний — первым */
   function warm(i){
     if (REDUCE || !window.fetch) return;
-    var fwd = STEPS[i + 1] && STEPS[i + 1].clip, back = STEPS[i] && STEPS[i].clip && i > 0 ? STEPS[i].clip + "r" : null;
+    var fwd = STEPS[i + 1] && clipOf(STEPS[i + 1]), back = i > 0 && STEPS[i] && clipOf(STEPS[i]) ? clipOf(STEPS[i]) + "r" : null;
     [back, fwd].forEach(function(c){ if (c) fetchClip(c).catch(function(){}); });
     [i - 1, i + 1].forEach(function(k){
       if (k < 0 || k > LAST) return; var f = frameOf(k);
@@ -133,7 +134,7 @@
   /* один шаг стройки: from → to (соседние) */
   function hop(from, to){
     var fwd = to > from, s = STEPS[Math.min(Math.max(from, to), LAST - 1)];
-    var clip = s.clip && !REDUCE ? s.clip + (fwd ? "" : "r") : null;
+    var clip = clipOf(s) && !REDUCE ? clipOf(s) + (fwd ? "" : "r") : null;
     var next = frameOf(to);
     if (frameOf(from) === next) return Promise.resolve();
     if (fwd && to < LAST) $("stageBadge").textContent = "Строим · " + STEPS[to].name;
@@ -160,10 +161,9 @@
   function badge(){
     var i = Math.min(shown, LAST - 1);
     $("stageBadge").textContent = (shown >= LAST ? "Готово" : "Этап " + (i + 1) + " из " + LAST) + " · " + STEPS[i].name;
-    var miss = [];
-    if (!STEPS[4].clip) miss.push("отделка");
-    if (!STEPS[5].clip) miss.push("кровля");
-    $("frameNote").textContent = "Ролики пока есть для фундамента и двух этажей; " + miss.join(" и ") + " — сменой кадра.";
+    var miss = STEPS.filter(function(s, i){ return i > 0 && !clipOf(s) && frameOf(i) !== frameOf(i - 1); })
+      .map(function(s){ return s.name.toLowerCase(); });
+    $("frameNote").textContent = miss.length ? "Ролика пока нет для этапа: " + miss.join(", ") + " — там плавная смена кадра." : "";
   }
 
   /* панель шагов */
