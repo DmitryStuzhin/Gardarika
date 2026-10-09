@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Стройка дома по шагам — Vozdvizhen</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" as="image" href="assets/calc-video/v1/s01.jpg">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/configurator/constructor.css">
+<link rel="stylesheet" href="assets/configurator/calc.css">
+<link rel="stylesheet" href="assets/calc-video/calc-video.css">
+</head>
+<body class="cx-page">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-back" viewBox="0 0 20 20"><path d="M17 10H4M9 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 20 20"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></symbol>
+</svg>
+<header class="nav is-scrolled" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html#top" aria-label="Vozdvizhen — на главную">
+      <img class="brand-sign" src="assets/brand/mark.svg" alt="" width="36" height="40">
+      <span class="brand-mark">Vozdvizhen</span>
+    </a>
+    <nav class="links cx-links" aria-label="Разделы">
+      <a href="index.html#/catalog">Проекты</a>
+      <a href="index.html#price">Цены</a>
+      <a href="index.html#contact">Контакты</a>
+    </nav>
+    <a class="nav-phone cx-phone" href="tel:+79777144969">+7 977 714-49-69</a>
+  </div>
+</header>
+
+<main class="wrap cx kc vc">
+  <div class="kc-head">
+    <div>
+      <p class="cx-badge">Прототип · дом 1</p>
+      <h1>Дом по шагам</h1>
+    </div>
+    <p>Пройдите стройку от участка до готового дома. На каждом шаге видно, что появляется и сколько это стоит. Где есть варианты, выберите свой.</p>
+  </div>
+
+  <ol class="kc-steps" id="steps" aria-label="Этапы стройки"></ol>
+
+  <div class="cx-grid kc-grid vc-grid">
+    <div class="cx-stage">
+      <div class="vc-viewer" id="viewer">
+        <img class="vc-frame is-on" id="frameA" src="assets/calc-video/v1/s01.jpg" alt="" width="1600" height="900">
+        <img class="vc-frame" id="frameB" alt="" width="1600" height="900">
+        <video class="vc-clip" id="clip" muted playsinline preload="auto" aria-hidden="true"></video>
+        <p class="kc-badge" id="stageBadge"></p>
+        <div class="vc-bar" aria-hidden="true"><i id="bar"></i></div>
+      </div>
+      <div class="vc-under">
+        <button type="button" class="btn btn-line btn-sm" id="tour"><svg><use href="#i-play"/></svg>Стройка целиком</button>
+        <p id="frameNote"></p>
+      </div>
+    </div>
+
+    <div class="kc-side">
+      <section class="kc-panel" id="panel" aria-live="polite"></section>
+      <div class="kc-nav">
+        <button type="button" class="btn btn-line" id="prev"><svg><use href="#i-back"/></svg>Назад</button>
+        <button type="button" class="btn btn-honey" id="next">Далее<svg><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="kc-sum" id="sum">
+        <span>Дом целиком · цены-пример</span>
+        <b id="total"></b>
+        <small id="done"></small>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="assets/calc-video/calc-video.js"></script>
+</body>
+</html>
