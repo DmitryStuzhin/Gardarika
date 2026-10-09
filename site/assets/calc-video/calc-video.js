@@ -59,17 +59,28 @@
   function money(n){ return n.toLocaleString("ru-RU").replace(/,/g, " ") + " ₽"; }
   function src(name, ext){ return DIR + name + ext; }
 
-  /* предзагрузка: кадр и ролик соседних этапов */
-  var warmed = {};
+  /* Ролики скачиваются целиком в память по одному (без конкуренции за соединения)
+     и проигрываются из памяти — поэтому и вперёд, и назад стартуют без задержки. */
+  var clips = {}, queue = [], loading = false, imgs = {};
+  function fetchClip(c){
+    if (!clips[c]) clips[c] = new Promise(function(ok, fail){ queue.unshift({c: c, ok: ok, fail: fail}); pump(); });
+    return clips[c];
+  }
+  function pump(){
+    if (loading || !queue.length) return;
+    var job = queue.shift(); loading = true;
+    fetch(src(job.c, ".mp4")).then(function(r){ if (!r.ok) throw new Error(r.status); return r.blob(); })
+      .then(function(b){ job.ok(URL.createObjectURL(b)); }, function(e){ delete clips[job.c]; job.fail(e); })
+      .then(function(){ loading = false; pump(); });
+  }
+  /* что понадобится с этапа i: ролик вперёд (в i+1) и ролик назад (из i в i-1); ближний — первым */
   function warm(i){
-    if (i < 0 || i > LAST) return;
-    var f = frameOf(i);
-    if (!warmed[f]){ warmed[f] = new Image(); warmed[f].src = src(f, ".jpg"); }
-    var s = STEPS[i], n = STEPS[i + 1];
-    [n && n.clip, s && s.clip && s.clip + "r"].forEach(function(c){
-      if (!c || warmed[c] || REDUCE) return;
-      var v = warmed[c] = document.createElement("video");
-      v.preload = "auto"; v.muted = true; v.src = src(c, ".mp4");
+    if (REDUCE || !window.fetch) return;
+    var fwd = STEPS[i + 1] && STEPS[i + 1].clip, back = STEPS[i] && STEPS[i].clip && i > 0 ? STEPS[i].clip + "r" : null;
+    [back, fwd].forEach(function(c){ if (c) fetchClip(c).catch(function(){}); });
+    [i - 1, i + 1].forEach(function(k){
+      if (k < 0 || k > LAST) return; var f = frameOf(k);
+      if (!imgs[f]){ imgs[f] = new Image(); imgs[f].src = src(f, ".jpg"); }
     });
   }
 
@@ -92,27 +103,31 @@
   }
 
   function playClip(name, rate){
-    return new Promise(function(done){
-      var finished = false;
-      /* ролик не начался за 5 секунд (медленная сеть) — не держим посетителя */
-      var wait = setTimeout(function(){ video.pause(); end(false); }, 5000);
-      function end(ok){
-        if (finished) return; finished = true; clearTimeout(wait);
-        video.onended = video.onerror = video.ontimeupdate = null;
-        done(ok);
-      }
-      video.onerror = function(){ end(false); };
-      video.ontimeupdate = function(){ if (video.duration) bar.style.width = (100 * video.currentTime / video.duration) + "%"; };
-      video.onended = function(){ end(true); };
-      video.src = src(name, ".mp4");
-      video.playbackRate = rate;
-      video.addEventListener("playing", function show(){
-        video.removeEventListener("playing", show); clearTimeout(wait);
-        video.classList.add("is-on"); viewer.classList.add("is-playing");
+    viewer.classList.add("is-loading");
+    var got = window.fetch ? fetchClip(name) : Promise.resolve(src(name, ".mp4"));
+    /* медленная сеть: ждём ролик до 25 секунд, потом сдаёмся и меняем кадр наплывом */
+    var late = new Promise(function(_, fail){ setTimeout(function(){ fail(new Error("timeout")); }, 25000); });
+    return Promise.race([got, late]).then(function(url){
+      return new Promise(function(done){
+        var finished = false;
+        function end(ok){
+          if (finished) return; finished = true;
+          video.onended = video.onerror = video.ontimeupdate = video.onplaying = null;
+          done(ok);
+        }
+        video.onerror = function(){ end(false); };
+        video.ontimeupdate = function(){ if (video.duration) bar.style.width = (100 * video.currentTime / video.duration) + "%"; };
+        video.onended = function(){ end(true); };
+        video.onplaying = function(){
+          video.onplaying = null; viewer.classList.remove("is-loading");
+          video.classList.add("is-on"); viewer.classList.add("is-playing");
+        };
+        video.src = url;
+        video.defaultPlaybackRate = rate; video.playbackRate = rate;
+        var p = video.play();
+        if (p && p.catch) p.catch(function(){ end(false); });
       });
-      var p = video.play();
-      if (p && p.catch) p.catch(function(){ end(false); });
-    });
+    }, function(){ return false; }).then(function(ok){ viewer.classList.remove("is-loading"); return ok; });
   }
 
   /* один шаг стройки: from → to (соседние) */
@@ -133,7 +148,7 @@
 
   function run(){
     if (busy) return;
-    if (shown === target){ fast = false; tourBtn.disabled = false; warm(shown + 1); warm(shown - 1); return; }
+    if (shown === target){ fast = false; tourBtn.disabled = false; warm(Math.min(shown, LAST - 1)); return; }
     busy = true;
     var step = target > shown ? 1 : -1;
     if (Math.abs(target - shown) > 1) fast = true;
@@ -222,5 +237,5 @@
     setFrame(frameOf(0), true).then(function(){ setTimeout(function(){ go(LAST); }, 300); });
   });
 
-  renderSteps(); renderPanel(); badge(); warm(1);
+  renderSteps(); renderPanel(); badge(); warm(0);
 })();

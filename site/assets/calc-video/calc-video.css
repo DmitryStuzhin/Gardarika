@@ -32,3 +32,7 @@
   .vc-under p{display:none}
 }
 @media (prefers-reduced-motion:reduce){.vc-frame{transition:none}}
+/* ролик ещё грузится: бегущая полоска внизу кадра */
+.vc-viewer.is-loading .vc-bar{opacity:1}
+.vc-viewer.is-loading .vc-bar i{width:30%;animation:vcLoad 1.1s ease-in-out infinite}
+@keyframes vcLoad{from{transform:translateX(-100%)}to{transform:translateX(340%)}}
