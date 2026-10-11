@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Калькулятор дома — Vozdvizhen</title>
+<meta name="robots" content="noindex">
+<!-- Прежний 3D-калькулятор: скрыт с сайта (ссылок на него нет), оставлен до решения, удалять ли. -->
+<meta name="description" content="Соберите дом из трёх готовых моделей — Lento 100, Lilia 105 и Garden 106 — смешайте их части, выберите конструктив и получите смету по этапам в PDF.">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/configurator/constructor.css">
+<link rel="stylesheet" href="assets/configurator/calc.css">
+</head>
+<body class="cx-page">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-back" viewBox="0 0 20 20"><path d="M17 10H4M9 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 20 20"><path d="M5 2.5h7l3.5 3.5v11.5H5zM12 2.5V6h3.5M10 9v5.5M7.5 12l2.5 2.5 2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+</svg>
+<header class="nav is-scrolled" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html#top" aria-label="Vozdvizhen — на главную">
+      <img class="brand-sign" src="assets/brand/mark.svg" alt="" width="36" height="40">
+      <span class="brand-mark">Vozdvizhen</span>
+    </a>
+    <nav class="links cx-links" aria-label="Разделы">
+      <a href="index.html#/catalog">Проекты</a>
+      <a href="index.html#price">Цены</a>
+      <a href="index.html#contact">Контакты</a>
+    </nav>
+    <a class="nav-phone cx-phone" href="tel:+79777144969">+7 977 714-49-69</a>
+  </div>
+</header>
+
+<main class="wrap cx kc">
+  <div class="kc-head">
+    <div>
+      <p class="cx-badge">3 готовые модели · остальные в разработке</p>
+      <h1>Калькулятор дома</h1>
+    </div>
+    <p>Выберите проект — и постройте его с нуля: фундамент, стены, второй уровень, кровля, фасад. На любом этапе можно взять решение из другого дома. Смета считается по объёмам модели.</p>
+  </div>
+
+  <ol class="kc-steps" id="steps" aria-label="Шаги расчёта"></ol>
+
+  <div class="cx-grid kc-grid">
+    <div class="cx-stage">
+      <div class="cx-viewer" id="viewer" aria-label="3D-модель дома">
+        <p class="kc-badge" id="stageBadge"></p>
+        <p class="kc-hint">Тяните, чтобы повернуть · колесо — приблизить</p>
+      </div>
+      <p class="cx-mix" id="mix"></p>
+    </div>
+
+    <div class="kc-side">
+      <section class="kc-panel" id="panel" aria-live="polite"></section>
+      <div class="kc-nav">
+        <button type="button" class="btn btn-line" id="prev"><svg><use href="#i-back"/></svg>Назад</button>
+        <button type="button" class="btn btn-honey" id="next">Далее<svg><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="kc-sum" id="sum">
+        <span>Предварительно</span>
+        <b id="total"></b>
+        <small id="area"></small>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- плашка конфликта — вне липкого блока 3D, иначе её перекрывает панель шагов -->
+<div class="cx-conflict" id="conflict" hidden role="alert">
+  <p id="conflictText"></p>
+  <div><button type="button" class="btn btn-honey btn-sm" id="conflictFix"></button><button type="button" class="btn btn-line btn-sm" id="conflictCancel">Оставить как было</button></div>
+</div>
+
+
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/vendor/OrbitControls.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/configurator/houses.js"></script>
+<script src="assets/configurator/engine.js"></script>
+<script src="assets/configurator/pricing.js"></script>
+<script src="assets/configurator/geometry.js"></script>
+<script src="assets/configurator/pdf.js"></script>
+<script src="assets/configurator/calc.js"></script>
+</body>
+</html>

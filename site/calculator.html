@@ -4,21 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Калькулятор дома — Vozdvizhen</title>
-<meta name="description" content="Соберите дом из трёх готовых моделей — Lento 100, Lilia 105 и Garden 106 — смешайте их части, выберите конструктив и получите смету по этапам в PDF.">
+<meta name="description" content="Пройдите стройку дома по шагам — от участка до готового дома — и посмотрите, сколько стоит каждый этап.">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
 <link rel="icon" href="assets/brand/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
+<link rel="preload" as="image" href="assets/calc-video/v1/s01.jpg">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/configurator/constructor.css">
 <link rel="stylesheet" href="assets/configurator/calc.css">
+<link rel="stylesheet" href="assets/calc-video/calc-video.css?v=4">
 </head>
 <body class="cx-page">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-back" viewBox="0 0 20 20"><path d="M17 10H4M9 5l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-pdf" viewBox="0 0 20 20"><path d="M5 2.5h7l3.5 3.5v11.5H5zM12 2.5V6h3.5M10 9v5.5M7.5 12l2.5 2.5 2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 20 20"><path d="M6 4.5v11l9-5.5z" fill="currentColor"/></symbol>
 </svg>
 <header class="nav is-scrolled" id="nav">
   <div class="wrap nav-in">
@@ -35,24 +37,30 @@
   </div>
 </header>
 
-<main class="wrap cx kc">
+<main class="wrap cx kc vc">
   <div class="kc-head">
     <div>
-      <p class="cx-badge">3 готовые модели · остальные в разработке</p>
+      <p class="cx-badge">Стройка по шагам</p>
       <h1>Калькулятор дома</h1>
     </div>
-    <p>Выберите проект — и постройте его с нуля: фундамент, стены, второй уровень, кровля, фасад. На любом этапе можно взять решение из другого дома. Смета считается по объёмам модели.</p>
+    <p>Пройдите стройку от участка до готового дома. На каждом шаге видно, что появляется и сколько это стоит. Где есть варианты, выберите свой.</p>
   </div>
 
-  <ol class="kc-steps" id="steps" aria-label="Шаги расчёта"></ol>
+  <ol class="kc-steps" id="steps" aria-label="Этапы стройки"></ol>
 
-  <div class="cx-grid kc-grid">
+  <div class="cx-grid kc-grid vc-grid">
     <div class="cx-stage">
-      <div class="cx-viewer" id="viewer" aria-label="3D-модель дома">
+      <div class="vc-viewer" id="viewer">
+        <img class="vc-frame is-on" id="frameA" src="assets/calc-video/v1/s01.jpg" alt="" width="1600" height="900">
+        <img class="vc-frame" id="frameB" alt="" width="1600" height="900">
+        <video class="vc-clip" id="clip" muted playsinline preload="auto" aria-hidden="true"></video>
         <p class="kc-badge" id="stageBadge"></p>
-        <p class="kc-hint">Тяните, чтобы повернуть · колесо — приблизить</p>
+        <div class="vc-bar" aria-hidden="true"><i id="bar"></i></div>
       </div>
-      <p class="cx-mix" id="mix"></p>
+      <div class="vc-under">
+        <button type="button" class="btn btn-line btn-sm" id="tour"><svg><use href="#i-play"/></svg>Стройка целиком</button>
+        <p id="frameNote"></p>
+      </div>
     </div>
 
     <div class="kc-side">
@@ -62,29 +70,14 @@
         <button type="button" class="btn btn-honey" id="next">Далее<svg><use href="#i-arrow"/></svg></button>
       </div>
       <div class="kc-sum" id="sum">
-        <span>Предварительно</span>
+        <span>Дом целиком · цены-пример</span>
         <b id="total"></b>
-        <small id="area"></small>
+        <small id="done"></small>
       </div>
     </div>
   </div>
 </main>
 
-<!-- плашка конфликта — вне липкого блока 3D, иначе её перекрывает панель шагов -->
-<div class="cx-conflict" id="conflict" hidden role="alert">
-  <p id="conflictText"></p>
-  <div><button type="button" class="btn btn-honey btn-sm" id="conflictFix"></button><button type="button" class="btn btn-line btn-sm" id="conflictCancel">Оставить как было</button></div>
-</div>
-
-
-<script src="assets/vendor/three.min.js"></script>
-<script src="assets/vendor/OrbitControls.js"></script>
-<script src="assets/js/data.js"></script>
-<script src="assets/configurator/houses.js"></script>
-<script src="assets/configurator/engine.js"></script>
-<script src="assets/configurator/pricing.js"></script>
-<script src="assets/configurator/geometry.js"></script>
-<script src="assets/configurator/pdf.js"></script>
-<script src="assets/configurator/calc.js"></script>
+<script src="assets/calc-video/calc-video.js?v=4"></script>
 </body>
 </html>

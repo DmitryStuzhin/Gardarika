@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Админка — Vozdvizhen</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/brand/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/admin/admin.css?v=1">
+</head>
+<body class="adm">
+<header class="adm-top">
+  <div class="adm-top-in">
+    <a class="adm-brand" href="#/"><img src="assets/brand/mark.svg" alt="" width="26" height="29"><span>Vozdvizhen</span><small>админка</small></a>
+    <p class="adm-status" id="status" aria-live="polite"></p>
+    <div class="adm-top-act" id="topAct" hidden>
+      <button type="button" class="btn btn-honey btn-sm" id="save">Сохранить на сайт</button>
+      <a class="btn btn-line btn-sm adm-hide-s" href="index.html#/catalog" target="_blank" rel="noopener">Открыть сайт</a>
+      <button type="button" class="adm-icon-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-label="Ещё">⋯</button>
+      <div class="adm-menu" id="menu" hidden>
+        <a href="index.html#/catalog" target="_blank" rel="noopener">Открыть сайт</a>
+        <button type="button" id="historyBtn">История версий</button>
+        <button type="button" id="logout">Выйти</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="adm-main">
+  <section class="adm-login" id="login" hidden>
+    <form class="adm-card" id="loginForm">
+      <h1>Вход в админку</h1>
+      <p>Каталог домов: фото, описания, цены.</p>
+      <label class="adm-field"><span>Пароль</span><input type="password" id="password" autocomplete="current-password" required></label>
+      <p class="adm-err" id="loginErr" hidden></p>
+      <button class="btn btn-honey" type="submit">Войти</button>
+    </form>
+  </section>
+
+  <section id="list" hidden></section>
+  <section id="editor" hidden></section>
+</main>
+
+<div class="adm-toast" id="toast" role="status" hidden></div>
+
+<dialog class="adm-dialog" id="dialog">
+  <form method="dialog">
+    <h2 id="dlgTitle"></h2>
+    <div id="dlgBody"></div>
+    <div class="adm-dlg-act" id="dlgAct"></div>
+  </form>
+</dialog>
+
+<input type="file" id="filePick" accept="image/jpeg,image/png,image/webp" hidden>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/admin/admin.js?v=1"></script>
+</body>
+</html>

@@ -62,12 +62,25 @@ curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-
 
 Первая выкладка: **Actions → Deploy site → Run workflow** (выберите ветку с сайтом). Дальше — автоматически при каждом изменении `main`.
 
+## 6. Админка каталога (один раз)
+
+На сервере от root:
+```
+curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-design-skills-non-ai-hyjlsh/deploy/enable-admin.sh | bash
+```
+Скрипт настраивает nginx (адреса `/api/admin/`, `/api/catalog.js`, `/media/`) и печатает пароль. Вход — `https://<домен>/admin.html`.
+Забыли пароль или хотите сменить — запустите скрипт ещё раз (свой пароль: `... | ADMIN_PASSWORD='пароль' bash`).
+
+Где что лежит на сервере: каталог — `/var/lib/gardarika/catalog.json`, прошлые версии — `catalog-history/` (последние 60),
+фото — `/var/lib/gardarika/media/`. Выкладка из GitHub их не трогает. Пока каталог ни разу не сохранён в админке, сайт берёт `site/assets/js/data.js`.
+
 ## Как вносить изменения
 
 - Быстрее всего: на сервере (`ssh root@IP`) выполнить `gardarika-update` — сайт обновится из GitHub за несколько секунд.
 
 - Попросите Claude: он поменяет файлы, проверит и отправит в репозиторий. После слияния в `main` сайт обновится сам.
-- Или правьте сами прямо на GitHub (например, `site/assets/js/data.js` — цифры компании, отзывы, построенные дома) и сохраняйте в `main`.
+- Дома каталога (фото, описания, цены, порядок) — в админке `admin.html`, без GitHub.
+- Остальное можно править прямо на GitHub (например, `site/assets/js/data.js` — цифры компании, отзывы, построенные дома) и сохранять в `main`. Дома в `data.js` после первого сохранения в админке больше не используются.
 - `COMPANY.draft` в `data.js`: `false` — боевой режим (пустые блоки скрыты), `true` — видны пометки «заполнить».
 
 ## Перед запуском

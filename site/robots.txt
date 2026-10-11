@@ -1,3 +1,7 @@
 User-agent: *
 Disallow: /privacy.html
 Disallow: /constructor.html
+Disallow: /admin.html
+Disallow: /calculator-3d.html
+Disallow: /calc-video.html
+Disallow: /api/

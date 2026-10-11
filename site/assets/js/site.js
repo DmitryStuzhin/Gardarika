@@ -14,6 +14,20 @@ function provLabel(h){ return h.prov === "viz" ? "Визуализация" : "�
 function areaNum(h){ return parseFloat(String(h.area).replace(",", ".")); }
 function price(h){ return "от " + h.price + NB + "млн" + NB + "₽"; }
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+/* Каталог: если в админке сохранён свой каталог, он приходит из api/catalog.js (window.CATALOG)
+   и заменяет данные из data.js. Скрытые дома на сайте не показываются. */
+var BASE = HOUSES;
+function normHouse(h){
+  h.name = String(h.name || h.slug || "Без названия"); h.type = String(h.type || ""); h.area = String(h.area || "");
+  h.rooms = String(h.rooms || ""); h.lede = String(h.lede || ""); h.story = String(h.story || "");
+  h.floors = +h.floors || 1; h.image = h.image || "";
+  h.dims = Array.isArray(h.dims) && h.dims[0] > 0 && h.dims[1] > 0 ? [+h.dims[0], +h.dims[1]] : null;
+  h.gallery = (h.gallery || []).map(function(g){ return typeof g === "string" ? {src: g, caption: ""} : g; }).filter(function(g){ return g && g.src; });
+  h.about = h.about || []; h.features = h.features || [];
+  return h;
+}
+if (window.CATALOG && Array.isArray(CATALOG.houses) && CATALOG.houses.length) HOUSES = CATALOG.houses;
+HOUSES = HOUSES.filter(function(h){ return h && h.slug && !h.hidden; }).map(normHouse);
 function bySlug(slug){ for (var i = 0; i < HOUSES.length; i++) if (HOUSES[i].slug === slug) return HOUSES[i]; return null; }
 function icon(id){ return '<svg aria-hidden="true"><use href="#' + id + '"/></svg>'; }
 
@@ -53,7 +67,12 @@ var io = "IntersectionObserver" in window ? new IntersectionObserver(function(en
 function watchDims(fig){ if (io) io.observe(fig); else fig.classList.add("dims-in"); }
 
 /* Первый экран: три новых дома */
-var heroHouses = HOUSES.filter(function(h){ return h.example; });
+/* на первом экране — три дома с готовыми фото; данные берём из каталога, а если дом из него убрали — из data.js */
+var heroHouses = ["birch-132", "lilac-96", "vesper-164"].map(function(slug){
+  var live = bySlug(slug), base = BASE.filter(function(x){ return x.slug === slug; })[0];
+  var h = live && live.dims && live.price ? live : normHouse(Object.assign({}, base));
+  h.live = !!live; return h;
+});
 var heroFig = $("#heroFig"), heroImgs = $$(".hero-img"), heroTabs = $$(".hero-tabs button"), heroStamp = $("#heroStamp");
 var heroIndex = 0, heroTimer = null;
 function setHero(i, animate){
@@ -63,10 +82,7 @@ function setHero(i, animate){
   heroTabs.forEach(function(b, n){ b.setAttribute("aria-selected", n === i ? "true" : "false"); b.tabIndex = n === i ? 0 : -1; });
   var v = $(".dim-val", heroFig);
   v.setAttribute("data-mm", h.dims[0]);
-  heroStamp.href = "#/p/" + h.slug;
-  var hc = $("#heroCalc");
-  hc.href = h.calc ? "calculator.html#" + h.slug : "calculator.html";
-  hc.innerHTML = icon("i-calc") + (h.calc ? "Рассчитать этот дом под себя" : "Собрать свой дом в калькуляторе") + icon("i-arrow");
+  heroStamp.href = h.live ? "#/p/" + h.slug : "#/catalog";
   heroStamp.setAttribute("aria-label", "Открыть проект " + h.name);
   heroStamp.innerHTML = stampHTML([
     cell("Проект", h.name, "sv-big span2"), cell("Цена, пример", price(h)),
@@ -105,16 +121,27 @@ autoHero();
 function cardHTML(h){
   var a = areaNum(h);
   return '<article class="card" data-floors="' + h.floors + '" data-size="' + (a < 110 ? "s" : a < 130 ? "m" : "l") + '">' +
-    '<div class="card-media"><img src="' + h.image + '" alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy">' +
+    '<div class="card-media"><img src="' + esc(h.image) + '" alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy">' +
       (h.example ? '<span class="tag tag-new">Новый проект</span>' : "") + '<span class="prov">' + provLabel(h) + "</span></div>" +
-    '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + h.name + '</a></h3><p class="card-type">' + (h.tagline || h.type) + "</p>" +
-      '<ul class="card-meta"><li>' + icon("i-area") + h.area + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + h.rooms + "</li>" : "") + "</ul>" +
+    '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + esc(h.name) + '</a></h3><p class="card-type">' + esc(h.tagline || h.type) + "</p>" +
+      '<ul class="card-meta"><li>' + icon("i-area") + esc(h.area) + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + esc(h.rooms) + "</li>" : "") + "</ul>" +
       '<div class="card-foot"><div class="card-price">' +
-        (h.example ? "<b>" + price(h) + '</b><small>ориентировочно, пример</small>' : h.calc ? "<b>Цена в калькуляторе</b><small>под ваш участок и комплектацию</small>" : "<b>Цена по запросу</b><small>3D-расчёт — в разработке</small>") +
-      "</div>" + (h.calc ? '<a class="card-calc" href="calculator.html#' + h.slug + '" aria-label="Рассчитать ' + esc(h.name) + '">' + icon("i-calc") + "<span>Рассчитать этот дом</span></a>" : '<span class="card-calc is-soon">Расчёт в разработке</span>') + "</div></div></article>";
+        (h.price ? "<b>" + esc(price(h)) + "</b><small>" + (h.example ? "ориентировочно, пример" : "ориентировочно") + "</small>" : "<b>Цена по запросу</b><small>под ваш участок и комплектацию</small>") +
+      '</div><a class="card-calc" href="#/p/' + h.slug + '" aria-label="Подробнее о проекте ' + esc(h.name) + '">' + icon("i-arrow") + "<span>Подробнее</span></a></div></div></article>";
 }
-var POPULAR = ["lento-100", "lilia-105", "garden-106", "birch-132", "lilac-96", "vesper-164", "bgl-124", "pine-141"];
-$("#popular").innerHTML = POPULAR.map(function(slug){ return cardHTML(bySlug(slug)); }).join("");
+/* популярные на главной — отмечаются в каталоге (popular: true) */
+$("#popular").innerHTML = HOUSES.filter(function(h){ return h.popular; }).slice(0, 8).map(cardHTML).join("");
+
+/* счётчики проектов в текстах главной */
+(function(){
+  function form(n, one, few, many){ var m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? one : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? few : many; }
+  var n = HOUSES.length, areas = HOUSES.map(areaNum).filter(function(x){ return x > 0; });
+  var lo = Math.floor(Math.min.apply(null, areas)), hi = Math.ceil(Math.max.apply(null, areas));
+  var proj = n + " " + form(n, "проект", "проекта", "проектов");
+  $$('[data-cat="count"]').forEach(function(e){ e.textContent = proj; });
+  $$('[data-cat="ready"]').forEach(function(e){ e.textContent = n + " " + form(n, "готовый проект", "готовых проекта", "готовых проектов"); });
+  $$('[data-cat="summary"]').forEach(function(e){ e.textContent = areas.length ? proj + " от " + lo + " до " + hi + NB + "м²" : proj; });
+})();
 
 var grid = $("#grid");
 grid.innerHTML = HOUSES.map(cardHTML).join("");
@@ -213,8 +240,6 @@ function quizResult(){
   $("#quizMatches").innerHTML = list.map(function(h){
     return '<a class="q-match" href="#/p/' + h.slug + '"><img src="' + h.image + '" alt=""><span><b>' + h.name + "</b><small>" + h.area + NB + "м² · " + floorsLabel(h.floors).toLowerCase() + "</small></span>" + icon("i-arrow") + "</a>";
   }).join("");
-  var calcFirst = list.filter(function(h){ return h.calc; })[0];
-  $("#quizToForm").href = calcFirst ? "calculator.html#" + calcFirst.slug : "calculator.html";
   $("#quizToContact").setAttribute("data-topic", "Квиз: " + list.map(function(h){ return h.name; }).join(", ") + (answers.when ? " · " + answers.when : ""));
 }
 qs.forEach(function(q, n){
@@ -243,6 +268,7 @@ function showProject(h){
   var img = $("#pImage"); img.src = h.image; img.alt = "Проект " + h.name + ": " + h.type.toLowerCase();
   $("#pProv").textContent = provLabel(h);
   $("#pTitle").textContent = h.name;
+  $("#pStory").hidden = !h.story;
   $("#pType").textContent = h.type;
   $("#pLede").textContent = h.lede;
   $("#pStory").textContent = h.story;
@@ -252,17 +278,15 @@ function showProject(h){
   $("#pAbout").hidden = !(h.about && h.about.length);
   var cells = [cell("Площадь", h.area + NB + "м²"), cell("Этажность", floorsLabel(h.floors)),
     cell("Габариты в плане", h.dims ? metres(h.dims) : "уточняются"), cell("Состав", h.rooms)];
-  cells.push(h.example ? cell("Цена, пример", price(h), "span2") : cell("Цена", "под ваш участок", "span2"));
+  cells.push(h.price ? cell(h.example ? "Цена, пример" : "Цена, ориентир", price(h), "span2") : cell("Цена", "под ваш участок", "span2"));
   $("#pStamp").innerHTML = stampHTML(cells);
   var g = $("#pGallery");
-  g.innerHTML = h.gallery.map(function(src){
-    return '<figure><div class="frame"><img src="' + src + '" alt="Исходный материал проекта ' + esc(h.name) + '" loading="lazy"></div><figcaption>' +
-      (/plan/.test(src) ? "Планировка · исходный материал проекта" : "Исходный материал проекта") + "</figcaption></figure>";
+  g.innerHTML = h.gallery.map(function(it){
+    var cap = it.caption || (/plan/.test(it.src) ? "Планировка · исходный материал проекта" : "Исходный материал проекта");
+    return '<figure><div class="frame"><img src="' + esc(it.src) + '" alt="' + esc(cap + " — " + h.name) + '" loading="lazy"></div><figcaption>' + esc(cap) + "</figcaption></figure>";
   }).join("");
   g.hidden = !h.gallery.length;
   $("#pDiscuss").setAttribute("data-project", h.slug);
-  $("#pCalc").href = "calculator.html#" + h.slug;
-  $("#pCalc").innerHTML = (h.calc ? "Рассчитать этот дом" : "Собрать похожий в калькуляторе") + icon("i-calc");
   document.title = h.name + " — Vozdvizhen";
   document.body.classList.add("is-project");
   project.hidden = false;
