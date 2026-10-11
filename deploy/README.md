@@ -68,7 +68,7 @@ curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-
 ```
 curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-design-skills-non-ai-hyjlsh/deploy/enable-admin.sh | bash
 ```
-Скрипт настраивает nginx (адреса `/api/admin/`, `/api/catalog.js`, `/media/`) и печатает пароль. Вход — `https://<домен>/admin.html`.
+Скрипт настраивает nginx (адреса `/api/admin/`, `/api/catalog.js`, `/media/`) и печатает пароль. Вход — `https://<домен>/admin`.
 Забыли пароль или хотите сменить — запустите скрипт ещё раз (свой пароль: `... | ADMIN_PASSWORD='пароль' bash`).
 
 Где что лежит на сервере: каталог — `/var/lib/gardarika/catalog.json`, прошлые версии — `catalog-history/` (последние 60),
