@@ -5,8 +5,9 @@
 # Повторный запуск выдаёт новый пароль — старый перестаёт работать (так же меняют забытый пароль).
 # Свой пароль вместо случайного:  ... | ADMIN_PASSWORD='ваш-пароль' bash
 set -euo pipefail
-[ "$(id -u)" = 0 ] || { echo "Запустите от root"; exit 1; }
 F=/etc/nginx/sites-available/gardarika
+[ -f "$F" ] && id deploy >/dev/null 2>&1 || { echo "Это не сервер сайта: скрипт нужно запускать на сервере Timeweb (ssh root@IP-сервера), а не на своём компьютере."; exit 1; }
+[ "$(id -u)" = 0 ] || { echo "Запустите от root: ... | sudo bash"; exit 1; }
 SNIP=/etc/nginx/snippets/gardarika-admin.conf
 ENVF=/etc/gardarika-lead.env
 DATA=/var/lib/gardarika
