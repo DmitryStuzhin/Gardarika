@@ -11,7 +11,7 @@
 <link rel="icon" href="assets/brand/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=6">
 </head>
 <body>
 <a class="skip" href="#main">К содержанию</a>
@@ -85,7 +85,7 @@
     </div>
     <div class="p-grid">
       <figure class="dimfig p-figure" id="pFigure">
-        <div class="dimfig-frame"><img id="pImage" src="assets/img/birch-132.webp" alt=""><figcaption class="prov" id="pProv"></figcaption></div>
+        <div class="dimfig-frame"><img id="pImage" alt=""><figcaption class="prov" id="pProv"></figcaption></div>
       </figure>
       <aside class="p-side">
         <div class="stamp" id="pStamp"></div>
@@ -148,9 +148,10 @@
   <section class="hero" id="top" aria-labelledby="heroTitle">
     <div class="hero-stage">
       <div class="hero-slides">
-        <img class="hero-img is-on" src="assets/img/birch-132.webp" alt="Семья собирает яблоки у двухэтажного деревянного дома Birch 132" width="2000" height="1115">
-        <img class="hero-img" src="assets/img/lilac-96.webp" alt="Семья сажает цветы у одноэтажного дома Lilac 96 с перголой" width="2000" height="1122">
-        <img class="hero-img" src="assets/img/vesper-164.webp" alt="Вечер у дома Vesper 164: дети играют в бадминтон, родители готовят ужин на террасе" width="2000" height="1109">
+        <!-- первое фото грузится сразу (на телефон — версия 1200 px), остальные два — после загрузки страницы (site.js) -->
+        <img class="hero-img is-on" src="assets/img/birch-132.webp" srcset="assets/img/birch-132-1200.webp 1200w, assets/img/birch-132.webp 2000w" sizes="100vw" fetchpriority="high" alt="Семья собирает яблоки у двухэтажного деревянного дома Birch 132" width="2000" height="1115">
+        <img class="hero-img" data-srcset="assets/img/lilac-96-1200.webp 1200w, assets/img/lilac-96.webp 2000w" sizes="100vw" alt="Семья сажает цветы у одноэтажного дома Lilac 96 с перголой" width="2000" height="1122">
+        <img class="hero-img" data-srcset="assets/img/vesper-164-1200.webp 1200w, assets/img/vesper-164.webp 2000w" sizes="100vw" alt="Вечер у дома Vesper 164: дети играют в бадминтон, родители готовят ужин на террасе" width="2000" height="1109">
       </div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="wrap hero-inner">
@@ -413,9 +414,9 @@
   </div>
 </footer>
 
-<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/data.js?v=6"></script>
 <script src="api/catalog.js"></script>
-<script src="assets/js/site.js?v=5"></script>
-<script src="assets/js/motion.js?v=5"></script>
+<script src="assets/js/site.js?v=6"></script>
+<script src="assets/js/motion.js?v=6"></script>
 </body>
 </html>

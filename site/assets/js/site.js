@@ -29,6 +29,13 @@ function normHouse(h){
 if (window.CATALOG && Array.isArray(CATALOG.houses) && CATALOG.houses.length) HOUSES = CATALOG.houses;
 HOUSES = HOUSES.filter(function(h){ return h && h.slug && !h.hidden; }).map(normHouse);
 function bySlug(slug){ for (var i = 0; i < HOUSES.length; i++) if (HOUSES[i].slug === slug) return HOUSES[i]; return null; }
+/* лёгкая версия фото для карточек: рядом с файлом лежит «имя-sm.webp» (для своих картинок — в репозитории,
+   для загруженных в админке — создаётся при загрузке). Если её нет, onerror подставит исходное фото. */
+function thumb(src){ return /^(assets\/img\/|\/media\/)[^?#]+\.(jpe?g|png|webp)$/.test(src) && !/-sm\.webp$/.test(src) ? src.replace(/\.(jpe?g|png|webp)$/, "-sm.webp") : src; }
+function thumbImg(src, attrs){
+  var t = thumb(src);
+  return '<img src="' + esc(t) + '"' + (t !== src ? ' data-full="' + esc(src) + '" onerror="if(this.dataset.full){this.src=this.dataset.full;this.removeAttribute(\'data-full\')}"' : "") + " " + attrs + ">";
+}
 function icon(id){ return '<svg aria-hidden="true"><use href="#' + id + '"/></svg>'; }
 
 /* Штамп: ячейки [подпись, значение, классы] */
@@ -73,11 +80,15 @@ var heroHouses = ["birch-132", "lilac-96", "vesper-164"].map(function(slug){
   var h = live && live.dims && live.price ? live : normHouse(Object.assign({}, base));
   h.live = !!live; return h;
 });
+/* фото первого экрана 2 и 3 догружаются после загрузки страницы — первый экран открывается быстрее */
+function loadHeroImg(img){ var s = img && img.getAttribute("data-srcset"); if (s){ img.srcset = s; img.removeAttribute("data-srcset"); } }
+window.addEventListener("load", function(){ $$(".hero-img").forEach(loadHeroImg); });
 var heroFig = $("#heroFig"), heroImgs = $$(".hero-img"), heroTabs = $$(".hero-tabs button"), heroStamp = $("#heroStamp");
 var heroIndex = 0, heroTimer = null;
 function setHero(i, animate){
   heroIndex = i;
   var h = heroHouses[i];
+  loadHeroImg(heroImgs[i]);
   heroImgs.forEach(function(img, n){ img.classList.toggle("is-on", n === i); });
   heroTabs.forEach(function(b, n){ b.setAttribute("aria-selected", n === i ? "true" : "false"); b.tabIndex = n === i ? 0 : -1; });
   var v = $(".dim-val", heroFig);
@@ -121,7 +132,7 @@ autoHero();
 function cardHTML(h){
   var a = areaNum(h);
   return '<article class="card" data-floors="' + h.floors + '" data-size="' + (a < 110 ? "s" : a < 130 ? "m" : "l") + '">' +
-    '<div class="card-media"><img src="' + esc(h.image) + '" alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy">' +
+    '<div class="card-media">' + thumbImg(h.image, 'alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy"') +
       (h.example ? '<span class="tag tag-new">Новый проект</span>' : "") + '<span class="prov">' + provLabel(h) + "</span></div>" +
     '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + esc(h.name) + '</a></h3><p class="card-type">' + esc(h.tagline || h.type) + "</p>" +
       '<ul class="card-meta"><li>' + icon("i-area") + esc(h.area) + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + esc(h.rooms) + "</li>" : "") + "</ul>" +
@@ -238,7 +249,7 @@ function quizResult(){
   list = list.slice(0, 3);
   $("#quizResultTitle").textContent = (list.length === 1 ? "Вам подойдёт " : "Вам подойдут ") + list.length + " " + plural(list.length);
   $("#quizMatches").innerHTML = list.map(function(h){
-    return '<a class="q-match" href="#/p/' + h.slug + '"><img src="' + h.image + '" alt=""><span><b>' + h.name + "</b><small>" + h.area + NB + "м² · " + floorsLabel(h.floors).toLowerCase() + "</small></span>" + icon("i-arrow") + "</a>";
+    return '<a class="q-match" href="#/p/' + h.slug + '">' + thumbImg(h.image, 'alt=""') + "<span><b>" + h.name + "</b><small>" + h.area + NB + "м² · " + floorsLabel(h.floors).toLowerCase() + "</small></span>" + icon("i-arrow") + "</a>";
   }).join("");
   $("#quizToContact").setAttribute("data-topic", "Квиз: " + list.map(function(h){ return h.name; }).join(", ") + (answers.when ? " · " + answers.when : ""));
 }

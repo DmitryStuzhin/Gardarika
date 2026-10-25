@@ -20,6 +20,7 @@
     var h = {"X-Admin": "1"};
     if (opt.json !== undefined){ h["Content-Type"] = "application/json"; opt.body = JSON.stringify(opt.json); }
     if (opt.type) h["Content-Type"] = opt.type;
+    if (opt.headers) Object.keys(opt.headers).forEach(function(k){ h[k] = opt.headers[k]; });
     return fetch(API + path, {method: opt.method || (opt.body ? "POST" : "GET"), headers: h, body: opt.body, credentials: "same-origin"})
       .then(function(r){
         return r.json().catch(function(){ return {}; }).then(function(d){ d.status = r.status; return d; });
@@ -211,7 +212,7 @@
   });
 
   /* ---------- фото: уменьшаем в браузере и загружаем ---------- */
-  function shrink(file, max){
+  function shrink(file, max, webpOnly){
     return new Promise(function(ok, fail){
       var url = URL.createObjectURL(file), img = new Image();
       img.onload = function(){
@@ -222,6 +223,7 @@
         URL.revokeObjectURL(url);
         c.toBlob(function(b){
           if (b && b.type === "image/webp") return ok(b);
+          if (webpOnly) return ok(null);
           c.toBlob(function(j){ j ? ok(j) : fail(new Error("не удалось обработать фото")); }, "image/jpeg", .88);
         }, "image/webp", .86);
       };
@@ -236,7 +238,11 @@
     }).then(function(d){
       if (d.status === 401) throw new Error("Сессия закончилась — войдите снова");
       if (!d.ok) throw new Error(d.error || "Не удалось загрузить фото");
-      return d.url;
+      /* лёгкая версия 900 px для карточек каталога; не получилось — сайт возьмёт полное фото */
+      return shrink(file, 900, true).then(function(sm){
+        if (!sm) return d.url;
+        return api("upload", {body: sm, type: sm.type, headers: {"X-Variant-Of": d.url.split("/").pop()}}).then(function(){ return d.url; });
+      }, function(){ return d.url; });
     });
   }
   var pickCb = null;

@@ -226,6 +226,7 @@ def list_history():
     return out
 
 
+MEDIA_NAME = re.compile(r"^\d{8}-[0-9a-f]{12}\.(?:jpg|png|webp)$")
 IMAGE_MAGIC = ((b"\xff\xd8\xff", "jpg"), (b"\x89PNG\r\n\x1a\n", "png"))
 
 
@@ -370,6 +371,12 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(415, {"ok": False, "error": "нужна картинка JPG, PNG или WebP"})
             os.makedirs(MEDIA, exist_ok=True)
             name = time.strftime("%Y%m%d") + "-" + secrets.token_hex(6) + "." + ext
+            # лёгкая версия для карточек: X-Variant-Of: <имя уже загруженного фото> → <имя>-sm.webp
+            of = self.headers.get("X-Variant-Of") or ""
+            if of:
+                if ext != "webp" or not MEDIA_NAME.match(of) or not os.path.exists(os.path.join(MEDIA, of)):
+                    return self.reply(422, {"ok": False, "error": "неверная лёгкая версия"})
+                name = of.rsplit(".", 1)[0] + "-sm.webp"
             path_ = os.path.join(MEDIA, name)
             with open(path_, "wb") as f:
                 f.write(data)

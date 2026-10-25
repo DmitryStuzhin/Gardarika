@@ -74,6 +74,14 @@ curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-
 Где что лежит на сервере: каталог — `/var/lib/gardarika/catalog.json`, прошлые версии — `catalog-history/` (последние 60),
 фото — `/var/lib/gardarika/media/`. Выкладка из GitHub их не трогает. Пока каталог ни разу не сохранён в админке, сайт берёт `site/assets/js/data.js`.
 
+## 7. Ускорение (один раз)
+
+На сервере от root — включает HTTP/2 и сжатие:
+```
+curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-design-skills-non-ai-hyjlsh/deploy/tune-server.sh | bash
+```
+Проверить сайт снаружи (DNS, HTTPS, скорость, вес страницы): **Actions → Diagnose site → Run workflow**.
+
 ## Как вносить изменения
 
 - Быстрее всего: на сервере (`ssh root@IP`) выполнить `gardarika-update` — сайт обновится из GitHub за несколько секунд.
