@@ -134,11 +134,11 @@ function cardHTML(h){
   return '<article class="card" data-floors="' + h.floors + '" data-size="' + (a < 110 ? "s" : a < 130 ? "m" : "l") + '">' +
     '<div class="card-media">' + thumbImg(h.image, 'alt="Проект ' + esc(h.name) + ': ' + esc(h.type.toLowerCase()) + '" loading="lazy"') +
       (h.example ? '<span class="tag tag-new">Новый проект</span>' : "") + '<span class="prov">' + provLabel(h) + "</span></div>" +
-    '<div class="card-body"><h3><a class="card-link" href="#/p/' + h.slug + '">' + esc(h.name) + '</a></h3><p class="card-type">' + esc(h.tagline || h.type) + "</p>" +
+    '<div class="card-body"><h3><a class="card-link" href="/doma/' + h.slug + '">' + esc(h.name) + '</a></h3><p class="card-type">' + esc(h.tagline || h.type) + "</p>" +
       '<ul class="card-meta"><li>' + icon("i-area") + esc(h.area) + NB + "м²</li><li>" + icon("i-floors") + floorsLabel(h.floors) + "</li>" + (/комнат|спальн/.test(h.rooms) ? "<li>" + icon("i-rooms") + esc(h.rooms) + "</li>" : "") + "</ul>" +
       '<div class="card-foot"><div class="card-price">' +
         (h.price ? "<b>" + esc(price(h)) + "</b><small>" + (h.example ? "ориентировочно, пример" : "ориентировочно") + "</small>" : "<b>Цена по запросу</b><small>под ваш участок и комплектацию</small>") +
-      '</div><a class="card-calc" href="#/p/' + h.slug + '" aria-label="Подробнее о проекте ' + esc(h.name) + '">' + icon("i-arrow") + "<span>Подробнее</span></a></div></div></article>";
+      '</div><a class="card-calc" href="/doma/' + h.slug + '" aria-label="Подробнее о проекте ' + esc(h.name) + '">' + icon("i-arrow") + "<span>Подробнее</span></a></div></div></article>";
 }
 /* популярные на главной — отмечаются в каталоге (popular: true) */
 $("#popular").innerHTML = HOUSES.filter(function(h){ return h.popular; }).slice(0, 8).map(cardHTML).join("");
@@ -344,6 +344,13 @@ function route(){
     if (t) t.scrollIntoView(); else window.scrollTo(0, 0);
   }
 }
+/* ссылки на дома — настоящие адреса /doma/<дом> (их видит поисковик); на главной открываем дом без перезагрузки */
+document.addEventListener("click", function(ev){
+  var a = ev.target.closest && ev.target.closest('a[href^="/doma/"]');
+  if (!a || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.button) return;
+  var m = /^\/doma\/([\w-]+)$/.exec(a.getAttribute("href"));
+  if (m && bySlug(m[1])){ ev.preventDefault(); location.hash = "#/p/" + m[1]; }
+});
 window.addEventListener("hashchange", route);
 /* первый показ страницы Метрика уже посчитала сама; отдельные просмотры отмечаем только при переходах */
 var routedOnce = false;
@@ -353,6 +360,7 @@ routedOnce = true;
 /* Заявка */
 var form = $("#leadForm"), msg = $("#leadMsg"), sel = $("#leadProject"), topic = $("#leadTopic"), phone = $("#leadPhone");
 HOUSES.forEach(function(h){ var o = document.createElement("option"); o.value = h.slug; o.textContent = h.name + " · " + h.area + " м²"; sel.appendChild(o); });
+(function(){ var m = /[?&]project=([\w-]+)/.exec(location.search); if (m && bySlug(m[1])) sel.value = m[1]; })();
 $("#pDiscuss").addEventListener("click", function(){ sel.value = this.getAttribute("data-project") || ""; });
 $$("[data-topic]").forEach(function(a){ a.addEventListener("click", function(){ topic.value = a.getAttribute("data-topic"); topic.setAttribute("data-from", a.getAttribute("data-topic")); }); });
 function formatPhone(v){

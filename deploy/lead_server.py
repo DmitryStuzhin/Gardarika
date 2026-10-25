@@ -28,6 +28,11 @@ import urllib.parse
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+try:  # страницы для поисковиков: /doma/, /doma/<дом>, /sitemap.xml (deploy/seo_pages.py)
+    import seo_pages
+except ImportError:
+    seo_pages = None
+
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 CHAT = os.environ.get("TELEGRAM_CHAT_ID", "")
 CHATS_FILE = os.environ.get("CHATS_FILE", "/home/deploy/telegram-chats.txt")
@@ -289,6 +294,17 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             return self.wfile.write(body)
+        if seo_pages and (path == "/sitemap.xml" or path == "/doma" or path.startswith("/doma/")):
+            res = seo_pages.render(path, read_catalog())
+            if res:
+                code, ctype, text = res
+                body = text.encode()
+                self.send_response(code)
+                self.send_header("Content-Type", ctype)
+                self.send_header("Cache-Control", "no-cache")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                return self.wfile.write(body)
         if path == "/api/admin/session":
             return self.reply(200 if self.authed() else 401, {"ok": self.authed(), "enabled": bool(ADMIN_HASH)})
         if not path.startswith("/api/admin/"):

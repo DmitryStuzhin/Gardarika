@@ -74,12 +74,14 @@ curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-
 Где что лежит на сервере: каталог — `/var/lib/gardarika/catalog.json`, прошлые версии — `catalog-history/` (последние 60),
 фото — `/var/lib/gardarika/media/`. Выкладка из GitHub их не трогает. Пока каталог ни разу не сохранён в админке, сайт берёт `site/assets/js/data.js`.
 
-## 7. Ускорение (один раз)
+## 7. Поиск и ускорение (один раз)
 
-На сервере от root — включает HTTP/2 и сжатие:
+На сервере от root — страницы домов `/doma/…` и карта сайта `/sitemap.xml` (их собирает `deploy/seo_pages.py` из каталога админки),
+переадресация `www` → основной домен, HTTP/2 и сжатие:
 ```
-curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-design-skills-non-ai-hyjlsh/deploy/tune-server.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DmitryStuzhin/Gardarika/claude/web-design-skills-non-ai-hyjlsh/deploy/enable-seo.sh | bash
 ```
+(`deploy/tune-server.sh` — только HTTP/2 и сжатие, входит в enable-seo.sh.)
 Проверить сайт снаружи (DNS, HTTPS, скорость, вес страницы): **Actions → Diagnose site → Run workflow**.
 
 ## Как вносить изменения

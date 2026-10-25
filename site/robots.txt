@@ -5,3 +5,6 @@ Disallow: /admin
 Disallow: /calculator-3d.html
 Disallow: /calc-video.html
 Disallow: /api/
+Disallow: /*?project=
+
+Sitemap: https://vozdvizhen.ru/sitemap.xml
