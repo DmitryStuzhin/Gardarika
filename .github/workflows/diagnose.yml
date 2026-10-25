@@ -1,0 +1,52 @@
+# Проверка сайта снаружи: DNS, IPv4/IPv6, HTTPS, скорость и вес страницы.
+# Запуск: Actions → Diagnose site → Run workflow, или сам при изменении этого файла.
+name: Diagnose site
+
+on:
+  push:
+    branches: [claude/web-design-skills-non-ai-hyjlsh]
+    paths: [".github/workflows/diagnose.yml"]
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DNS
+        run: |
+          for n in vozdvizhen.ru www.vozdvizhen.ru xn--80aaajg5ah8bc.xn--p1ai; do
+            for t in A AAAA NS CAA; do echo "$n $t: $(dig +short $t $n @1.1.1.1 | tr '\n' ' ')"; done
+            echo "$n A via 77.88.8.8 (Yandex): $(dig +short A $n @77.88.8.8 | tr '\n' ' ')"
+            echo "$n AAAA via 77.88.8.8: $(dig +short AAAA $n @77.88.8.8 | tr '\n' ' ')"
+          done
+          echo "--- делегирование .ru"
+          dig +short NS vozdvizhen.ru @a.dns.ripn.net || true
+
+      - name: HTTP/HTTPS по IPv4
+        run: |
+          for u in https://vozdvizhen.ru/ https://www.vozdvizhen.ru/ http://vozdvizhen.ru/ https://vozdvizhen.ru/api/catalog.js https://vozdvizhen.ru/calculator.html; do
+            curl -4 -sS -o /dev/null -m 30 -w "$u -> %{http_code} %{http_version} dns=%{time_namelookup}s connect=%{time_connect}s tls=%{time_appconnect}s first_byte=%{time_starttransfer}s total=%{time_total}s size=%{size_download} redirect=%{redirect_url}\n" "$u" || echo "$u -> ОШИБКА"
+          done
+
+      - name: HTTPS по IPv6
+        run: |
+          curl -6 -sS -o /dev/null -m 20 -w "ipv6 -> %{http_code} total=%{time_total}s\n" https://vozdvizhen.ru/ || echo "IPv6: не подключается (у раннера может не быть IPv6)"
+
+      - name: Сертификат
+        run: |
+          echo | openssl s_client -connect vozdvizhen.ru:443 -servername vozdvizhen.ru 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName || echo "сертификат не получен"
+          echo | openssl s_client -connect vozdvizhen.ru:443 -servername vozdvizhen.ru -alpn h2 2>/dev/null | grep -i "ALPN" || true
+
+      - name: Заголовки и вес главной
+        run: |
+          curl -sSI -m 20 https://vozdvizhen.ru/ | head -20
+          curl -sSI -m 20 --compressed https://vozdvizhen.ru/assets/css/site.css | grep -iE "content-encoding|cache-control|content-length" || true
+          curl -s -m 30 https://vozdvizhen.ru/ -o page.html
+          total=0
+          for u in $(grep -oE '(src|href)="[^"#]+\.(webp|jpg|jpeg|png|css|js|woff2|ttf)(\?[^"]*)?"' page.html | sed -E 's/^(src|href)="//; s/"$//' | sort -u); do
+            s=$(curl -s -o /dev/null -m 30 -w "%{size_download} %{time_total}" "https://vozdvizhen.ru/$u"); echo "$s $u"; total=$((total + ${s%% *}))
+          done | sort -n | tail -15
+          echo "каталог из админки: $(curl -s -m 20 https://vozdvizhen.ru/api/catalog.js | head -c 120)"
+          for img in $(curl -s -m 20 https://vozdvizhen.ru/api/catalog.js | grep -oE '"image": ?"[^"]+"' | sed -E 's/.*"([^"]+)"$/\1/' | head -20); do
+            curl -s -o /dev/null -m 30 -w "%{size_download} %{http_code} $img\n" "https://vozdvizhen.ru/${img#/}"
+          done | sort -n
