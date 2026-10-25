@@ -185,7 +185,7 @@
         '<div class="kc-bill"><div class="kc-bill-g">' + rows + "</div></div>" +
         '<div class="kc-bill-total"><span>Итого</span><b>' + money(total()) + "</b></div>" +
         '<p class="kc-assume"><b>Цены — пример.</b> Финальную смету считает сметчик после геологии участка и проекта.</p>' +
-        '<div class="vc-cta"><a class="btn btn-honey" href="index.html#contact">Обсудить этот дом<svg><use href="#i-arrow"/></svg></a>' +
+        '<div class="vc-cta"><a class="btn btn-honey" href="index.html#contact" data-goal="calc_cta">Обсудить этот дом<svg><use href="#i-arrow"/></svg></a>' +
         '<a class="btn btn-line" href="tel:+79777144969">Позвонить: +7 977 714-49-69</a></div>';
     } else {
       var s = STEPS[cur];
@@ -215,6 +215,7 @@
   function go(i){
     i = Math.max(0, Math.min(LAST, i));
     dir = i >= cur ? 1 : -1; cur = i;
+    if (window.vzGoal){ if (i > 0) vzGoal("calc_start", null, true); if (i === LAST) vzGoal("calc_finish", {total: total()}, true); }
     renderSteps(); renderPanel();
     target = Math.min(cur, LAST);
     run();
@@ -231,6 +232,7 @@
   var tourBtn = $("tour");
   tourBtn.addEventListener("click", function(){
     if (busy) return;
+    if (window.vzGoal) vzGoal("calc_tour");
     tourBtn.disabled = true;
     /* сначала мгновенно на участок, потом стройка подряд */
     shown = 0; target = 0; cur = 0; renderSteps(); renderPanel(); badge();
@@ -238,4 +240,5 @@
   });
 
   renderSteps(); renderPanel(); badge(); warm(0);
+  if (window.vzGoal) vzGoal("calc_open");
 })();

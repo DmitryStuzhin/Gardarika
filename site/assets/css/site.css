@@ -677,3 +677,10 @@ body.is-catalog main{display:none}
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
   .js .dim,.js .dim-y{clip-path:none}
 }
+/* плашка о cookie (assets/js/metrika.js) */
+.cookie-note{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;align-items:center;gap:14px;max-width:min(520px,calc(100% - 32px));padding:12px 12px 12px 16px;border-radius:14px;background:var(--graphite);color:var(--on-pine);box-shadow:0 18px 40px -16px rgba(20,24,26,.6);font-size:14px;line-height:1.45}
+.cookie-note p{margin:0}
+.cookie-note a{color:#fff;text-underline-offset:3px}
+.cookie-note button{flex:none;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:var(--honey);color:var(--on-honey);font:600 14px/1 var(--display);cursor:pointer}
+.cookie-note button:hover{background:var(--honey-hi)}
+@media (max-width:760px){.cookie-note{left:12px;right:12px;max-width:none;bottom:calc(84px + env(safe-area-inset-bottom,0px))}}

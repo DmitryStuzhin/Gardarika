@@ -247,6 +247,7 @@ function quizResult(){
   });
   if (!list.length) list = HOUSES.filter(function(h){ return answers.floors === "any" || (answers.floors === "1" ? h.floors === 1 : h.floors > 1); });
   list = list.slice(0, 3);
+  if (window.vzGoal) vzGoal("quiz_done");
   $("#quizResultTitle").textContent = (list.length === 1 ? "Вам подойдёт " : "Вам подойдут ") + list.length + " " + plural(list.length);
   $("#quizMatches").innerHTML = list.map(function(h){
     return '<a class="q-match" href="#/p/' + h.slug + '">' + thumbImg(h.image, 'alt=""') + "<span><b>" + h.name + "</b><small>" + h.area + NB + "м² · " + floorsLabel(h.floors).toLowerCase() + "</small></span>" + icon("i-arrow") + "</a>";
@@ -304,6 +305,7 @@ function showProject(h){
   window.scrollTo(0, 0);
   $("#pTitle").focus({preventScroll: true});
   if (h.dims) watchDims(fig);
+  if (window.vzGoal){ if (routedOnce) vzHit(document.title); vzGoal("project_view", {slug: h.slug}); }
 }
 function hideProject(){
   if (project.hidden) return false;
@@ -318,6 +320,7 @@ function showCatalog(){
   catPage.hidden = false;
   document.body.classList.add("is-catalog");
   document.title = "Каталог домов — Vozdvizhen";
+  if (window.vzHit && routedOnce) vzHit(document.title);
   window.scrollTo(0, 0);
   $("#catTitle").focus({preventScroll: true});
 }
@@ -342,7 +345,10 @@ function route(){
   }
 }
 window.addEventListener("hashchange", route);
+/* первый показ страницы Метрика уже посчитала сама; отдельные просмотры отмечаем только при переходах */
+var routedOnce = false;
 route();
+routedOnce = true;
 
 /* Заявка */
 var form = $("#leadForm"), msg = $("#leadMsg"), sel = $("#leadProject"), topic = $("#leadTopic"), phone = $("#leadPhone");
@@ -386,7 +392,7 @@ form.addEventListener("submit", function(e){
   btn.disabled = true; msg.classList.remove("is-bad"); msg.textContent = "Отправляем…";
   fetch("/api/lead", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)})
     .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(){ msg.textContent = "Спасибо! Заявка у нас — перезвоним в рабочее время (Пн–Вс, 8:00–20:00)."; form.reset(); })
+    .then(function(){ if (window.vzGoal) vzGoal("lead_sent", {project: data.project || "не выбран", from: data.topic || "форма"}); msg.textContent = "Спасибо! Заявка у нас — перезвоним в рабочее время (Пн–Вс, 8:00–20:00)."; form.reset(); })
     .catch(function(){ msg.classList.add("is-bad"); msg.textContent = "Не получилось отправить заявку. Позвоните нам: +7 977 714-49-69 — или попробуйте ещё раз."; })
     .then(function(){ btn.disabled = false; });
 });
