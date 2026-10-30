@@ -24,7 +24,7 @@ jobs:
 
       - name: HTTP/HTTPS по IPv4
         run: |
-          for u in https://vozdvizhen.ru/ https://www.vozdvizhen.ru/ http://vozdvizhen.ru/ https://vozdvizhen.ru/api/catalog.js https://vozdvizhen.ru/calculator.html; do
+          for u in https://vozdvizhen.ru/ https://www.vozdvizhen.ru/ http://vozdvizhen.ru/ https://vozdvizhen.ru/api/catalog.js https://vozdvizhen.ru/calculator.html https://vozdvizhen.ru/doma/ https://vozdvizhen.ru/doma/birch-132 https://vozdvizhen.ru/sitemap.xml https://vozdvizhen.ru/robots.txt https://vozdvizhen.ru/yandex_45b64a23e94ab9ee.html; do
             curl -4 -sS -o /dev/null -m 30 -w "$u -> %{http_code} %{http_version} dns=%{time_namelookup}s connect=%{time_connect}s tls=%{time_appconnect}s first_byte=%{time_starttransfer}s total=%{time_total}s size=%{size_download} redirect=%{redirect_url}\n" "$u" || echo "$u -> ОШИБКА"
           done
 
